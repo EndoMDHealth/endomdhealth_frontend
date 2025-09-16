@@ -1,14 +1,27 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://endomdhealth.com/sitemap.xml
+
+# Medical content guidelines
+User-agent: *
+Crawl-delay: 1
+
+# Allow crawling of medical information
+Allow: /what-we-treat
+Allow: /what-we-offer
+Allow: /who-we-serve
+Allow: /resources
+Allow: /blog
+Allow: /faq
+Allow: /insurance
+
+# Disallow private areas
+Disallow: /admin
+Disallow: /private
+Disallow: /api/
+
+# Healthcare specific
+User-agent: Googlebot
 Allow: /

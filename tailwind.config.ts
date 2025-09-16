@@ -47,6 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Medical brand colors
+        medical: {
+          navy: "hsl(var(--medical-navy))",
+          mustard: "hsl(var(--medical-mustard))",
+          light: "hsl(var(--medical-light))",
+          trust: "hsl(var(--medical-trust))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
