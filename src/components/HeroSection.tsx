@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MapPin, Clock, Shield, Star, Users, Calendar, Award } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
-import serviceAreaMap from "@/assets/service-area-map.jpg";
+import heroImage from "@/assets/hero-child-bubbles.jpg";
 import { useState, useEffect } from "react";
 
 const HeroSection = () => {
@@ -39,171 +38,133 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-primary to-medical-trust text-primary-foreground overflow-hidden min-h-screen flex items-center">
-      {/* Animated Background Elements */}
+    <section className="relative bg-gradient-to-br from-warm-peach via-warm-coral/20 to-warm-sage/30 text-primary overflow-hidden min-h-screen flex items-center">
+      {/* Cheerful Background Elements */}
       <div className="absolute inset-0">
         <img 
           src={heroImage} 
-          alt="Child with parent in pediatric consultation" 
-          className="w-full h-full object-cover opacity-20"
+          alt="Happy child blowing bubbles in a sunny field" 
+          className="w-full h-full object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-medical-trust/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-peach/60 via-transparent to-warm-sage/40" />
         
-        {/* Floating Animation Elements */}
-        <div className="absolute top-20 left-10 w-4 h-4 bg-accent/30 rounded-full animate-bounce delay-100" />
-        <div className="absolute top-40 right-20 w-6 h-6 bg-accent/20 rounded-full animate-bounce delay-300" />
-        <div className="absolute bottom-32 left-32 w-3 h-3 bg-accent/40 rounded-full animate-bounce delay-500" />
+        {/* Floating Bubble-like Elements */}
+        <div className="absolute top-20 left-10 w-8 h-8 bg-accent/20 rounded-full animate-bounce delay-100 blur-sm" />
+        <div className="absolute top-40 right-20 w-12 h-12 bg-warm-coral/20 rounded-full animate-bounce delay-300 blur-sm" />
+        <div className="absolute bottom-32 left-32 w-6 h-6 bg-warm-lavender/30 rounded-full animate-bounce delay-500 blur-sm" />
+        <div className="absolute top-60 right-40 w-4 h-4 bg-accent/30 rounded-full animate-bounce delay-700 blur-sm" />
+        <div className="absolute bottom-60 right-20 w-10 h-10 bg-warm-peach/30 rounded-full animate-bounce delay-900 blur-sm" />
       </div>
       
       <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Hero Content */}
-          <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2 mb-4">
-                <Star className="h-5 w-5 text-accent fill-accent" />
-                <Star className="h-5 w-5 text-accent fill-accent" />
-                <Star className="h-5 w-5 text-accent fill-accent" />
-                <Star className="h-5 w-5 text-accent fill-accent" />
-                <Star className="h-5 w-5 text-accent fill-accent" />
-                <span className="text-sm text-primary-foreground/80 ml-2">Trusted by 2,500+ families</span>
+        <div className="max-w-6xl mx-auto">
+          {/* Hero Content - Centered Layout */}
+          <div className={`text-center space-y-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="space-y-6">
+              <div className="flex justify-center items-center space-x-2 mb-6">
+                <Star className="h-6 w-6 text-accent fill-accent" />
+                <Star className="h-6 w-6 text-accent fill-accent" />
+                <Star className="h-6 w-6 text-accent fill-accent" />
+                <Star className="h-6 w-6 text-accent fill-accent" />
+                <Star className="h-6 w-6 text-accent fill-accent" />
+                <span className="text-lg text-primary/80 ml-3 font-medium">Trusted by 2,500+ families</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in-up">
-                <span className="block">Specialized pediatric</span>
-                <span className="block text-accent">endocrine care</span>
-                <span className="block">– guiding your child through every stage of growth.</span>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in-up text-primary">
+                <span className="block mb-2">Simply expert,</span>
+                <span className="block text-accent mb-2">compassionate</span>
+                <span className="block">and accessible care</span>
+                <span className="block text-2xl md:text-3xl lg:text-4xl font-normal text-primary/70 mt-4">
+                  on your schedule
+                </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-primary-foreground/90 leading-relaxed animate-fade-in-up delay-200">
-                Serving patients ages Birth–23 years in Maryland and Virginia.
+              <p className="text-xl md:text-2xl text-primary/80 leading-relaxed animate-fade-in-up delay-200 max-w-4xl mx-auto">
+                Expert pediatric endocrine care with the convenience of both virtual and in-person visits. 
+                No more waiting long months for answers.
               </p>
             </div>
 
-            {/* Gamified Statistics */}
-            <div className={`grid grid-cols-3 gap-4 p-6 bg-primary-foreground/10 rounded-2xl border border-primary-foreground/20 backdrop-blur-sm transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <div className="text-center group">
-                <div className="text-2xl md:text-3xl font-bold text-accent">{patientCount.toLocaleString()}+</div>
-                <div className="text-xs text-primary-foreground/80">Patients Helped</div>
+            {/* Fluid Statistics Cards */}
+            <div className={`flex justify-center gap-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <div className="text-center group bg-card/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{patientCount.toLocaleString()}+</div>
+                <div className="text-sm text-primary/70 font-medium">Families Served</div>
               </div>
-              <div className="text-center group">
-                <div className="text-2xl md:text-3xl font-bold text-accent">{experienceYears}+</div>
-                <div className="text-xs text-primary-foreground/80">Years Experience</div>
+              <div className="text-center group bg-card/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{experienceYears}+</div>
+                <div className="text-sm text-primary/70 font-medium">Years Experience</div>
               </div>
-              <div className="text-center group">
-                <div className="text-2xl md:text-3xl font-bold text-accent">{satisfactionRate}%</div>
-                <div className="text-xs text-primary-foreground/80">Satisfaction Rate</div>
+              <div className="text-center group bg-card/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{satisfactionRate}%</div>
+                <div className="text-sm text-primary/70 font-medium">Satisfaction Rate</div>
               </div>
             </div>
 
-            {/* Enhanced Value Props with Hover Effects */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <Card className="bg-primary-foreground/10 border-primary-foreground/20 p-4 transition-all duration-300 hover:bg-primary-foreground/20 hover:scale-105 hover:shadow-lg cursor-pointer group">
-                <div className="flex items-center space-x-2 text-primary-foreground">
-                  <Clock className="h-5 w-5 text-accent transition-transform group-hover:rotate-12" />
-                  <span className="font-semibold">Seen in ~1 week</span>
+            {/* Fluid Value Props */}
+            <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+              <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group flex-1 min-w-[280px]">
+                <div className="flex items-center justify-center space-x-3 text-primary">
+                  <Clock className="h-6 w-6 text-accent transition-transform group-hover:rotate-12" />
+                  <span className="font-semibold text-lg">Fast Appointments</span>
                 </div>
-                <div className="w-full bg-primary-foreground/20 rounded-full h-1 mt-2">
-                  <div className="bg-accent h-1 rounded-full w-4/5 transition-all duration-500 group-hover:w-full"></div>
+                <p className="text-sm text-primary/70 mt-2 text-center">Avoid the typical 3-6 month wait</p>
+                <div className="w-full bg-muted rounded-full h-2 mt-3">
+                  <div className="bg-accent h-2 rounded-full w-4/5 transition-all duration-500 group-hover:w-full"></div>
                 </div>
-              </Card>
+              </div>
               
-              <Card className="bg-primary-foreground/10 border-primary-foreground/20 p-4 transition-all duration-300 hover:bg-primary-foreground/20 hover:scale-105 hover:shadow-lg cursor-pointer group">
-                <div className="flex items-center space-x-2 text-primary-foreground">
-                  <MapPin className="h-5 w-5 text-accent transition-transform group-hover:bounce" />
-                  <span className="font-semibold">Virtual & in-person</span>
+              <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group flex-1 min-w-[280px]">
+                <div className="flex items-center justify-center space-x-3 text-primary">
+                  <MapPin className="h-6 w-6 text-accent transition-transform group-hover:bounce" />
+                  <span className="font-semibold text-lg">Virtual & In-Person</span>
                 </div>
-                <div className="w-full bg-primary-foreground/20 rounded-full h-1 mt-2">
-                  <div className="bg-accent h-1 rounded-full w-5/6 transition-all duration-500 group-hover:w-full"></div>
+                <p className="text-sm text-primary/70 mt-2 text-center">Care on your schedule</p>
+                <div className="w-full bg-muted rounded-full h-2 mt-3">
+                  <div className="bg-accent h-2 rounded-full w-5/6 transition-all duration-500 group-hover:w-full"></div>
                 </div>
-              </Card>
+              </div>
               
-              <Card className="bg-primary-foreground/10 border-primary-foreground/20 p-4 transition-all duration-300 hover:bg-primary-foreground/20 hover:scale-105 hover:shadow-lg cursor-pointer group">
-                <div className="flex items-center space-x-2 text-primary-foreground">
-                  <Shield className="h-5 w-5 text-accent transition-transform group-hover:scale-110" />
-                  <span className="font-semibold">Insurance accepted</span>
+              <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group flex-1 min-w-[280px]">
+                <div className="flex items-center justify-center space-x-3 text-primary">
+                  <Shield className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
+                  <span className="font-semibold text-lg">Insurance Accepted</span>
                 </div>
-                <div className="w-full bg-primary-foreground/20 rounded-full h-1 mt-2">
-                  <div className="bg-accent h-1 rounded-full w-full transition-all duration-500"></div>
+                <p className="text-sm text-primary/70 mt-2 text-center">Most major plans covered</p>
+                <div className="w-full bg-muted rounded-full h-2 mt-3">
+                  <div className="bg-accent h-2 rounded-full w-full transition-all duration-500"></div>
                 </div>
-              </Card>
+              </div>
             </div>
 
-            {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Warm CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Button 
                 size="lg" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 transition-all duration-300 hover:scale-105 hover:shadow-lg group relative overflow-hidden"
+                className="bg-accent hover:bg-accent/90 text-white font-bold px-10 py-4 text-lg rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl group relative overflow-hidden min-w-[250px]"
               >
                 <span className="relative z-10 flex items-center">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Request an Appointment
+                  <Calendar className="mr-3 h-5 w-5" />
+                  Request an Appointment Today
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent/80 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-accent to-warm-coral transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
               </Button>
               
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105 group"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105 group px-10 py-4 text-lg rounded-2xl font-semibold min-w-[250px]"
               >
-                <Users className="mr-2 h-4 w-4 transition-transform group-hover:rotate-12" />
+                <Users className="mr-3 h-5 w-5 transition-transform group-hover:rotate-12" />
                 Learn More About Us
               </Button>
             </div>
-          </div>
-
-          {/* Enhanced Service Area Map */}
-          <div className={`relative transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-            <Card className="bg-primary-foreground/95 p-8 text-primary transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group">
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-2xl font-bold">Our Service Area</h3>
-                    <Award className="h-6 w-6 text-accent" />
-                  </div>
-                  <p className="text-muted-foreground">
-                    Providing specialized pediatric endocrinology care across Maryland and Virginia
-                  </p>
-                </div>
-                
-                <div className="relative overflow-hidden rounded-lg">
-                  <img 
-                    src={serviceAreaMap} 
-                    alt="Service area map showing Maryland and Virginia" 
-                    className="w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="p-3 rounded-lg bg-secondary/50 transition-all duration-300 hover:bg-secondary">
-                    <h4 className="font-semibold text-primary flex items-center">
-                      <MapPin className="h-3 w-3 mr-1 text-accent" />
-                      Maryland
-                    </h4>
-                    <p className="text-muted-foreground">Comprehensive coverage</p>
-                    <div className="w-full bg-muted rounded-full h-1 mt-2">
-                      <div className="bg-accent h-1 rounded-full w-4/5"></div>
-                    </div>
-                  </div>
-                  <div className="p-3 rounded-lg bg-secondary/50 transition-all duration-300 hover:bg-secondary">
-                    <h4 className="font-semibold text-primary flex items-center">
-                      <MapPin className="h-3 w-3 mr-1 text-accent" />
-                      Virginia
-                    </h4>
-                    <p className="text-muted-foreground">Statewide service</p>
-                    <div className="w-full bg-muted rounded-full h-1 mt-2">
-                      <div className="bg-accent h-1 rounded-full w-5/6"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
             
-            {/* Trust Indicators */}
-            <div className="absolute -bottom-4 -right-4 bg-accent text-accent-foreground p-4 rounded-full shadow-lg animate-bounce">
-              <Shield className="h-6 w-6" />
+            <div className="text-center mt-8">
+              <p className="text-primary/70 text-lg">
+                <span className="font-semibold text-accent">Serving Maryland & Virginia</span> • 
+                <span className="ml-2">Ages Birth–23 years</span>
+              </p>
             </div>
           </div>
         </div>

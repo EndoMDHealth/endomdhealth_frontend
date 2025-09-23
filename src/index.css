@@ -8,7 +8,7 @@ All colors MUST be HSL. Warm, professional medical brand.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 25 20% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,45 +17,49 @@ All colors MUST be HSL. Warm, professional medical brand.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Primary: Navy #0B1F3A */
-    --primary: 215 69% 14%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Warm Navy for trust and professionalism */
+    --primary: 197 71% 52%;
+    --primary-foreground: 210 40% 98%;
 
-    /* Secondary: Soft gray for backgrounds */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 215 69% 14%;
+    /* Secondary: Soft peachy backgrounds */
+    --secondary: 25 95% 90%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    /* Muted: Light gray #F5F6F8 */
-    --muted: 210 20% 97%;
+    /* Muted: Light warm gray */
+    --muted: 25 30% 95%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    /* Accent: Mustard #E0B400 */
-    --accent: 48 100% 44%;
-    --accent-foreground: 215 69% 14%;
+    /* Accent: Bright golden orange for energy */
+    --accent: 39 100% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 215 69% 14%;
+    --border: 25 20% 88%;
+    --input: 25 20% 88%;
+    --ring: 197 71% 52%;
 
     --radius: 1rem;
 
-    /* Medical brand specific tokens */
-    --medical-navy: 215 69% 14%; /* #0B1F3A */
-    --medical-mustard: 48 100% 44%; /* #E0B400 */
-    --medical-light: 210 20% 97%; /* #F5F6F8 */
-    --medical-trust: 211 39% 23%; /* #253B53 */
+    /* Warm, family-friendly color palette */
+    --medical-trust: 197 71% 52%;
+    --medical-care: 169 100% 35%;
+    --medical-warmth: 39 100% 60%;
+    --medical-comfort: 25 95% 90%;
+    --warm-coral: 14 77% 68%;
+    --warm-peach: 25 95% 85%;
+    --warm-sage: 130 25% 70%;
+    --warm-lavender: 260 25% 85%;
     
     /* Gradients for hero sections */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--medical-navy)), hsl(var(--medical-trust)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--medical-mustard)), hsl(48 90% 54%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--warm-peach)), hsl(var(--warm-coral)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--warm-coral)));
     
-    /* Shadows */
-    --shadow-soft: 0 4px 6px -1px hsl(var(--medical-navy) / 0.1);
-    --shadow-medium: 0 10px 15px -3px hsl(var(--medical-navy) / 0.1);
-    --shadow-large: 0 25px 50px -12px hsl(var(--medical-navy) / 0.15);
+    /* Shadows with warm tones */
+    --shadow-soft: 0 4px 6px -1px hsl(var(--warm-coral) / 0.1);
+    --shadow-medium: 0 10px 15px -3px hsl(var(--warm-coral) / 0.15);
+    --shadow-large: 0 25px 50px -12px hsl(var(--warm-coral) / 0.2);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
