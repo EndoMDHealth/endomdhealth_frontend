@@ -8,8 +8,8 @@ import {
   Pill, 
   Activity 
 } from "lucide-react";
-import outdoorToddlerGirl from "@/assets/outdoor-toddler-girl.jpg";
-import outdoorPreteenBoy from "@/assets/outdoor-preteen-boy.jpg";
+import fallToddlerGirl from "@/assets/fall-toddler-girl.jpg";
+import fallPreteenBoy from "@/assets/fall-preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -74,40 +74,34 @@ const ConcernsSection = () => {
             </div>
           </div>
 
-          {/* Main Content - Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Images Diagonally Placed */}
-            <div className="relative">
-              <div className="relative max-w-lg mx-auto">
-                {/* Background decorative shape */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-sunshine-boost to-yellow-300 rounded-[3rem] transform rotate-2"></div>
-                
-                {/* Image container with yellow border */}
-                <div className="relative bg-white p-6 rounded-[3rem] border-4 border-brand-sunshine-boost shadow-lg">
-                  <div className="relative h-80">
-                    {/* Top image - positioned diagonally */}
-                    <div className="absolute top-0 left-0 w-48 h-36 rounded-2xl overflow-hidden transform rotate-3 z-10">
-                      <img
-                        src={outdoorToddlerGirl}
-                        alt="Happy toddler girl playing outdoors"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    {/* Bottom image - positioned diagonally below */}
-                    <div className="absolute bottom-0 right-0 w-48 h-36 rounded-2xl overflow-hidden transform -rotate-3">
-                      <img
-                        src={outdoorPreteenBoy}
-                        alt="Confident pre-teen boy outdoors"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+          {/* Main Content - Adjusted Layout: Images 1/3, Content 2/3 */}
+          <div className="grid lg:grid-cols-5 gap-8 items-center">
+            {/* Left Side - Images Diagonally Placed (2/5 columns) */}
+            <div className="lg:col-span-2">
+              <div className="relative max-w-md mx-auto">
+                <div className="relative h-96">
+                  {/* Top image - positioned diagonally, larger and no frame */}
+                  <div className="absolute top-0 left-4 w-56 h-40 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
+                    <img
+                      src={fallToddlerGirl}
+                      alt="Happy toddler girl enjoying fall season"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {/* Bottom image - positioned diagonally below, larger and no frame */}
+                  <div className="absolute bottom-0 right-4 w-56 h-40 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
+                    <img
+                      src={fallPreteenBoy}
+                      alt="Confident pre-teen boy in autumn setting"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Side - Conditions List */}
-            <div className="space-y-6">
+            {/* Right Side - Conditions List (3/5 columns) */}
+            <div className="lg:col-span-3 space-y-6">
               {concerns.map((concern, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className={`${concern.iconBg} p-3 rounded-full flex-shrink-0`}>
