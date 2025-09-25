@@ -9,7 +9,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "EndoMD Health saved my teenage daughter's life. After years of unexplained pain, they finally gave us answers and effective treatment. Cannot recommend them enough!",
+      quote: "I had an incredible experience with Dr. Ladan Davallow at EndoMD! Scheduling was easy, she was highly responsive, and she went above and beyond to work with my family and insurance to get necessary approvals. Throughout the process, she was professional, an incredible communicator, caring, and attentive. Overall, an exceptional healthcare experience—I highly recommend!",
       author: "Danielle Johnson Crowley",
       rating: 5,
     },
