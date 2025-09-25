@@ -39,7 +39,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "EndoMD Health provided hope when we had none. My daughter's chronic pain is now manageable thanks to their expertise and dedication to patient care.",
+      quote: "Dr Davallow is an excellent pediatric endocrinologist. She is very thorough in making sure to get all necessary information to properly diagnose, is very knowledgeable, and has excellent bedside manner. We are so happy we found her for our daughter.",
       author: "Tiffany Howell",
       rating: 5,
     },
