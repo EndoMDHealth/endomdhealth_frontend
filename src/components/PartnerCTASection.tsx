@@ -73,27 +73,33 @@ const PartnerCTASection = () => {
             </p>
           </div>
 
-          {/* Partner Buttons Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {partnerButtons.map((partner) => (
-              <Card key={partner.href} className="p-6 hover:shadow-lg transition-shadow group cursor-pointer">
-                <a href={partner.href} className="block space-y-4">
-                  <div className="flex justify-center">
-                    <div className="p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                      <partner.icon className="h-8 w-8 text-primary" />
+          {/* Partner Buttons Compact Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {partnerButtons.map((partner, index) => {
+              const colors = [
+                { bg: 'bg-brand-sunshine-boost', icon: 'text-white' },
+                { bg: 'bg-brand-morning-glow', icon: 'text-white' },
+                { bg: 'bg-brand-healing-leaf', icon: 'text-white' },
+                { bg: 'bg-brand-steady-sky', icon: 'text-white' },
+                { bg: 'bg-brand-starry-hug', icon: 'text-white' }
+              ];
+              const colorScheme = colors[index % colors.length];
+              
+              return (
+                <Card key={partner.href} className={`${colorScheme.bg} p-4 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer border-0`}>
+                  <a href={partner.href} className="block space-y-3">
+                    <div className="flex justify-center">
+                      <partner.icon className={`h-8 w-8 ${colorScheme.icon}`} />
                     </div>
-                  </div>
-                  <div className="space-y-2 text-center">
-                    <h3 className="text-lg font-semibold text-primary group-hover:text-primary/80 transition-colors">
-                      {partner.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {partner.description}
-                    </p>
-                  </div>
-                </a>
-              </Card>
-            ))}
+                    <div className="text-center">
+                      <h3 className="text-sm font-semibold text-white group-hover:text-white/90 transition-colors leading-tight">
+                        {partner.title}
+                      </h3>
+                    </div>
+                  </a>
+                </Card>
+              );
+            })}
           </div>
 
           {/* Quick Links Row */}
