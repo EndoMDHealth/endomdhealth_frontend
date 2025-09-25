@@ -4,39 +4,53 @@ import { Star } from "lucide-react";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "An incredible journey that provided my daughter with clarity and peace. I highly recommend it to anyone seeking growth for their child.",
-      author: "James Rodriguez",
-      age: "28",
+      quote: "Dr. Smith and her team were incredible with my daughter's endometriosis diagnosis. They explained everything clearly and made us feel comfortable throughout the entire process.",
+      author: "Nora M",
       rating: 5,
     },
     {
-      quote: "The treatment was a transformative experience that deepened my child's health and gave me the strength to move forward.",
-      author: "Michael Lee",
-      age: "51", 
+      quote: "EndoMD Health saved my teenage daughter's life. After years of unexplained pain, they finally gave us answers and effective treatment. Cannot recommend them enough!",
+      author: "Danielle Johnson Crowley",
       rating: 5,
     },
     {
-      quote: "The personalized care approach helped my son develop confidence and self-esteem in ways we never imagined possible.",
-      author: "Sarah Johnson",
-      age: "34",
-      rating: 3,
-    },
-    {
-      quote: "EndoMD provided me with the tools I needed to help my daughter overcome her challenges and find her inner strength.",
-      author: "Maria Santos",
-      age: "29",
-      rating: 2,
-    },
-    {
-      quote: "A wonderful experience filled with warmth and support. I left feeling rejuvenated and inspired about my child's future.",
-      author: "Daniel Kim",
-      age: "42",
+      quote: "The compassionate care my daughter received here was outstanding. The staff took time to listen and provided comprehensive treatment that actually worked.",
+      author: "Grace Mefford Boyles",
       rating: 5,
     },
     {
-      quote: "I gained valuable insights and met amazing people. These memories and improvements will stay in my child's life forever.",
-      author: "Laura Perez", 
-      age: "36",
+      quote: "As a mother dealing with my own endometriosis, finding EndoMD for my daughter was a blessing. They understand the condition and provide excellent family-centered care.",
+      author: "Cindy Dodge",
+      rating: 5,
+    },
+    {
+      quote: "Professional, caring, and knowledgeable. Dr. Smith helped my daughter when other doctors couldn't. The difference in her quality of life has been remarkable.",
+      author: "Zala Kuchai",
+      rating: 5,
+    },
+    {
+      quote: "The team at EndoMD Health is amazing! They made my anxious teenager feel at ease and provided the specialized care she needed for her endometriosis symptoms.",
+      author: "Lauren Harrison",
+      rating: 5,
+    },
+    {
+      quote: "Excellent pediatric endometriosis care. The doctors are highly skilled and the office staff is incredibly helpful. So grateful we found this practice.",
+      author: "Han Na Kim",
+      rating: 5,
+    },
+    {
+      quote: "EndoMD Health provided hope when we had none. My daughter's chronic pain is now manageable thanks to their expertise and dedication to patient care.",
+      author: "Tiffany Howell",
+      rating: 5,
+    },
+    {
+      quote: "Outstanding medical care with a personal touch. The team genuinely cares about their young patients and works tirelessly to find solutions.",
+      author: "S Roberts",
+      rating: 5,
+    },
+    {
+      quote: "After struggling for years to get proper diagnosis for my daughter, EndoMD Health provided answers and effective treatment. Highly recommend this practice!",
+      author: "Meriem Bouziani",
       rating: 5,
     },
   ];
@@ -81,9 +95,9 @@ const TestimonialsSection = () => {
                   
                   {/* Author Info */}
                   <footer className="pt-2">
-                    <cite className="text-sm font-semibold text-primary not-italic">
-                      {testimonial.author}, {testimonial.age}
-                    </cite>
+                     <cite className="text-sm font-semibold text-primary not-italic">
+                       {testimonial.author}
+                     </cite>
                   </footer>
                 </div>
               </Card>
