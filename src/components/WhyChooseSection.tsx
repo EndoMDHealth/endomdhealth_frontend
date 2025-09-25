@@ -56,7 +56,7 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-stone-100">
+    <section className="py-16 bg-brand-steady-sky-light">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}

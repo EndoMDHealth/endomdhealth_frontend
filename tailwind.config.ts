@@ -54,6 +54,7 @@ export default {
           "healing-leaf": "hsl(var(--healing-leaf))",
           "healing-leaf-light": "hsl(var(--healing-leaf-light))",
           "steady-sky": "hsl(var(--steady-sky))",
+          "steady-sky-light": "hsl(var(--steady-sky-light))",
           "starry-hug": "hsl(var(--starry-hug))",
         },
         sidebar: {
