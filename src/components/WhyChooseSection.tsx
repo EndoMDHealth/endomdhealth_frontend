@@ -15,6 +15,19 @@ import realFamilyConsultation from "@/assets/family-doctor-consultation.jpg";
 const WhyChooseSection = () => {
   const leftFeatures = [
     {
+      title: "Fast Appointments",
+      description 1: "Care when you need it, not months later."
+      description 2:  "Our streamlined scheduling gets your child seen quickly so care begins without delay.",
+      icon: Calendar,
+      iconBg: "bg-teal-600",
+    },
+    {
+      title: "Skip the Waiting Room",
+      description: "Save time by eliminating lengthy clinic waiting times with virtual consultations.",
+      icon: Home,
+      iconBg: "bg-brand-sunshine-boost",
+    },
+    {
       title: "Direct Communication",
       description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
       icon: MessageCircle,
@@ -32,20 +45,20 @@ const WhyChooseSection = () => {
       icon: TrendingUp,
       iconBg: "bg-brand-steady-sky",
     },
-    {
-      title: "Outstanding Care",
+    {             
+      title: "Meaningful Care",
       description: "We don't rush to get you out the door. We give your child the time and care needed to make a meaningful difference.",
       icon: HeartHandshake,
-      iconBg: "bg-emerald-600",
+      iconBg: "bg-emerald-600"
     },
   ];
 
   const rightFeatures = [
     {
-      title: "Fast Appointments",
-      description: "Avoid the typical 3-6 month wait to see a specialist with quick, easy scheduling.",
-      icon: Calendar,
-      iconBg: "bg-teal-600",
+      title: "Direct Communication",
+      description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
+      icon: MessageCircle,
+      iconBg: "bg-brand-sunshine-boost",
     },
     {
       title: "Convenient Access",
