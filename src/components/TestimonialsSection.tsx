@@ -1,25 +1,59 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Quote } from "lucide-react";
+import { Star } from "lucide-react";
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Dr. Davallow really listens and explains everything clearly. We finally feel like someone understands our child's needs.",
-      author: "Z.M.",
+      quote: "An incredible journey that provided my daughter with clarity and peace. I highly recommend it to anyone seeking growth for their child.",
+      author: "James Rodriguez",
+      age: "28",
+      rating: 5,
     },
     {
-      quote: "The staff is kind and supportive. My daughter looks forward to her visits.",
-      author: "L.R.",
+      quote: "The treatment was a transformative experience that deepened my child's health and gave me the strength to move forward.",
+      author: "Michael Lee",
+      age: "51", 
+      rating: 5,
     },
     {
-      quote: "We trust EndoMD with our son's care completely.",
-      author: "A.P.",
+      quote: "The personalized care approach helped my son develop confidence and self-esteem in ways we never imagined possible.",
+      author: "Sarah Johnson",
+      age: "34",
+      rating: 3,
+    },
+    {
+      quote: "EndoMD provided me with the tools I needed to help my daughter overcome her challenges and find her inner strength.",
+      author: "Maria Santos",
+      age: "29",
+      rating: 2,
+    },
+    {
+      quote: "A wonderful experience filled with warmth and support. I left feeling rejuvenated and inspired about my child's future.",
+      author: "Daniel Kim",
+      age: "42",
+      rating: 5,
+    },
+    {
+      quote: "I gained valuable insights and met amazing people. These memories and improvements will stay in my child's life forever.",
+      author: "Laura Perez", 
+      age: "36",
+      rating: 5,
     },
   ];
 
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`h-4 w-4 ${
+          i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+        }`}
+      />
+    ));
+  };
+
   return (
-    <section className="py-20 bg-background">
+    <section className="py-16 bg-stone-100">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           <div className="text-center space-y-4">
@@ -27,42 +61,33 @@ const TestimonialsSection = () => {
               What Parents Are Saying
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Hear from families who have experienced the difference of personalized, 
-              compassionate pediatric endocrine care.
+              We select our team members carefully to ensure your child receives outstanding care.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card key={index} className="p-6 bg-white hover:shadow-lg transition-all duration-300">
                 <div className="space-y-4">
-                  <Quote className="h-8 w-8 text-accent/60" />
-                  <blockquote className="text-lg text-foreground leading-relaxed">
+                  {/* Star Rating */}
+                  <div className="flex space-x-1">
+                    {renderStars(testimonial.rating)}
+                  </div>
+                  
+                  {/* Testimonial Quote */}
+                  <blockquote className="text-sm text-muted-foreground leading-relaxed">
                     "{testimonial.quote}"
                   </blockquote>
-                  <footer className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-semibold text-primary">
-                        {testimonial.author.charAt(0)}
-                      </span>
-                    </div>
-                    <cite className="text-sm font-medium text-muted-foreground">
-                      – {testimonial.author}
+                  
+                  {/* Author Info */}
+                  <footer className="pt-2">
+                    <cite className="text-sm font-semibold text-primary not-italic">
+                      {testimonial.author}, {testimonial.age}
                     </cite>
                   </footer>
                 </div>
               </Card>
             ))}
-          </div>
-
-          <div className="text-center">
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              Read More Parent Stories
-            </Button>
           </div>
         </div>
       </div>
