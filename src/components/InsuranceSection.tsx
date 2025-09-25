@@ -36,29 +36,35 @@ const InsuranceSection = () => {
             <div className="relative">
               <div className="flex animate-scroll space-x-8 md:space-x-12">
                 {/* First set of logos */}
-                {insuranceLogos.map((insurance, index) => (
-                  <div key={`first-${index}`} className="flex-shrink-0">
-                    <div className="w-32 h-20 md:w-40 md:h-24 flex items-center justify-center p-4">
-                      <img
-                        src={insurance.logo}
-                        alt={`${insurance.name} logo`}
-                        className="max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110"
-                      />
+                {insuranceLogos.map((insurance, index) => {
+                  const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
+                  return (
+                    <div key={`first-${index}`} className="flex-shrink-0">
+                      <div className={`${isLargerLogo ? 'w-40 h-24 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
+                        <img
+                          src={insurance.logo}
+                          alt={`${insurance.name} logo`}
+                          className={`${isLargerLogo ? 'scale-125' : ''} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 {/* Second set of logos for seamless loop */}
-                {insuranceLogos.map((insurance, index) => (
-                  <div key={`second-${index}`} className="flex-shrink-0">
-                    <div className="w-32 h-20 md:w-40 md:h-24 flex items-center justify-center p-4">
-                      <img
-                        src={insurance.logo}
-                        alt={`${insurance.name} logo`}
-                        className="max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110"
-                      />
+                {insuranceLogos.map((insurance, index) => {
+                  const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
+                  return (
+                    <div key={`second-${index}`} className="flex-shrink-0">
+                      <div className={`${isLargerLogo ? 'w-40 h-24 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
+                        <img
+                          src={insurance.logo}
+                          alt={`${insurance.name} logo`}
+                          className={`${isLargerLogo ? 'scale-125' : ''} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
