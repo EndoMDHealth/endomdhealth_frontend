@@ -32,9 +32,9 @@ const InsuranceSection = () => {
           </div>
 
           {/* Continuously Rotating Insurance Logos Tape */}
-          <div className="w-full overflow-hidden bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg py-12">
+          <div className="w-full overflow-hidden bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg py-6">
             <div className="relative">
-              <div className="flex animate-scroll space-x-8 md:space-x-12">
+              <div className="flex animate-scroll space-x-4 md:space-x-6">
                 {/* First set of logos */}
                 {insuranceLogos.map((insurance, index) => {
                   const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
@@ -69,11 +69,6 @@ const InsuranceSection = () => {
             </div>
           </div>
 
-          <div className="space-y-4">
-            <p className="text-lg text-primary/80 max-w-2xl mx-auto">
-              See our rates without insurance or get in touch and we can let you know.
-            </p>
-          </div>
         </div>
       </div>
     </section>
