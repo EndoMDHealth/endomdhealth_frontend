@@ -44,7 +44,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "Outstanding medical care with a personal touch. The team genuinely cares about their young patients and works tirelessly to find solutions.",
+      quote: "We were so happy with our visit with Dr. Davallow! She was very understanding and compassionate. She spent extra time making sure all of our questions and concerns were discussed. The added bonus of a tele-visit worked exceptionally well for us and not having to wait months to obtain an appointment. I would definitely recommend her to anyone in need of an endocrinologist!",
       author: "S Roberts",
       rating: 5,
     },
