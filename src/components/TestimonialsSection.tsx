@@ -24,7 +24,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "Professional, caring, and knowledgeable. Dr. Smith helped my daughter when other doctors couldn't. The difference in her quality of life has been remarkable.",
+      quote: "Really wonderful doctor: she takes her time to listen to your concern! Really happy to find her. Will def be recommending to other parents",
       author: "Zala Kuchai",
       rating: 5,
     },
