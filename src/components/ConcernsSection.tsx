@@ -35,13 +35,13 @@ const ConcernsSection = () => {
       title: "Address Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
       icon: Users,
-      iconBg: "bg-orange-500",
+      iconBg: "bg-emerald-600",
     },
     {
       title: "Manage Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
       icon: Pill,
-      iconBg: "bg-pink-500",
+      iconBg: "bg-teal-600",
     },
     {
       title: "Balance Hormones",
@@ -79,17 +79,17 @@ const ConcernsSection = () => {
             {/* Left Side - Images Diagonally Placed (2/5 columns) */}
             <div className="lg:col-span-2">
               <div className="relative max-w-md mx-auto">
-                <div className="relative h-96">
-                  {/* Top image - positioned diagonally, larger and no frame */}
-                  <div className="absolute top-0 left-4 w-56 h-40 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
+                <div className="relative h-[500px]">
+                  {/* Top image - positioned diagonally, much larger */}
+                  <div className="absolute top-0 left-4 w-72 h-52 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
                     <img
                       src={fallToddlerGirl}
                       alt="Happy toddler girl enjoying fall season"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  {/* Bottom image - positioned diagonally below, larger and no frame */}
-                  <div className="absolute bottom-0 right-4 w-56 h-40 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
+                  {/* Bottom image - positioned diagonally below, much larger */}
+                  <div className="absolute bottom-0 right-4 w-72 h-52 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
                     <img
                       src={fallPreteenBoy}
                       alt="Confident pre-teen boy in autumn setting"
