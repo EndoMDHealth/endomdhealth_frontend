@@ -30,7 +30,7 @@ const WhyChooseSection = () => {
       title: "Direct Communication",
       description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
       icon: MessageCircle,
-      iconBg: "bg-brand-sunshine-boost",
+      iconBg: "bg-brand-healing-leaf",
     },
   ];
 
