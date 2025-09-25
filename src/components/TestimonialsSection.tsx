@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
             }
           }
           .scroll-animation {
-            animation: scroll 45s linear infinite;
+            animation: scroll 22.5s linear infinite;
           }
         `
       }} />
@@ -103,7 +103,7 @@ const TestimonialsSection = () => {
               {duplicatedTestimonials.map((testimonial, index) => (
                 <Card 
                   key={index} 
-                  className="p-6 min-w-[380px] max-w-[380px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
+                  className="p-6 min-w-[320px] max-w-[320px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
                   style={{ backgroundColor: '#E8EBC4' }}
                 >
                   <div className="space-y-4">
