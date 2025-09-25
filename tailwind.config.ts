@@ -52,6 +52,7 @@ export default {
           "sunshine-boost": "hsl(var(--sunshine-boost))",
           "morning-glow": "hsl(var(--morning-glow))",
           "healing-leaf": "hsl(var(--healing-leaf))",
+          "healing-leaf-light": "hsl(var(--healing-leaf-light))",
           "steady-sky": "hsl(var(--steady-sky))",
           "starry-hug": "hsl(var(--starry-hug))",
         },
