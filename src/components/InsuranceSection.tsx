@@ -25,7 +25,7 @@ const InsuranceSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-3xl font-bold text-primary leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary leading-tight">
               We Accept Most Major Insurance Plans,{" "}
               <span className="text-sunshine-boost">Including Medicaid</span>
             </h2>
