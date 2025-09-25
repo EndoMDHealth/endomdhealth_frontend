@@ -34,7 +34,7 @@ const InsuranceSection = () => {
           {/* Continuously Rotating Insurance Logos Tape */}
           <div className="w-full overflow-hidden bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg py-6">
             <div className="relative">
-              <div className="flex animate-scroll space-x-4 md:space-x-6">
+              <div className="flex animate-scroll space-x-3 md:space-x-4">
                 {/* First set of logos */}
                 {insuranceLogos.map((insurance, index) => {
                   const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
