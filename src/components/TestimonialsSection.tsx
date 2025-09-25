@@ -55,6 +55,9 @@ const TestimonialsSection = () => {
     },
   ];
 
+  // Duplicate testimonials for seamless loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
@@ -68,6 +71,22 @@ const TestimonialsSection = () => {
 
   return (
     <section className="py-16 bg-stone-100">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .scroll-animation {
+            animation: scroll 60s linear infinite;
+          }
+        `
+      }} />
+      
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           <div className="text-center space-y-4">
@@ -79,29 +98,35 @@ const TestimonialsSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 bg-orange-200/70 hover:shadow-lg transition-all duration-300">
-                <div className="space-y-4">
-                  {/* Star Rating */}
-                  <div className="flex space-x-1">
-                    {renderStars(testimonial.rating)}
+          <div className="relative overflow-hidden">
+            <div className="flex space-x-6 scroll-animation">
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <Card 
+                  key={index} 
+                  className="p-6 min-w-[350px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
+                  style={{ backgroundColor: '#F3F6DE' }}
+                >
+                  <div className="space-y-4">
+                    {/* Star Rating */}
+                    <div className="flex space-x-1">
+                      {renderStars(testimonial.rating)}
+                    </div>
+                    
+                    {/* Testimonial Quote */}
+                    <blockquote className="text-sm text-muted-foreground leading-relaxed line-clamp-6">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    
+                    {/* Author Info */}
+                    <footer className="pt-2">
+                      <cite className="text-sm font-semibold text-primary not-italic">
+                        {testimonial.author}
+                      </cite>
+                    </footer>
                   </div>
-                  
-                  {/* Testimonial Quote */}
-                  <blockquote className="text-sm text-muted-foreground leading-relaxed">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  
-                  {/* Author Info */}
-                  <footer className="pt-2">
-                     <cite className="text-sm font-semibold text-primary not-italic">
-                       {testimonial.author}
-                     </cite>
-                  </footer>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </div>
