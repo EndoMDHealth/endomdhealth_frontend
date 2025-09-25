@@ -40,7 +40,7 @@ const InsuranceSection = () => {
                   const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
                   return (
                     <div key={`first-${index}`} className="flex-shrink-0">
-                      <div className={`${isLargerLogo ? 'w-40 h-24 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
+                      <div className={`${isLargerLogo ? 'w-48 h-28 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
                         <img
                           src={insurance.logo}
                           alt={`${insurance.name} logo`}
