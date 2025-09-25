@@ -7,9 +7,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigationItems = [
-    { name: "For Individuals", href: "#individuals" },
-    { name: "For Clinicians", href: "#clinicians" },
     { name: "Who we are", href: "#about" },
+    { name: "What we offer", href: "#services" },
+    { name: "Who we serve", href: "#serve" },
     { name: "Contact Us", href: "#contact" },
   ];
 
@@ -22,18 +22,6 @@ const Header = () => {
             <div className="text-xl lg:text-2xl font-bold">
               <span className="text-brand-sunshine-boost">ENDO</span>
               <span className="text-white">MD</span>
-            </div>
-          </div>
-
-          {/* Contact Info - Desktop only */}
-          <div className="hidden xl:flex items-center space-x-6 text-sm text-white/90">
-            <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
-              <span>(571) 480-6053</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="h-4 w-4" />
-              <span>info@endomdhealth.com</span>
             </div>
           </div>
 
@@ -62,11 +50,23 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Get Started Button */}
+          {/* Request Appointment Button */}
           <div className="hidden lg:flex items-center">
             <Button className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-semibold px-4 xl:px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105 whitespace-nowrap">
-              Get Started
+              Request appointment
             </Button>
+          </div>
+
+          {/* Contact Info - Desktop only */}
+          <div className="hidden xl:flex items-center space-x-6 text-sm text-white/90">
+            <div className="flex items-center space-x-2">
+              <Phone className="h-4 w-4" />
+              <span>(571) 480-6053</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Mail className="h-4 w-4" />
+              <span>info@endomdhealth.com</span>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -119,7 +119,7 @@ const Header = () => {
             </nav>
             
             <Button className="w-full bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-semibold py-3 rounded-lg transition-all duration-300">
-              Get Started
+              Request appointment
             </Button>
           </div>
         )}
