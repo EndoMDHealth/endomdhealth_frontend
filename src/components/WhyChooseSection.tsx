@@ -16,8 +16,7 @@ const WhyChooseSection = () => {
   const leftFeatures = [
     {
       title: "Fast Appointments",
-      description 1: "Care when you need it, not months later.",
-      description 2:  "Our streamlined scheduling gets your child seen quickly so care begins without delay.",
+      description: "Care when you need it, not months later. Our streamlined scheduling gets your child seen quickly so care begins without delay.",
       icon: Calendar,
       iconBg: "bg-teal-600",
     },
