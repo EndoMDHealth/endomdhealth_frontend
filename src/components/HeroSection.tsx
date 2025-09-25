@@ -72,7 +72,7 @@ const HeroSection = () => {
               </div>
               <div>
                 <p className="text-sm text-white/70 font-medium">Age range</p>
-                <p className="text-lg font-bold text-white">5 - 25 years</p>
+                <p className="text-lg font-bold text-white">Birth - 25 years</p>
               </div>
             </div>
           </div>
