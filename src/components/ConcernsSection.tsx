@@ -8,8 +8,8 @@ import {
   Pill, 
   Activity 
 } from "lucide-react";
-import fallToddlerGirl from "@/assets/fall-toddler-girl.jpg";
-import fallPreteenBoy from "@/assets/fall-preteen-boy.jpg";
+import activeFallToddlerGirl from "@/assets/active-fall-toddler-girl.jpg";
+import activeFallPreteenBoy from "@/assets/active-fall-preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -81,18 +81,18 @@ const ConcernsSection = () => {
               <div className="relative max-w-md mx-auto">
                 <div className="relative h-[500px]">
                   {/* Top image - positioned diagonally, much larger */}
-                  <div className="absolute top-0 left-4 w-72 h-52 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
+                  <div className="absolute top-0 left-4 w-80 h-56 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
                     <img
-                      src={fallToddlerGirl}
-                      alt="Happy toddler girl enjoying fall season"
+                      src={activeFallToddlerGirl}
+                      alt="Happy toddler girl actively playing in fall leaves"
                       className="w-full h-full object-cover"
                     />
                   </div>
                   {/* Bottom image - positioned diagonally below, much larger */}
-                  <div className="absolute bottom-0 right-4 w-72 h-52 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
+                  <div className="absolute bottom-0 right-4 w-80 h-56 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
                     <img
-                      src={fallPreteenBoy}
-                      alt="Confident pre-teen boy in autumn setting"
+                      src={activeFallPreteenBoy}
+                      alt="Pre-teen boy actively biking in autumn setting"
                       className="w-full h-full object-cover"
                     />
                   </div>
