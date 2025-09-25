@@ -1,44 +1,50 @@
 import { Card } from "@/components/ui/card";
 import { 
   Scale, 
-  Activity, 
+  Droplets, 
   TrendingUp, 
-  Clock, 
-  Zap, 
-  Target 
+  Calendar, 
+  Shield, 
+  RotateCcw 
 } from "lucide-react";
 
 const ConcernsSection = () => {
   const concerns = [
     {
-      title: "Healthy weight consultation",
+      title: "Healthy Weight Consultation",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
       icon: Scale,
+      color: "bg-brand-sunshine-boost",
     },
     {
-      title: "Reverse type 2 diabetes",
-      description: "Specialized care to manage and potentially reverse type 2 diabetes in children.",
-      icon: Activity,
+      title: "Reverse Type 2 Diabetes",
+      description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
+      icon: Droplets,
+      color: "bg-brand-healing-leaf",
     },
     {
-      title: "Growth concerns",
+      title: "Growth Concerns",
       description: "Comprehensive support to promote healthy growth with professional evaluation.",
       icon: TrendingUp,
+      color: "bg-blue-500",
     },
     {
-      title: "Address puberty concerns",
+      title: "Address Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
-      icon: Clock,
+      icon: Calendar,
+      color: "bg-orange-500",
     },
     {
-      title: "Manage thyroid issues",
-      description: "Targeted treatment for thyroid symptoms like tiredness, sleepiness and lack of concentration.",
-      icon: Zap,
+      title: "Manage Thyroid Issues",
+      description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
+      icon: Shield,
+      color: "bg-pink-500",
     },
     {
-      title: "Balance hormones",
-      description: "Advanced hormone management to improve concentration and overall well-being.",
-      icon: Target,
+      title: "Balance Hormones",
+      description: "Advanced hormone management to improve concentration and overall health.",
+      icon: RotateCcw,
+      color: "bg-purple-500",
     },
   ];
 
@@ -48,11 +54,10 @@ const ConcernsSection = () => {
         <div className="space-y-12">
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Pediatric endocrine concerns we address
+              Pediatric Endocrine Concerns We Address
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Our specialized team provides comprehensive care for a wide range of pediatric endocrine conditions, 
-              ensuring your child receives the expert attention they deserve.
+              A Better Life For Your Child Is A Click Away, Start The Journey Today!
             </p>
           </div>
 
@@ -61,10 +66,10 @@ const ConcernsSection = () => {
               <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                      <concern.icon className="h-6 w-6 text-primary" />
+                    <div className={`p-3 ${concern.color} rounded-full group-hover:scale-110 transition-transform`}>
+                      <concern.icon className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-primary">
+                    <h3 className="text-lg font-bold text-primary">
                       {concern.title}
                     </h3>
                   </div>
