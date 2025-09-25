@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import unitedhealthcareLogo from "@/assets/logos/unitedhealthcare-logo.jpg";
+import unitedhealthcareLogo from "@/assets/logos/uhc-logo.svg";
 import anthemLogo from "@/assets/logos/anthem-logo.jpg";
-import cignaLogo from "@/assets/logos/cigna-logo.jpg";
-import aetnaLogo from "@/assets/logos/aetna-logo.jpg";
+import cignaLogo from "@/assets/logos/cigna-logo.webp";
+import aetnaLogo from "@/assets/logos/aetna-logo.svg";
 import humanaLogo from "@/assets/logos/humana-logo.jpg";
-import sentaraLogo from "@/assets/logos/sentara-logo.jpg";
+import sentaraLogo from "@/assets/logos/sentara-logo-new.jpg";
 import carefirstLogo from "@/assets/logos/carefirst-logo.jpg";
 
 const InsuranceSection = () => {
@@ -31,33 +31,36 @@ const InsuranceSection = () => {
             </h2>
           </div>
 
-          {/* Rotating Insurance Logos Tape */}
-          <div className="w-full overflow-hidden bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg py-8">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full max-w-5xl mx-auto"
-            >
-              <CarouselContent className="-ml-2 md:-ml-4">
+          {/* Continuously Rotating Insurance Logos Tape */}
+          <div className="w-full overflow-hidden bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg py-12">
+            <div className="relative">
+              <div className="flex animate-scroll space-x-8 md:space-x-12">
+                {/* First set of logos */}
                 {insuranceLogos.map((insurance, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/3 md:basis-1/5">
-                    <div className="p-4">
-                      <Card className="border-none shadow-none bg-transparent">
-                        <div className="aspect-[3/2] flex items-center justify-center p-4">
-                          <img
-                            src={insurance.logo}
-                            alt={`${insurance.name} logo`}
-                            className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
-                          />
-                        </div>
-                      </Card>
+                  <div key={`first-${index}`} className="flex-shrink-0">
+                    <div className="w-32 h-20 md:w-40 md:h-24 flex items-center justify-center p-4">
+                      <img
+                        src={insurance.logo}
+                        alt={`${insurance.name} logo`}
+                        className="max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110"
+                      />
                     </div>
-                  </CarouselItem>
+                  </div>
                 ))}
-              </CarouselContent>
-            </Carousel>
+                {/* Second set of logos for seamless loop */}
+                {insuranceLogos.map((insurance, index) => (
+                  <div key={`second-${index}`} className="flex-shrink-0">
+                    <div className="w-32 h-20 md:w-40 md:h-24 flex items-center justify-center p-4">
+                      <img
+                        src={insurance.logo}
+                        alt={`${insurance.name} logo`}
+                        className="max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="space-y-4">
