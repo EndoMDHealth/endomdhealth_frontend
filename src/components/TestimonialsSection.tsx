@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Dr. Smith and her team were incredible with my daughter's endometriosis diagnosis. They explained everything clearly and made us feel comfortable throughout the entire process.",
+      quote: "Worth the time and money.. very knowledgeable and non judgmental.. my daughter TIR increased during our time with the doctor…highly recommended",
       author: "Nora M",
       rating: 5,
     },
@@ -14,7 +14,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "The compassionate care my daughter received here was outstanding. The staff took time to listen and provided comprehensive treatment that actually worked.",
+      quote: "Dr Davallow is incredible. We are so thrilled to be working with EndoMed and having the personalized care. Could not recommend more!",
       author: "Grace Mefford Boyles",
       rating: 5,
     },
