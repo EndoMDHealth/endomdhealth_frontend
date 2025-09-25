@@ -26,8 +26,8 @@ const InsuranceSection = () => {
         <div className="text-center space-y-12">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-primary leading-tight">
-              We accept most major insurance plans,{" "}
-              <span className="text-sunshine-boost">including Medicaid, Tricare, ChampVA</span>
+              In-network with most insurance plans,{" "}
+              <span className="text-sunshine-boost">Medicaid, Tricare and ChampVA</span>
             </h2>
           </div>
 
