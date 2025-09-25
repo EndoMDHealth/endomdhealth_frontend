@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { 
   Scale, 
   Droplets, 
@@ -7,6 +8,8 @@ import {
   Shield, 
   RotateCcw 
 } from "lucide-react";
+import happyChild1 from "@/assets/happy-child-1.jpg";
+import happyChild2 from "@/assets/happy-child-2.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -14,37 +17,37 @@ const ConcernsSection = () => {
       title: "Healthy Weight Consultation",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
       icon: Scale,
-      color: "bg-brand-sunshine-boost",
+      iconBg: "bg-yellow-500",
     },
     {
       title: "Reverse Type 2 Diabetes",
       description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
       icon: Droplets,
-      color: "bg-brand-healing-leaf",
+      iconBg: "bg-teal-500",
     },
     {
       title: "Growth Concerns",
       description: "Comprehensive support to promote healthy growth with professional evaluation.",
       icon: TrendingUp,
-      color: "bg-blue-500",
+      iconBg: "bg-blue-500",
     },
     {
       title: "Address Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
       icon: Calendar,
-      color: "bg-orange-500",
+      iconBg: "bg-orange-500",
     },
     {
       title: "Manage Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
       icon: Shield,
-      color: "bg-pink-500",
+      iconBg: "bg-pink-500",
     },
     {
       title: "Balance Hormones",
       description: "Advanced hormone management to improve concentration and overall health.",
       icon: RotateCcw,
-      color: "bg-purple-500",
+      iconBg: "bg-purple-500",
     },
   ];
 
@@ -52,6 +55,7 @@ const ConcernsSection = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
+          {/* Header */}
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
               Pediatric Endocrine Concerns We Address
@@ -61,24 +65,65 @@ const ConcernsSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {concerns.map((concern, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className={`p-3 ${concern.color} rounded-full group-hover:scale-110 transition-transform`}>
-                      <concern.icon className="h-6 w-6 text-white" />
+          {/* Main Content - Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Images */}
+            <div className="relative">
+              <div className="relative max-w-md mx-auto">
+                {/* Background decorative shape */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-[3rem] transform rotate-3"></div>
+                
+                {/* Image container with yellow border */}
+                <div className="relative bg-white p-4 rounded-[3rem] border-4 border-yellow-400 shadow-lg">
+                  <div className="grid grid-cols-1 gap-4">
+                    {/* Top image */}
+                    <div className="rounded-2xl overflow-hidden">
+                      <img
+                        src={happyChild1}
+                        alt="Happy child receiving healthcare"
+                        className="w-full h-48 object-cover"
+                      />
                     </div>
+                    {/* Bottom image */}
+                    <div className="rounded-2xl overflow-hidden">
+                      <img
+                        src={happyChild2}
+                        alt="Confident child in medical setting"
+                        className="w-full h-48 object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Conditions List */}
+            <div className="space-y-6">
+              {concerns.map((concern, index) => (
+                <div key={index} className="flex items-start space-x-4">
+                  <div className={`${concern.iconBg} p-3 rounded-full flex-shrink-0`}>
+                    <concern.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="space-y-1">
                     <h3 className="text-lg font-bold text-primary">
                       {concern.title}
                     </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {concern.description}
+                    </p>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {concern.description}
-                  </p>
                 </div>
-              </Card>
-            ))}
+              ))}
+              
+              {/* Request Appointment Button */}
+              <div className="pt-6">
+                <Button 
+                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 rounded-full"
+                >
+                  Request an Appointment
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
