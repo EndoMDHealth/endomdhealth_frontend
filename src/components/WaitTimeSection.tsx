@@ -12,9 +12,6 @@ const WaitTimeSection = () => {
             <p className="text-xl md:text-2xl text-primary-foreground/90">
               We know your time is important, and your child's care is critical.
             </p>
-            <p className="text-lg md:text-xl font-semibold text-accent">
-              Here's how we can help:
-            </p>
           </div>
         </div>
       </div>
