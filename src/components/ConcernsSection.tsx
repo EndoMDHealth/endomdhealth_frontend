@@ -8,8 +8,8 @@ import {
   Pill, 
   Activity 
 } from "lucide-react";
-import toddlerGirl from "@/assets/toddler-girl.jpg";
-import preteenBoy from "@/assets/preteen-boy.jpg";
+import outdoorToddlerGirl from "@/assets/outdoor-toddler-girl.jpg";
+import outdoorPreteenBoy from "@/assets/outdoor-preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -20,7 +20,7 @@ const ConcernsSection = () => {
       iconBg: "bg-brand-sunshine-boost",
     },
     {
-      title: "Reverse Type 2 Diabetes",
+      title: "Reverse Type 2 Diabetes", 
       description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
       icon: Droplets,
       iconBg: "bg-brand-healing-leaf",
@@ -56,18 +56,27 @@ const ConcernsSection = () => {
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
               Pediatric Endocrine Concerns We Address
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               A Better Life For Your Child Is A Click Away, Start The Journey Today!
             </p>
+            
+            {/* Request Appointment Button - Centered under title */}
+            <div className="pt-4">
+              <Button 
+                className="bg-brand-sunshine-boost hover:bg-yellow-500 text-black font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Request an Appointment
+              </Button>
+            </div>
           </div>
 
           {/* Main Content - Two Column Layout */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Images Side by Side */}
+            {/* Left Side - Images Diagonally Placed */}
             <div className="relative">
               <div className="relative max-w-lg mx-auto">
                 {/* Background decorative shape */}
@@ -75,21 +84,21 @@ const ConcernsSection = () => {
                 
                 {/* Image container with yellow border */}
                 <div className="relative bg-white p-6 rounded-[3rem] border-4 border-brand-sunshine-boost shadow-lg">
-                  <div className="grid grid-cols-2 gap-4">
-                    {/* Toddler girl image */}
-                    <div className="rounded-2xl overflow-hidden">
+                  <div className="relative h-80">
+                    {/* Top image - positioned diagonally */}
+                    <div className="absolute top-0 left-0 w-48 h-36 rounded-2xl overflow-hidden transform rotate-3 z-10">
                       <img
-                        src={toddlerGirl}
-                        alt="Happy toddler girl in healthcare setting"
-                        className="w-full h-56 object-cover"
+                        src={outdoorToddlerGirl}
+                        alt="Happy toddler girl playing outdoors"
+                        className="w-full h-full object-cover"
                       />
                     </div>
-                    {/* Pre-teen boy image */}
-                    <div className="rounded-2xl overflow-hidden">
+                    {/* Bottom image - positioned diagonally below */}
+                    <div className="absolute bottom-0 right-0 w-48 h-36 rounded-2xl overflow-hidden transform -rotate-3">
                       <img
-                        src={preteenBoy}
-                        alt="Confident pre-teen boy in medical office"
-                        className="w-full h-56 object-cover"
+                        src={outdoorPreteenBoy}
+                        alt="Confident pre-teen boy outdoors"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
@@ -114,15 +123,6 @@ const ConcernsSection = () => {
                   </div>
                 </div>
               ))}
-              
-              {/* Request Appointment Button */}
-              <div className="pt-8 text-center">
-                <Button 
-                  className="bg-brand-sunshine-boost hover:bg-yellow-500 text-black font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Request an Appointment
-                </Button>
-              </div>
             </div>
           </div>
         </div>
