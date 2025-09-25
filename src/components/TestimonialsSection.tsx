@@ -81,7 +81,7 @@ const TestimonialsSection = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 bg-white hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="p-6 bg-stone-200 hover:shadow-lg transition-all duration-300">
                 <div className="space-y-4">
                   {/* Star Rating */}
                   <div className="flex space-x-1">
