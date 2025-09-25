@@ -34,7 +34,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "Excellent pediatric endometriosis care. The doctors are highly skilled and the office staff is incredibly helpful. So grateful we found this practice.",
+      quote: "We had a wonderful experience seeing Dr. Davallow for my child's growth assessment. From the start, the process of scheduling and sending over records was seamless, and communication with the office was smooth and efficient. We were amazed at how quickly we were able to get an appointment—especially given how long the wait usually is to see a pediatric endocrinologist. The staff was warm and welcoming, and our visit was both thorough and informative. Dr. Davallow took the time to truly listen to all my concerns as a mother. She showed genuine empathy and was able to relate to my perspective, which I really appreciated. She offered thoughtful, evidence-based guidance and helped set realistic expectations regarding treatment. Overall, I felt very heard and well-supported. I highly recommend Dr. Davallow for any parent looking for expert, compassionate care in pediatric endocrinology!",
       author: "Han Na Kim",
       rating: 5,
     },
