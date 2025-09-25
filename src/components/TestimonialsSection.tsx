@@ -19,7 +19,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "As a mother dealing with my own endometriosis, finding EndoMD for my daughter was a blessing. They understand the condition and provide excellent family-centered care.",
+      quote: "Dr. Davallow was friendly, informative, and patient while explaining what could be happening with my daughter. I definitely appreciated her bedside manner!",
       author: "Cindy Dodge",
       rating: 5,
     },
