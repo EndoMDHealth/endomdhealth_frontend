@@ -52,7 +52,7 @@ const ConcernsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-warm-peach">
+    <section className="py-16 bg-warm-peach">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}

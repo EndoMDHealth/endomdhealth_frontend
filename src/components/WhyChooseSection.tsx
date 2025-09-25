@@ -68,13 +68,13 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-warm-peach">
+    <section className="py-16 bg-stone-100">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Why Choose <span className="text-brand-sunshine-boost">EndoMD</span> Health?
+              Why Choose <span className="text-brand-starry-hug">Endo</span><span className="text-brand-sunshine-boost">MD</span> Health?
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               We want to see your child thrive and deliver outstanding convenient care to achieve this result.
