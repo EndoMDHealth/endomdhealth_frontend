@@ -1,58 +1,58 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
-  Scale, 
+  Heart, 
   Droplets, 
   TrendingUp, 
-  Calendar, 
-  Shield, 
-  RotateCcw 
+  Users, 
+  Pill, 
+  Activity 
 } from "lucide-react";
-import happyChild1 from "@/assets/happy-child-1.jpg";
-import happyChild2 from "@/assets/happy-child-2.jpg";
+import toddlerGirl from "@/assets/toddler-girl.jpg";
+import preteenBoy from "@/assets/preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
     {
       title: "Healthy Weight Consultation",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
-      icon: Scale,
-      iconBg: "bg-yellow-500",
+      icon: Heart,
+      iconBg: "bg-brand-sunshine-boost",
     },
     {
       title: "Reverse Type 2 Diabetes",
       description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
       icon: Droplets,
-      iconBg: "bg-teal-500",
+      iconBg: "bg-brand-healing-leaf",
     },
     {
       title: "Growth Concerns",
       description: "Comprehensive support to promote healthy growth with professional evaluation.",
       icon: TrendingUp,
-      iconBg: "bg-blue-500",
+      iconBg: "bg-brand-steady-sky",
     },
     {
       title: "Address Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
-      icon: Calendar,
+      icon: Users,
       iconBg: "bg-orange-500",
     },
     {
       title: "Manage Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
-      icon: Shield,
+      icon: Pill,
       iconBg: "bg-pink-500",
     },
     {
       title: "Balance Hormones",
       description: "Advanced hormone management to improve concentration and overall health.",
-      icon: RotateCcw,
-      iconBg: "bg-purple-500",
+      icon: Activity,
+      iconBg: "bg-brand-starry-hug",
     },
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-warm-peach">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
@@ -67,29 +67,29 @@ const ConcernsSection = () => {
 
           {/* Main Content - Two Column Layout */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Images */}
+            {/* Left Side - Images Side by Side */}
             <div className="relative">
-              <div className="relative max-w-md mx-auto">
+              <div className="relative max-w-lg mx-auto">
                 {/* Background decorative shape */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-[3rem] transform rotate-3"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-sunshine-boost to-yellow-300 rounded-[3rem] transform rotate-2"></div>
                 
                 {/* Image container with yellow border */}
-                <div className="relative bg-white p-4 rounded-[3rem] border-4 border-yellow-400 shadow-lg">
-                  <div className="grid grid-cols-1 gap-4">
-                    {/* Top image */}
+                <div className="relative bg-white p-6 rounded-[3rem] border-4 border-brand-sunshine-boost shadow-lg">
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Toddler girl image */}
                     <div className="rounded-2xl overflow-hidden">
                       <img
-                        src={happyChild1}
-                        alt="Happy child receiving healthcare"
-                        className="w-full h-48 object-cover"
+                        src={toddlerGirl}
+                        alt="Happy toddler girl in healthcare setting"
+                        className="w-full h-56 object-cover"
                       />
                     </div>
-                    {/* Bottom image */}
+                    {/* Pre-teen boy image */}
                     <div className="rounded-2xl overflow-hidden">
                       <img
-                        src={happyChild2}
-                        alt="Confident child in medical setting"
-                        className="w-full h-48 object-cover"
+                        src={preteenBoy}
+                        alt="Confident pre-teen boy in medical office"
+                        className="w-full h-56 object-cover"
                       />
                     </div>
                   </div>
@@ -116,9 +116,9 @@ const ConcernsSection = () => {
               ))}
               
               {/* Request Appointment Button */}
-              <div className="pt-6">
+              <div className="pt-8 text-center">
                 <Button 
-                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 rounded-full"
+                  className="bg-brand-sunshine-boost hover:bg-yellow-500 text-black font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Request an Appointment
                 </Button>
