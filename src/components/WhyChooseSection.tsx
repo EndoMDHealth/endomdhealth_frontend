@@ -64,7 +64,7 @@ const WhyChooseSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
               Why Choose <span className="text-brand-starry-hug">Endo</span><span className="text-brand-sunshine-boost">MD</span> Health?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-white max-w-3xl mx-auto">
               We want to see your child thrive and deliver outstanding convenient care to achieve this result.
             </p>
           </div>
@@ -84,7 +84,7 @@ const WhyChooseSection = () => {
                       <h3 className="font-bold text-primary">
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-sm text-white leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
@@ -119,7 +119,7 @@ const WhyChooseSection = () => {
                       <h3 className="font-bold text-primary">
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-sm text-white leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
