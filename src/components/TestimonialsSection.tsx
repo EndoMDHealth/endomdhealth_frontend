@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
             }
           }
           .scroll-animation {
-            animation: scroll 60s linear infinite;
+            animation: scroll 30s linear infinite;
           }
         `
       }} />
@@ -103,8 +103,8 @@ const TestimonialsSection = () => {
               {duplicatedTestimonials.map((testimonial, index) => (
                 <Card 
                   key={index} 
-                  className="p-6 min-w-[350px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
-                  style={{ backgroundColor: '#F3F6DE' }}
+                  className="p-6 min-w-[450px] max-w-[450px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
+                  style={{ backgroundColor: '#E8EBC4' }}
                 >
                   <div className="space-y-4">
                     {/* Star Rating */}
@@ -113,7 +113,7 @@ const TestimonialsSection = () => {
                     </div>
                     
                     {/* Testimonial Quote */}
-                    <blockquote className="text-sm text-muted-foreground leading-relaxed line-clamp-6">
+                    <blockquote className="text-sm text-muted-foreground leading-relaxed">
                       "{testimonial.quote}"
                     </blockquote>
                     
