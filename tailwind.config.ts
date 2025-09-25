@@ -47,12 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Medical brand colors
-        medical: {
-          navy: "hsl(var(--medical-navy))",
-          mustard: "hsl(var(--medical-mustard))",
-          light: "hsl(var(--medical-light))",
-          trust: "hsl(var(--medical-trust))",
+        // Brand colors from reference palette
+        brand: {
+          "sunshine-boost": "hsl(var(--sunshine-boost))",
+          "morning-glow": "hsl(var(--morning-glow))",
+          "healing-leaf": "hsl(var(--healing-leaf))",
+          "steady-sky": "hsl(var(--steady-sky))",
+          "starry-hug": "hsl(var(--starry-hug))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
