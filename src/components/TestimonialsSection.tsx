@@ -29,7 +29,7 @@ const TestimonialsSection = () => {
       rating: 5,
     },
     {
-      quote: "The team at EndoMD Health is amazing! They made my anxious teenager feel at ease and provided the specialized care she needed for her endometriosis symptoms.",
+      quote: "We had a great experience with Dr. Davallow! From the moment I reached out, communication was super easy as well as scheduling an initial appointment. I really appreciate the fact that she holds virtual meetings. Her demeanor is so pleasant and calming, you can really tell she's invested in your child and what they need. Highly recommend if you're searching for an endocrinologist for your child!",
       author: "Lauren Harrison",
       rating: 5,
     },
