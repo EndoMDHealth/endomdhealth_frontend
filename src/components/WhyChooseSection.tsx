@@ -32,6 +32,9 @@ const WhyChooseSection = () => {
       icon: MessageCircle,
       iconBg: "bg-brand-sunshine-boost",
     },
+  ];
+
+  const rightFeatures = [
     {
       title: "Root Cause Treatment",
       description: "Address the underlying causes of your child's endocrine issues for effective, long-term solutions.",
@@ -49,33 +52,6 @@ const WhyChooseSection = () => {
       description: "We don't rush to get you out the door. We give your child the time and care needed to make a meaningful difference.",
       icon: HeartHandshake,
       iconBg: "bg-emerald-600"
-    },
-  ];
-
-  const rightFeatures = [
-    {
-      title: "Direct Communication",
-      description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
-      icon: MessageCircle,
-      iconBg: "bg-brand-sunshine-boost",
-    },
-    {
-      title: "Convenient Access",
-      description: "No need to take a day off school or work or drive 2-3 hours to see a specialist.",
-      icon: MapPin,
-      iconBg: "bg-brand-healing-leaf",
-    },
-    {
-      title: "Skip the Waiting Room",
-      description: "Save time by eliminating lengthy clinic waiting times with virtual consultations.",
-      icon: Home,
-      iconBg: "bg-brand-sunshine-boost",
-    },
-    {
-      title: "Ongoing Expert Care",
-      description: "Receive expert medical care for managing weight, growth, and hormone-related concerns continuously.",
-      icon: Stethoscope,
-      iconBg: "bg-brand-starry-hug",
     },
   ];
 
