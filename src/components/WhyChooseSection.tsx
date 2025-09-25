@@ -10,7 +10,7 @@ import {
   Home,
   Stethoscope 
 } from "lucide-react";
-import realDoctorConsultation from "@/assets/real-doctor-consultation.jpg";
+import realFamilyConsultation from "@/assets/family-doctor-consultation.jpg";
 
 const WhyChooseSection = () => {
   const leftFeatures = [
@@ -18,25 +18,25 @@ const WhyChooseSection = () => {
       title: "Direct Communication",
       description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
       icon: MessageCircle,
-      iconBg: "bg-green-600",
+      iconBg: "bg-brand-sunshine-boost",
     },
     {
       title: "Root Cause Treatment",
       description: "Address the underlying causes of your child's endocrine issues for effective, long-term solutions.",
       icon: Search,
-      iconBg: "bg-emerald-500",
+      iconBg: "bg-brand-healing-leaf",
     },
     {
       title: "Comprehensive Coaching",
       description: "Benefit from weekly nutrition and exercise coaching to support your child's optimal mental and physical health.",
       icon: TrendingUp,
-      iconBg: "bg-blue-600",
+      iconBg: "bg-brand-steady-sky",
     },
     {
       title: "Outstanding Care",
       description: "We don't rush to get you out the door. We give your child the time and care needed to make a meaningful difference.",
       icon: HeartHandshake,
-      iconBg: "bg-yellow-600",
+      iconBg: "bg-emerald-600",
     },
   ];
 
@@ -45,30 +45,30 @@ const WhyChooseSection = () => {
       title: "Fast Appointments",
       description: "Avoid the typical 3-6 month wait to see a specialist with quick, easy scheduling.",
       icon: Calendar,
-      iconBg: "bg-blue-500",
+      iconBg: "bg-teal-600",
     },
     {
       title: "Convenient Access",
       description: "No need to take a day off school or work or drive 2-3 hours to see a specialist.",
       icon: MapPin,
-      iconBg: "bg-green-500",
+      iconBg: "bg-brand-healing-leaf",
     },
     {
       title: "Skip the Waiting Room",
       description: "Save time by eliminating lengthy clinic waiting times with virtual consultations.",
       icon: Home,
-      iconBg: "bg-yellow-500",
+      iconBg: "bg-brand-sunshine-boost",
     },
     {
       title: "Ongoing Expert Care",
       description: "Receive expert medical care for managing weight, growth, and hormone-related concerns continuously.",
       icon: Stethoscope,
-      iconBg: "bg-teal-600",
+      iconBg: "bg-brand-starry-hug",
     },
   ];
 
   return (
-    <section className="py-20 bg-stone-200">
+    <section className="py-20 bg-warm-peach">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
@@ -111,8 +111,8 @@ const WhyChooseSection = () => {
                   <div className="w-80 h-80 rounded-full border-4 border-brand-sunshine-boost p-4">
                     <div className="w-full h-full rounded-full overflow-hidden">
                       <img
-                        src={realDoctorConsultation}
-                        alt="Real doctor consultation with patient"
+                        src={realFamilyConsultation}
+                        alt="Pediatrician with mother and child consultation"
                         className="w-full h-full object-cover"
                       />
                     </div>
