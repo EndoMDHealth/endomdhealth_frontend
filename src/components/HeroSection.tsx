@@ -22,13 +22,13 @@ const HeroSection = () => {
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
-                A Comprehensive Platform For{" "}
-                <span className="text-brand-sunshine-boost">Pediatric Endocrinology</span>{" "}
+                Specialized{" "}
+                <span className="text-brand-sunshine-boost">Pediatric endocrine care</span>{" "}
                 Services.
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-                Specialized Pediatric endocrine care - Guiding your child in every stage of growth
+                Guiding your child in every stage of growth
               </p>
               
               <p className="text-lg text-white/80 max-w-2xl">
