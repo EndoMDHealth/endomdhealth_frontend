@@ -40,11 +40,6 @@ const WhoWeAre = () => {
                   >
                     Contact Us
                   </Button>
-                   <Button
-                     size="lg" 
-                    variant="outline"
-                    className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
-                  >
                 </div>
               </div>
               <div className="relative">
