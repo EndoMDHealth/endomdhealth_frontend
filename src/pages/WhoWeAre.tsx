@@ -3,8 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import familyDoctorConsultation from "@/assets/family-doctor-consultation.jpg";
-import drDavallow from "@/assets/dr-davallow.png";
+import realDoctorConsultation from "@/assets/real-doctor-consultation.jpg";
+import drDavallow from "@/assets/dr-davallow-green.png";
 
 const WhoWeAre = () => {
   return (
@@ -13,14 +13,14 @@ const WhoWeAre = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-brand-starry-hug via-brand-steady-sky to-brand-starry-hug py-20 lg:py-32">
+        <section className="relative bg-white py-20 lg:py-32">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
+                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-starry-hug leading-tight">
                   Who We Are
                 </h1>
-                <p className="text-xl text-white/90 leading-relaxed">
+                <p className="text-xl text-muted-foreground leading-relaxed">
                   EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
                   care through a hybrid virtual and in-person model. We address the critical shortage of pediatric 
                   endocrinologists  the US. We currently serve patients in Virginia and Maryland, but plan to 
@@ -29,14 +29,14 @@ const WhoWeAre = () => {
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-bold"
+                    className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-bold text-xl px-10 py-6"
                   >
                     Request Appointment
                   </Button>
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-brand-starry-hug bg-transparent"
+                    className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
                   >
                     Contact Us
                   </Button>
@@ -44,8 +44,8 @@ const WhoWeAre = () => {
               </div>
               <div className="relative">
                 <img 
-                  src={familyDoctorConsultation} 
-                  alt="Family consultation with pediatric endocrinologist" 
+                  src={realDoctorConsultation} 
+                  alt="Child smiling with pediatric endocrinologist during consultation" 
                   className="rounded-2xl shadow-2xl"
                 />
               </div>
@@ -54,12 +54,12 @@ const WhoWeAre = () => {
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-20 bg-gradient-to-br from-brand-sunshine-boost/10 via-brand-steady-sky/10 to-brand-healing-leaf/10">
+        <section className="py-20 bg-gradient-to-br from-brand-healing-leaf/20 via-brand-healing-leaf/10 to-brand-steady-sky/10">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
               <div className="space-y-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-brand-sunshine-boost to-brand-sunshine-boost/80 rounded-full flex items-center justify-center shadow-lg">
-                  <Target className="h-10 w-10 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-brand-healing-leaf to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                  <Target className="h-7 w-7 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Mission</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -70,8 +70,8 @@ const WhoWeAre = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-brand-steady-sky to-brand-steady-sky/80 rounded-full flex items-center justify-center shadow-lg">
-                  <Heart className="h-10 w-10 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-brand-healing-leaf rounded-full flex items-center justify-center shadow-lg">
+                  <Heart className="h-7 w-7 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Vision</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -110,7 +110,7 @@ const WhoWeAre = () => {
                   <div className="lg:col-span-2 space-y-6">
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Award className="h-6 w-6 text-brand-sunshine-boost" />
+                        <Award className="h-6 w-6 text-brand-healing-leaf" />
                         Education and Training
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -122,7 +122,7 @@ const WhoWeAre = () => {
 
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Shield className="h-6 w-6 text-brand-healing-leaf" />
+                        <Shield className="h-6 w-6 text-emerald-600" />
                         Board Certifications
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -133,7 +133,7 @@ const WhoWeAre = () => {
 
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Users className="h-6 w-6 text-brand-steady-sky" />
+                        <Users className="h-6 w-6 text-teal-600" />
                         Professional Memberships
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
