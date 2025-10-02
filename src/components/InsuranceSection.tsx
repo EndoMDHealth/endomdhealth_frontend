@@ -21,7 +21,7 @@ const InsuranceSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-warm-peach">
+    <section className="py-16 bg-brand-healing-leaf-light">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           <div className="space-y-6">
