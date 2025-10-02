@@ -104,7 +104,7 @@ const WhoWeAre = () => {
                       />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-2">Dr. Ladan Davallow</h3>
-                    <p className="text-brand-healing-leaf font-semibold">Pediatric Endocrinologist</p>
+                    <p className="text-starry-hug font-semibold">Pediatric Endocrinologist</p>
                   </div>
 
                   <div className="lg:col-span-2 space-y-6">
