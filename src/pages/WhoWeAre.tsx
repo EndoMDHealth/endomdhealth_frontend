@@ -4,6 +4,7 @@ import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import familyDoctorConsultation from "@/assets/family-doctor-consultation.jpg";
+import drDavallow from "@/assets/dr-davallow.png";
 
 const WhoWeAre = () => {
   return (
@@ -17,7 +18,7 @@ const WhoWeAre = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                  About Us
+                  Who We Are
                 </h1>
                 <p className="text-xl text-white/90 leading-relaxed">
                   EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
@@ -53,12 +54,12 @@ const WhoWeAre = () => {
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-gradient-to-br from-brand-sunshine-boost/10 via-brand-steady-sky/10 to-brand-healing-leaf/10">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-              <Card className="p-10 space-y-4 border-2 shadow-lg">
-                <div className="w-16 h-16 bg-brand-sunshine-boost/10 rounded-full flex items-center justify-center">
-                  <Target className="h-8 w-8 text-brand-sunshine-boost" />
+            <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+              <div className="space-y-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-brand-sunshine-boost to-brand-sunshine-boost/80 rounded-full flex items-center justify-center shadow-lg">
+                  <Target className="h-10 w-10 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Mission</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -66,24 +67,24 @@ const WhoWeAre = () => {
                   delivering timely, specialized, and holistic care that supports the whole child—medically, 
                   emotionally, and socially.
                 </p>
-              </Card>
+              </div>
 
-              <Card className="p-10 space-y-4 border-2 shadow-lg">
-                <div className="w-16 h-16 bg-brand-steady-sky/10 rounded-full flex items-center justify-center">
-                  <Heart className="h-8 w-8 text-brand-steady-sky" />
+              <div className="space-y-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-brand-steady-sky to-brand-steady-sky/80 rounded-full flex items-center justify-center shadow-lg">
+                  <Heart className="h-10 w-10 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Vision</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Transforming lives by making specialized endocrinology care accessible for everyone, 
                   starting with children.
                 </p>
-              </Card>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Meet Our Expert */}
-        <section className="py-20 bg-secondary/30">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -92,11 +93,15 @@ const WhoWeAre = () => {
             </div>
 
             <div className="max-w-5xl mx-auto">
-              <Card className="p-8 lg:p-12 border-2 shadow-xl">
+              <Card className="p-8 lg:p-12 border-2 shadow-xl bg-card">
                 <div className="grid lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-1">
-                    <div className="aspect-square bg-gradient-to-br from-brand-starry-hug to-brand-steady-sky rounded-2xl flex items-center justify-center mb-4">
-                      <Users className="h-24 w-24 text-white" />
+                    <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg">
+                      <img 
+                        src={drDavallow} 
+                        alt="Dr. Ladan Davallow, Pediatric Endocrinologist" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-2">Dr. Ladan Davallow</h3>
                     <p className="text-brand-sunshine-boost font-semibold">Pediatric Endocrinologist</p>
@@ -105,7 +110,7 @@ const WhoWeAre = () => {
                   <div className="lg:col-span-2 space-y-6">
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Award className="h-5 w-5 text-brand-sunshine-boost" />
+                        <Award className="h-6 w-6 text-brand-sunshine-boost" />
                         Education and Training
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -117,7 +122,7 @@ const WhoWeAre = () => {
 
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-brand-healing-leaf" />
+                        <Shield className="h-6 w-6 text-brand-healing-leaf" />
                         Board Certifications
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -128,7 +133,7 @@ const WhoWeAre = () => {
 
                     <div>
                       <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Users className="h-5 w-5 text-brand-steady-sky" />
+                        <Users className="h-6 w-6 text-brand-steady-sky" />
                         Professional Memberships
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
