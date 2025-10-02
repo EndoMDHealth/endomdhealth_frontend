@@ -13,7 +13,7 @@ const WhoWeAre = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="relative bg-white py-20 lg:py-32">
+        <section className="relative bg-white py-20 lg:py-28">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
