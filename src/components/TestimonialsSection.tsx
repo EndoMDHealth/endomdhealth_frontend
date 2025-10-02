@@ -104,7 +104,7 @@ const TestimonialsSection = () => {
                 <Card 
                   key={index} 
                   className="p-4 min-w-[320px] max-w-[320px] flex-shrink-0 hover:shadow-lg transition-all duration-300"
-                  style={{ backgroundColor: '#869F88' }}
+                  style={{ backgroundColor: '#6C7D42' }}
                 >
                   <div className="space-y-3">
                     {/* Star Rating */}
