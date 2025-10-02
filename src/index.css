@@ -8,29 +8,30 @@ All colors MUST be HSL. Warm, professional medical brand.
 
 @layer base {
   :root {
-    --background: 25 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    /* Playful, warm backgrounds */
+    --background: 210 100% 98%;
+    --foreground: 234 55% 19%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 234 55% 19%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 234 55% 19%;
 
     /* Primary: Starry Hug navy for trust and professionalism */
     --primary: 234 55% 19%;
-    --primary-foreground: 68 41% 92%;
+    --primary-foreground: 210 100% 98%;
 
-    /* Secondary: Morning Glow soft backgrounds */
-    --secondary: 68 41% 92%;
+    /* Secondary: Soft sky blue backgrounds */
+    --secondary: 210 100% 95%;
     --secondary-foreground: 234 55% 19%;
 
-    /* Muted: Steady Sky muted tones */
-    --muted: 223 18% 90%;
-    --muted-foreground: 223 18% 47%;
+    /* Muted: Light neutral tones */
+    --muted: 210 40% 92%;
+    --muted-foreground: 215 20% 55%;
 
-    /* Accent: Sunshine Boost for energy */
-    --accent: 48 92% 63%;
+    /* Accent: Sunshine Boost yellow for energy */
+    --accent: 48 96% 65%;
     --accent-foreground: 234 55% 19%;
 
     --destructive: 0 84.2% 60.2%;
@@ -42,20 +43,15 @@ All colors MUST be HSL. Warm, professional medical brand.
 
     --radius: 1rem;
 
-    /* Brand color palette from reference */
-    --sunshine-boost: 48 92% 63%;
-    --morning-glow: 68 41% 92%;
-    --healing-leaf: 127 14% 58%;
-    --healing-leaf-light: 127 14% 85%;
-    --steady-sky: 223 18% 47%;
-    --steady-sky-light: 223 18% 78%;
+    /* Playful brand color palette */
+    --sunshine-boost: 48 96% 65%;
+    --sky-blue: 210 100% 92%;
+    --soft-yellow: 48 100% 88%;
+    --warm-white: 30 50% 96%;
     --starry-hug: 234 55% 19%;
-    
-    /* Updated warm, family-friendly color palette */
-    --warm-coral: 14 77% 68%;
-    --warm-peach: 68 41% 92%;
-    --warm-sage: 127 14% 58%;
-    --warm-lavender: 260 25% 85%;
+    --playful-coral: 14 85% 72%;
+    --playful-mint: 160 60% 75%;
+    --playful-lavender: 260 45% 80%;
     
     /* Gradients for hero sections */
     --gradient-hero: linear-gradient(135deg, hsl(var(--warm-peach)), hsl(var(--warm-coral)));
@@ -132,7 +128,13 @@ All colors MUST be HSL. Warm, professional medical brand.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  /* Playful accent font for headings */
+  .font-playful {
+    font-family: 'Fredoka', 'Inter', sans-serif;
   }
 
   /* Medical brand custom animations */
