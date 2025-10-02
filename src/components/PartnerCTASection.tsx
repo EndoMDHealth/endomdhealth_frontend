@@ -60,7 +60,7 @@ const PartnerCTASection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-accent/10 to-accent/5">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           {/* Header */}
