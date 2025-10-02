@@ -34,7 +34,7 @@ const WhoWeAre = () => {
                     Request Appointment
                   </Button>
                   <Button 
-                    size="lg" 
+                    size="md" 
                     variant="outline"
                     className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
                   >
