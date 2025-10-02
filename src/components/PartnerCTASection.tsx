@@ -19,7 +19,7 @@ const PartnerCTASection = () => {
       description: "Collaborate with us to improve patient outcomes"
     },
     {
-      title: "Join us as a Community Partner",
+      title: "Become a Community Partner",
       href: "/who-we-serve/community-partners",
       icon: Users,
       description: "Join our network of community support"
