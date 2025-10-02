@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, Target, Users, Award, Clock, Shield } from "lucide-react";
+import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import familyDoctorConsultation from "@/assets/family-doctor-consultation.jpg";
-import realDoctorConsultation from "@/assets/real-doctor-consultation.jpg";
 
 const WhoWeAre = () => {
   return (
@@ -18,11 +17,13 @@ const WhoWeAre = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                  Who We Are
+                  About Us
                 </h1>
                 <p className="text-xl text-white/90 leading-relaxed">
-                  A dedicated team of pediatric endocrinology specialists committed to providing exceptional, 
-                  personalized care for children and families across Virginia and Maryland.
+                  EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
+                  care through a hybrid virtual and in-person model. We address the critical shortage of pediatric 
+                  endocrinologists in the US. We currently serve patients in Virginia and Maryland, but plan to 
+                  expand nation-wide!
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button 
@@ -51,168 +52,110 @@ const WhoWeAre = () => {
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Mission & Vision Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center space-y-6 mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Our Mission
-              </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                To transform pediatric endocrine care by making specialized, compassionate treatment accessible 
-                to every child who needs it. We believe every family deserves timely access to expert care 
-                without the barriers of long wait times or geographical limitations.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="p-8 text-center space-y-4 border-2 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-brand-sunshine-boost/10 rounded-full flex items-center justify-center mx-auto">
-                  <Heart className="h-8 w-8 text-brand-sunshine-boost" />
+            <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+              <Card className="p-10 space-y-4 border-2 shadow-lg">
+                <div className="w-16 h-16 bg-brand-sunshine-boost/10 rounded-full flex items-center justify-center">
+                  <Target className="h-8 w-8 text-brand-sunshine-boost" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Compassionate Care</h3>
-                <p className="text-muted-foreground">
-                  We treat every child with the kindness, respect, and attention they deserve, 
-                  creating a supportive environment for healing and growth.
+                <h2 className="text-3xl font-bold text-foreground">Mission</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Our mission is simple: Helping kids with endocrine conditions thrive. We do that by 
+                  delivering timely, specialized, and holistic care that supports the whole child—medically, 
+                  emotionally, and socially.
                 </p>
               </Card>
 
-              <Card className="p-8 text-center space-y-4 border-2 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-brand-healing-leaf/10 rounded-full flex items-center justify-center mx-auto">
-                  <Target className="h-8 w-8 text-brand-healing-leaf" />
+              <Card className="p-10 space-y-4 border-2 shadow-lg">
+                <div className="w-16 h-16 bg-brand-steady-sky/10 rounded-full flex items-center justify-center">
+                  <Heart className="h-8 w-8 text-brand-steady-sky" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Excellence</h3>
-                <p className="text-muted-foreground">
-                  Our commitment to staying at the forefront of pediatric endocrinology ensures 
-                  your child receives the most advanced, evidence-based treatment available.
-                </p>
-              </Card>
-
-              <Card className="p-8 text-center space-y-4 border-2 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-brand-steady-sky/10 rounded-full flex items-center justify-center mx-auto">
-                  <Users className="h-8 w-8 text-brand-steady-sky" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground">Family Partnership</h3>
-                <p className="text-muted-foreground">
-                  We work closely with families as partners in care, ensuring you're informed, 
-                  empowered, and supported every step of the way.
+                <h2 className="text-3xl font-bold text-foreground">Vision</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Transforming lives by making specialized endocrinology care accessible for everyone, 
+                  starting with children.
                 </p>
               </Card>
             </div>
           </div>
         </section>
 
-        {/* What Makes Us Different */}
+        {/* Meet Our Expert */}
         <section className="py-20 bg-secondary/30">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <img 
-                  src={realDoctorConsultation} 
-                  alt="Doctor consultation with patient" 
-                  className="rounded-2xl shadow-xl"
-                />
-              </div>
-              <div className="order-1 lg:order-2 space-y-6">
-                <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-                  What Makes Us Different
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  We've reimagined pediatric endocrine care to eliminate the frustrations families 
-                  face with traditional healthcare systems.
-                </p>
-                
-                <div className="space-y-4">
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-brand-sunshine-boost/10 rounded-lg flex items-center justify-center">
-                        <Clock className="h-6 w-6 text-brand-sunshine-boost" />
-                      </div>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Meet Our Expert Pediatric Endocrinologist
+              </h2>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <Card className="p-8 lg:p-12 border-2 shadow-xl">
+                <div className="grid lg:grid-cols-3 gap-8">
+                  <div className="lg:col-span-1">
+                    <div className="aspect-square bg-gradient-to-br from-brand-starry-hug to-brand-steady-sky rounded-2xl flex items-center justify-center mb-4">
+                      <Users className="h-24 w-24 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-bold text-foreground mb-1">No More Waiting</h3>
-                      <p className="text-muted-foreground">
-                        Average 14-day wait for new appointments vs. the 6-9 month national average. 
-                        Your child's health can't wait, and neither should you.
-                      </p>
-                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Dr. Ladan Davallow</h3>
+                    <p className="text-brand-sunshine-boost font-semibold">Pediatric Endocrinologist</p>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-brand-healing-leaf/10 rounded-lg flex items-center justify-center">
-                        <Shield className="h-6 w-6 text-brand-healing-leaf" />
-                      </div>
-                    </div>
+                  <div className="lg:col-span-2 space-y-6">
                     <div>
-                      <h3 className="font-bold text-foreground mb-1">Comprehensive Approach</h3>
-                      <p className="text-muted-foreground">
-                        Beyond just medication - we address medical, nutritional, lifestyle, and 
-                        emotional aspects of your child's health for lasting results.
-                      </p>
+                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                        <Award className="h-5 w-5 text-brand-sunshine-boost" />
+                        Education and Training
+                      </h4>
+                      <ul className="space-y-2 text-muted-foreground">
+                        <li><strong>Medical School:</strong> Cornell University</li>
+                        <li><strong>Pediatric Residency:</strong> Dartmouth & University of Virginia</li>
+                        <li><strong>Pediatric Endocrinology Fellowship:</strong> University of Virginia</li>
+                      </ul>
                     </div>
-                  </div>
 
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-brand-steady-sky/10 rounded-lg flex items-center justify-center">
-                        <Award className="h-6 w-6 text-brand-steady-sky" />
-                      </div>
-                    </div>
                     <div>
-                      <h3 className="font-bold text-foreground mb-1">Accessible Expertise</h3>
-                      <p className="text-muted-foreground">
-                        Board-certified specialists available through convenient telehealth visits 
-                        and in-person care - no more long drives or taking days off work.
+                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                        <Shield className="h-5 w-5 text-brand-healing-leaf" />
+                        Board Certifications
+                      </h4>
+                      <ul className="space-y-2 text-muted-foreground">
+                        <li>American Board of Pediatrics</li>
+                        <li>Pediatric Endocrinology (American Board of Pediatrics)</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                        <Users className="h-5 w-5 text-brand-steady-sky" />
+                        Professional Memberships
+                      </h4>
+                      <ul className="space-y-2 text-muted-foreground">
+                        <li>Pediatric Endocrine Society</li>
+                        <li>The American Academy of Pediatrics</li>
+                      </ul>
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-muted-foreground leading-relaxed mb-4">
+                        Dr. Davallow is an experienced and highly rated Ivy-league trained pediatric endocrinologist 
+                        with over 10 years of experience treating kids. She is best known for her passionate and 
+                        expert care for children with a variety of hormone/endocrine disorders such as weight, 
+                        diabetes, growth, thyroid and puberty disorders.
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        Prior to her current role at EndoMD Health, Dr. Davallow has had several years experience 
+                        at large pediatric academic centers where she has not only seen children with endocrine 
+                        conditions, but served as faculty for the medical school. She has also published multiple 
+                        research articles, particularly on growth in children. She has also been honored with 
+                        numerous awards for her research, including placing first place for the annual UVA Pediatrics 
+                        Research Competition for her research on ADHD and growth/short stature.
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Values */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Our Core Values
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                The principles that guide every decision we make and every interaction we have
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-gradient-to-br from-brand-sunshine-boost/10 to-brand-sunshine-boost/5 p-6 rounded-xl border border-brand-sunshine-boost/20">
-                <h3 className="text-xl font-bold text-foreground mb-3">Integrity</h3>
-                <p className="text-muted-foreground">
-                  We operate with honesty, transparency, and ethical standards in all we do.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-brand-healing-leaf/10 to-brand-healing-leaf/5 p-6 rounded-xl border border-brand-healing-leaf/20">
-                <h3 className="text-xl font-bold text-foreground mb-3">Innovation</h3>
-                <p className="text-muted-foreground">
-                  We embrace new technologies and approaches to deliver better care experiences.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-brand-steady-sky/10 to-brand-steady-sky/5 p-6 rounded-xl border border-brand-steady-sky/20">
-                <h3 className="text-xl font-bold text-foreground mb-3">Inclusivity</h3>
-                <p className="text-muted-foreground">
-                  We welcome and serve families of all backgrounds with respect and cultural sensitivity.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-brand-starry-hug/10 to-brand-starry-hug/5 p-6 rounded-xl border border-brand-starry-hug/20">
-                <h3 className="text-xl font-bold text-foreground mb-3">Empowerment</h3>
-                <p className="text-muted-foreground">
-                  We educate and equip families to be active participants in their child's health journey.
-                </p>
-              </div>
+              </Card>
             </div>
           </div>
         </section>
