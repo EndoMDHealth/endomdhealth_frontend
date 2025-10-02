@@ -28,7 +28,7 @@ const HeroSection = () => {
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-                Guiding your child in every stage of growth
+                Guiding your child through every stage of growth
               </p>
               
               <p className="text-lg text-white/80 max-w-2xl">
