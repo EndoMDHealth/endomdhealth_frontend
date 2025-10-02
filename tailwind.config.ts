@@ -13,10 +13,6 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        playful: ['Fredoka', 'Inter', 'sans-serif'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -54,15 +50,13 @@ export default {
         // Brand colors from reference palette
         brand: {
           "sunshine-boost": "hsl(var(--sunshine-boost))",
+          "morning-glow": "hsl(var(--morning-glow))",
+          "healing-leaf": "hsl(var(--healing-leaf))",
+          "healing-leaf-light": "hsl(var(--healing-leaf-light))",
+          "steady-sky": "hsl(var(--steady-sky))",
+          "steady-sky-light": "hsl(var(--steady-sky-light))",
           "starry-hug": "hsl(var(--starry-hug))",
         },
-        // Playful colors for child-friendly design
-        "sky-blue": "hsl(var(--sky-blue))",
-        "soft-yellow": "hsl(var(--soft-yellow))",
-        "warm-white": "hsl(var(--warm-white))",
-        "playful-coral": "hsl(var(--playful-coral))",
-        "playful-mint": "hsl(var(--playful-mint))",
-        "playful-lavender": "hsl(var(--playful-lavender))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
