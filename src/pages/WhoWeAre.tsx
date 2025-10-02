@@ -54,12 +54,12 @@ const WhoWeAre = () => {
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-20 bg-gradient-to-br from-brand-healing-leaf/20 via-brand-healing-leaf/10 to-brand-steady-sky/10">
+        <section className="py-20 bg-brand-healing-leaf-light">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
               <div className="space-y-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-brand-healing-leaf to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                  <Target className="h-7 w-7 text-white" />
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
+                  <Target className="h-5 w-5 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Mission</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -70,8 +70,8 @@ const WhoWeAre = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-brand-healing-leaf rounded-full flex items-center justify-center shadow-lg">
-                  <Heart className="h-7 w-7 text-white" />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand-healing-leaf to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                  <Heart className="h-5 w-5 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Vision</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -166,13 +166,13 @@ const WhoWeAre = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-brand-starry-hug to-brand-steady-sky">
+        <section className="py-20 bg-brand-healing-leaf-light">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold text-white">
-                Ready to Experience the EndoMD Difference?
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+                Ready to Experience the ENDOMD Difference?
               </h2>
-              <p className="text-xl text-white/90">
+              <p className="text-xl text-muted-foreground">
                 Join over 2,500 families who trust us with their child's endocrine health
               </p>
               <div className="flex flex-wrap justify-center gap-4 pt-4">
@@ -185,7 +185,7 @@ const WhoWeAre = () => {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-brand-starry-hug bg-transparent"
+                  className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
                 >
                   Learn More About Our Services
                 </Button>
