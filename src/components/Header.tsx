@@ -7,7 +7,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigationItems = [
-    { name: "Who we are", href: "#about" },
+    { name: "Who we are", href: "/who-we-are" },
     { name: "What we offer", href: "#services" },
     { name: "Who we serve", href: "#serve" },
     { name: "Contact Us", href: "#contact" },
