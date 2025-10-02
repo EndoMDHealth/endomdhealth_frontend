@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import realDoctorConsultation from "@/assets/real-doctor-consultation.jpg";
+import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
 import drDavallow from "@/assets/dr-davallow-green.png";
 
 const WhoWeAre = () => {
@@ -44,7 +44,7 @@ const WhoWeAre = () => {
               </div>
               <div className="relative">
                 <img 
-                  src={realDoctorConsultation} 
+                  src={childDoctorConsultation} 
                   alt="Child smiling with pediatric endocrinologist during consultation" 
                   className="rounded-2xl shadow-2xl"
                 />
