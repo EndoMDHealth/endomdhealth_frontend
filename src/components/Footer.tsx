@@ -48,12 +48,12 @@ const Footer = () => {
             {/* Brand Section */}
             <div className="lg:col-span-1 space-y-4">
               <div>
-                <h3 className="text-2xl font-bold">EndoMD Health</h3>
+                <h3 className="text-2xl font-bold">ENDOMD Health</h3>
                 <p className="text-accent font-medium">Helping kids thrive</p>
               </div>
               <p className="text-sm text-primary-foreground/80 leading-relaxed">
                 Specialized pediatric endocrine care serving Maryland and Virginia, 
-                helping children ages Birth–23 years achieve optimal health and growth.
+                helping children ages Birth–25 years achieve optimal health and growth.
               </p>
               <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 Request Appointment
