@@ -23,7 +23,7 @@ const WhoWeAre = () => {
                 <p className="text-xl text-white/90 leading-relaxed">
                   EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
                   care through a hybrid virtual and in-person model. We address the critical shortage of pediatric 
-                  endocrinologists in the US. We currently serve patients in Virginia and Maryland, but plan to 
+                  endocrinologists  the US. We currently serve patients in Virginia and Maryland, but plan to 
                   expand nation-wide!
                 </p>
                 <div className="flex flex-wrap gap-4">
