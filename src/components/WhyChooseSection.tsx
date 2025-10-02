@@ -62,7 +62,7 @@ const WhyChooseSection = () => {
           {/* Header */}
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Why Choose <span className="text-brand-starry-hug">Endo</span><span className="text-brand-sunshine-boost">MD</span> Health?
+              Why Choose <span className="text-brand-starry-hug">ENDO</span><span className="text-brand-sunshine-boost">MD</span> Health?
             </h2>
             <p className="text-lg text-dark gray max-w-3xl mx-auto">
               We want to see your child thrive and deliver outstanding convenient care to achieve this result.
