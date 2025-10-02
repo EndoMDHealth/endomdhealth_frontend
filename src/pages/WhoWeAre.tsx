@@ -29,7 +29,7 @@ const WhoWeAre = () => {
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-bold text-xl px-10 py-6"
+                    className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/70 text-brand-starry-hug font-bold text-xl px-10 py-6"
                   >
                     Request Appointment
                   </Button>
