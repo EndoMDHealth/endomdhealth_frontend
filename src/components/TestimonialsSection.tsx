@@ -70,7 +70,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-16 brand-healing-leaf-light-100">
+    <section className="py-16 bg-brand-healing-leaf-light-100">
       <style dangerouslySetInnerHTML={{
         __html: `
           @keyframes scroll {
