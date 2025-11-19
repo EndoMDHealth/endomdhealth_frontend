@@ -1,23 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Users } from "lucide-react";
-import heroClinicalFamily from "@/assets/hero-clinical-family.jpg";
+import warmFamilyPortrait from "@/assets/warm-family-portrait.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${heroClinicalFamily})`,
-        }}
-      >
-        {/* Light overlay for clinical feel */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70"></div>
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-4xl">
+    <section className="py-16 lg:py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Content */}
           <div className="space-y-8">
             {/* Main Heading */}
             <div className="space-y-4">
@@ -52,28 +42,39 @@ const HeroSection = () => {
                 Learn More
               </Button>
             </div>
-          </div>
 
-          {/* Info Cards */}
-          <div className="flex flex-col sm:flex-row gap-6 mt-12 lg:mt-16">
-            <div className="flex items-center space-x-3 bg-card border border-border rounded-lg px-6 py-4 shadow-sm">
-              <div className="p-2 bg-accent/10 rounded-full">
-                <MapPin className="h-6 w-6 text-accent" />
+            {/* Info Cards */}
+            <div className="flex flex-col sm:flex-row gap-6 mt-8">
+              <div className="flex items-center space-x-3 bg-card border border-border rounded-lg px-6 py-4 shadow-sm">
+                <div className="p-2 bg-accent/10 rounded-full">
+                  <MapPin className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Serving</p>
+                  <p className="text-lg font-bold text-foreground">Virginia & Maryland</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Serving</p>
-                <p className="text-lg font-bold text-foreground">Virginia & Maryland</p>
+              
+              <div className="flex items-center space-x-3 bg-card border border-border rounded-lg px-6 py-4 shadow-sm">
+                <div className="p-2 bg-accent/10 rounded-full">
+                  <Users className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">Age range</p>
+                  <p className="text-lg font-bold text-foreground">Birth - 25 years</p>
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-3 bg-card border border-border rounded-lg px-6 py-4 shadow-sm">
-              <div className="p-2 bg-accent/10 rounded-full">
-                <Users className="h-6 w-6 text-accent" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">Age range</p>
-                <p className="text-lg font-bold text-foreground">Birth - 25 years</p>
-              </div>
+          </div>
+
+          {/* Right Side - Image */}
+          <div className="relative">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img 
+                src={warmFamilyPortrait}
+                alt="Happy family with children smiling together, representing pediatric endocrinology care"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
