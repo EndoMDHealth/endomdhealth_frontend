@@ -35,13 +35,13 @@ const TestimonialsSection = () => {
     },
     {
       quote:
-        "We had a great experience with Dr. Davallow! From the moment I reached out, communication was super easy as well as scheduling an initial appointment. I really appreciate the fact that she holds virtual meetings. Her demeanor is so pleasant and calming, you can really tell she's invested in your child and what they need. Highly recommend if you're searching for an endocrinologist for your child!",
+        "We had a great experience with Dr. Davallow! From the moment I reached out, communication was super easy as well as scheduling an initial appointment. Her demeanor is so pleasant and calming, you can really tell she's invested in your child and what they need.",
       author: "Lauren H.",
       rating: 5,
     },
     {
       quote:
-        "We had a wonderful experience seeing Dr. Davallow for my child's growth assessment. From the start, the process of scheduling and sending over records was seamless, and communication with the office was smooth and efficient. We were amazed at how quickly we were able to get an appointment—especially given how long the wait usually is to see a pediatric endocrinologist. Overall, I felt very heard and well-supported. I highly recommend Dr. Davallow for any parent looking for expert, compassionate care in pediatric endocrinology!",
+        "We had a wonderful experience seeing Dr. Davallow. From the start, the process of scheduling and sending over records was seamless. We were amazed at how quickly we were able to get an appointment given how long the wait is to see a ped. endo. Overall, I felt very heard and well-supported. I highly recommend Dr. Davallow for any parent looking for expert, compassionate care in pediatric endocrinology!",
       author: "Han Na K.",
       rating: 5,
     },
