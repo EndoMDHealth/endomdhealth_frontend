@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
+import clinicalConsultation from "@/assets/clinical-consultation.jpg";
 import drDavallow from "@/assets/dr-davallow-green.png";
 
 const WhoWeAre = () => {
@@ -13,30 +13,30 @@ const WhoWeAre = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="relative bg-white py-20 lg:py-28">
+        <section className="relative bg-background py-20 lg:py-28">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-brand-starry-hug leading-tight">
+                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight">
                   Who We Are
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
                   care through a hybrid virtual and in-person model. We address the critical shortage of pediatric 
-                  endocrinologists  the US. We currently serve patients in Virginia and Maryland, but plan to 
+                  endocrinologists in the US. We currently serve patients in Virginia and Maryland, but plan to 
                   expand nation-wide!
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/70 text-brand-starry-hug font-bold text-xl px-10 py-6"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-10 py-6"
                   >
                     Request Appointment
                   </Button>
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
+                    className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                   >
                     Contact Us
                   </Button>
@@ -44,9 +44,9 @@ const WhoWeAre = () => {
               </div>
               <div className="relative">
                 <img 
-                  src={childDoctorConsultation} 
-                  alt="Child smiling with pediatric endocrinologist during consultation" 
-                  className="rounded-2xl shadow-2xl"
+                  src={clinicalConsultation} 
+                  alt="Pediatric endocrinologist with child patient in modern medical office" 
+                  className="rounded-2xl shadow-lg"
                 />
               </div>
             </div>
@@ -54,12 +54,12 @@ const WhoWeAre = () => {
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-20 bg-brand-healing-leaf-light">
+        <section className="py-20 bg-secondary">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
               <div className="space-y-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
-                  <Target className="h-5 w-5 text-white" />
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-md">
+                  <Target className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Mission</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -70,7 +70,7 @@ const WhoWeAre = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-brand-healing-leaf to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center shadow-md">
                   <Heart className="h-5 w-5 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-foreground">Vision</h2>
@@ -109,8 +109,8 @@ const WhoWeAre = () => {
 
                   <div className="lg:col-span-2 space-y-6">
                     <div>
-                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Award className="h-6 w-6 text-brand-healing-leaf" />
+                    <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                      <Award className="h-6 w-6 text-primary" />
                         Education and Training
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -121,8 +121,8 @@ const WhoWeAre = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Shield className="h-6 w-6 text-emerald-600" />
+                    <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                      <Shield className="h-6 w-6 text-accent" />
                         Board Certifications
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -132,8 +132,8 @@ const WhoWeAre = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Users className="h-6 w-6 text-teal-600" />
+                    <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                      <Users className="h-6 w-6 text-accent" />
                         Professional Memberships
                       </h4>
                       <ul className="space-y-2 text-muted-foreground">
@@ -166,11 +166,11 @@ const WhoWeAre = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-brand-healing-leaf-light">
+        <section className="py-20 bg-secondary">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Ready to Experience the ENDOMD Difference?
+                Ready to Experience the EndoMD Difference?
               </h2>
               <p className="text-xl text-muted-foreground">
                 Join over 2,500 families who trust us with their child's endocrine health
@@ -178,14 +178,14 @@ const WhoWeAre = () => {
               <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <Button 
                   size="lg" 
-                  className="bg-brand-sunshine-boost hover:bg-brand-sunshine-boost/90 text-brand-starry-hug font-bold px-8"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8"
                 >
                   Request Appointment
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-2 border-brand-starry-hug text-brand-starry-hug hover:bg-brand-starry-hug hover:text-white"
+                  className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 >
                   Learn More About Our Services
                 </Button>

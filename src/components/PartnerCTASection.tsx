@@ -60,12 +60,12 @@ const PartnerCTASection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           {/* Header */}
           <div className="space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Join us in improving specialty outcomes for more children with endocrine disorders.
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -77,11 +77,11 @@ const PartnerCTASection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {partnerButtons.map((partner, index) => {
               const colors = [
-                { bg: 'bg-brand-sunshine-boost', icon: 'text-white' },
-                { bg: 'bg-brand-starry-hug', icon: 'text-white' },
-                { bg: 'bg-brand-healing-leaf', icon: 'text-white' },
-                { bg: 'bg-brand-steady-sky', icon: 'text-white' },
-                { bg: 'bg-brand-starry-hug', icon: 'text-white' }
+                { bg: 'bg-accent', icon: 'text-white' },
+                { bg: 'bg-primary', icon: 'text-white' },
+                { bg: 'bg-accent', icon: 'text-white' },
+                { bg: 'bg-primary', icon: 'text-white' },
+                { bg: 'bg-accent', icon: 'text-white' }
               ];
               const colorScheme = colors[index % colors.length];
               
