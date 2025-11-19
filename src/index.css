@@ -18,8 +18,8 @@ All colors MUST be HSL. Warm, professional medical brand.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 18%;
 
-    /* Primary: Professional medical blue for trust */
-    --primary: 210 80% 48%;
+    /* Primary: Dark navy blue for trust and professionalism */
+    --primary: 234 55% 19%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary: Light gray clinical backgrounds */
@@ -48,9 +48,9 @@ All colors MUST be HSL. Warm, professional medical brand.
     --morning-glow: 0 0% 97%;
     --healing-leaf: 168 76% 42%;
     --healing-leaf-light: 0 0% 97%;
-    --steady-sky: 210 80% 48%;
-    --steady-sky-light: 210 80% 90%;
-    --starry-hug: 220 13% 18%;
+    --steady-sky: 234 55% 19%;
+    --steady-sky-light: 234 55% 40%;
+    --starry-hug: 234 55% 19%;
     
     /* Warm, welcoming color palette */
     --warm-coral: 48 92% 63%;
