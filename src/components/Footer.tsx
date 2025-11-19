@@ -40,7 +40,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-primary text-background">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="py-16">
@@ -52,20 +52,16 @@ const Footer = () => {
                 <p className="text-accent font-medium">Helping kids thrive</p>
               </div>
               <p className="text-sm text-background/80 leading-relaxed">
-                Specialized pediatric endocrine care serving Maryland and Virginia, 
-                helping children ages Birth–25 years achieve optimal health and growth.
+                Specialized pediatric endocrine care serving Maryland and Virginia, helping children ages Birth–25 years
+                achieve optimal health and growth.
               </p>
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Request Appointment
-              </Button>
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Request Appointment</Button>
             </div>
 
             {/* Footer Links */}
             {footerSections.map((section) => (
               <div key={section.title} className="space-y-4">
-                <h4 className="text-lg font-semibold text-accent">
-                  {section.title}
-                </h4>
+                <h4 className="text-lg font-semibold text-accent">{section.title}</h4>
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.href}>
