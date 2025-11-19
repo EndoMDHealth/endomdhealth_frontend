@@ -31,7 +31,7 @@ All colors MUST be HSL. Warm, professional medical brand.
     --muted-foreground: 220 9% 46%;
 
     /* Accent: Warm yellow matching child's sweater */
-    --accent: 46 88% 60%;
+    --accent: 46 88% 50%;
     --accent-foreground: 220 13% 18%;
 
     --destructive: 0 84.2% 60.2%;
@@ -44,7 +44,7 @@ All colors MUST be HSL. Warm, professional medical brand.
     --radius: 1rem;
 
     /* Brand color palette - warm and welcoming */
-    --sunshine-boost: 46 88% 60%;
+    --sunshine-boost: 46 88% 50%;
     --morning-glow: 0 0% 97%;
     --healing-leaf: 168 76% 42%;
     --healing-leaf-light: 0 0% 97%;
@@ -53,7 +53,7 @@ All colors MUST be HSL. Warm, professional medical brand.
     --starry-hug: 234 55% 19%;
     
     /* Warm, welcoming color palette */
-    --warm-coral: 46 88% 60%;
+    --warm-coral: 46 88% 50%;
     --warm-peach: 0 0% 97%;
     --warm-sage: 168 76% 42%;
     --warm-lavender: 0 0% 97%;
