@@ -21,13 +21,13 @@ const InsuranceSection = () => {
   ];
 
   return (
-    <section className="py-16 white">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
               In-network with most insurance plans,{" "}
-              <span className="text-sunshine-boost">Medicaid, Tricare and ChampVA</span>
+              <span className="text-primary">Medicaid, Tricare and ChampVA</span>
             </h2>
           </div>
 

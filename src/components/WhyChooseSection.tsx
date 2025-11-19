@@ -18,19 +18,19 @@ const WhyChooseSection = () => {
       title: "Fast Appointments",
       description: "Care when you need it, not months later. Our streamlined scheduling gets your child seen quickly so care begins without delay.",
       icon: Calendar,
-      iconBg: "bg-teal-600",
+      iconBg: "bg-accent",
     },
     {
       title: "Skip the Waiting Room",
       description: "Save time by eliminating lengthy clinic waiting times with virtual consultations.",
       icon: Home,
-      iconBg: "bg-brand-sunshine-boost",
+      iconBg: "bg-accent",
     },
     {
       title: "Direct Communication",
       description: "Enjoy easy access to your specialist with prompt responses, without waiting days.",
       icon: MessageCircle,
-      iconBg: "bg-brand-healing-leaf",
+      iconBg: "bg-accent",
     },
   ];
 
@@ -39,32 +39,32 @@ const WhyChooseSection = () => {
       title: "Root Cause Treatment",
       description: "Address the underlying causes of your child's endocrine issues for effective, long-term solutions.",
       icon: Search,
-      iconBg: "bg-brand-healing-leaf",
+      iconBg: "bg-accent",
     },
     {
       title: "Comprehensive Coaching",
       description: "Benefit from weekly nutrition and exercise coaching to support your child's optimal mental and physical health.",
       icon: TrendingUp,
-      iconBg: "bg-brand-steady-sky",
+      iconBg: "bg-primary",
     },
     {             
       title: "Meaningful Care",
       description: "We don't rush to get you out the door. We give your child the time and care needed to make a meaningful difference.",
       icon: HeartHandshake,
-      iconBg: "bg-emerald-600"
+      iconBg: "bg-accent"
     },
   ];
 
   return (
-    <section className="py-16 bg-brand-healing-leaf-light">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Why Choose <span className="text-brand-starry-hug">ENDO</span><span className="text-brand-sunshine-boost">MD</span> Health?
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Why Choose <span className="text-primary">ENDO</span><span className="text-accent">MD</span> Health?
             </h2>
-            <p className="text-lg text-dark gray max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               We want to see your child thrive and deliver outstanding convenient care to achieve this result.
             </p>
           </div>
@@ -81,12 +81,12 @@ const WhyChooseSection = () => {
                       <feature.icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-bold text-primary">
-                        {feature.title}
-                      </h3>
-                      <p className="text-sm text-dark gray leading-relaxed">
-                        {feature.description}
-                      </p>
+                    <h3 className="font-bold text-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
                     </div>
                   </div>
                 ))}
@@ -96,7 +96,7 @@ const WhyChooseSection = () => {
               <div className="flex justify-center">
                 <div className="relative">
                   {/* Yellow border circle */}
-                  <div className="w-80 h-80 rounded-full border-4 border-brand-sunshine-boost p-4">
+                  <div className="w-80 h-80 rounded-full border-4 border-accent p-4">
                     <div className="w-full h-full rounded-full overflow-hidden">
                       <img
                         src={realFamilyConsultation}
@@ -113,13 +113,13 @@ const WhyChooseSection = () => {
                 {rightFeatures.map((feature, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div className={`${feature.iconBg} p-3 rounded-full flex-shrink-0`}>
-                      <feature.icon className="h-6 w-6 text-dark gray" />
+                      <feature.icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-bold text-primary">
+                      <h3 className="font-bold text-foreground">
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-dark gray leading-relaxed">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         {feature.description}
                       </p>
                     </div>

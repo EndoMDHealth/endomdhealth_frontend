@@ -40,7 +40,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="py-16">
@@ -48,10 +48,10 @@ const Footer = () => {
             {/* Brand Section */}
             <div className="lg:col-span-1 space-y-4">
               <div>
-                <h3 className="text-2xl font-bold">ENDOMD Health</h3>
+                <h3 className="text-2xl font-bold">EndoMD Health</h3>
                 <p className="text-accent font-medium">Helping kids thrive</p>
               </div>
-              <p className="text-sm text-primary-foreground/80 leading-relaxed">
+              <p className="text-sm text-background/80 leading-relaxed">
                 Specialized pediatric endocrine care serving Maryland and Virginia, 
                 helping children ages Birth–25 years achieve optimal health and growth.
               </p>
@@ -71,7 +71,7 @@ const Footer = () => {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="flex items-center space-x-2 text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                        className="flex items-center space-x-2 text-sm text-background/80 hover:text-background transition-colors"
                       >
                         {link.icon && <link.icon className="h-4 w-4" />}
                         <span>{link.title}</span>
@@ -85,16 +85,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/20 py-6">
+        <div className="border-t border-background/20 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-primary-foreground/60">
+            <p className="text-sm text-background/60">
               © {new Date().getFullYear()} EndoMD Health. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="/accessibility" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+              <a href="/accessibility" className="text-background/60 hover:text-background transition-colors">
                 Accessibility
               </a>
-              <a href="/sitemap.xml" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+              <a href="/sitemap.xml" className="text-background/60 hover:text-background transition-colors">
                 Sitemap
               </a>
             </div>

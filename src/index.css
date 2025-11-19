@@ -8,63 +8,64 @@ All colors MUST be HSL. Warm, professional medical brand.
 
 @layer base {
   :root {
-    --background: 25 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    /* Clinical white and light gray backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    /* Primary: Starry Hug navy for trust and professionalism */
-    --primary: 234 55% 19%;
-    --primary-foreground: 68 41% 92%;
+    /* Primary: Professional medical blue for trust */
+    --primary: 210 80% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Morning Glow soft backgrounds */
-    --secondary: 68 41% 92%;
-    --secondary-foreground: 234 55% 19%;
+    /* Secondary: Light gray clinical backgrounds */
+    --secondary: 0 0% 97%;
+    --secondary-foreground: 220 13% 18%;
 
-    /* Muted: Steady Sky muted tones */
-    --muted: 223 18% 90%;
-    --muted-foreground: 223 18% 47%;
+    /* Muted: Soft gray tones */
+    --muted: 220 13% 95%;
+    --muted-foreground: 220 9% 46%;
 
-    /* Accent: Sunshine Boost for energy */
-    --accent: 48 92% 63%;
-    --accent-foreground: 234 55% 19%;
+    /* Accent: Warm teal for pediatric friendliness */
+    --accent: 168 76% 42%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 223 18% 88%;
-    --input: 223 18% 88%;
-    --ring: 234 55% 19%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 210 80% 48%;
 
     --radius: 1rem;
 
-    /* Brand color palette from reference */
-    --sunshine-boost: 48 92% 63%;
-    --morning-glow: 68 41% 92%;
-    --healing-leaf: 127 14% 58%;
-    --healing-leaf-light: 127 14% 85%;
-    --steady-sky: 223 18% 47%;
-    --steady-sky-light: 223 18% 78%;
-    --starry-hug: 234 55% 19%;
+    /* Clinical brand color palette - minimal, professional */
+    --sunshine-boost: 168 76% 42%;
+    --morning-glow: 0 0% 97%;
+    --healing-leaf: 168 76% 42%;
+    --healing-leaf-light: 0 0% 97%;
+    --steady-sky: 210 80% 48%;
+    --steady-sky-light: 210 80% 90%;
+    --starry-hug: 220 13% 18%;
     
-    /* Updated warm, family-friendly color palette */
-    --warm-coral: 14 77% 68%;
-    --warm-peach: 68 41% 92%;
-    --warm-sage: 127 14% 58%;
-    --warm-lavender: 260 25% 85%;
+    /* Updated clinical, minimal color palette */
+    --warm-coral: 168 76% 42%;
+    --warm-peach: 0 0% 97%;
+    --warm-sage: 168 76% 42%;
+    --warm-lavender: 0 0% 97%;
     
-    /* Gradients for hero sections */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--warm-peach)), hsl(var(--warm-coral)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--warm-coral)));
+    /* Subtle gradients for clinical feel */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 97%));
+    --gradient-accent: linear-gradient(135deg, hsl(210 80% 48%), hsl(168 76% 42%));
     
-    /* Shadows with warm tones */
-    --shadow-soft: 0 4px 6px -1px hsl(var(--warm-coral) / 0.1);
-    --shadow-medium: 0 10px 15px -3px hsl(var(--warm-coral) / 0.15);
-    --shadow-large: 0 25px 50px -12px hsl(var(--warm-coral) / 0.2);
+    /* Soft shadows for depth */
+    --shadow-soft: 0 1px 3px 0 hsl(220 13% 18% / 0.1);
+    --shadow-medium: 0 4px 6px -1px hsl(220 13% 18% / 0.1);
+    --shadow-large: 0 10px 15px -3px hsl(220 13% 18% / 0.1);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

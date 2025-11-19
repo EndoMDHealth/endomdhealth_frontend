@@ -17,47 +17,47 @@ const ConcernsSection = () => {
       title: "Healthy Weight Consultation",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
       icon: Heart,
-      iconBg: "bg-brand-sunshine-boost",
+      iconBg: "bg-accent",
     },
     {
       title: "Reverse Type 2 Diabetes", 
       description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
       icon: Droplets,
-      iconBg: "bg-brand-healing-leaf",
+      iconBg: "bg-accent",
     },
     {
       title: "Growth Concerns",
       description: "Comprehensive support to promote healthy growth with professional evaluation.",
       icon: TrendingUp,
-      iconBg: "bg-brand-steady-sky",
+      iconBg: "bg-primary",
     },
     {
       title: "Address Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
       icon: Users,
-      iconBg: "bg-emerald-600",
+      iconBg: "bg-accent",
     },
     {
       title: "Manage Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
       icon: Pill,
-      iconBg: "bg-teal-600",
+      iconBg: "bg-accent",
     },
     {
       title: "Balance Hormones",
       description: "Advanced hormone management to improve concentration and overall health.",
       icon: Activity,
-      iconBg: "bg-brand-starry-hug",
+      iconBg: "bg-primary",
     },
   ];
 
   return (
-    <section className="py-16 bg-warm-peach">
+    <section className="py-16 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="space-y-12">
           {/* Header */}
           <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Pediatric Endocrine Concerns We Address
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -67,7 +67,7 @@ const ConcernsSection = () => {
             {/* Request Appointment Button - Centered under title */}
             <div className="pt-4">
               <Button 
-                className="bg-brand-sunshine-boost hover:bg-yellow-500 text-black font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-12 py-6 shadow-md"
               >
                 Request an Appointment
               </Button>
