@@ -108,7 +108,7 @@ const TestimonialsSection = () => {
               {duplicatedTestimonials.map((testimonial, index) => (
                 <Card
                   key={index}
-                  className="p-4 min-w-[320px] max-w-[320px] flex-shrink-0 hover:shadow-lg transition-all duration-300 bg-brand-healing-leaf-light"
+                  className="p-4 min-w-[280px] max-w-[280px] flex-shrink-0 hover:shadow-lg transition-all duration-300 bg-brand-healing-leaf-light"
                 >
                   <div className="space-y-3">
                     {/* Star Rating */}
