@@ -108,9 +108,9 @@ const TestimonialsSection = () => {
               {duplicatedTestimonials.map((testimonial, index) => (
                 <Card
                   key={index}
-                  className="p-4 min-w-[280px] max-w-[280px] flex-shrink-0 hover:shadow-lg transition-all duration-300 bg-brand-healing-leaf-light"
+                  className="p-3 min-w-[280px] max-w-[280px] flex-shrink-0 hover:shadow-lg transition-all duration-300 bg-brand-healing-leaf-light"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {/* Star Rating */}
                     <div className="flex space-x-1">{renderStars(testimonial.rating)}</div>
 
@@ -120,7 +120,7 @@ const TestimonialsSection = () => {
                     </blockquote>
 
                     {/* Author Info */}
-                    <footer className="pt-1">
+                    <footer className="pt-0">
                       <cite className="text-sm font-semibold text-primary not-italic">{testimonial.author}</cite>
                     </footer>
                   </div>
