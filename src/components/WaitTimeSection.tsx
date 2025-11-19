@@ -5,7 +5,7 @@ const WaitTimeSection = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-3xl lg:text-5xl font-bold leading-tight text-foreground">
             The average pediatric endocrinology appointment takes between 3 and 6 months to schedule. 
-            <span className="text-primary"> We're here to change that.</span>
+            <span className="text-accent"> We're here to change that.</span>
           </h2>
           
           <div className="space-y-4">
