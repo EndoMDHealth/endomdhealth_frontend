@@ -4,7 +4,7 @@ import warmFamilyPortrait from "@/assets/warm-family-portrait.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="py-8 lg:py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Content */}
@@ -13,7 +13,7 @@ const HeroSection = () => {
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                 Specialized{" "}
-                <span className="text-primary">Pediatric Endocrine </span>{" "}
+                <span className="text-accent">Pediatric Endocrine </span>{" "}
                 Care Services
               </h1>
               

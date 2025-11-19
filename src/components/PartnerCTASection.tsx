@@ -77,13 +77,13 @@ const PartnerCTASection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {partnerButtons.map((partner, index) => {
               return (
-                <Card key={partner.href} className="bg-accent p-3 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer border-0">
+                <Card key={partner.href} className="bg-primary p-3 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer border-0">
                   <a href={partner.href} className="block space-y-2">
                     <div className="flex justify-center">
-                      <partner.icon className="h-8 w-8 text-accent-foreground" />
+                      <partner.icon className="h-8 w-8 text-accent" />
                     </div>
                     <div className="text-center">
-                      <h3 className="text-base font-bold text-accent-foreground group-hover:text-accent-foreground/90 transition-colors leading-tight">
+                      <h3 className="text-base font-bold text-accent group-hover:text-accent/90 transition-colors leading-tight">
                         {partner.title}
                       </h3>
                     </div>
