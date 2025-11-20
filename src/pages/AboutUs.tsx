@@ -4,7 +4,7 @@ import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import clinicalConsultation from "@/assets/clinical-consultation.jpg";
-import drDavallow from "@/assets/dr-davallow-green.png";
+import drDavallow from "@/assets/dr-davallow-yellow.png";
 
 const AboutUs = () => {
   return (
@@ -170,7 +170,7 @@ const AboutUs = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Ready to Experience the EndoMD Difference?
+                Ready to Experience the Endo<span className="text-accent">MD</span> Difference?
               </h2>
               <p className="text-xl text-muted-foreground">
                 Join over 2,500 families who trust us with their child's endocrine health
