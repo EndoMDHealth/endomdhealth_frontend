@@ -52,7 +52,7 @@ const PartnerCTASection = () => {
   ];
 
   return (
-    <section className="py-16 bg-softteal">
+    <section className="py-16 bg-softTeal">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           {/* Header */}
