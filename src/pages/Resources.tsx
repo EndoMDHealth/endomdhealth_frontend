@@ -2,7 +2,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { BookOpen, Video, Heart, TrendingUp, Activity, Sparkles, ExternalLink } from "lucide-react";
+import pediatricEndocrinologist from "@/assets/resources/pediatric-endocrinologist.jpg";
+import healthyActiveLiving from "@/assets/resources/healthy-active-living.jpg";
+import diabetesTips from "@/assets/resources/diabetes-tips.jpg";
+import measureHeight from "@/assets/resources/measure-height.jpg";
+import growthProblems from "@/assets/resources/growth-problems.jpg";
+import hypothyroidism from "@/assets/resources/hypothyroidism.jpg";
 
 const resourceCategories = [
   {
@@ -15,13 +22,15 @@ const resourceCategories = [
         title: "How to Prepare for a Telehealth Visit",
         description: "Advice on what you need, which tools to have handy and what to expect during your child's virtual exam and afterward.",
         link: "https://www.uhhospitals.org/blog/articles/2020/04/tips-for-a-great-telehealth-visit-with-your-child/",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: null // Image too large to download
       },
       {
         title: "Who is a Pediatric Endocrinologist?",
         description: "Pediatric endocrinologists are physicians who have special training and expertise in the care of children and adolescents with hormone disorders.",
         link: "https://pedsendo.org/patient-resources/what-is-a-pediatric-endocrinologist/",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: pediatricEndocrinologist
       }
     ]
   },
@@ -35,7 +44,8 @@ const resourceCategories = [
         title: "Healthy Active Living for Families",
         description: "Start today: Help your child stay at a healthy weight for life.",
         link: "https://www.healthychildren.org/English/healthy-living/growing-healthy/Pages/default.aspx",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: healthyActiveLiving
       }
     ]
   },
@@ -49,7 +59,8 @@ const resourceCategories = [
         title: "Type 2 Diabetes: Tips for Healthy Living",
         description: "American Academy of Pediatrics (AAP) discusses healthy living tips for children with type 2 diabetes.",
         link: "https://www.healthychildren.org/English/health-issues/conditions/chronic/Pages/Type-2-Diabetes-A-Manageable-Epidemic.aspx",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: diabetesTips
       }
     ]
   },
@@ -63,13 +74,15 @@ const resourceCategories = [
         title: "How to Accurately Measure Your Child's Height at Home",
         description: "Be prepared for a virtual care visit by learning how to accurately measure your child's height and weight at home.",
         link: "https://www.aboutkidshealth.ca/healthaz/na/virtual-care-how-to-accurately-measure-your-childs-height-and-weight-at-home/",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: measureHeight
       },
       {
         title: "Growth Problems in Children",
         description: "An overview of the symptoms, causes and treatment of growth problems in children.",
         link: "https://www.aboutkidshealth.ca/healthaz/na/growth-problems-in-children/",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: growthProblems
       }
     ]
   },
@@ -83,7 +96,8 @@ const resourceCategories = [
         title: "Hypothyroidism in Children",
         description: "Hypothyroidism is the term we use to describe when the thyroid does not make enough thyroid hormone to keep the body running normally.",
         link: "https://www.thyroid.org/hypothyroidism-children-adolescents/",
-        date: "Dec 22, 2023"
+        date: "Dec 22, 2023",
+        image: hypothyroidism
       }
     ]
   }
@@ -111,59 +125,75 @@ const Resources = () => {
       {/* Resources by Category */}
       <main className="container mx-auto px-4 py-12">
         <div className="space-y-16">
-          {resourceCategories.map((category) => {
+          {resourceCategories.map((category, categoryIdx) => {
             const Icon = category.icon;
             return (
-              <section key={category.id} id={category.id} className="scroll-mt-20">
-                {/* Category Header */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-accent" />
+              <div key={category.id}>
+                {categoryIdx > 0 && (
+                  <div className="flex items-center justify-center mb-16">
+                    <Separator className="w-3/4 max-w-2xl bg-accent h-0.5" />
                   </div>
-                  <div>
-                    <h2 className="text-3xl font-bold text-foreground">{category.title}</h2>
-                    <p className="text-muted-foreground">{category.description}</p>
+                )}
+                <section id={category.id} className="scroll-mt-20">
+                  {/* Category Header */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-accent" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold text-foreground">{category.title}</h2>
+                      <p className="text-muted-foreground">{category.description}</p>
+                    </div>
                   </div>
-                </div>
 
-                {/* Resource Cards */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.resources.map((resource, idx) => (
-                    <Card
-                      key={idx}
-                      className="hover-scale hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30 flex flex-col"
-                    >
-                      <CardHeader>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <BookOpen className="w-4 h-4" />
-                          <span>{resource.date}</span>
-                        </div>
-                        <CardTitle className="text-xl">{resource.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="flex-grow flex flex-col">
-                        <p className="text-muted-foreground mb-6 flex-grow">
-                          {resource.description}
-                        </p>
-                        <Button
-                          variant="outline"
-                          className="w-full group"
-                          asChild
-                        >
-                          <a
-                            href={resource.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2"
+                  {/* Resource Cards */}
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {category.resources.map((resource, idx) => (
+                      <Card
+                        key={idx}
+                        className="hover-scale hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30 flex flex-col overflow-hidden"
+                      >
+                        {resource.image && (
+                          <div className="relative h-48 w-full overflow-hidden">
+                            <img
+                              src={resource.image}
+                              alt={resource.title}
+                              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <CardHeader>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                            <BookOpen className="w-4 h-4" />
+                            <span>{resource.date}</span>
+                          </div>
+                          <CardTitle className="text-xl">{resource.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex-grow flex flex-col">
+                          <p className="text-muted-foreground mb-6 flex-grow">
+                            {resource.description}
+                          </p>
+                          <Button
+                            variant="outline"
+                            className="w-full group"
+                            asChild
                           >
-                            Read More
-                            <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                          </a>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
+                            <a
+                              href={resource.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2"
+                            >
+                              Read More
+                              <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </a>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              </div>
             );
           })}
         </div>
