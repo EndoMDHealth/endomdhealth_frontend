@@ -50,23 +50,23 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList>
+            <NavigationMenuList className="flex-row space-x-2">
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent text-base font-medium px-4 h-12">
                   Who We Are
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                  <ul className="grid w-[420px] gap-2 p-6 bg-background">
                     {whoWeAreItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                            <div className="text-base font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
@@ -76,21 +76,21 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent text-base font-medium px-4 h-12">
                   What We Offer
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                  <ul className="grid w-[420px] gap-2 p-6 bg-background">
                     {whatWeOfferItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                            <div className="text-base font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
@@ -100,21 +100,21 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent text-base font-medium px-4 h-12">
                   Who We Serve
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[500px] gap-3 p-4 md:w-[600px] md:grid-cols-2">
+                  <ul className="grid w-[520px] gap-2 p-6 md:grid-cols-2 bg-background">
                     {whoWeServeItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                            <div className="text-base font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
