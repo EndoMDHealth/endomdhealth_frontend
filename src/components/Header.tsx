@@ -2,41 +2,128 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, X, Search, Phone, Mail } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navigationItems = [
-    { name: "Who we are", href: "/who-we-are" },
-    { name: "What we offer", href: "#services" },
-    { name: "Who we serve", href: "#serve" },
-    { name: "Contact Us", href: "#contact" },
+  const whoWeAreItems = [
+    { name: "What We Treat", href: "/what-we-treat" },
+    { name: "Resources", href: "/resources" },
+    { name: "About Us", href: "/about-us" },
+    { name: "Blog", href: "/blog" },
+  ];
+
+  const whatWeOfferItems = [
+    { name: "Medical Consult", href: "/medical-consult" },
+    { name: "Nutrition & Lifestyle Coaching", href: "/nutrition-coaching" },
+    { name: "E-Consult", href: "/e-consult" },
+  ];
+
+  const whoWeServeItems = [
+    { name: "For Patients", href: "/for-patients" },
+    { name: "For Parents", href: "/for-parents" },
+    { name: "For Healthcare Professionals", href: "/for-healthcare-professionals" },
+    { name: "For Schools", href: "/for-schools" },
+    { name: "For Community Partners", href: "/for-community-partners" },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-md">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-18">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-xl lg:text-2xl font-bold">
+            <a href="/" className="text-xl lg:text-2xl font-bold">
               <span className="text-accent">ENDO</span>
               <span className="text-primary-foreground">MD</span>
-            </div>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            {navigationItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-primary-foreground hover:text-accent transition-colors duration-300 font-medium text-sm whitespace-nowrap"
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                  Who We Are
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                    {whoWeAreItems.map((item) => (
+                      <li key={item.name}>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href={item.href}
+                            className={cn(
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            )}
+                          >
+                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                  What We Offer
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    {whatWeOfferItems.map((item) => (
+                      <li key={item.name}>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href={item.href}
+                            className={cn(
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            )}
+                          >
+                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 data-[state=open]:bg-primary-foreground/10 data-[state=open]:text-accent">
+                  Who We Serve
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[500px] gap-3 p-4 md:w-[600px] md:grid-cols-2">
+                    {whoWeServeItems.map((item) => (
+                      <li key={item.name}>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href={item.href}
+                            className={cn(
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            )}
+                          >
+                            <div className="text-sm font-medium leading-none">{item.name}</div>
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
 
           {/* Search Bar - Desktop */}
           <div className="hidden lg:flex items-center space-x-3">
@@ -106,16 +193,53 @@ const Header = () => {
             </div>
 
             <nav className="space-y-3 mb-4">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block text-primary-foreground hover:text-accent transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              <div>
+                <div className="text-primary-foreground font-semibold mb-2">Who We Are</div>
+                <div className="pl-4 space-y-2">
+                  {whoWeAreItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="block text-primary-foreground/80 hover:text-accent transition-colors duration-300 py-1 text-sm"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-primary-foreground font-semibold mb-2">What We Offer</div>
+                <div className="pl-4 space-y-2">
+                  {whatWeOfferItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="block text-primary-foreground/80 hover:text-accent transition-colors duration-300 py-1 text-sm"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-primary-foreground font-semibold mb-2">Who We Serve</div>
+                <div className="pl-4 space-y-2">
+                  {whoWeServeItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="block text-primary-foreground/80 hover:text-accent transition-colors duration-300 py-1 text-sm"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </nav>
             
             <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all">
