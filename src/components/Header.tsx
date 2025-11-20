@@ -56,17 +56,17 @@ const Header = () => {
                   Who We Are
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[420px] gap-2 p-6 bg-background">
+                  <ul className="grid w-[280px] gap-1 p-3 bg-background">
                     {whoWeAreItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
+                              "block select-none rounded-md px-3 py-2 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-base font-medium">{item.name}</div>
+                            <div className="text-sm font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
@@ -80,17 +80,17 @@ const Header = () => {
                   What We Offer
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[420px] gap-2 p-6 bg-background">
+                  <ul className="grid w-[320px] gap-1 p-3 bg-background">
                     {whatWeOfferItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
+                              "block select-none rounded-md px-3 py-2 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-base font-medium">{item.name}</div>
+                            <div className="text-sm font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
@@ -104,17 +104,17 @@ const Header = () => {
                   Who We Serve
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[520px] gap-2 p-6 md:grid-cols-2 bg-background">
+                  <ul className="grid w-[340px] gap-1 p-3 md:grid-cols-2 bg-background">
                     {whoWeServeItems.map((item) => (
                       <li key={item.name}>
                         <NavigationMenuLink asChild>
                           <a
                             href={item.href}
                             className={cn(
-                              "block select-none rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
+                              "block select-none rounded-md px-3 py-2 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent border border-transparent hover:border-accent/20"
                             )}
                           >
-                            <div className="text-base font-medium">{item.name}</div>
+                            <div className="text-sm font-medium">{item.name}</div>
                           </a>
                         </NavigationMenuLink>
                       </li>
