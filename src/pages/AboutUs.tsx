@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Heart, Target, Users, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import clinicalConsultation from "@/assets/clinical-consultation.jpg";
+import clinicalConsultation from "@/assets/vibrant-doctor-child.jpg";
 import drDavallow from "@/assets/dr-davallow-yellow.png";
 
 const AboutUs = () => {
