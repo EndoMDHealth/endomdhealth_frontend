@@ -15,8 +15,8 @@ const conditions = [
       "Effectively manage and prevent overeating",
       "Foster lifelong healthy eating habits",
       "Use medication when appropriate to support weight management",
-      "Provide psychological support for emotional well-being"
-    ]
+      "Provide psychological support for emotional well-being",
+    ],
   },
   {
     icon: Activity,
@@ -27,8 +27,8 @@ const conditions = [
       "Monitor and stabilize blood sugar levels",
       "Develop personalized wellness plans",
       "Employ targeted medical interventions when needed",
-      "Support long-term metabolic health"
-    ]
+      "Support long-term metabolic health",
+    ],
   },
   {
     icon: TrendingUp,
@@ -39,8 +39,8 @@ const conditions = [
       "Conduct thorough assessments of growth patterns",
       "Provide psychological support for families",
       "Evaluate and administer growth hormone treatments when indicated",
-      "Monitor development milestones closely"
-    ]
+      "Monitor development milestones closely",
+    ],
   },
   {
     icon: Users,
@@ -51,8 +51,8 @@ const conditions = [
       "Assess root cause of early and late puberty",
       "Support natural puberty progression",
       "Maintain hormonal balance through expert care",
-      "Provide family education and guidance"
-    ]
+      "Provide family education and guidance",
+    ],
   },
   {
     icon: Sparkles,
@@ -63,8 +63,8 @@ const conditions = [
       "Optimize thyroid function through advanced therapies",
       "Enhance daily energy and sleep quality",
       "Address autoimmune thyroid disorders",
-      "Monitor and adjust treatment for best outcomes"
-    ]
+      "Monitor and adjust treatment for best outcomes",
+    ],
   },
   {
     icon: Heart,
@@ -75,23 +75,23 @@ const conditions = [
       "Diagnose & treat hormonal imbalances such as PCOS",
       "Utilize hormone therapy for weight, growth, and development",
       "Enhance energy, concentration, and sleep quality",
-      "Support overall endocrine health"
-    ]
-  }
+      "Support overall endocrine health",
+    ],
+  },
 ];
 
 const WhatWeTreat = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section with Image */}
       <section className="relative bg-gradient-to-b from-primary/5 to-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-center md:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-in">
-                Child Endocrine Conditions We Treat
+                Conditions We Treat
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-6">
                 A better life for your child is a click away, start the journey today
@@ -101,8 +101,8 @@ const WhatWeTreat = () => {
               </Button>
             </div>
             <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg">
-              <img 
-                src={heroImage} 
+              <img
+                src={heroImage}
                 alt="Happy child playing outdoors - healthy and active lifestyle"
                 className="w-full h-full object-cover"
               />
@@ -117,12 +117,14 @@ const WhatWeTreat = () => {
           {conditions.map((condition, index) => {
             const Icon = condition.icon;
             return (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="hover-scale hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30"
               >
                 <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 rounded-full ${condition.bgColor} flex items-center justify-center mx-auto mb-4`}>
+                  <div
+                    className={`w-16 h-16 rounded-full ${condition.bgColor} flex items-center justify-center mx-auto mb-4`}
+                  >
                     <Icon className={`w-8 h-8 ${condition.iconColor}`} />
                   </div>
                   <CardTitle className="text-xl md:text-2xl">{condition.title}</CardTitle>
