@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import clinicalConsultation from "@/assets/clinical-consultation.jpg";
 import drDavallow from "@/assets/dr-davallow-green.png";
 
-const WhoWeAre = () => {
+const AboutUs = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -18,7 +18,7 @@ const WhoWeAre = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight">
-                  Who We Are
+                  About Us
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   EndoMD Health is a technology-enabled platform delivering personalized pediatric endocrinology 
@@ -200,4 +200,4 @@ const WhoWeAre = () => {
   );
 };
 
-export default WhoWeAre;
+export default AboutUs;
