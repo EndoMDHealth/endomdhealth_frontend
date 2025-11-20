@@ -20,8 +20,8 @@ const conditions = [
   },
   {
     icon: Activity,
-    iconColor: "text-brand-healing-leaf",
-    bgColor: "bg-brand-healing-leaf/10",
+    iconColor: "text-accent",
+    bgColor: "bg-accent/10",
     title: "Reverse Type 2 Diabetes",
     description: [
       "Monitor and stabilize blood sugar levels",
@@ -32,8 +32,8 @@ const conditions = [
   },
   {
     icon: TrendingUp,
-    iconColor: "text-brand-soft-teal",
-    bgColor: "bg-brand-soft-teal/10",
+    iconColor: "text-accent",
+    bgColor: "bg-accent/10",
     title: "Address Growth Concerns",
     description: [
       "Conduct thorough assessments of growth patterns",
@@ -44,8 +44,8 @@ const conditions = [
   },
   {
     icon: Users,
-    iconColor: "text-primary",
-    bgColor: "bg-primary/10",
+    iconColor: "text-accent",
+    bgColor: "bg-accent/10",
     title: "Address Puberty Concerns",
     description: [
       "Assess root cause of early and late puberty",
@@ -68,8 +68,8 @@ const conditions = [
   },
   {
     icon: Heart,
-    iconColor: "text-brand-healing-leaf",
-    bgColor: "bg-brand-healing-leaf/10",
+    iconColor: "text-accent",
+    bgColor: "bg-accent/10",
     title: "Balance Hormones",
     description: [
       "Diagnose & treat hormonal imbalances such as PCOS",
@@ -112,7 +112,7 @@ const WhatWeTreat = () => {
       </section>
 
       {/* Conditions Grid - Reduced top spacing */}
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="container mx-auto px-4 py-4 md:py-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {conditions.map((condition, index) => {
             const Icon = condition.icon;
@@ -143,20 +143,20 @@ const WhatWeTreat = () => {
         </div>
       </main>
 
-      {/* CTA Section - Reduced top spacing, soft teal text */}
-      <section className="bg-gradient-to-t from-brand-soft-teal-light/30 to-background py-12 md:py-16">
+      {/* CTA Section - Reduced top spacing */}
+      <section className="bg-gradient-to-t from-primary/5 to-background py-12 md:py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-soft-teal mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
             Ready to Start Your Child's Journey to Better Health?
           </h2>
-          <p className="text-lg text-brand-soft-teal/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Our expert team is here to provide comprehensive, compassionate care for your child's endocrine needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6 bg-brand-soft-teal hover:bg-brand-soft-teal/90 text-white" asChild>
+            <Button size="lg" className="text-lg px-8 py-6" asChild>
               <a href="/for-parents">Get Started</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-brand-soft-teal text-brand-soft-teal hover:bg-brand-soft-teal/10" asChild>
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
               <a href="/resources">Learn More</a>
             </Button>
           </div>
