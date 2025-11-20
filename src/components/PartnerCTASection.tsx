@@ -1,14 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { 
-  Stethoscope, 
-  Users, 
-  GraduationCap, 
-  Building2, 
-  Heart,
-  UserCheck,
-  Baby
-} from "lucide-react";
+import { Stethoscope, Users, GraduationCap, Building2, Heart, UserCheck, Baby } from "lucide-react";
 
 const PartnerCTASection = () => {
   const partnerButtons = [
@@ -16,32 +8,32 @@ const PartnerCTASection = () => {
       title: "Partner as a Clinician",
       href: "/who-we-serve/healthcare-professionals",
       icon: Stethoscope,
-      description: "Collaborate with us to improve patient outcomes"
+      description: "Collaborate with us to improve patient outcomes",
     },
     {
       title: "Join us as a Community Partner",
       href: "/who-we-serve/community-partners",
       icon: Users,
-      description: "Join our network of community support"
+      description: "Join our network of community support",
     },
     {
       title: "Resources for Schools",
       href: "/who-we-serve/schools",
       icon: GraduationCap,
-      description: "Educational resources and support programs"
+      description: "Educational resources and support programs",
     },
     {
       title: "Partner as a Hospital",
       href: "/who-we-serve/hospitals",
       icon: Building2,
-      description: "Institutional partnerships for better care"
+      description: "Institutional partnerships for better care",
     },
     {
       title: "Resources for Health Plans",
       href: "/who-we-serve/health-plans",
       icon: Heart,
-      description: "Improve specialty care access for members"
-    }
+      description: "Improve specialty care access for members",
+    },
   ];
 
   const quickLinks = [
@@ -49,18 +41,18 @@ const PartnerCTASection = () => {
       title: "Support for Patients",
       href: "/who-we-serve/patients",
       icon: Baby,
-      description: "Resources and guidance for young patients"
+      description: "Resources and guidance for young patients",
     },
     {
       title: "Guidance for Parents",
       href: "/who-we-serve/parents",
       icon: UserCheck,
-      description: "Support and information for families"
-    }
+      description: "Support and information for families",
+    },
   ];
 
   return (
-    <section className="py-16 bg-secondary">
+    <section className="py-16 bg-teal-200">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-12">
           {/* Header */}
@@ -77,7 +69,10 @@ const PartnerCTASection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {partnerButtons.map((partner, index) => {
               return (
-                <Card key={partner.href} className="bg-primary p-3 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer border-0">
+                <Card
+                  key={partner.href}
+                  className="bg-primary p-3 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer border-0"
+                >
                   <a href={partner.href} className="block space-y-2">
                     <div className="flex justify-center">
                       <partner.icon className="h-8 w-8 text-accent" />
@@ -92,7 +87,6 @@ const PartnerCTASection = () => {
               );
             })}
           </div>
-
         </div>
       </div>
     </section>
