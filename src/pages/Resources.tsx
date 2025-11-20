@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { BookOpen, Video, Heart, TrendingUp, Activity, Sparkles, ExternalLink } from "lucide-react";
+import familyTelehealthCouch from "@/assets/resources/family-telehealth-couch.jpg";
 import pediatricEndocrinologist from "@/assets/resources/pediatric-endocrinologist.jpg";
 import healthyActiveLiving from "@/assets/resources/healthy-active-living.jpg";
 import diabetesTips from "@/assets/resources/diabetes-tips.jpg";
@@ -23,7 +24,7 @@ const resourceCategories = [
         description: "Advice on what you need, which tools to have handy and what to expect during your child's virtual exam and afterward.",
         link: "https://www.uhhospitals.org/blog/articles/2020/04/tips-for-a-great-telehealth-visit-with-your-child/",
         date: "Dec 22, 2023",
-        image: null // Image too large to download
+        image: familyTelehealthCouch
       },
       {
         title: "Who is a Pediatric Endocrinologist?",
@@ -120,6 +121,32 @@ const Resources = () => {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* Index Section */}
+      <section className="container mx-auto px-4 py-8">
+        <nav className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Browse by Topic</h2>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {resourceCategories.map((category) => {
+              const Icon = category.icon;
+              return (
+                <a
+                  key={category.id}
+                  href={`#${category.id}`}
+                  className="flex items-center gap-3 p-4 rounded-lg border border-border/50 bg-card hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <span className="text-foreground font-medium group-hover:text-accent transition-colors">
+                    {category.title}
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </nav>
       </section>
 
       {/* Resources by Category */}
