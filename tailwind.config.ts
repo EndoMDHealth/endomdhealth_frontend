@@ -56,6 +56,8 @@ export default {
           "steady-sky": "hsl(var(--steady-sky))",
           "steady-sky-light": "hsl(var(--steady-sky-light))",
           "starry-hug": "hsl(var(--starry-hug))",
+          "soft-teal": "hsl(var(--soft-teal))",
+          "soft-teal-light": "hsl(var(--soft-teal-light))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
