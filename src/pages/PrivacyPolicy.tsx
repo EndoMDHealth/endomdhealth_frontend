@@ -249,7 +249,7 @@ const PrivacyPolicy = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">
-                      Right to Request Restrictions on Uses and Disclosures:
+                      Right to Request Restrictions on Uses and Disclosures
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
@@ -261,7 +261,6 @@ const PrivacyPolicy = () => {
                         restriction requested and to whom that restriction would apply. Covered Entity is not required
                         to agree to your requested restriction on disclosure, except if the disclosure is for the
                         purpose of carrying out payment or health care operations and is not otherwise required by law.
-                        
                         Pursuant to federal law, if you request that we not share PHI with your insurance company,
                         Covered Entity will accept that request but only if you pay in full for the service rendered.
                       </li>
@@ -270,11 +269,15 @@ const PrivacyPolicy = () => {
 
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">
-                      Right to Receive Confidential Communications of Your Health Information:
+                      Right to Receive Confidential Communications of Your Health Information
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                        You have the right to request that communications involving PHI be provided to you at an alternative location or by an alternative means of communication.  Covered Entity will accommodate any reasonable request if the normal method of disclosure would endanger you and that danger is stated in your request.  Any such request must be made in writing to the Privacy Contact listed in this Notice.
+                        You have the right to request that communications involving PHI be provided to you at an
+                        alternative location or by an alternative means of communication.  Covered Entity will
+                        accommodate any reasonable request if the normal method of disclosure would endanger you and
+                        that danger is stated in your request.  Any such request must be made in writing to the Privacy
+                        Contact listed in this Notice.
                       </li>
                     </ul>
                   </div>
@@ -285,10 +288,20 @@ const PrivacyPolicy = () => {
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                     You have the right to inspect and copy your PHI that is contained in a “designated record set” for as long as Covered Entity maintains your PHI.  A designated record set contains claim information, premium and billing records and any other records that Covered Entity has created in caring for you. You have the right to be provided with copies of health and medical records in electronic form if Covered Entity maintains health records in that format and the documents are readily producible in such format. Federal law prohibits you from having access to psychotherapy notes or information compiled for civil, criminal, or administrative proceedings.  Covered Entity may deny your right to access in a few limited circumstances, and will provide you with a written explanation of the reason for denial. You may appeal such a denial in limited scenarios.  Requests for access to your PHI should be made in writing to the Privacy Contact listed in this Notice. 
+                        You have the right to inspect and copy your PHI that is contained in a “designated record set”
+                        for as long as Covered Entity maintains your PHI.  A designated record set contains claim
+                        information, premium and billing records and any other records that Covered Entity has created
+                        in caring for you. You have the right to be provided with copies of health and medical records
+                        in electronic form if Covered Entity maintains health records in that format and the documents
+                        are readily producible in such format. Federal law prohibits you from having access to
+                        psychotherapy notes or information compiled for civil, criminal, or administrative proceedings. 
+                        Covered Entity may deny your right to access in a few limited circumstances, and will provide
+                        you with a written explanation of the reason for denial. You may appeal such a denial in limited
+                        scenarios.  Requests for access to your PHI should be made in writing to the Privacy Contact
+                        listed in this Notice. 
                       </li>
                     </ul>
-                  </div> 
+                  </div>
 
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">
@@ -296,27 +309,44 @@ const PrivacyPolicy = () => {
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                      You have the right to give permission for your Protected Health Information to be disclosed for communicating results, findings and care decisions to your family members and others. If you wish to make such a disclosure, you must communicate the Name, Relationship, and contact information to the Privacy Contact listed in this Notice to ensure it is documented.                      </li>
+                        You have the right to give permission for your Protected Health Information to be disclosed for
+                        communicating results, findings and care decisions to your family members and others. If you
+                        wish to make such a disclosure, you must communicate the Name, Relationship, and contact
+                        information to the Privacy Contact listed in this Notice to ensure it is documented.{" "}
+                      </li>
                     </ul>
-                  </div> 
-                  
-                   <div>
+                  </div>
+
+                  <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">
                       Right to Amend your Protected Health Information
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                      You have the right to request that PHI in a designated record set be amended for as long as Covered Entity maintains the PHI.  Covered Entity may deny your request for amendment if it determines that the PHI was not created by Covered Entity, is not part of the designated record set, is not information that is available for inspection, or that the PHI is accurate and complete.  If your request for amendment is declined, you have the right to have a statement of disagreement included with the PHI and Covered Entity has a right to include a rebuttal to your statement.  Requests for amendment of your PHI should be made in writing to the Privacy Contact listed in this Notice.                      </li>
+                        You have the right to request that PHI in a designated record set be amended for as long as
+                        Covered Entity maintains the PHI.  Covered Entity may deny your request for amendment if it
+                        determines that the PHI was not created by Covered Entity, is not part of the designated record
+                        set, is not information that is available for inspection, or that the PHI is accurate and
+                        complete.  If your request for amendment is declined, you have the right to have a statement of
+                        disagreement included with the PHI and Covered Entity has a right to include a rebuttal to your
+                        statement.  Requests for amendment of your PHI should be made in writing to the Privacy Contact
+                        listed in this Notice.{" "}
+                      </li>
                     </ul>
                   </div>
-                  
+
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">
                       Right to Receive an Accounting of Disclosures
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                      You have the right to receive an accounting of disclosures, with some exceptions, of your PHI that Covered Entity has made, if any, for reasons other than disclosures for treatment, payment and health care operations, and disclosures made to you or your personal representative. Your right to an accounting of disclosures cannot exceed a period of six (6) years before the date of your request.  Requests for an accounting of disclosures of your PHI must be made in writing to the Privacy Contact listed in this Notice.  
+                        You have the right to receive an accounting of disclosures, with some exceptions, of your PHI
+                        that Covered Entity has made, if any, for reasons other than disclosures for treatment, payment
+                        and health care operations, and disclosures made to you or your personal representative. Your
+                        right to an accounting of disclosures cannot exceed a period of six (6) years before the date of
+                        your request.  Requests for an accounting of disclosures of your PHI must be made in writing to
+                        the Privacy Contact listed in this Notice.  
                       </li>
                     </ul>
                   </div>
@@ -327,7 +357,9 @@ const PrivacyPolicy = () => {
                     </h3>
                     <ul className="space-y-2 text-muted-foreground ml-6">
                       <li className="leading-relaxed">
-                      If you receive this notice electronically, you have the right to receive a paper copy upon request.  Requests for a paper copy of this Notice should be made in writing to the Privacy Contact listed in this Notice.                        Contact.
+                        If you receive this notice electronically, you have the right to receive a paper copy upon
+                        request.  Requests for a paper copy of this Notice should be made in writing to the Privacy
+                        Contact listed in this Notice. Contact.
                       </li>
                     </ul>
                   </div>
@@ -339,7 +371,11 @@ const PrivacyPolicy = () => {
                 <h2 className="text-3xl font-bold text-foreground mb-6">Complaints</h2>
                 <ul className="space-y-2 text-muted-foreground ml-6 mb-8">
                   <li className="leading-relaxed">
-                      If you believe your privacy rights have been violated, you may file a complaint with Covered Entity or with the Secretary of Health and Human Services.  Complaints should be filed in writing with the Privacy Contact listed in this Notice.  Our office will not retaliate against you for filing a complaint.                  </li>
+                    If you believe your privacy rights have been violated, you may file a complaint with Covered Entity
+                    or with the Secretary of Health and Human Services.  Complaints should be filed in writing with the
+                    Privacy Contact listed in this Notice.  Our office will not retaliate against you for filing a
+                    complaint.{" "}
+                  </li>
                 </ul>
 
                 <h2 className="text-3xl font-bold text-foreground mb-6">Privacy Officer</h2>
