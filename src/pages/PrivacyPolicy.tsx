@@ -71,7 +71,7 @@ const PrivacyPolicy = () => {
               {/* Overview Section */}
               <section id="overview" className="mb-12 scroll-mt-24">
                 <p className="text-muted-foreground mb-4 leading-relaxed font-medium">
-                  Effective Date: September 24, 2024
+                  Effective Date: September 20, 2024
                 </p>
                 <div className="bg-accent/10 border-l-4 border-accent p-6 rounded-r-lg mb-6">
                   <p className="text-foreground font-bold text-sm leading-relaxed">
