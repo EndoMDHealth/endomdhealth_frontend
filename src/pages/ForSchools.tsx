@@ -3,12 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Zap, 
-  Scale, 
-  Monitor,
-} from "lucide-react";
-import classroomKids from "@/assets/classroom-kids.jpg";
+import happyChildGrass from "@/assets/happy-child-grass.jpg";
+import realClassroomKids from "@/assets/real-classroom-kids.jpg";
+import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
+import diverseChildStudying from "@/assets/diverse-child-studying.jpg";
+import familyTelehealthCouch from "@/assets/family-telehealth-couch.jpg";
 
 const ForSchools = () => {
   useEffect(() => {
@@ -17,19 +16,25 @@ const ForSchools = () => {
 
   const whyEndoMDPoints = [
     {
-      icon: Zap,
       title: "Fast, convenient specialist care",
-      description: "Resulting in better health outcomes for students."
+      description: "Resulting in better health outcomes for students.",
+      image: childDoctorConsultation,
+      imageAlt: "Child receiving specialist care consultation",
+      bgColor: "bg-accent/10"
     },
     {
-      icon: Scale,
       title: "Assist schools in making informed decisions",
-      description: "That improve health equity across your student population."
+      description: "That improve health equity across your student population.",
+      image: diverseChildStudying,
+      imageAlt: "Child engaged in studying at school",
+      bgColor: "bg-primary/10"
     },
     {
-      icon: Monitor,
       title: "Virtual consults reduce student absenteeism",
-      description: "And enhance academic achievement."
+      description: "And enhance academic achievement.",
+      image: familyTelehealthCouch,
+      imageAlt: "Family using telehealth consultation at home",
+      bgColor: "bg-softTeal"
     }
   ];
 
@@ -38,12 +43,22 @@ const ForSchools = () => {
       <Header />
       
       <main>
-        {/* Hero Section */}
-        <section className="py-12 md:py-16 bg-primary">
-          <div className="container mx-auto px-4">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary-foreground max-w-4xl leading-tight text-center mx-auto">
-              We Collaborate with Schools to Bridge Care Gaps and Improve Health Equity
-            </h1>
+        {/* Hero Section - matching Community Partners design */}
+        <section className="relative">
+          <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
+            <img 
+              src={happyChildGrass} 
+              alt="Happy child smiling while laying on grass"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
+            <div className="container mx-auto">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground max-w-4xl leading-tight">
+                We Collaborate with Schools to Bridge Care Gaps and Improve Health Equity
+              </h1>
+            </div>
           </div>
         </section>
 
@@ -64,39 +79,53 @@ const ForSchools = () => {
           </div>
         </section>
 
-        {/* Why EndoMD Health Section */}
-        <section className="py-12 md:py-16 bg-softTeal">
+        {/* Why EndoMD Health Section - matching Expected Results design */}
+        <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 via-accent/10 to-primary/5">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                  Why EndoMD Health?
-                </h2>
-                <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
-              </div>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Why EndoMD Health?
+              </h2>
+              <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+                Partnering with schools to deliver exceptional healthcare outcomes for students.
+              </p>
+            </div>
 
-              <div className="grid md:grid-cols-3 gap-6">
-                {whyEndoMDPoints.map((item, index) => (
-                  <Card 
-                    key={index}
-                    className="p-6 bg-background border-0 shadow-md hover:shadow-lg transition-shadow duration-300"
-                  >
-                    <div className="flex flex-col items-center text-center gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
-                        <item.icon className="w-7 h-7 text-accent" />
-                      </div>
-                      <div className="space-y-2">
-                        <h3 className="text-lg font-semibold text-foreground">
-                          {item.title}
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {item.description}
-                        </p>
-                      </div>
+            <div className="max-w-6xl mx-auto space-y-8">
+              {whyEndoMDPoints.map((item, index) => (
+                <Card 
+                  key={index}
+                  className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${item.bgColor}`}
+                >
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch`}>
+                    {/* Image */}
+                    <div className="w-full md:w-2/5 h-64 md:h-auto">
+                      <img 
+                        src={item.image} 
+                        alt={item.imageAlt}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                  </Card>
-                ))}
-              </div>
+                    
+                    {/* Content */}
+                    <div className="w-full md:w-3/5 p-6 md:p-10 flex flex-col justify-center">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-accent-foreground font-bold text-lg">
+                          {index + 1}
+                        </div>
+                        <div className="h-1 flex-1 bg-gradient-to-r from-accent to-transparent rounded-full" />
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -125,8 +154,8 @@ const ForSchools = () => {
                   {/* Image */}
                   <div className="w-full md:w-2/5 h-64 md:h-auto">
                     <img 
-                      src={classroomKids} 
-                      alt="Students in a classroom smiling and engaged"
+                      src={realClassroomKids} 
+                      alt="Students in a classroom engaged in learning"
                       className="w-full h-full object-cover"
                     />
                   </div>
