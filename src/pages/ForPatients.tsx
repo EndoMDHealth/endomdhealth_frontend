@@ -85,14 +85,13 @@ const ForPatients = () => {
                       Forgot your password?
                     </Link>
                     
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                        asChild
-                      >
-                        <Link to="/create-account">Create an Account</Link>
-                      </Button>
-                    </div>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      asChild
+                    >
+                      <Link to="/create-account">Create an Account</Link>
+                    </Button>
                   </div>
                 </form>
               </div>
