@@ -30,11 +30,7 @@ const NutritionCoaching = () => {
   const struggles = [
     {
       icon: Scale,
-      question: "Do you feel trapped in a cycle of restrictive dieting that leaves you stuck?",
-    },
-    {
-      icon: HelpCircle,
-      question: "Are you overwhelmed by all the conflicting nutritional advice out there?",
+      question: "Do you feel trapped in a cycle of restrictive dieting?",
     },
     {
       icon: Target,
@@ -138,8 +134,7 @@ const NutritionCoaching = () => {
             {/* Left Content */}
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                Nutrition & Lifestyle Coaching for{" "}
-                <span className="text-accent">Teens and Young Adults</span>
+                Nutrition & Lifestyle Coaching for <span className="text-accent">Teens and Young Adults</span>
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Personalized support to build healthier habits, improve confidence, and create a sustainable
