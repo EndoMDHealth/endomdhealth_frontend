@@ -14,7 +14,7 @@ const Footer = () => {
     {
       title: "Contact Info",
       links: [
-        { title: "Contact Us", href: "/contact" },
+        { title: "Contact Us", href: "/contact-us" },
         { title: "571-480-6053", href: "tel:571-480-6053", icon: Phone },
         { title: "info@endomdhealth.com", href: "mailto:info@endomdhealth.com", icon: Mail },
         { title: "804-660-6321", href: "tel:804-660-6321", icon: FileText },
