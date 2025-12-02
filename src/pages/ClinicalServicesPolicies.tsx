@@ -77,7 +77,7 @@ const ClinicalServicesPolicies = () => {
               {/* General Information Section */}
               <section id="general-information" className="mb-12 scroll-mt-24">
                 <p className="text-muted-foreground mb-4 leading-relaxed font-medium">
-                  Effective date: September 20, 2024
+                  Effective Date: September 20, 2024
                 </p>
                 <h2 className="text-3xl font-bold text-foreground mb-6">General Information</h2>
                 <p className="text-muted-foreground mb-4 leading-relaxed">
