@@ -9,11 +9,11 @@ import {
   GraduationCap, 
   Heart,
 } from "lucide-react";
-import happyChildGrass from "@/assets/happy-child-grass.jpg";
-import childPlayingSports from "@/assets/child-playing-sports.jpg";
-import childStudying from "@/assets/child-studying.jpg";
-import childDoctorHighfive from "@/assets/child-doctor-highfive.jpg";
-import childrenCommunity from "@/assets/children-community.jpg";
+import childGrassHappy from "@/assets/child-grass-happy.jpg";
+import diverseChildSports from "@/assets/diverse-child-sports.jpg";
+import diverseChildStudying from "@/assets/diverse-child-studying.jpg";
+import childPediatricVisit from "@/assets/child-pediatric-visit.jpg";
+import diverseChildrenPlaying from "@/assets/diverse-children-playing.jpg";
 
 const ForCommunityPartners = () => {
   useEffect(() => {
@@ -47,28 +47,28 @@ const ForCommunityPartners = () => {
     {
       title: "Healthier children lead to stronger communities",
       description: "Early diagnosis and proper management mean healthier outcomes and improved quality of life.",
-      image: childPlayingSports,
-      imageAlt: "Happy child playing sports outdoors",
+      image: diverseChildSports,
+      imageAlt: "Child playing sports outdoors",
       bgColor: "bg-accent/10"
     },
     {
       title: "Reduced school absenteeism",
       description: "Addressing endocrine health issues helps students stay in class and succeed academically.",
-      image: childStudying,
+      image: diverseChildStudying,
       imageAlt: "Child engaged in studying at school",
       bgColor: "bg-primary/10"
     },
     {
       title: "Enhanced provider collaboration",
       description: "Our partnerships strengthen coordination among medical professionals, educators, and families.",
-      image: childDoctorHighfive,
-      imageAlt: "Child high-fiving healthcare provider",
+      image: childPediatricVisit,
+      imageAlt: "Child with healthcare provider",
       bgColor: "bg-softTeal"
     },
     {
       title: "Long-term impact",
       description: "Investing in pediatric endocrine care today leads to healthier futures for children and communities alike.",
-      image: childrenCommunity,
+      image: diverseChildrenPlaying,
       imageAlt: "Children playing together in community",
       bgColor: "bg-accent/10"
     }
@@ -83,7 +83,7 @@ const ForCommunityPartners = () => {
         <section className="relative">
           <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
             <img 
-              src={happyChildGrass} 
+              src={childGrassHappy} 
               alt="Happy child smiling while laying on grass" 
               className="w-full h-full object-cover object-center"
             />
