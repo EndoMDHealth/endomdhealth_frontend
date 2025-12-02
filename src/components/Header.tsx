@@ -148,10 +148,20 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Request Appointment Button */}
-          <div className="hidden lg:flex items-center">
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap">
-              Request appointment
+          {/* Login & Request Appointment Buttons */}
+          <div className="hidden lg:flex items-center space-x-3">
+            <Button 
+              asChild
+              variant="outline" 
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-accent font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
+            >
+              <a href="/login">Login</a>
+            </Button>
+            <Button 
+              asChild
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
+            >
+              <a href="/contact-us">Request appointment</a>
             </Button>
           </div>
 
@@ -261,9 +271,21 @@ const Header = () => {
               </a>
             </nav>
             
-            <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all">
-              Request appointment
-            </Button>
+            <div className="space-y-2">
+              <Button 
+                asChild
+                variant="outline" 
+                className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-accent font-semibold py-3 transition-all"
+              >
+                <a href="/login">Login</a>
+              </Button>
+              <Button 
+                asChild
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
+              >
+                <a href="/contact-us">Request appointment</a>
+              </Button>
+            </div>
           </div>
         )}
       </div>
