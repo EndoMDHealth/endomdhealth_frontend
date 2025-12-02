@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle2, Calendar, FileText, Stethoscope, ClipboardList, Repeat } from "lucide-react";
+import childDoctorImage from "@/assets/child-doctor-consultation.jpg";
 
 const MedicalConsult = () => {
   const services = [
@@ -74,37 +75,51 @@ const MedicalConsult = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-primary/5 to-background py-20">
+      <section className="bg-gradient-to-b from-primary/5 to-background py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Comprehensive Medical Consult
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Get the Care Your Child Deserves
-            </p>
-            <p className="text-lg text-muted-foreground mb-10 max-w-3xl mx-auto">
-              We understand that your child is unique and deserves individualized care and we provide that.
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-4 mb-10 max-w-2xl mx-auto">
-              {services.map((service, index) => (
-                <div key={index} className="flex items-center gap-3 text-left">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">{service}</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left: Text Content */}
+              <div className="text-left">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                  Comprehensive Medical Consult
+                </h1>
+                <p className="text-xl text-muted-foreground mb-6">
+                  Get the Care Your Child Deserves
+                </p>
+                <p className="text-lg text-muted-foreground mb-8">
+                  We understand that your child is unique and deserves individualized care and we provide that.
+                </p>
+                
+                <div className="grid gap-3 mb-8">
+                  {services.map((service, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+                      <span className="text-foreground">{service}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <Button size="lg" className="text-lg px-8">
-              Get Started
-            </Button>
+                <Button size="lg" className="text-lg px-8">
+                  Get Started
+                </Button>
+              </div>
+
+              {/* Right: Image */}
+              <div className="relative">
+                <img 
+                  src={childDoctorImage} 
+                  alt="Friendly physician with child in medical consultation" 
+                  className="rounded-lg shadow-lg w-full h-auto object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-background">
+      <section className="py-12 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
