@@ -241,7 +241,8 @@ const PrivacyPolicy = () => {
 
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   There is a potential for any information disclosed pursuant to this authorization to be subject to
-                  re-disclosure by the recipient and, therefore, no longer protected to the same extent.
+                  re-disclosure by the recipient and, therefore, no longer protected to the same extent as such health
+                  information was protected by law while solely in the possession of the health care entity.
                 </p>
 
                 <h2 className="text-3xl font-bold text-foreground mb-6 mt-8">
