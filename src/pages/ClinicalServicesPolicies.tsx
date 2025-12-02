@@ -13,6 +13,10 @@ const ClinicalServicesPolicies = () => {
     { id: "supplemental-privacy", title: "Supplemental Privacy Practices Information" },
     { id: "text-email", title: "Text and Email Communications" },
     { id: "coppa", title: "Children's Online Privacy Protection Act" },
+    { id: "information-use", title: "Information Use and Disclosure" },
+    { id: "parental-attestation", title: "Parental & Guardianship Attestation" },
+    { id: "complaint-policy", title: "Complaint Policy" },
+    { id: "agreement-consent", title: "Agreement and Consent" },
   ];
 
   const scrollToSection = (id: string) => {
@@ -149,6 +153,61 @@ const ClinicalServicesPolicies = () => {
                     • information about Your Child's use of the Telehealth Services and EndoMD Health Platform, including information sent by the mobile device or computer used by You or Your Child (e.g., IP address, unique device identifiers, website usage information, etc.) and information sent by the mobile device(s), and location information.
                   </li>
                 </ul>
+              </section>
+
+              {/* Information Use and Disclosure Section */}
+              <section id="information-use" className="mb-12 scroll-mt-24">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  We use and disclose that personal information:
+                </p>
+                <ul className="space-y-2 text-muted-foreground ml-6 mb-4">
+                  <li className="leading-relaxed">- to provide Our services;</li>
+                  <li className="leading-relaxed">- for business analytics purposes;</li>
+                  <li className="leading-relaxed">- for Our own marketing purposes;</li>
+                  <li className="leading-relaxed">- to provide customer support to You;</li>
+                  <li className="leading-relaxed">- for account and network security purposes;</li>
+                  <li className="leading-relaxed">- to maintain legal and regulatory compliance; and</li>
+                  <li className="leading-relaxed">- to enforce compliance with Our agreements and policies.</li>
+                </ul>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  You consent to the collection, use, and disclosure of You or Your Child's information, as described in this Clinical Services and Practice Policies Agreement, Our Privacy Policy, and Our Notice of Privacy Practices. You may revoke this consent at any time. However, once Your consent is revoked, Your Child may not use Our Telehealth Services or the EndoMD Health Platform again unless a new Clinical Services and Practice Policies Agreement is signed by You.
+                </p>
+              </section>
+
+              {/* Parental & Guardianship Attestation Section */}
+              <section id="parental-attestation" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">Parental & Guardianship Attestation</h2>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  To authorize health services for Your Child, You must be his or her parent or legal guardian. If You are separated or divorced (or become separated or divorced) from the other parent or legal guardian of Your Child, You agree to immediately notify the other parent or legal guardian that EndoMD Health is providing Telehealth Services to Your Child. If requested, You also agree to provide a copy of the most recent custody decree that establishes Your custody rights or otherwise demonstrates that You have the right to authorize treatment for Your Child. You understand that it is Your responsibility to promptly notify EndoMD Health of any changes concerning You as the parent or legal guardian of Your Child.
+                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  One risk of pediatric endocrinology care involves disagreement among parents and/or disagreement between parents and the child's clinician regarding the child's treatment. You agree to notify EndoMD Health immediately if such a disagreement occurs. If such disagreements occur, EndoMD Health will strive to listen carefully so that We can understand Your perspectives and fully explain Our perspective. If either parent or legal guardian decides that the Telehealth Services should end, EndoMD Health will endeavor to honor that decision, unless there are extraordinary circumstances.
+                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  During the treatment, EndoMD Health may meet with Your Child's parents or legal guardians either separately or together. Please be aware that EndoMD Health's patient is Your Child – not You, the other parent or legal guardian, or any siblings or other family members of the child. Furthermore, any communication by a parent or legal guardian may be disclosed by EndoMD Health to the other parent or legal guardian. Therefore, a parent or legal guardian should NOT share any information which he or she is not willing to have disclosed to the other parent or legal guardian.
+                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  You hereby certify that You have legal authority to authorize EndoMD Health to provide the Telehealth Services to Your Child. You further certify that You are not a party to or otherwise the subject of any agreement or court order that requires the written approval of Your Child's other parent or any third party to authorize medical treatment or services for Your Child.
+                </p>
+              </section>
+
+              {/* Complaint Policy Section */}
+              <section id="complaint-policy" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">Complaint Policy</h2>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  You and Your Child have the right to communicate grievances regarding care. Should You wish to make a formal complaint about anyone at EndoMD Health, please submit Your concerns in writing to EndoMD Health at info@endomdhealth.com
+                </p>
+              </section>
+
+              {/* Agreement and Consent Section */}
+              <section id="agreement-consent" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">Agreement and Consent</h2>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  If You have questions about any of the contents of this Clinical Services and Practice Policies Agreement, Our procedures, or Your role in this process, please discuss them with the Critical Care Team. Please remember that the best way to ensure quality treatment is to keep communication open and direct with Your Child's clinicians.
+                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  You consent to be bound to the terms of this Clinical Services and Practice Policies Agreement, and acknowledge that You understand them. You further certify that if You are signing as a personal representative of Your Child You have legal authority to provide consent for the treatment of Your Child.
+                </p>
               </section>
             </div>
           </main>
