@@ -168,11 +168,13 @@ const PrivacyPolicy = () => {
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   Covered Entity may also use or disclose your health information without your written authorization for
                   uses and disclosures required by law, for public health activities, and other specified situations,
-                  such as: Disclosures to Workers' Compensation or similar legal programs, as authorized by and
-                  necessary to comply with applicable laws.
+                  such as:
                 </p>
-
                 <ul className="space-y-3 text-muted-foreground ml-6">
+                  <li className="leading-relaxed">
+                    • Disclosures to Workers' Compensation or similar legal programs, as authorized by and necessary to
+                    comply with applicable laws.
+                  </li>
                   <li className="leading-relaxed">
                     • Disclosures made in response to a court order, subpoena or other lawful processes.
                   </li>
