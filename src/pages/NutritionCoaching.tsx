@@ -18,18 +18,40 @@ import {
   Droplet,
   BookOpen,
   ArrowRight,
+  HelpCircle,
+  Scale,
+  AlertCircle,
+  Activity,
 } from "lucide-react";
 import teenHealthyImage from "@/assets/teen-healthy-cooking.jpg";
-import coachImage from "@/assets/nutrition-coach.jpg";
+import healthyPlateImage from "@/assets/healthy-colorful-plate.jpg";
 
 const NutritionCoaching = () => {
   const struggles = [
-    "Feeling trapped in a cycle of restrictive dieting that leaves you stuck",
-    "Overwhelmed by all the conflicting nutritional advice out there",
-    "Struggling to stay consistent without the right support",
-    "Putting in effort at the gym but not seeing results",
-    "Trying (and failing) to make rigid diets fit into your busy life",
-    "Feeling 'off track' in your nutrition every time a holiday or big life event comes around",
+    {
+      icon: Scale,
+      question: "Do you feel trapped in a cycle of restrictive dieting that leaves you stuck?",
+    },
+    {
+      icon: HelpCircle,
+      question: "Are you overwhelmed by all the conflicting nutritional advice out there?",
+    },
+    {
+      icon: Target,
+      question: "Are you struggling to stay consistent without the right support?",
+    },
+    {
+      icon: Activity,
+      question: "Are you putting in effort at the gym but not seeing results?",
+    },
+    {
+      icon: AlertCircle,
+      question: "Are you trying (and failing) to make rigid diets fit into your busy life?",
+    },
+    {
+      icon: Calendar,
+      question: "Do you feel 'off track' in your nutrition every time a holiday or big life event comes around?",
+    },
   ];
 
   const offerings = [
@@ -146,23 +168,44 @@ const NutritionCoaching = () => {
       {/* Problem-Recognition Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
               Do You Recognize These Nutrition Struggles?
             </h2>
-            <div className="space-y-4 mb-8">
-              {struggles.map((struggle, index) => (
-                <Card key={index} className="border-l-4 border-l-accent">
-                  <CardContent className="p-6">
-                    <p className="text-lg text-muted-foreground">{struggle}</p>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="space-y-4 mb-12">
+              {struggles.map((struggle, index) => {
+                const Icon = struggle.icon;
+                return (
+                  <Card key={index} className="border-l-4 border-l-accent">
+                    <CardContent className="p-6 flex items-start space-x-4">
+                      <div className="p-2 bg-accent/10 rounded-full flex-shrink-0">
+                        <Icon className="h-6 w-6 text-accent" />
+                      </div>
+                      <p className="text-lg text-muted-foreground pt-2">{struggle.question}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
-            <div className="text-center mt-8">
-              <p className="text-2xl md:text-3xl font-semibold text-accent leading-relaxed">
-                You want less overthinking, less second-guessing, and more peace with food instead.
-              </p>
+            <div className="mt-12">
+              <Card className="border-2 border-accent/30 shadow-lg">
+                <CardContent className="p-8">
+                  <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <img
+                        src={healthyPlateImage}
+                        alt="Colorful healthy plate with vegetables, protein, and whole grains"
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-2xl md:text-3xl font-semibold text-accent leading-relaxed">
+                        You want less overthinking, less second-guessing, and more peace with food instead.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -254,43 +297,6 @@ const NutritionCoaching = () => {
                 );
               })}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Coach Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Meet Your Coach</h2>
-            <Card className="shadow-lg">
-              <CardContent className="p-8 md:p-12">
-                <div className="grid md:grid-cols-3 gap-8 items-center">
-                  <div className="md:col-span-1">
-                    <img
-                      src={coachImage}
-                      alt="Nutrition coach professional headshot"
-                      className="w-full h-auto rounded-lg shadow-md"
-                    />
-                  </div>
-                  <div className="md:col-span-2 space-y-4">
-                    <h3 className="text-2xl font-bold text-foreground">Dr. Sarah Mitchell, RD, CDN</h3>
-                    <p className="text-lg text-accent font-semibold">
-                      Registered Dietitian & Certified Diabetes Educator
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      With over 10 years of experience working with teens and young adults, Dr. Mitchell specializes in
-                      helping young people build healthy relationships with food. Her approach combines evidence-based
-                      nutrition science with empathy, cultural awareness, and practical strategies that fit real life.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      "My goal is to help teens feel confident, energized, and empowered—not restricted or stressed
-                      about food."
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
