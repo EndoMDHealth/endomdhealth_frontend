@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, FileText } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const PrivacyPolicy = () => {
   const [activeSection, setActiveSection] = useState("");
@@ -31,9 +31,6 @@ const PrivacyPolicy = () => {
       <section className="bg-gradient-to-b from-background to-muted/20 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-6">
-              <FileText className="w-8 h-8" />
-            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Privacy Policy</h1>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               Your child's privacy is extremely important to us. This policy explains how we collect, use, and protect
@@ -73,6 +70,9 @@ const PrivacyPolicy = () => {
             <div className="prose prose-slate max-w-none">
               {/* Overview Section */}
               <section id="overview" className="mb-12 scroll-mt-24">
+                <p className="text-muted-foreground mb-4 leading-relaxed font-medium">
+                  Effective Date: September 24, 2024
+                </p>
                 <div className="bg-accent/10 border-l-4 border-accent p-6 rounded-r-lg mb-6">
                   <p className="text-foreground font-bold text-sm leading-relaxed">
                     THIS NOTICE DESCRIBES HOW MEDICAL INFORMATION ABOUT YOU MAY BE USED AND DISCLOSED AND HOW YOU CAN
