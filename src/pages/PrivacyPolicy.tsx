@@ -140,8 +140,33 @@ const PrivacyPolicy = () => {
                 </div>
               </section>
 
-              {/* How We Collect Information */}
+              {/* Other Uses and Disclosures Section */}
               <section id="how-we-collect" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  Other Uses and Disclosures Allowed Without Authorization
+                </h2>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  In certain cases, your health information can be disclosed without your authorization to a family member or other person you identify who is involved in your care or payment for your care. Your health information may also be disclosed without authorization to your legal representative, if applicable. In those cases, Covered Entity is permitted to disclose the information to only those recipients who need to know about your care or payment for your care.
+                </p>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Covered Entity may also use or disclose your health information without your written authorization for uses and disclosures required by law, for public health activities, and other specified situations, such as: Disclosures to Workers' Compensation or similar legal programs, as authorized by and necessary to comply with applicable laws.
+                </p>
+                
+                <ul className="space-y-3 text-muted-foreground ml-6">
+                  <li className="leading-relaxed">• Disclosures made in response to a court order, subpoena or other lawful processes.</li>
+                  <li className="leading-relaxed">• Disclosures related to situations involving threats to personal or public health or safety.</li>
+                  <li className="leading-relaxed">• Disclosures related to situations involving judicial proceedings or law enforcement activities.</li>
+                  <li className="leading-relaxed">• Disclosures to a coroner, medical examiner or funeral director.</li>
+                  <li className="leading-relaxed">• Certain disclosures related to health oversight activities, specialized government or military functions and Health and Human Service HIPAA compliance investigations.</li>
+                  <li className="leading-relaxed">• Disclosures related to organ, eye or tissue donation and transplantation after death.</li>
+                  <li className="leading-relaxed">• Disclosures related to certain essential government functions, such as conducting intelligence and national security activities authorized by law.</li>
+                </ul>
+              </section>
+
+              {/* How We Collect Information */}
+              <section id="de-identified" className="mb-12 scroll-mt-24">
                 <h2 className="text-3xl font-bold text-foreground mb-4">
                   How We Collect Information About Your Child
                 </h2>
