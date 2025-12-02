@@ -122,6 +122,17 @@ const Header = () => {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <a
+                    href="/contact-us"
+                    className="bg-transparent text-primary-foreground hover:text-accent hover:bg-primary-foreground/10 text-base font-medium px-4 h-12 inline-flex items-center justify-center"
+                  >
+                    Contact Us
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -240,6 +251,14 @@ const Header = () => {
                   ))}
                 </div>
               </div>
+
+              <a
+                href="/contact-us"
+                className="block text-primary-foreground font-semibold hover:text-accent transition-colors duration-300 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact Us
+              </a>
             </nav>
             
             <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all">
