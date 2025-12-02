@@ -9,11 +9,11 @@ import {
   GraduationCap, 
   Heart,
 } from "lucide-react";
-import childGrassHappy from "@/assets/child-grass-happy.jpg";
+import happyChildGrass from "@/assets/happy-child-grass.jpg";
 import diverseChildSports from "@/assets/diverse-child-sports.jpg";
 import diverseChildStudying from "@/assets/diverse-child-studying.jpg";
-import childPediatricVisit from "@/assets/child-pediatric-visit.jpg";
-import diverseChildrenPlaying from "@/assets/diverse-children-playing.jpg";
+import childDoctorHighfive from "@/assets/child-doctor-highfive.jpg";
+import childrenRunningSmiling from "@/assets/children-running-smiling.jpg";
 
 const ForCommunityPartners = () => {
   useEffect(() => {
@@ -61,15 +61,15 @@ const ForCommunityPartners = () => {
     {
       title: "Enhanced provider collaboration",
       description: "Our partnerships strengthen coordination among medical professionals, educators, and families.",
-      image: childPediatricVisit,
-      imageAlt: "Child with healthcare provider",
+      image: childDoctorHighfive,
+      imageAlt: "Healthcare providers high-fiving with child",
       bgColor: "bg-softTeal"
     },
     {
       title: "Long-term impact",
       description: "Investing in pediatric endocrine care today leads to healthier futures for children and communities alike.",
-      image: diverseChildrenPlaying,
-      imageAlt: "Children playing together in community",
+      image: childrenRunningSmiling,
+      imageAlt: "Children running together and smiling",
       bgColor: "bg-accent/10"
     }
   ];
@@ -83,8 +83,8 @@ const ForCommunityPartners = () => {
         <section className="relative">
           <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
             <img 
-              src={childGrassHappy} 
-              alt="Happy child smiling while laying on grass" 
+              src={happyChildGrass} 
+              alt="Happy child smiling while laying on grass"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
