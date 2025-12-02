@@ -3,10 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import happyChildGrass from "@/assets/happy-child-grass.jpg";
+import childGoingToSchool from "@/assets/child-going-to-school.jpg";
 import realClassroomKids from "@/assets/real-classroom-kids.jpg";
-import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
-import diverseChildStudying from "@/assets/diverse-child-studying.jpg";
+import childSpecialistCare from "@/assets/child-specialist-care.jpg";
+import teacherClassroom from "@/assets/teacher-classroom.jpg";
 import familyTelehealthCouch from "@/assets/family-telehealth-couch.jpg";
 
 const ForSchools = () => {
@@ -18,15 +18,15 @@ const ForSchools = () => {
     {
       title: "Fast, convenient specialist care",
       description: "Resulting in better health outcomes for students.",
-      image: childDoctorConsultation,
+      image: childSpecialistCare,
       imageAlt: "Child receiving specialist care consultation",
       bgColor: "bg-accent/10"
     },
     {
       title: "Assist schools in making informed decisions",
       description: "That improve health equity across your student population.",
-      image: diverseChildStudying,
-      imageAlt: "Child engaged in studying at school",
+      image: teacherClassroom,
+      imageAlt: "Teacher helping students in classroom",
       bgColor: "bg-primary/10"
     },
     {
@@ -43,12 +43,12 @@ const ForSchools = () => {
       <Header />
       
       <main>
-        {/* Hero Section - matching Community Partners design */}
+        {/* Hero Section */}
         <section className="relative">
           <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
             <img 
-              src={happyChildGrass} 
-              alt="Happy child smiling while laying on grass"
+              src={childGoingToSchool} 
+              alt="Child going to school with backpack"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
@@ -79,7 +79,7 @@ const ForSchools = () => {
           </div>
         </section>
 
-        {/* Why EndoMD Health Section - matching Expected Results design */}
+        {/* Why EndoMD Health Section */}
         <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 via-accent/10 to-primary/5">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -100,7 +100,7 @@ const ForSchools = () => {
                 >
                   <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch`}>
                     {/* Image */}
-                    <div className="w-full md:w-2/5 h-64 md:h-auto">
+                    <div className="w-full md:w-2/5 h-48 md:h-64">
                       <img 
                         src={item.image} 
                         alt={item.imageAlt}
