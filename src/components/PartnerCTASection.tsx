@@ -12,7 +12,7 @@ const PartnerCTASection = () => {
     },
     {
       title: "Join us as a Community Partner",
-      href: "/who-we-serve/community-partners",
+      href: "/for-community-partners",
       icon: Users,
       description: "Join our network of community support",
     },
