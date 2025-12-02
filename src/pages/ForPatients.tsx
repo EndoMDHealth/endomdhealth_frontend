@@ -85,10 +85,6 @@ const ForPatients = () => {
                       Forgot your password?
                     </Link>
                     
-                    <div className="pt-2 border-t border-border">
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Don't have an account?
-                      </p>
                       <Button
                         variant="outline"
                         className="w-full"
