@@ -8,9 +8,12 @@ import {
   Users, 
   GraduationCap, 
   Heart,
-  CheckCircle2
 } from "lucide-react";
 import happyChildGrass from "@/assets/happy-child-grass.jpg";
+import childPlayingSports from "@/assets/child-playing-sports.jpg";
+import childStudying from "@/assets/child-studying.jpg";
+import childDoctorHighfive from "@/assets/child-doctor-highfive.jpg";
+import childrenCommunity from "@/assets/children-community.jpg";
 
 const ForCommunityPartners = () => {
   useEffect(() => {
@@ -37,6 +40,37 @@ const ForCommunityPartners = () => {
       icon: Heart,
       title: "Ongoing community engagement",
       description: "Through outreach programs, screenings, and awareness initiatives that promote early detection and intervention."
+    }
+  ];
+
+  const expectedResults = [
+    {
+      title: "Healthier children lead to stronger communities",
+      description: "Early diagnosis and proper management mean healthier outcomes and improved quality of life.",
+      image: childPlayingSports,
+      imageAlt: "Happy child playing sports outdoors",
+      bgColor: "bg-accent/10"
+    },
+    {
+      title: "Reduced school absenteeism",
+      description: "Addressing endocrine health issues helps students stay in class and succeed academically.",
+      image: childStudying,
+      imageAlt: "Child engaged in studying at school",
+      bgColor: "bg-primary/10"
+    },
+    {
+      title: "Enhanced provider collaboration",
+      description: "Our partnerships strengthen coordination among medical professionals, educators, and families.",
+      image: childDoctorHighfive,
+      imageAlt: "Child high-fiving healthcare provider",
+      bgColor: "bg-softTeal"
+    },
+    {
+      title: "Long-term impact",
+      description: "Investing in pediatric endocrine care today leads to healthier futures for children and communities alike.",
+      image: childrenCommunity,
+      imageAlt: "Children playing together in community",
+      bgColor: "bg-accent/10"
     }
   ];
 
@@ -114,6 +148,57 @@ const ForCommunityPartners = () => {
                   </Card>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Expected Results Section */}
+        <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 via-accent/10 to-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Expected Results
+              </h2>
+              <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+                Together, we can create lasting positive change for children and communities.
+              </p>
+            </div>
+
+            <div className="max-w-6xl mx-auto space-y-8">
+              {expectedResults.map((result, index) => (
+                <Card 
+                  key={index}
+                  className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${result.bgColor}`}
+                >
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch`}>
+                    {/* Image */}
+                    <div className="w-full md:w-2/5 h-64 md:h-auto">
+                      <img 
+                        src={result.image} 
+                        alt={result.imageAlt}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="w-full md:w-3/5 p-6 md:p-10 flex flex-col justify-center">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-accent-foreground font-bold text-lg">
+                          {index + 1}
+                        </div>
+                        <div className="h-1 flex-1 bg-gradient-to-r from-accent to-transparent rounded-full" />
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+                        {result.title}
+                      </h3>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {result.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
