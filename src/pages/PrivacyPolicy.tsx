@@ -45,9 +45,6 @@ const PrivacyPolicy = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Privacy Policy
             </h1>
-            <p className="text-lg text-muted-foreground mb-2">
-              Effective: [DATE]
-            </p>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               Your child's privacy is extremely important to us. This policy explains how we collect, use, and protect your information.
             </p>
@@ -85,42 +82,62 @@ const PrivacyPolicy = () => {
             <div className="prose prose-slate max-w-none">
               {/* Overview Section */}
               <section id="overview" className="mb-12 scroll-mt-24">
-                <h2 className="text-3xl font-bold text-foreground mb-4">Overview</h2>
-                <p className="text-muted-foreground mb-4">
-                  [Insert introductory text about EndoMD Health's commitment to privacy and compliance]
-                </p>
-                <p className="text-muted-foreground mb-4">
-                  [Add text about what this policy covers and references to Terms of Service and Notice of Privacy Practices]
-                </p>
-                <div className="bg-muted/30 border-l-4 border-accent p-4 rounded-r-lg my-6">
-                  <p className="text-sm text-foreground font-medium">
-                    This Privacy Policy applies to information we collect:
+                <div className="bg-accent/10 border-l-4 border-accent p-6 rounded-r-lg mb-6">
+                  <p className="text-foreground font-bold text-sm leading-relaxed">
+                    THIS NOTICE DESCRIBES HOW MEDICAL INFORMATION ABOUT YOU MAY BE USED AND DISCLOSED AND HOW YOU CAN GET ACCESS TO THIS INFORMATION. PLEASE REVIEW IT CAREFULLY.
                   </p>
-                  <ul className="text-sm text-muted-foreground mt-2 space-y-1">
-                    <li>• On our Website</li>
-                    <li>• In email, text, and other electronic messages</li>
-                    <li>• Through mobile and desktop applications</li>
-                    <li>• Telephonically</li>
-                  </ul>
                 </div>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  The Health Insurance Portability and Accountability Act of 1996 (HIPAA) imposes certain requirements on health care providers concerning the use and disclosure of individual health information. This information, known as Protected Health Information (PHI), includes virtually all individually identifiable health information held by a health care provider who electronically transmits PHI in connection with certain transactions. PHI may include medical, financial, demographic and other information about you or your dependents. This notice describes the privacy practices of EndoMD Health ("Covered Entity") and its providers. The providers covered by this notice may share health information with each other to carry out Treatment, Payment, or Health Care Operations. The providers also may share PHI with your insurer for purposes of Treatment, Payment and Health Care Operations. For examples of each of these terms, see below.
+                </p>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Covered Entity is required by law to maintain the privacy of PHI, to provide you with notice of its legal duties and privacy practices, and to notify affected individuals following a breach of unsecured PHI. Covered Entity will follow the terms of this notice while it is in effect.
+                </p>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Covered Entity reserves the right to change its privacy practices and the terms of this notice at any time, provided such changes are permitted by applicable law. Any change in the terms of this notice will be effective for all PHI that Covered Entity is maintaining at that time. If a change is made to this notice, Covered Entity will provide a copy of the revised notice to all patients of the provider at that time.
+                </p>
               </section>
 
-              {/* Information Collection Section */}
+              {/* Permitted Uses and Disclosures Section */}
               <section id="information-collection" className="mb-12 scroll-mt-24">
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  Information Collection, Use, and Disclosure
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  Permitted Uses and Disclosures of Your Health Information
                 </h2>
-                <p className="text-muted-foreground mb-4">
-                  [Insert text about types of information collected]
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Within the limits of the law, Covered Entity may use and disclose your health information without your permission (known as an authorization) for purposes of health care Treatment, Payment activities, and Health Care Operations. Examples of the uses and disclosures that Covered Entity may make under each section are listed below:
                 </p>
-                <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                  Types of Personal Data We Collect
-                </h3>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>• [Personally identifiable information examples]</li>
-                  <li>• [Non-identifying information]</li>
-                  <li>• [Internet connection and usage data]</li>
-                </ul>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Treatment
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Covered Entity may use or disclose your health information to a physician or other health care provider to allow him to provide treatment to you or so Covered Entity can coordinate or manage your care.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Payment
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Your PHI may be used or disclosed for all activities of a health plan or a federal health program to ensure providers are paid for services rendered to you. This can include disclosures to process claims, to facilitate payment for services that you receive, or to obtain reimbursement.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Health Care Operations
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Health Care Operations refers to the basic business functions necessary to operate a health care facility. Covered Entity may use and disclose your health information for quality assessment and improvement activities; conducting or arranging for medical reviews, audits, or legal reviews; business planning and development; and general administrative activities.
+                    </p>
+                  </div>
+                </div>
               </section>
 
               {/* How We Collect Information */}
