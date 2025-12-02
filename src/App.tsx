@@ -17,6 +17,7 @@ import ForHealthcareProfessionals from "./pages/ForHealthcareProfessionals";
 import ForSchools from "./pages/ForSchools";
 import ForCommunityPartners from "./pages/ForCommunityPartners";
 import Login from "./pages/Login";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/for-schools" element={<ForSchools />} />
           <Route path="/for-community-partners" element={<ForCommunityPartners />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

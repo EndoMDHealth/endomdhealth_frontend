@@ -32,7 +32,7 @@ const Footer = () => {
     {
       title: "Legal",
       links: [
-        { title: "Privacy Policy", href: "/privacy" },
+        { title: "Privacy Policy", href: "/privacy-policy" },
         { title: "Terms of Service", href: "/terms" },
         { title: "HIPAA Compliance", href: "/hipaa" },
       ],
