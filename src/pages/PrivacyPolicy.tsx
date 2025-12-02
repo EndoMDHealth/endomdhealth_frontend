@@ -329,6 +329,7 @@ const PrivacyPolicy = () => {
                       <li className="leading-relaxed">
                       If you receive this notice electronically, you have the right to receive a paper copy upon request.  Requests for a paper copy of this Notice should be made in writing to the Privacy Contact listed in this Notice.                        Contact.
                       </li>
+                    </ul>
                   </div>
                 </div>
               </section>
