@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import contactTeamImage from "@/assets/contact-team.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -55,12 +56,15 @@ const ContactUs = () => {
         {/* Hero Section */}
         <section className="bg-background py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
-              Contact us
-            </h1>
-            
-            {/* Contact Form */}
-            <div className="max-w-xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left Column - Form */}
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
+                  Contact us
+                </h1>
+                
+                {/* Contact Form */}
+                <div className="max-w-xl">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <Label htmlFor="firstName" className="text-foreground font-medium">
@@ -162,6 +166,19 @@ const ContactUs = () => {
                 <p>
                   For non-urgent matters, we will respond to your message as soon as possible during regular business hours.
                 </p>
+              </div>
+                </div>
+              </div>
+
+              {/* Right Column - Image */}
+              <div className="hidden lg:block">
+                <div className="sticky top-24">
+                  <img
+                    src={contactTeamImage}
+                    alt="EndoMD Health medical team ready to assist you"
+                    className="w-full h-auto rounded-2xl shadow-lg"
+                  />
+                </div>
               </div>
             </div>
           </div>
