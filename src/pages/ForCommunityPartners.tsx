@@ -13,7 +13,7 @@ import happyChildGrass from "@/assets/happy-child-grass.jpg";
 import diverseChildSports from "@/assets/diverse-child-sports.jpg";
 import diverseChildStudying from "@/assets/diverse-child-studying.jpg";
 import childDoctorHighfive from "@/assets/child-doctor-highfive.jpg";
-import childrenRunningSmiling from "@/assets/children-running-smiling.jpg";
+import kidsRunningCamera from "@/assets/kids-running-camera.jpg";
 
 const ForCommunityPartners = () => {
   useEffect(() => {
@@ -68,8 +68,8 @@ const ForCommunityPartners = () => {
     {
       title: "Long-term impact",
       description: "Investing in pediatric endocrine care today leads to healthier futures for children and communities alike.",
-      image: childrenRunningSmiling,
-      imageAlt: "Children running together and smiling",
+      image: kidsRunningCamera,
+      imageAlt: "Happy children running towards camera and smiling",
       bgColor: "bg-accent/10"
     }
   ];
