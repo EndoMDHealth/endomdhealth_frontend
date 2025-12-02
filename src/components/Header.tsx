@@ -30,6 +30,7 @@ const Header = () => {
 
   const whoWeServeItems = [
     { name: "For Patients", href: "/for-patients" },
+    { name: "Patient Login", href: "/login" },
     { name: "For Parents", href: "/for-parents" },
     { name: "For Healthcare Professionals", href: "/for-healthcare-professionals" },
     { name: "For Schools", href: "/for-schools" },
