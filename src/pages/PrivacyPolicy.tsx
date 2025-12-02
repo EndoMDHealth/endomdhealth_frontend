@@ -165,8 +165,149 @@ const PrivacyPolicy = () => {
                 </ul>
               </section>
 
-              {/* How We Collect Information */}
+              {/* Authorization and Individual Rights Section */}
               <section id="de-identified" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  Other Uses and Disclosures Requiring Your Authorization and Your Individual Rights
+                </h2>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Other uses and disclosures of your PHI will be made only upon receiving your written authorization. You may revoke an authorization at any time by providing written notice to Covered Entity that you wish to revoke an authorization. Covered Entity will honor a request to revoke as of the day it is received and to the extent that Covered Entity has not already used or disclosed your PHI in good faith with the authorization.
+                </p>
+                
+                <p className="text-muted-foreground mb-3 leading-relaxed">
+                  Covered Entity will not use your PHI to:
+                </p>
+                
+                <ol className="space-y-2 text-muted-foreground ml-6 mb-4 list-decimal">
+                  <li className="leading-relaxed">Conduct a criminal, civil, or administrative investigation into any person for the mere act of seeking, obtaining, providing, or facilitating reproductive health care,</li>
+                  <li className="leading-relaxed">Impose criminal, civil, or administrative liability on any person for the mere act of seeking, obtaining, providing, or facilitating reproductive health care, or</li>
+                  <li className="leading-relaxed">Identify any person described in items 1 or 2.</li>
+                </ol>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  For example, if your medical record includes information about reproductive care, including a past abortion, we will not disclose your identity to a state law enforcement official for purposes of conducting a criminal, civil, or administrative investigation related to such past treatment.
+                </p>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  Covered Entity will not use or disclose your PHI related to reproductive health care for audits, criminal investigations, judicial/administrative proceedings, or law enforcement purposes without an attestation from the person requesting such use/disclosure, in compliance with HIPAA.
+                </p>
+                
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  There is a potential for any information disclosed pursuant to this authorization to be subject to re-disclosure by the recipient and, therefore, no longer protected to the same extent.
+                </p>
+                
+                <h2 className="text-3xl font-bold text-foreground mb-6 mt-8">
+                  Your Individual Rights in Relation to Your PHI
+                </h2>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Request Restrictions on Uses and Disclosures
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• You may request that Covered Entity limit uses/disclosures of PHI related to treatment, payment, and operations, except as required by law.</li>
+                      <li className="leading-relaxed">• Requests must be in writing to the Privacy Contact listed in this Notice.</li>
+                      <li className="leading-relaxed">• Covered Entity is not required to agree except when disclosure is for payment/operations and not otherwise required by law.</li>
+                      <li className="leading-relaxed">• Federal law allows refusing insurance sharing if you pay in full for services.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Receive Confidential Communications
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• You may request communications at alternative locations or via alternative means if normal disclosure could endanger you.</li>
+                      <li className="leading-relaxed">• Requests must be submitted in writing to the Privacy Contact.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Access Your PHI
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• You may inspect and copy PHI in a designated record set while Covered Entity maintains it.</li>
+                      <li className="leading-relaxed">• Electronic copies provided if available; psychotherapy notes and certain legal records excluded.</li>
+                      <li className="leading-relaxed">• Denials explained in writing; appeals possible.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Request Release of PHI
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• You may authorize PHI disclosures to family or others by providing Name, Relationship, and Contact Information to the Privacy Contact.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Amend PHI
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• Requests to amend PHI in the designated record set may be submitted in writing.</li>
+                      <li className="leading-relaxed">• Covered Entity may deny if PHI wasn't created by them, isn't in the record set, isn't inspectable, or is accurate and complete.</li>
+                      <li className="leading-relaxed">• Denials allow statements of disagreement; rebuttals may be added.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Receive an Accounting of Disclosures
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• You may request an accounting of disclosures (excluding treatment, payment, operations, or disclosures to you/your representative) for up to 6 years prior.</li>
+                      <li className="leading-relaxed">• Requests must be submitted in writing to the Privacy Contact.</li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Right to Receive a Paper Copy of This Notice
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground ml-6">
+                      <li className="leading-relaxed">• Even if received electronically, you may request a paper copy in writing to the Privacy Contact.</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              {/* Complaints and Privacy Officer Section */}
+              <section id="childrens-privacy" className="mb-12 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  Complaints
+                </h2>
+                <ul className="space-y-2 text-muted-foreground ml-6 mb-8">
+                  <li className="leading-relaxed">• File complaints with Covered Entity or the Secretary of HHS in writing to the Privacy Contact.</li>
+                  <li className="leading-relaxed">• No retaliation will occur for filing a complaint.</li>
+                </ul>
+                
+                <h2 className="text-3xl font-bold text-foreground mb-6">
+                  Privacy Officer
+                </h2>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Direct questions, requests, comments, or complaints to the Privacy Contact.
+                </p>
+                
+                <div className="bg-card border border-border rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Privacy Officer Contact Information</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p className="font-medium">Privacy Officer</p>
+                    <p>EndoMD Health LLC.</p>
+                    <p>1717 East Cary Street</p>
+                    <p>Richmond, VA 23233</p>
+                    <p>Email: <a href="mailto:info@endomdhealth.com" className="text-primary hover:underline">info@endomdhealth.com</a></p>
+                    <p>Phone: <a href="tel:571-480-6053" className="text-primary hover:underline">(571) 480-6053</a></p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Placeholder sections for table of contents */}
+              <section id="disclosure-third-parties" className="mb-12 scroll-mt-24">
                 <h2 className="text-3xl font-bold text-foreground mb-4">
                   How We Collect Information About Your Child
                 </h2>
