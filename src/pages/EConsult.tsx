@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -166,9 +167,11 @@ const EConsult = () => {
                 without the wait.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
-                  Submit e-Consult Request
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
+                  <Link to="/clinician-login">
+                    Submit e-Consult Request
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
@@ -340,9 +343,11 @@ const EConsult = () => {
               Submit your first e-Consult request today and experience streamlined specialty care collaboration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
-                Submit E-Consult Request
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
+                <Link to="/clinician-login">
+                  Submit E-Consult Request
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
               <Button
                 size="lg"
