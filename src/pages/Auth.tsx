@@ -105,10 +105,10 @@ const Auth = () => {
       });
     } else {
       toast({
-        title: "Account created!",
-        description: "You can now log in to your account.",
+        title: "Check your email",
+        description: "We've sent you a verification link. Please verify your email to continue.",
       });
-      navigate("/");
+      navigate("/verify-email");
     }
   };
 
