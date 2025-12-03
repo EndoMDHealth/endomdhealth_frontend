@@ -19,7 +19,7 @@ import {
   ClipboardCheck,
   Stethoscope,
 } from "lucide-react";
-import providerHeroImage from "@/assets/provider-econsult-hero.jpg";
+import physiciansCollaborativeMeeting from "@/assets/physicians-collaborative-meeting.jpg";
 
 const EConsult = () => {
   const benefits = [
@@ -154,40 +154,46 @@ const EConsult = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="relative">
+        <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
+          <img 
+            src={physiciansCollaborativeMeeting} 
+            alt="Physicians collaborating around a table in a meeting"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
+          <div className="container mx-auto">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground max-w-4xl leading-tight">
+              e-Consults: A Clinician's Solution to Improved Care Collaboration
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section below hero */}
+      <section className="py-8 md:py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8 items-center">
-            <div className="md:col-span-3">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">e-Consults</h1>
-              <p className="text-xl md:text-2xl mb-4 text-muted-foreground font-medium">
-                A Clinician's Solution to Improved Care Collaboration
-              </p>
-              <p className="text-lg mb-8 text-muted-foreground max-w-3xl">
-                Streamline specialty care access with our e-Consult service. Get expert pediatric endocrinology guidance
-                without the wait.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
-                  <Link to="/clinician-login">
-                    Submit e-Consult Request
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-border hover:bg-secondary"
-                >
-                  Contact Us
-                </Button>
-              </div>
-            </div>
-            <div className="md:col-span-1 hidden md:block">
-              <img 
-                src={providerHeroImage} 
-                alt="Professional healthcare provider in clinical setting" 
-                className="w-full h-auto rounded-lg shadow-lg object-cover"
-              />
+          <div className="max-w-4xl">
+            <p className="text-lg mb-6 text-muted-foreground">
+              Streamline specialty care access with our e-Consult service. Get expert pediatric endocrinology guidance
+              without the wait.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
+                <Link to="/clinician-login">
+                  Submit e-Consult Request
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-border hover:bg-secondary"
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         </div>
