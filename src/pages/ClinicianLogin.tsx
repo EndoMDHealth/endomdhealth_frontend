@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, FileText, HelpCircle, Stethoscope } from "lucide-react";
-import maleDoctorImage from "@/assets/male-doctor-portrait.jpg";
+import whiteMaleDoctorImage from "@/assets/white-male-doctor-portrait.jpg";
 
 const ClinicianLogin = () => {
   const [email, setEmail] = useState("");
@@ -40,14 +40,14 @@ const ClinicianLogin = () => {
       {/* Login Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start max-w-5xl mx-auto">
             {/* Login Box */}
             <div className="order-2 md:order-1">
-              <div className="bg-card border border-border rounded-lg shadow-md p-8 max-w-md mx-auto md:mx-0">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Clinician Login</h2>
-                <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="bg-card border border-border rounded-lg shadow-md p-8 md:p-10 max-w-lg mx-auto md:mx-0">
+                <h2 className="text-3xl font-bold text-foreground mb-8">Clinician Login</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-base">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -55,12 +55,12 @@ const ClinicianLogin = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full"
+                      className="w-full h-12 text-base"
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="text-base">Password</Label>
                     <Input
                       id="password"
                       type="password"
@@ -68,29 +68,29 @@ const ClinicianLogin = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="w-full"
+                      className="w-full h-12 text-base"
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-12"
                     size="lg"
                   >
                     Log In
                   </Button>
 
-                  <div className="text-center space-y-2">
+                  <div className="text-center space-y-3">
                     <Link
                       to="/forgot-password"
-                      className="text-sm text-primary hover:underline block"
+                      className="text-base text-primary hover:underline block"
                     >
                       Forgot your password?
                     </Link>
                     
                     <Button
                       variant="outline"
-                      className="w-full"
+                      className="w-full text-base h-12"
                       asChild
                     >
                       <Link to="/provider-registration">Register as a Provider</Link>
@@ -101,11 +101,11 @@ const ClinicianLogin = () => {
             </div>
 
             {/* Supporting Visual */}
-            <div className="order-1 md:order-2">
+            <div className="order-1 md:order-2 flex items-start justify-center md:justify-end">
               <img
-                src={maleDoctorImage}
+                src={whiteMaleDoctorImage}
                 alt="Professional male doctor in white coat"
-                className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 md:ml-auto h-auto object-cover"
+                className="rounded-lg shadow-lg w-full max-w-[280px] h-auto object-cover"
               />
             </div>
           </div>
