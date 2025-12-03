@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: "Please enter a valid email address" }),
@@ -26,11 +27,18 @@ const signupSchema = loginSchema.extend({
   path: ["confirmPassword"],
 });
 
+const forgotPasswordSchema = z.object({
+  email: z.string().trim().email({ message: "Please enter a valid email address" }),
+});
+
 type LoginFormData = z.infer<typeof loginSchema>;
 type SignupFormData = z.infer<typeof signupSchema>;
+type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
+
+type AuthView = "login" | "signup" | "forgot-password";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [view, setView] = useState<AuthView>("login");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { signIn, signUp, user, loading } = useAuth();
   const navigate = useNavigate();
@@ -44,6 +52,11 @@ const Auth = () => {
   const signupForm = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     defaultValues: { email: "", password: "", confirmPassword: "", fullName: "" },
+  });
+
+  const forgotPasswordForm = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: { email: "" },
   });
 
   useEffect(() => {
@@ -98,6 +111,30 @@ const Auth = () => {
     }
   };
 
+  const handleForgotPassword = async (data: ForgotPasswordFormData) => {
+    setIsSubmitting(true);
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    
+    setIsSubmitting(false);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Check your email",
+        description: "We've sent you a password reset link.",
+      });
+      setView("login");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -114,16 +151,18 @@ const Auth = () => {
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-2xl font-bold text-primary">
-                {isLogin ? "Welcome Back" : "Create Account"}
+                {view === "login" && "Welcome Back"}
+                {view === "signup" && "Create Account"}
+                {view === "forgot-password" && "Reset Password"}
               </CardTitle>
               <CardDescription>
-                {isLogin
-                  ? "Sign in to access your account"
-                  : "Sign up to get started with EndoMD Health"}
+                {view === "login" && "Sign in to access your account"}
+                {view === "signup" && "Sign up to get started with EndoMD Health"}
+                {view === "forgot-password" && "Enter your email to receive a reset link"}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {isLogin ? (
+              {view === "login" && (
                 <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
@@ -153,6 +192,15 @@ const Auth = () => {
                       </p>
                     )}
                   </div>
+                  <div className="text-right">
+                    <button
+                      type="button"
+                      onClick={() => setView("forgot-password")}
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
@@ -164,7 +212,9 @@ const Auth = () => {
                     )}
                   </Button>
                 </form>
-              ) : (
+              )}
+
+              {view === "signup" && (
                 <form onSubmit={signupForm.handleSubmit(handleSignup)} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="fullName">Full Name</Label>
@@ -235,17 +285,56 @@ const Auth = () => {
                 </form>
               )}
 
-              <div className="mt-6 text-center">
-                <button
-                  type="button"
-                  onClick={() => setIsLogin(!isLogin)}
-                  className="text-sm text-primary hover:underline"
-                >
-                  {isLogin
-                    ? "Don't have an account? Sign up"
-                    : "Already have an account? Sign in"}
-                </button>
-              </div>
+              {view === "forgot-password" && (
+                <form onSubmit={forgotPasswordForm.handleSubmit(handleForgotPassword)} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="reset-email">Email</Label>
+                    <Input
+                      id="reset-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      {...forgotPasswordForm.register("email")}
+                    />
+                    {forgotPasswordForm.formState.errors.email && (
+                      <p className="text-sm text-destructive">
+                        {forgotPasswordForm.formState.errors.email.message}
+                      </p>
+                    )}
+                  </div>
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send Reset Link"
+                    )}
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => setView("login")}
+                    className="w-full flex items-center justify-center text-sm text-primary hover:underline"
+                  >
+                    <ArrowLeft className="h-4 w-4 mr-1" />
+                    Back to login
+                  </button>
+                </form>
+              )}
+
+              {view !== "forgot-password" && (
+                <div className="mt-6 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setView(view === "login" ? "signup" : "login")}
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {view === "login"
+                      ? "Don't have an account? Sign up"
+                      : "Already have an account? Sign in"}
+                  </button>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
