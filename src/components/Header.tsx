@@ -160,7 +160,7 @@ const Header = () => {
               asChild
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
             >
-              <a href="/contact-us">Request appointment</a>
+              <a href="/appointment-request">Request appointment</a>
             </Button>
           </div>
 
@@ -281,7 +281,7 @@ const Header = () => {
                 asChild
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
               >
-                <a href="/contact-us">Request appointment</a>
+                <a href="/appointment-request">Request appointment</a>
               </Button>
             </div>
           </div>

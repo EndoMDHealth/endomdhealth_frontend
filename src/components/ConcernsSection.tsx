@@ -67,9 +67,10 @@ const ConcernsSection = () => {
             {/* Request Appointment Button - Centered under title */}
             <div className="pt-4">
               <Button 
+                asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-12 py-6 shadow-md"
               >
-                Request an Appointment
+                <a href="/appointment-request">Request an Appointment</a>
               </Button>
             </div>
           </div>

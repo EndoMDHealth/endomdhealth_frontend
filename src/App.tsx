@@ -22,6 +22,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
 import ContactUs from "./pages/ContactUs";
+import AppointmentRequest from "./pages/AppointmentRequest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/clinical-services-policies" element={<ClinicalServicesPolicies />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/appointment-request" element={<AppointmentRequest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
