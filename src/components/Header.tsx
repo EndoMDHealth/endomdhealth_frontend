@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Menu, X, Search, Phone, Mail, LogOut, User } from 'lucide-react';
@@ -23,6 +23,18 @@ import endo_yellow from '../assets/logos/endo_yellow.png';
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { user, signOut } = useAuth();
+  const [fullName, setFullName] = useState('');
+
+
+  useEffect(() => {
+    if (user) {
+      const fullName = user.user_metadata.full_name;
+      document.title = `EndoMD Health - ${fullName}`;
+      setFullName(fullName);
+    } else {
+      document.title = 'EndoMD Health';
+    }
+  }, [user]);
 
 	const whoWeAreItems = [
 		{ name: 'What We Treat', href: '/what-we-treat' },
@@ -195,7 +207,8 @@ const Header = () => {
 								<DropdownMenuTrigger asChild>
 									<Button className='bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap'>
 										<User className='h-4 w-4 mr-2' />
-										{user.email?.split('@')[0]}
+										{/* {user?email.split('@')[0]} */}
+                    {fullName}
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align='end'>
