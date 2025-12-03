@@ -20,14 +20,14 @@ import {
   Stethoscope,
 } from "lucide-react";
 import physiciansCollaborativeMeeting from "@/assets/physicians-collaborative-meeting.jpg";
-import childPlayingSports from "@/assets/child-playing-sports.jpg";
-import childPediatricVisit from "@/assets/child-pediatric-visit.jpg";
-import teenagerDoctorHappy from "@/assets/teenager-doctor-happy.jpg";
-import teenagersSmiling from "@/assets/teenagers-smiling.jpg";
-import clinicalConsultation from "@/assets/clinical-consultation.jpg";
+import scaleFruits from "@/assets/conditions/scale-fruits.jpg";
+import childGrowthChart from "@/assets/conditions/child-growth-chart.jpg";
+import diabetesSyringe from "@/assets/conditions/diabetes-syringe.jpg";
+import teenageBoy from "@/assets/conditions/teenage-boy.jpg";
+import teenageGirl from "@/assets/conditions/teenage-girl.jpg";
+import tiredTeenagerCouch from "@/assets/conditions/tired-teenager-couch.jpg";
+import labResultsChart from "@/assets/conditions/lab-results-chart.jpg";
 import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
-import healthyColorfulPlate from "@/assets/healthy-colorful-plate.jpg";
-import preteenBoy from "@/assets/preteen-boy.jpg";
 
 const EConsult = () => {
   const benefits = [
@@ -104,13 +104,13 @@ const EConsult = () => {
   ];
 
   const appropriateConditions = [
-    { title: "Obesity and metabolic concerns", image: childPlayingSports, alt: "Child playing sports" },
-    { title: "Growth problems and short stature", image: childPediatricVisit, alt: "Child at pediatric visit" },
-    { title: "Type 2 Diabetes management questions", image: healthyColorfulPlate, alt: "Healthy colorful plate" },
-    { title: "Puberty concerns (early or delayed)", image: preteenBoy, alt: "Preteen boy" },
-    { title: "Polycystic Ovary Syndrome (PCOS)", image: teenagersSmiling, alt: "Teenagers smiling" },
-    { title: "Thyroid disorders and questions", image: teenagerDoctorHappy, alt: "Teenager with doctor" },
-    { title: "Lab result interpretation", image: clinicalConsultation, alt: "Clinical consultation" },
+    { title: "Obesity and metabolic concerns", image: scaleFruits, alt: "Scale with fruits for healthy weight management" },
+    { title: "Growth problems and short stature", image: childGrowthChart, alt: "Child being measured against growth chart" },
+    { title: "Type 2 Diabetes management questions", image: diabetesSyringe, alt: "Insulin syringe for diabetes management" },
+    { title: "Puberty concerns (early or delayed)", image: teenageBoy, alt: "Teenage boy" },
+    { title: "Polycystic Ovary Syndrome (PCOS)", image: teenageGirl, alt: "Teenage girl" },
+    { title: "Thyroid disorders and questions", image: tiredTeenagerCouch, alt: "Tired teenager on couch" },
+    { title: "Lab result interpretation", image: labResultsChart, alt: "Lab results chart" },
     { title: "General endocrine questions", image: childDoctorConsultation, alt: "Child doctor consultation" },
   ];
 
