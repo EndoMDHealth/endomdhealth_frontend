@@ -56,7 +56,7 @@ const MedicalConsult = () => {
     {
       question: "Do I need health insurance for a consultation?",
       answer:
-        "At EndoMD Health, we accept patients with or without health insurance. We are currently in-network with Cigna, Anthem Blue Cross Blue Shield, United Healthcare, Carefirst, Sentara, Tricare, ChampVA, Medicaid and others; and are working on actively expanding our insurance coverage. If you do not have health insurance, you can still book an appointment with a specialist and receive care. We charge a low fee of $250 for an initial consult without insurance, and $150 for a follow-up consult.",
+        "At EndoMD Health, we accept patients with or without health insurance. We are currently in-network with Cigna, Aetna, Anthem Blue Cross Blue Shield, United Healthcare, Carefirst, Sentara, Tricare, ChampVA, Medicaid and others; and are working on actively expanding our insurance coverage. If you do not have health insurance, you can still book an appointment with a specialist and receive care. We charge a low fee of $250 for an initial consult without insurance, and $150 for a follow-up consult.",
     },
     {
       question: "Where can I get my labs done?",
