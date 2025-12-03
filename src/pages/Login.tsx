@@ -40,7 +40,7 @@ const Login = () => {
 
               {/* Healthcare Provider Button */}
               <Button
-                onClick={() => navigate("/e-consult")}
+                onClick={() => navigate("/clinician-login")}
                 className="h-auto py-8 px-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg transition-all flex flex-col items-center gap-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
               >
                 <Stethoscope className="h-12 w-12" />
