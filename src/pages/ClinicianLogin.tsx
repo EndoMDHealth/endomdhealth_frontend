@@ -105,7 +105,7 @@ const ClinicianLogin = () => {
               <img
                 src={whiteMaleDoctorImage}
                 alt="Professional male doctor in white coat"
-                className="rounded-lg shadow-lg w-full max-w-[560px] h-auto object-cover"
+                className="rounded-lg shadow-lg w-full max-w-[373px] h-auto object-cover"
               />
             </div>
           </div>
