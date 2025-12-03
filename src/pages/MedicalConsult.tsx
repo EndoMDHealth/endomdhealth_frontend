@@ -107,11 +107,11 @@ const MedicalConsult = () => {
               </div>
 
               {/* Right: Image */}
-              <div className="relative">
+              <div className="relative flex justify-center">
                 <img
                   src={childDoctorImage}
                   alt="Friendly physician with child in medical consultation"
-                  className="rounded-lg shadow-lg w-full h-auto object-cover"
+                  className="rounded-lg shadow-lg w-[90%] h-auto object-cover"
                 />
               </div>
             </div>
