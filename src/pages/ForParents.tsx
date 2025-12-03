@@ -46,6 +46,16 @@ const ForParents = () => {
     "Questions you want answered",
   ];
 
+  const conditionsTreated = [
+    "Slow or fast growth",
+    "Early or delayed puberty",
+    "Thyroid problems",
+    "Type 1 and Type 2 diabetes and prediabetes",
+    "Weight and metabolic concerns",
+    "Menstrual irregularities",
+    "Adrenal and genetic hormone conditions",
+  ];
+
   const whyChooseUs = [
     { icon: CalendarCheck, text: "Fast access to specialists—no waiting months" },
     { icon: Star, text: "Convenient virtual and in-person care" },
