@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Menu, X, Search, Phone, Mail } from "lucide-react";
+import { Menu, X, Search, Phone, Mail, LogOut, User } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,10 +10,18 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const whoWeAreItems = [
     { name: "What We Treat", href: "/what-we-treat" },
@@ -35,6 +43,10 @@ const Header = () => {
     { name: "For Schools", href: "/for-schools" },
     { name: "For Community Partners", href: "/for-community-partners" },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-md">
@@ -167,12 +179,31 @@ const Header = () => {
 
           {/* Login & Request Appointment Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button 
-              asChild
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
-            >
-              <a href="/login">Login</a>
-            </Button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    {user.email?.split('@')[0]}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button 
+                asChild
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
+              >
+                <a href="/auth">Login</a>
+              </Button>
+            )}
             <Button 
               asChild
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
@@ -266,12 +297,22 @@ const Header = () => {
             </nav>
             
             <div className="space-y-2">
-              <Button 
-                asChild
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
-              >
-                <a href="/login">Login</a>
-              </Button>
+              {user ? (
+                <Button 
+                  onClick={handleSignOut}
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              ) : (
+                <Button 
+                  asChild
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
+                >
+                  <a href="/auth">Login</a>
+                </Button>
+              )}
               <Button 
                 asChild
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
