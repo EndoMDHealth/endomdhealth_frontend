@@ -38,16 +38,6 @@ const ForParents = () => {
     "Thyroid ultrasound (if needed)",
   ];
 
-  const conditionsTreated = [
-    "Slow or fast growth",
-    "Early or delayed puberty",
-    "Thyroid problems",
-    "Type 1 and Type 2 diabetes and prediabetes",
-    "Weight and metabolic concerns",
-    "Menstrual irregularities",
-    "Adrenal and genetic hormone conditions",
-  ];
-
   const prepareItems = [
     "Past medical records, growth charts, recent labs",
     "A list of symptoms",
