@@ -21,16 +21,14 @@ const ClinicianLogin = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-background to-muted/20 py-12">
         <div className="container mx-auto px-4 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
             <Stethoscope className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Healthcare Provider Portal
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Healthcare Provider Portal</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Access your e-Consult dashboard, submit requests, and manage patient consultations.
           </p>
@@ -44,10 +42,12 @@ const ClinicianLogin = () => {
             {/* Login Box */}
             <div className="order-2 md:order-1">
               <div className="bg-card border border-border rounded-lg shadow-md p-8 md:p-10 max-w-lg mx-auto md:mx-0">
-                <h2 className="text-3xl font-bold text-foreground mb-8">Clinician Login</h2>
+                <h2 className="text-3xl font-bold text-foreground mb-8">Healthcare Provider Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-base">Email</Label>
+                    <Label htmlFor="email" className="text-base">
+                      Email
+                    </Label>
                     <Input
                       id="email"
                       type="email"
@@ -58,9 +58,11 @@ const ClinicianLogin = () => {
                       className="w-full h-12 text-base"
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-base">Password</Label>
+                    <Label htmlFor="password" className="text-base">
+                      Password
+                    </Label>
                     <Input
                       id="password"
                       type="password"
@@ -81,19 +83,12 @@ const ClinicianLogin = () => {
                   </Button>
 
                   <div className="text-center space-y-3">
-                    <Link
-                      to="/forgot-password"
-                      className="text-base text-primary hover:underline block"
-                    >
+                    <Link to="/forgot-password" className="text-base text-primary hover:underline block">
                       Forgot your password?
                     </Link>
-                    
-                    <Button
-                      variant="outline"
-                      className="w-full text-base h-12"
-                      asChild
-                    >
-                      <Link to="/provider-registration">Register as a Provider</Link>
+
+                    <Button variant="outline" className="w-full text-base h-12" asChild>
+                      <Link to="/provider-registration">Register as a Healthcare Provider</Link>
                     </Button>
                   </div>
                 </form>
@@ -121,9 +116,7 @@ const ClinicianLogin = () => {
                 <Shield className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">HIPAA Compliant</h3>
-              <p className="text-sm text-muted-foreground">
-                Secure, encrypted platform for patient consultations
-              </p>
+              <p className="text-sm text-muted-foreground">Secure, encrypted platform for patient consultations</p>
             </div>
 
             <div className="text-center">
@@ -131,9 +124,7 @@ const ClinicianLogin = () => {
                 <FileText className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">e-Consult Dashboard</h3>
-              <p className="text-sm text-muted-foreground">
-                Submit requests and track consultation status
-              </p>
+              <p className="text-sm text-muted-foreground">Submit requests and track consultation status</p>
             </div>
 
             <div className="text-center">
