@@ -1,16 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, FileText } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 const Footer = () => {
-  const [termsOpen, setTermsOpen] = useState(false);
-
   const footerSections = [
     {
       title: "About Us",
@@ -43,6 +34,7 @@ const Footer = () => {
       links: [
         { title: "Privacy Policy", href: "/privacy-policy" },
         { title: "Clinical Services and Practice Policies", href: "/clinical-services-policies" },
+        { title: "Terms of Service", href: "/terms-of-service" },
       ],
     },
   ];
@@ -86,28 +78,6 @@ const Footer = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Terms of Service Section */}
-        <div className="border-t border-background/20 py-6">
-          <Collapsible open={termsOpen} onOpenChange={setTermsOpen}>
-            <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
-              <h4 className="text-lg font-semibold text-accent">Terms of Service</h4>
-              <ChevronDown 
-                className={`h-5 w-5 text-accent transition-transform duration-200 ${termsOpen ? 'rotate-180' : ''}`} 
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-4">
-              <div className="text-sm text-background/80 leading-relaxed space-y-4">
-                <p>
-                  Effective September 20, 2024. These "Terms of Service" are entered into between you and, to the extent pertinent, your minor child (hereinafter, collectively, "you"), and EndoMD Health LLC ("EndoMD Health") and are structured to facilitate your access to the terms relevant to your specific use of the website, <a href="http://www.endomdhelath.com" className="underline hover:text-background">www.endomdhelath.com</a>, including any content, functionality, and services offered on or through it (collectively, the "Website"), allowing you to easily navigate and understand the provisions applicable to your usage of the Website. By accessing and using the Website, you are agreeing to the following terms.
-                </p>
-                <p>
-                  If you have any questions about these Terms, please contact us via email at <a href="mailto:info@endomdhealth.com" className="underline hover:text-background">info@endomdhealth.com</a>
-                </p>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
         </div>
 
         {/* Bottom Bar */}
