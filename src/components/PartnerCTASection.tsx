@@ -18,7 +18,7 @@ const PartnerCTASection = () => {
     },
     {
       title: "Resources for Schools",
-      href: "/who-we-serve/schools",
+      href: "/for-schools",
       icon: GraduationCap,
       description: "Educational resources and support programs",
     },
