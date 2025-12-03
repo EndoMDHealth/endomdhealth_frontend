@@ -265,32 +265,55 @@ const NutritionCoaching = () => {
         </div>
       </section>
 
-      {/* Results Section */}
+      {/* Results Section - Flowing Layout */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">What Teens Can Expect</h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Real, sustainable improvements in health and confidence
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Flowing Grid Layout */}
+            <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
               {results.map((result, index) => {
                 const Icon = result.icon;
+                const isLeft = index % 2 === 0;
                 return (
-                  <Card key={index} className="border shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-6 space-y-4">
-                      <div className="p-3 bg-accent/10 rounded-full w-fit">
-                        <Icon className="h-8 w-8 text-accent" />
+                  <div 
+                    key={index} 
+                    className={`flex items-start gap-5 group ${isLeft ? 'md:pr-8' : 'md:pl-8'}`}
+                  >
+                    {/* Icon */}
+                    <div className="relative flex-shrink-0">
+                      <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                        <Icon className="h-7 w-7 text-accent" />
                       </div>
-                      <h3 className="text-xl font-semibold text-foreground">{result.title}</h3>
-                      <p className="text-muted-foreground">{result.description}</p>
-                    </CardContent>
-                  </Card>
+                      {/* Decorative dot */}
+                      <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-accent/40" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="pt-1">
+                      <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors duration-300">
+                        {result.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {result.description}
+                      </p>
+                    </div>
+                  </div>
                 );
               })}
+            </div>
+
+            {/* Subtle decorative divider */}
+            <div className="flex items-center justify-center mt-16 gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-accent/30" />
+              <div className="w-2 h-2 rounded-full bg-accent/50" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent/30" />
             </div>
           </div>
         </div>
