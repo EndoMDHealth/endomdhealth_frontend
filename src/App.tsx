@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import AboutUs from "./pages/AboutUs";
 import WhatWeTreat from "./pages/WhatWeTreat";
@@ -23,6 +24,7 @@ import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
 import ContactUs from "./pages/ContactUs";
 import AppointmentRequest from "./pages/AppointmentRequest";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,34 +32,37 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/what-we-treat" element={<WhatWeTreat />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/medical-consult" element={<MedicalConsult />} />
-          <Route path="/nutrition-coaching" element={<NutritionCoaching />} />
-          <Route path="/e-consult" element={<EConsult />} />
-          <Route path="/for-patients" element={<ForPatients />} />
-          <Route path="/for-parents" element={<ForParents />} />
-          <Route path="/for-healthcare-professionals" element={<ForHealthcareProfessionals />} />
-          <Route path="/for-schools" element={<ForSchools />} />
-          <Route path="/for-community-partners" element={<ForCommunityPartners />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/clinician-login" element={<ClinicianLogin />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/clinical-services-policies" element={<ClinicalServicesPolicies />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/appointment-request" element={<AppointmentRequest />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/what-we-treat" element={<WhatWeTreat />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/medical-consult" element={<MedicalConsult />} />
+            <Route path="/nutrition-coaching" element={<NutritionCoaching />} />
+            <Route path="/e-consult" element={<EConsult />} />
+            <Route path="/for-patients" element={<ForPatients />} />
+            <Route path="/for-parents" element={<ForParents />} />
+            <Route path="/for-healthcare-professionals" element={<ForHealthcareProfessionals />} />
+            <Route path="/for-schools" element={<ForSchools />} />
+            <Route path="/for-community-partners" element={<ForCommunityPartners />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/clinician-login" element={<ClinicianLogin />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/clinical-services-policies" element={<ClinicalServicesPolicies />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/appointment-request" element={<AppointmentRequest />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
