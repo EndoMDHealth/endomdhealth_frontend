@@ -42,7 +42,7 @@ const ClinicianLogin = () => {
             {/* Login Box */}
             <div className="order-2 md:order-1">
               <div className="bg-card border border-border rounded-lg shadow-md p-8 md:p-10 max-w-lg mx-auto md:mx-0">
-                <h2 className="text-3xl font-bold text-foreground mb-8">Healthcare Provider Login</h2>
+                <h2 className="text-3xl font-bold text-foreground mb-8">Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-base">
