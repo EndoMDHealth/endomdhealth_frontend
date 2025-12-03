@@ -38,6 +38,23 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-md">
+      {/* Top Bar - Contact Info */}
+      <div className="bg-primary-foreground/10 border-b border-primary-foreground/20">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center lg:justify-end gap-6 py-2 text-sm text-primary-foreground/90">
+            <div className="flex items-center space-x-2">
+              <Phone className="h-4 w-4" />
+              <span>(571) 480-6053</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Mail className="h-4 w-4" />
+              <span>info@endomdhealth.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Main Navigation Bar */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
@@ -164,17 +181,6 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Contact Info - Desktop only */}
-          <div className="hidden xl:flex items-center space-x-6 text-sm text-primary-foreground/90">
-            <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
-              <span>(571) 480-6053</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="h-4 w-4" />
-              <span>info@endomdhealth.com</span>
-            </div>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -200,17 +206,6 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Mobile Contact Info */}
-            <div className="mb-4 space-y-2 text-sm text-primary-foreground/90">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>(571) 480-6053</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4" />
-                <span>info@endomdhealth.com</span>
-              </div>
-            </div>
 
             <nav className="space-y-3 mb-4">
               <div>
