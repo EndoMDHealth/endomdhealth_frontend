@@ -29,9 +29,10 @@ const AboutUs = () => {
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
+                    asChild
                     className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-10 py-6"
                   >
-                    Request Appointment
+                    <a href="/appointment-request">Request Appointment</a>
                   </Button>
                   <Button 
                     size="lg" 
@@ -178,9 +179,10 @@ const AboutUs = () => {
               <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <Button 
                   size="lg" 
+                  asChild
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8"
                 >
-                  Request Appointment
+                  <a href="/appointment-request">Request Appointment</a>
                 </Button>
                 <Button 
                   size="lg" 
