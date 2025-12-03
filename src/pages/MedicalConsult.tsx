@@ -61,7 +61,7 @@ const MedicalConsult = () => {
     {
       question: "Where can I get my labs done?",
       answer:
-        "We partner with Quest Diagnostics for labs. Quest has convenient locations across the nation. Once our physician puts in a lab request you can just show up to a Quest location and have your labs done. We will receive the results directly from Quest and will update you.",
+        "We partner with Quest Diagnostics and LabCorp for labs. Both have convenient locations across the nation. Once our physician puts in a lab request you can just show up to your nearest location and have your labs done. We will receive the results directly from them and will update you.",
     },
     {
       question: "How soon can I meet with the pediatric endocrinologist?",
