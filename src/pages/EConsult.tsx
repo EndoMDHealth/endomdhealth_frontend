@@ -172,32 +172,6 @@ const EConsult = () => {
         </div>
       </section>
 
-      {/* CTA Section below hero */}
-      <section className="py-8 md:py-12 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
-            <p className="text-lg mb-6 text-muted-foreground">
-              Streamline specialty care access with our e-Consult service. Get expert pediatric endocrinology guidance
-              without the wait.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
-                <Link to="/clinician-login">
-                  Submit e-Consult Request
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-border hover:bg-secondary"
-              >
-                Contact Us
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* What is E-Consult Section */}
       <section className="py-16 md:py-20 bg-secondary">
@@ -224,6 +198,14 @@ const EConsult = () => {
                     concerns should be directed to emergency services or scheduled for immediate in-person evaluation.
                   </span>
                 </p>
+              </div>
+              <div className="mt-8 text-center">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
+                  <Link to="/clinician-login">
+                    Submit e-Consult Request
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
