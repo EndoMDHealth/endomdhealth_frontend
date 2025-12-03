@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Stethoscope, Users, GraduationCap, Building2, Heart, UserCheck, Baby } from "lucide-react";
+import { Stethoscope, Users, GraduationCap, Heart, UserCheck, Baby } from "lucide-react";
 
 const PartnerCTASection = () => {
   const partnerButtons = [
     {
-      title: "Partner as a Clinician",
+      title: "Partner as a Clinician or Hospital",
       href: "/who-we-serve/healthcare-professionals",
       icon: Stethoscope,
       description: "Collaborate with us to improve patient outcomes",
@@ -21,12 +21,6 @@ const PartnerCTASection = () => {
       href: "/who-we-serve/schools",
       icon: GraduationCap,
       description: "Educational resources and support programs",
-    },
-    {
-      title: "Partner as a Hospital",
-      href: "/who-we-serve/hospitals",
-      icon: Building2,
-      description: "Institutional partnerships for better care",
     },
     {
       title: "Resources for Health Plans",
@@ -66,7 +60,7 @@ const PartnerCTASection = () => {
           </div>
 
           {/* Partner Buttons Compact Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {partnerButtons.map((partner, index) => {
               return (
                 <Card
