@@ -20,6 +20,14 @@ import {
   Stethoscope,
 } from "lucide-react";
 import physiciansCollaborativeMeeting from "@/assets/physicians-collaborative-meeting.jpg";
+import childPlayingSports from "@/assets/child-playing-sports.jpg";
+import childPediatricVisit from "@/assets/child-pediatric-visit.jpg";
+import teenagerDoctorHappy from "@/assets/teenager-doctor-happy.jpg";
+import teenagersSmiling from "@/assets/teenagers-smiling.jpg";
+import clinicalConsultation from "@/assets/clinical-consultation.jpg";
+import childDoctorConsultation from "@/assets/child-doctor-consultation.jpg";
+import healthyColorfulPlate from "@/assets/healthy-colorful-plate.jpg";
+import preteenBoy from "@/assets/preteen-boy.jpg";
 
 const EConsult = () => {
   const benefits = [
@@ -96,14 +104,14 @@ const EConsult = () => {
   ];
 
   const appropriateConditions = [
-    "Obesity and metabolic concerns",
-    "Growth problems and short stature",
-    "Type 2 Diabetes management questions",
-    "Puberty concerns (early or delayed)",
-    "Polycystic Ovary Syndrome (PCOS)",
-    "Thyroid disorders and questions",
-    "Lab result interpretation",
-    "General endocrine questions",
+    { title: "Obesity and metabolic concerns", image: childPlayingSports, alt: "Child playing sports" },
+    { title: "Growth problems and short stature", image: childPediatricVisit, alt: "Child at pediatric visit" },
+    { title: "Type 2 Diabetes management questions", image: healthyColorfulPlate, alt: "Healthy colorful plate" },
+    { title: "Puberty concerns (early or delayed)", image: preteenBoy, alt: "Preteen boy" },
+    { title: "Polycystic Ovary Syndrome (PCOS)", image: teenagersSmiling, alt: "Teenagers smiling" },
+    { title: "Thyroid disorders and questions", image: teenagerDoctorHappy, alt: "Teenager with doctor" },
+    { title: "Lab result interpretation", image: clinicalConsultation, alt: "Clinical consultation" },
+    { title: "General endocrine questions", image: childDoctorConsultation, alt: "Child doctor consultation" },
   ];
 
   const faqs = [
@@ -278,14 +286,25 @@ const EConsult = () => {
             <p className="text-lg text-center text-muted-foreground mb-10">
               Our e-Consult service is ideal for the following pediatric endocrine concerns:
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {appropriateConditions.map((condition, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-3 p-4 bg-secondary rounded-lg border border-border hover:border-accent/50 transition-colors"
+                  className="group bg-background rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border hover:border-accent/50"
                 >
-                  <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground font-medium">{condition}</span>
+                  <div className="h-32 overflow-hidden">
+                    <img 
+                      src={condition.image} 
+                      alt={condition.alt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground font-medium text-sm">{condition.title}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
