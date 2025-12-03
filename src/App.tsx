@@ -26,6 +26,7 @@ import ContactUs from "./pages/ContactUs";
 import AppointmentRequest from "./pages/AppointmentRequest";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -57,7 +58,7 @@ const App = () => (
             <Route path="/clinical-services-policies" element={<ClinicalServicesPolicies />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/appointment-request" element={<AppointmentRequest />} />
+            <Route path="/appointment-request" element={<ProtectedRoute><AppointmentRequest /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
