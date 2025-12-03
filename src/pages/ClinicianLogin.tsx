@@ -40,7 +40,7 @@ const ClinicianLogin = () => {
       {/* Login Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-[1fr_auto] gap-6 items-start max-w-5xl mx-auto">
             {/* Login Box */}
             <div className="order-2 md:order-1">
               <div className="bg-card border border-border rounded-lg shadow-md p-8 md:p-10 max-w-lg mx-auto md:mx-0">
@@ -105,7 +105,7 @@ const ClinicianLogin = () => {
               <img
                 src={whiteMaleDoctorImage}
                 alt="Professional male doctor in white coat"
-                className="rounded-lg shadow-lg w-full max-w-[280px] h-auto object-cover"
+                className="rounded-lg shadow-lg w-full max-w-[560px] h-auto object-cover"
               />
             </div>
           </div>
