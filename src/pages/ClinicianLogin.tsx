@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, FileText, HelpCircle, Stethoscope } from "lucide-react";
-import providerHeroImage from "@/assets/provider-econsult-hero.jpg";
+import maleDoctorImage from "@/assets/male-doctor-portrait.jpg";
 
 const ClinicianLogin = () => {
   const [email, setEmail] = useState("");
@@ -40,10 +40,10 @@ const ClinicianLogin = () => {
       {/* Login Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
             {/* Login Box */}
             <div className="order-2 md:order-1">
-              <div className="bg-card border border-border rounded-lg shadow-md p-8 max-w-md mx-auto">
+              <div className="bg-card border border-border rounded-lg shadow-md p-8 max-w-md mx-auto md:mx-0">
                 <h2 className="text-2xl font-bold text-foreground mb-6">Clinician Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
@@ -103,9 +103,9 @@ const ClinicianLogin = () => {
             {/* Supporting Visual */}
             <div className="order-1 md:order-2">
               <img
-                src={providerHeroImage}
-                alt="Healthcare provider using e-Consult portal"
-                className="rounded-lg shadow-lg w-full h-auto"
+                src={maleDoctorImage}
+                alt="Professional male doctor in white coat"
+                className="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0 md:ml-auto h-auto object-cover"
               />
             </div>
           </div>
