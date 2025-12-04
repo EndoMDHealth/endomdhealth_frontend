@@ -115,17 +115,15 @@ const Register = () => {
               ))}
             </div>
 
-            <div className="text-center mt-8">
-              <p className="text-muted-foreground">
-                Already have an account?{" "}
-                <Button
-                  variant="link"
-                  className="text-primary p-0 h-auto"
-                  onClick={() => navigate("/auth")}
-                >
-                  Sign in here
-                </Button>
-              </p>
+            <div className="text-center mt-8 space-y-2">
+              <Button
+                variant="ghost"
+                className="text-muted-foreground"
+                onClick={() => navigate("/auth")}
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Login
+              </Button>
             </div>
           </div>
         )}
