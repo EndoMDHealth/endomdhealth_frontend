@@ -9,7 +9,7 @@ import { Loader2, ArrowRight, ArrowLeft, User, FileCheck, CheckCircle, Heart } f
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface PatientRegistrationFlowProps {
-  onSuccess: () => void;
+  onSuccess: (email: string) => void;
   onFailed: (message: string) => void;
 }
 
@@ -103,7 +103,7 @@ const PatientRegistrationFlow = ({ onSuccess, onFailed }: PatientRegistrationFlo
         title: "Registration Successful!",
         description: "Please check your email to verify your account.",
       });
-      onSuccess();
+      onSuccess(email);
     } catch (error) {
       onFailed("An unexpected error occurred. Please try again.");
     }
