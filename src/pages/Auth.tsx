@@ -232,7 +232,7 @@ const Auth = () => {
                 </form>
               )}
 
-              {(view === "login" || view === "signup") && (
+              {/* {(view === "login" || view === "signup") && (
                 <>
                   <div className="my-4 flex items-center">
                     <Separator className="flex-1" />
@@ -266,7 +266,7 @@ const Auth = () => {
                     Continue with Google
                   </Button>
                 </>
-              )}
+              )} */}
 
               {view === "signup" && (
                 <form onSubmit={signupForm.handleSubmit(handleSignup)} className="space-y-4">
