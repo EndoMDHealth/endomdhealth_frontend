@@ -209,7 +209,7 @@ const EConsult = () => {
               </div>
               <div className="mt-8 text-center">
                 <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
-                  <Link to="/clinician-login">
+                  <Link to="/provider-login">
                     Submit e-Consult Request
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -351,7 +351,7 @@ const EConsult = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
-                <Link to="/clinician-login">
+                <Link to="/provider-login">
                   Submit E-Consult Request
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

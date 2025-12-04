@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
@@ -10,6 +10,7 @@ interface PhysicianProtectedRouteProps {
 
 const PhysicianProtectedRoute = ({ children }: PhysicianProtectedRouteProps) => {
   const { user, loading: authLoading } = useAuth();
+  const location = useLocation();
   const [isPhysician, setIsPhysician] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,12 +50,13 @@ const PhysicianProtectedRoute = ({ children }: PhysicianProtectedRouteProps) => 
   }
 
   if (!user) {
-    return <Navigate to="/clinician-login" replace />;
+    // Store intended destination for redirect after login
+    return <Navigate to="/provider-login" state={{ from: location.pathname }} replace />;
   }
 
-  // If not a physician, redirect to registration or show message
+  // If not a physician, redirect to registration
   if (isPhysician === false) {
-    return <Navigate to="/clinician-login?register=true" replace />;
+    return <Navigate to="/provider-login?register=true" replace />;
   }
 
   return <>{children}</>;
