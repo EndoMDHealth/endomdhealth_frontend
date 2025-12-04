@@ -376,17 +376,14 @@ const Auth = () => {
                 </form>
               )}
 
-              {view !== "forgot-password" && (
+              {view === "login" && (
                 <div className="mt-6 text-center">
-                  <button
-                    type="button"
-                    onClick={() => setView(view === "login" ? "signup" : "login")}
+                  <a
+                    href="/register"
                     className="text-sm text-primary hover:underline"
                   >
-                    {view === "login"
-                      ? "Don't have an account? Sign up"
-                      : "Already have an account? Sign in"}
-                  </button>
+                    Don't have an account? Sign up
+                  </a>
                 </div>
               )}
             </CardContent>
