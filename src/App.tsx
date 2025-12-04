@@ -27,6 +27,7 @@ import TermsOfService from "./pages/TermsOfService";
 import ContactUs from "./pages/ContactUs";
 import AppointmentRequest from "./pages/AppointmentRequest";
 import Auth from "./pages/Auth";
+import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import NotFound from "./pages/NotFound";
@@ -67,6 +68,7 @@ const App = () => (
             <Route path="/physician-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/physician-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
