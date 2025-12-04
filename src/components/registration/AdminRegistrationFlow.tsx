@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowRight, ArrowLeft, Shield, User, FileCheck, CheckCircle } from "lucide-react";
 
 interface AdminRegistrationFlowProps {
-  onSuccess: () => void;
+  onSuccess: (email: string) => void;
   onFailed: (message: string) => void;
 }
 
@@ -129,13 +129,13 @@ const AdminRegistrationFlow = ({ onSuccess, onFailed }: AdminRegistrationFlowPro
           title: "Registration Successful!",
           description: "Welcome to the admin portal.",
         });
-        onSuccess();
+        onSuccess(email);
       } else {
         toast({
           title: "Almost there!",
           description: "Please check your email to verify your account.",
         });
-        onSuccess();
+        onSuccess(email);
       }
     } catch (error) {
       onFailed("An unexpected error occurred. Please try again.");

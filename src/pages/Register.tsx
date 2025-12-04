@@ -4,30 +4,38 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Stethoscope, Shield, User, ArrowRight, ArrowLeft, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { Stethoscope, Shield, User, ArrowRight, ArrowLeft, CheckCircle, XCircle, Mail } from "lucide-react";
 import ProviderRegistrationFlow from "@/components/registration/ProviderRegistrationFlow";
 import AdminRegistrationFlow from "@/components/registration/AdminRegistrationFlow";
 import PatientRegistrationFlow from "@/components/registration/PatientRegistrationFlow";
 
 type UserRole = "provider" | "admin" | "patient" | null;
-type RegistrationStatus = "selecting" | "registering" | "success" | "failed";
+type RegistrationStatus = "selecting" | "registering" | "verify_email" | "success" | "failed";
 
 const Register = () => {
   const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState<UserRole>(null);
   const [status, setStatus] = useState<RegistrationStatus>("selecting");
   const [errorMessage, setErrorMessage] = useState("");
+  const [redirectPath, setRedirectPath] = useState("/");
+  const [userEmail, setUserEmail] = useState("");
 
   const handleRoleSelect = (role: UserRole) => {
     setSelectedRole(role);
     setStatus("registering");
   };
 
-  const handleRegistrationSuccess = (redirectPath: string) => {
+  const handleRegistrationSuccess = (path: string, email?: string) => {
+    setRedirectPath(path);
+    if (email) setUserEmail(email);
+    setStatus("verify_email");
+  };
+
+  const handleContinueToDashboard = () => {
     setStatus("success");
     setTimeout(() => {
       navigate(redirectPath, { replace: true });
-    }, 2000);
+    }, 1500);
   };
 
   const handleRegistrationFailed = (message: string) => {
@@ -142,24 +150,62 @@ const Register = () => {
 
             {selectedRole === "provider" && (
               <ProviderRegistrationFlow
-                onSuccess={() => handleRegistrationSuccess("/provider-dashboard")}
+                onSuccess={(email) => handleRegistrationSuccess("/provider-dashboard", email)}
                 onFailed={handleRegistrationFailed}
               />
             )}
 
             {selectedRole === "admin" && (
               <AdminRegistrationFlow
-                onSuccess={() => handleRegistrationSuccess("/provider-dashboard")}
+                onSuccess={(email) => handleRegistrationSuccess("/provider-dashboard", email)}
                 onFailed={handleRegistrationFailed}
               />
             )}
 
             {selectedRole === "patient" && (
               <PatientRegistrationFlow
-                onSuccess={() => handleRegistrationSuccess("/")}
+                onSuccess={(email) => handleRegistrationSuccess("/", email)}
                 onFailed={handleRegistrationFailed}
               />
             )}
+          </div>
+        )}
+
+        {/* Email Verification Reminder */}
+        {status === "verify_email" && (
+          <div className="max-w-md mx-auto text-center">
+            <Card className="border-blue-200 bg-blue-50">
+              <CardContent className="pt-8 pb-6">
+                <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-10 h-10 text-blue-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-blue-800 mb-2">
+                  Verify Your Email
+                </h2>
+                <p className="text-blue-700 mb-2">
+                  We've sent a verification link to:
+                </p>
+                {userEmail && (
+                  <p className="font-semibold text-blue-800 mb-4">{userEmail}</p>
+                )}
+                <p className="text-sm text-blue-600 mb-6">
+                  Please check your inbox and click the link to verify your email address.
+                  Don't forget to check your spam folder.
+                </p>
+                <div className="space-y-3">
+                  <Button 
+                    onClick={handleContinueToDashboard}
+                    className="w-full"
+                  >
+                    Continue to Dashboard
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  <p className="text-xs text-blue-500">
+                    You can continue, but some features may be limited until you verify your email.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
@@ -172,15 +218,11 @@ const Register = () => {
                   <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-green-800 mb-2">
-                  Registration Successful!
+                  Welcome!
                 </h2>
-                <p className="text-green-700 mb-4">
-                  Your account has been created successfully.
+                <p className="text-green-700">
+                  Redirecting to your dashboard...
                 </p>
-                <div className="flex items-center justify-center gap-2 text-green-600">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Redirecting to your dashboard...</span>
-                </div>
               </CardContent>
             </Card>
           </div>

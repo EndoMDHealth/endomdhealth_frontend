@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowRight, ArrowLeft, Stethoscope, User, FileCheck, CheckCircle } from "lucide-react";
 
 interface ProviderRegistrationFlowProps {
-  onSuccess: () => void;
+  onSuccess: (email: string) => void;
   onFailed: (message: string) => void;
 }
 
@@ -130,13 +130,13 @@ const ProviderRegistrationFlow = ({ onSuccess, onFailed }: ProviderRegistrationF
           title: "Registration Successful!",
           description: "Welcome to the e-Consult portal.",
         });
-        onSuccess();
+        onSuccess(email);
       } else {
         toast({
           title: "Almost there!",
           description: "Please check your email to verify your account.",
         });
-        onSuccess();
+        onSuccess(email);
       }
     } catch (error) {
       onFailed("An unexpected error occurred. Please try again.");
