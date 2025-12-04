@@ -1,21 +1,182 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shield, FileText, HelpCircle, Stethoscope } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
+import { Shield, FileText, HelpCircle, Stethoscope, Loader2, ArrowRight } from "lucide-react";
 import whiteMaleDoctorImage from "@/assets/white-male-doctor-portrait.jpg";
 
 const ClinicianLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { user, signIn, signUp } = useAuth();
+  const { toast } = useToast();
+  
+  const [activeTab, setActiveTab] = useState(searchParams.get('register') ? 'register' : 'login');
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Login form
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  
+  // Register form
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [practiceName, setPracticeName] = useState("");
+  const [npiNumber, setNpiNumber] = useState("");
+  const [specialty, setSpecialty] = useState("");
+  const [state, setState] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Check if user is already logged in and is a physician
+  useEffect(() => {
+    const checkPhysicianStatus = async () => {
+      if (user) {
+        const { data } = await supabase
+          .from('physician_roles')
+          .select('id')
+          .eq('user_id', user.id)
+          .maybeSingle();
+        
+        if (data) {
+          navigate('/physician-dashboard');
+        }
+      }
+    };
+    
+    checkPhysicianStatus();
+  }, [user, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Login logic will be implemented here
-    console.log("Clinician login attempt:", { email });
+    setIsLoading(true);
+
+    const { error } = await signIn(loginEmail, loginPassword);
+
+    if (error) {
+      toast({
+        title: "Login Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Check if user is a physician
+    const { data: session } = await supabase.auth.getSession();
+    if (session.session?.user) {
+      const { data: physicianData } = await supabase
+        .from('physician_roles')
+        .select('id')
+        .eq('user_id', session.session.user.id)
+        .maybeSingle();
+
+      if (physicianData) {
+        toast({
+          title: "Welcome back!",
+          description: "Redirecting to your dashboard...",
+        });
+        navigate('/physician-dashboard');
+      } else {
+        toast({
+          title: "Access Denied",
+          description: "This portal is for registered healthcare providers only. Please register first.",
+          variant: "destructive",
+        });
+        setActiveTab('register');
+      }
+    }
+    
+    setIsLoading(false);
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (registerPassword !== registerConfirmPassword) {
+      toast({
+        title: "Passwords don't match",
+        description: "Please make sure your passwords match.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (registerPassword.length < 6) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 6 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    // First, sign up the user
+    const { error: signUpError } = await signUp(registerEmail, registerPassword, fullName);
+
+    if (signUpError) {
+      toast({
+        title: "Registration Failed",
+        description: signUpError.message,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Wait a moment for the auth to complete
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Get the user session
+    const { data: session } = await supabase.auth.getSession();
+    
+    if (session.session?.user) {
+      // Create physician role
+      const { error: roleError } = await supabase
+        .from('physician_roles')
+        .insert({
+          user_id: session.session.user.id,
+          role: 'physician',
+          practice_name: practiceName || null,
+          npi_number: npiNumber || null,
+          specialty: specialty || null,
+          state: state || null,
+          verified: false,
+        });
+
+      if (roleError) {
+        console.error('Error creating physician role:', roleError);
+        toast({
+          title: "Registration Incomplete",
+          description: "Account created but provider profile setup failed. Please contact support.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Registration Successful!",
+          description: "Welcome to the e-Consult portal. You can now access your dashboard.",
+        });
+        navigate('/physician-dashboard');
+      }
+    } else {
+      toast({
+        title: "Almost there!",
+        description: "Please check your email to verify your account, then log in.",
+      });
+      setActiveTab('login');
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -35,63 +196,198 @@ const ClinicianLogin = () => {
         </div>
       </section>
 
-      {/* Login Section */}
+      {/* Login/Register Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-[1fr_auto] gap-6 items-start max-w-5xl mx-auto">
-            {/* Login Box */}
+            {/* Form Box */}
             <div className="order-2 md:order-1">
               <div className="bg-card border border-border rounded-lg shadow-md p-8 md:p-10 max-w-lg mx-auto md:mx-0">
-                <h2 className="text-3xl font-bold text-foreground mb-8">Login</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-base">
-                      Email
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@practice.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="w-full h-12 text-base"
-                    />
-                  </div>
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
+                  <TabsList className="grid w-full grid-cols-2 mb-8">
+                    <TabsTrigger value="login">Login</TabsTrigger>
+                    <TabsTrigger value="register">Register</TabsTrigger>
+                  </TabsList>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="password" className="text-base">
-                      Password
-                    </Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="w-full h-12 text-base"
-                    />
-                  </div>
+                  <TabsContent value="login">
+                    <form onSubmit={handleLogin} className="space-y-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="login-email" className="text-base">Email</Label>
+                        <Input
+                          id="login-email"
+                          type="email"
+                          placeholder="your.email@practice.com"
+                          value={loginEmail}
+                          onChange={(e) => setLoginEmail(e.target.value)}
+                          required
+                          className="w-full h-12 text-base"
+                        />
+                      </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-12"
-                    size="lg"
-                  >
-                    Log In
-                  </Button>
+                      <div className="space-y-2">
+                        <Label htmlFor="login-password" className="text-base">Password</Label>
+                        <Input
+                          id="login-password"
+                          type="password"
+                          placeholder="Enter your password"
+                          value={loginPassword}
+                          onChange={(e) => setLoginPassword(e.target.value)}
+                          required
+                          className="w-full h-12 text-base"
+                        />
+                      </div>
 
-                  <div className="text-center space-y-3">
-                    <Link to="/forgot-password" className="text-base text-primary hover:underline block">
-                      Forgot your password?
-                    </Link>
+                      <Button
+                        type="submit"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-12"
+                        size="lg"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Logging in...
+                          </>
+                        ) : (
+                          <>
+                            Log In
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
 
-                    <Button variant="outline" className="w-full text-base h-12" asChild>
-                      <Link to="/provider-registration">Register as a Healthcare Provider</Link>
-                    </Button>
-                  </div>
-                </form>
+                      <div className="text-center">
+                        <Link to="/reset-password" className="text-base text-primary hover:underline">
+                          Forgot your password?
+                        </Link>
+                      </div>
+                    </form>
+                  </TabsContent>
+
+                  <TabsContent value="register">
+                    <form onSubmit={handleRegister} className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="col-span-2 space-y-2">
+                          <Label htmlFor="full-name">Full Name *</Label>
+                          <Input
+                            id="full-name"
+                            placeholder="Dr. Jane Smith"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            required
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="col-span-2 space-y-2">
+                          <Label htmlFor="register-email">Email *</Label>
+                          <Input
+                            id="register-email"
+                            type="email"
+                            placeholder="your.email@practice.com"
+                            value={registerEmail}
+                            onChange={(e) => setRegisterEmail(e.target.value)}
+                            required
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="register-password">Password *</Label>
+                          <Input
+                            id="register-password"
+                            type="password"
+                            placeholder="Min 6 characters"
+                            value={registerPassword}
+                            onChange={(e) => setRegisterPassword(e.target.value)}
+                            required
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="confirm-password">Confirm Password *</Label>
+                          <Input
+                            id="confirm-password"
+                            type="password"
+                            placeholder="Confirm password"
+                            value={registerConfirmPassword}
+                            onChange={(e) => setRegisterConfirmPassword(e.target.value)}
+                            required
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="col-span-2 space-y-2">
+                          <Label htmlFor="practice-name">Practice Name</Label>
+                          <Input
+                            id="practice-name"
+                            placeholder="Your Medical Practice"
+                            value={practiceName}
+                            onChange={(e) => setPracticeName(e.target.value)}
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="npi">NPI Number</Label>
+                          <Input
+                            id="npi"
+                            placeholder="1234567890"
+                            value={npiNumber}
+                            onChange={(e) => setNpiNumber(e.target.value)}
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="specialty">Specialty</Label>
+                          <Input
+                            id="specialty"
+                            placeholder="e.g., Pediatrics"
+                            value={specialty}
+                            onChange={(e) => setSpecialty(e.target.value)}
+                            className="h-11"
+                          />
+                        </div>
+
+                        <div className="col-span-2 space-y-2">
+                          <Label htmlFor="state">State *</Label>
+                          <Input
+                            id="state"
+                            placeholder="VA or MD"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            required
+                            className="h-11"
+                          />
+                          <p className="text-xs text-muted-foreground">
+                            Currently serving providers in Virginia and Maryland
+                          </p>
+                        </div>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 mt-6"
+                        size="lg"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Creating Account...
+                          </>
+                        ) : (
+                          <>
+                            Create Provider Account
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  </TabsContent>
+                </Tabs>
               </div>
             </div>
 

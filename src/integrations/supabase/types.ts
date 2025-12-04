@@ -14,6 +14,184 @@ export type Database = {
   }
   public: {
     Tables: {
+      e_consult_attachments: {
+        Row: {
+          created_at: string
+          e_consult_id: string
+          file_name: string
+          file_path: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          e_consult_id: string
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          e_consult_id?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "e_consult_attachments_e_consult_id_fkey"
+            columns: ["e_consult_id"]
+            isOneToOne: false
+            referencedRelation: "e_consults"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      e_consult_messages: {
+        Row: {
+          created_at: string
+          e_consult_id: string
+          id: string
+          is_read: boolean | null
+          message: string
+          sender_id: string
+        }
+        Insert: {
+          created_at?: string
+          e_consult_id: string
+          id?: string
+          is_read?: boolean | null
+          message: string
+          sender_id: string
+        }
+        Update: {
+          created_at?: string
+          e_consult_id?: string
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "e_consult_messages_e_consult_id_fkey"
+            columns: ["e_consult_id"]
+            isOneToOne: false
+            referencedRelation: "e_consults"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      e_consults: {
+        Row: {
+          additional_notes: string | null
+          bmi: number | null
+          clinical_question: string
+          condition_category: Database["public"]["Enums"]["condition_category"]
+          created_at: string
+          height_cm: number | null
+          id: string
+          patient_age: number
+          patient_dob: string | null
+          patient_gender: string | null
+          patient_initials: string
+          physician_id: string
+          responded_at: string | null
+          responded_by: string | null
+          response_notes: string | null
+          status: Database["public"]["Enums"]["econsult_status"]
+          updated_at: string
+          weight_kg: number | null
+        }
+        Insert: {
+          additional_notes?: string | null
+          bmi?: number | null
+          clinical_question: string
+          condition_category: Database["public"]["Enums"]["condition_category"]
+          created_at?: string
+          height_cm?: number | null
+          id?: string
+          patient_age: number
+          patient_dob?: string | null
+          patient_gender?: string | null
+          patient_initials: string
+          physician_id: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
+          status?: Database["public"]["Enums"]["econsult_status"]
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          additional_notes?: string | null
+          bmi?: number | null
+          clinical_question?: string
+          condition_category?: Database["public"]["Enums"]["condition_category"]
+          created_at?: string
+          height_cm?: number | null
+          id?: string
+          patient_age?: number
+          patient_dob?: string | null
+          patient_gender?: string | null
+          patient_initials?: string
+          physician_id?: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
+          status?: Database["public"]["Enums"]["econsult_status"]
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
+      physician_roles: {
+        Row: {
+          created_at: string
+          id: string
+          npi_number: string | null
+          phone: string | null
+          practice_name: string | null
+          role: Database["public"]["Enums"]["physician_role"]
+          specialty: string | null
+          state: string | null
+          updated_at: string
+          user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          npi_number?: string | null
+          phone?: string | null
+          practice_name?: string | null
+          role?: Database["public"]["Enums"]["physician_role"]
+          specialty?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          npi_number?: string | null
+          phone?: string | null
+          practice_name?: string | null
+          role?: Database["public"]["Enums"]["physician_role"]
+          specialty?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -46,10 +224,30 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_physician_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["physician_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_physician: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      condition_category:
+        | "obesity"
+        | "growth"
+        | "diabetes"
+        | "puberty"
+        | "thyroid"
+        | "pcos"
+        | "other"
+      econsult_status:
+        | "submitted"
+        | "under_review"
+        | "awaiting_info"
+        | "completed"
+      physician_role: "physician" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -176,6 +374,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      condition_category: [
+        "obesity",
+        "growth",
+        "diabetes",
+        "puberty",
+        "thyroid",
+        "pcos",
+        "other",
+      ],
+      econsult_status: [
+        "submitted",
+        "under_review",
+        "awaiting_info",
+        "completed",
+      ],
+      physician_role: ["physician", "admin"],
+    },
   },
 } as const
