@@ -20,6 +20,7 @@ import ForCommunityPartners from "./pages/ForCommunityPartners";
 import Login from "./pages/Login";
 import ClinicianLogin from "./pages/ClinicianLogin";
 import PhysicianDashboard from "./pages/PhysicianDashboard";
+import SubmitEConsult from "./pages/SubmitEConsult";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
@@ -56,7 +57,13 @@ const App = () => (
             <Route path="/for-schools" element={<ForSchools />} />
             <Route path="/for-community-partners" element={<ForCommunityPartners />} />
             <Route path="/login" element={<Login />} />
+            {/* Provider Portal Routes */}
+            <Route path="/provider-login" element={<ClinicianLogin />} />
             <Route path="/clinician-login" element={<ClinicianLogin />} />
+            <Route path="/provider-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
+            <Route path="/provider-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
+            <Route path="/submit-econsult" element={<PhysicianProtectedRoute><SubmitEConsult /></PhysicianProtectedRoute>} />
+            {/* Legacy routes - redirect to new paths */}
             <Route path="/physician-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/physician-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />

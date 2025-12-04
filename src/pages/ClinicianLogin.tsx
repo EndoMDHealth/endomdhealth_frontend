@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
@@ -14,12 +14,16 @@ import whiteMaleDoctorImage from "@/assets/white-male-doctor-portrait.jpg";
 
 const ClinicianLogin = () => {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { user, signIn, signUp } = useAuth();
   const { toast } = useToast();
   
   const [activeTab, setActiveTab] = useState(searchParams.get('register') ? 'register' : 'login');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Get the intended destination from state (for redirect after login)
+  const from = (location.state as { from?: string })?.from || '/provider-dashboard';
   
   // Login form
   const [loginEmail, setLoginEmail] = useState("");
@@ -46,13 +50,13 @@ const ClinicianLogin = () => {
           .maybeSingle();
         
         if (data) {
-          navigate('/physician-dashboard');
+          navigate(from, { replace: true });
         }
       }
     };
     
     checkPhysicianStatus();
-  }, [user, navigate]);
+  }, [user, navigate, from]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +88,7 @@ const ClinicianLogin = () => {
           title: "Welcome back!",
           description: "Redirecting to your dashboard...",
         });
-        navigate('/physician-dashboard');
+        navigate(from, { replace: true });
       } else {
         toast({
           title: "Access Denied",
@@ -166,7 +170,7 @@ const ClinicianLogin = () => {
           title: "Registration Successful!",
           description: "Welcome to the e-Consult portal. You can now access your dashboard.",
         });
-        navigate('/physician-dashboard');
+        navigate(from, { replace: true });
       }
     } else {
       toast({

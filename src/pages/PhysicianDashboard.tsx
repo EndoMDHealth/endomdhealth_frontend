@@ -39,7 +39,6 @@ import {
 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import endoLogo from "@/assets/logos/endo_yellow.png";
-import SubmitEConsultModal from "@/components/econsult/SubmitEConsultModal";
 import EConsultDetailModal from "@/components/econsult/EConsultDetailModal";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
@@ -74,7 +73,6 @@ const PhysicianDashboard = () => {
     closedThisMonth: 0,
   });
   const [loading, setLoading] = useState(true);
-  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [selectedConsult, setSelectedConsult] = useState<EConsult | null>(null);
   const [physicianName, setPhysicianName] = useState("");
 
@@ -138,7 +136,7 @@ const PhysicianDashboard = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/clinician-login');
+    navigate('/provider-login');
   };
 
   const getStatusBadge = (status: EConsultStatus) => {
@@ -169,12 +167,12 @@ const PhysicianDashboard = () => {
   const completedConsults = consults.filter(c => c.status === 'completed');
 
   const navTabs = [
-    { id: 'dashboard', label: 'Dashboard', path: '/physician-dashboard' },
-    { id: 'submit', label: 'Submit E-Consult', path: '/physician-dashboard/submit', action: () => setIsSubmitModalOpen(true) },
-    { id: 'active', label: 'Active Consults', path: '/physician-dashboard/active' },
-    { id: 'completed', label: 'Completed', path: '/physician-dashboard/completed' },
-    { id: 'messages', label: 'Messages', path: '/physician-dashboard/messages' },
-    { id: 'settings', label: 'Settings', path: '/physician-dashboard/settings' },
+    { id: 'dashboard', label: 'Dashboard', path: '/provider-dashboard' },
+    { id: 'submit', label: 'Submit E-Consult', path: '/submit-econsult', action: () => navigate('/submit-econsult') },
+    { id: 'active', label: 'Active Consults', path: '/provider-dashboard/active' },
+    { id: 'completed', label: 'Completed', path: '/provider-dashboard/completed' },
+    { id: 'messages', label: 'Messages', path: '/provider-dashboard/messages' },
+    { id: 'settings', label: 'Settings', path: '/provider-dashboard/settings' },
   ];
 
   return (
@@ -197,7 +195,7 @@ const PhysicianDashboard = () => {
                   key={tab.id}
                   onClick={tab.action ? tab.action : () => navigate(tab.path)}
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                    (tab.id === 'dashboard' && activeTab === 'physician-dashboard') ||
+                    (tab.id === 'dashboard' && activeTab === 'provider-dashboard') ||
                     activeTab === tab.id
                       ? 'bg-primary/10 text-primary'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
@@ -227,7 +225,7 @@ const PhysicianDashboard = () => {
                     <p className="text-xs text-muted-foreground">{user?.email}</p>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate('/physician-dashboard/settings')}>
+                  <DropdownMenuItem onClick={() => navigate('/provider-dashboard/settings')}>
                     <Settings className="mr-2 h-4 w-4" />
                     Settings
                   </DropdownMenuItem>
@@ -262,7 +260,7 @@ const PhysicianDashboard = () => {
                 </div>
                 <Button 
                   size="lg" 
-                  onClick={() => setIsSubmitModalOpen(true)}
+                  onClick={() => navigate('/submit-econsult')}
                   className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 shadow-md hover:shadow-lg transition-all"
                 >
                   <PlusCircle className="mr-2 h-5 w-5" />
@@ -323,7 +321,7 @@ const PhysicianDashboard = () => {
                       <CardTitle className="text-xl">Active E-Consults</CardTitle>
                       <CardDescription>Your pending consultation requests</CardDescription>
                     </div>
-                    <Button variant="outline" size="sm" onClick={() => navigate('/physician-dashboard/active')}>
+                    <Button variant="outline" size="sm" onClick={() => navigate('/provider-dashboard/active')}>
                       View All
                       <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
@@ -335,7 +333,7 @@ const PhysicianDashboard = () => {
                       <FileText className="h-12 w-12 mx-auto text-gray-300 mb-4" />
                       <h3 className="text-lg font-medium text-gray-900 mb-2">No Active Consults</h3>
                       <p className="text-gray-500 mb-6">Submit your first e-consult to get started.</p>
-                      <Button onClick={() => setIsSubmitModalOpen(true)}>
+                      <Button onClick={() => navigate('/submit-econsult')}>
                         <PlusCircle className="mr-2 h-4 w-4" />
                         Submit E-Consult
                       </Button>
@@ -390,7 +388,7 @@ const PhysicianDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start hover:bg-gray-50"
-                      onClick={() => setIsSubmitModalOpen(true)}
+                      onClick={() => navigate('/submit-econsult')}
                     >
                       <Upload className="mr-3 h-4 w-4 text-primary" />
                       Upload Labs
@@ -398,7 +396,7 @@ const PhysicianDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start hover:bg-gray-50"
-                      onClick={() => navigate('/physician-dashboard/messages')}
+                      onClick={() => navigate('/provider-dashboard/messages')}
                     >
                       <MessageSquare className="mr-3 h-4 w-4 text-primary" />
                       Message Specialist
@@ -447,23 +445,14 @@ const PhysicianDashboard = () => {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 md:hidden">
         <Button 
           className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
-          onClick={() => setIsSubmitModalOpen(true)}
+          onClick={() => navigate('/submit-econsult')}
         >
           <PlusCircle className="mr-2 h-5 w-5" />
           Submit New E-Consult
         </Button>
       </div>
 
-      {/* Modals */}
-      <SubmitEConsultModal 
-        isOpen={isSubmitModalOpen} 
-        onClose={() => setIsSubmitModalOpen(false)}
-        onSuccess={() => {
-          setIsSubmitModalOpen(false);
-          fetchConsults();
-        }}
-      />
-
+      {/* E-Consult Detail Modal */}
       {selectedConsult && (
         <EConsultDetailModal
           consult={selectedConsult}
