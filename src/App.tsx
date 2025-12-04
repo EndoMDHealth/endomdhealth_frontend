@@ -19,6 +19,7 @@ import ForSchools from "./pages/ForSchools";
 import ForCommunityPartners from "./pages/ForCommunityPartners";
 import Login from "./pages/Login";
 import ClinicianLogin from "./pages/ClinicianLogin";
+import PhysicianDashboard from "./pages/PhysicianDashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
@@ -29,6 +30,7 @@ import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PhysicianProtectedRoute from "./components/PhysicianProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,8 @@ const App = () => (
             <Route path="/for-community-partners" element={<ForCommunityPartners />} />
             <Route path="/login" element={<Login />} />
             <Route path="/clinician-login" element={<ClinicianLogin />} />
+            <Route path="/physician-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
+            <Route path="/physician-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
