@@ -37,6 +37,12 @@ type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroi
 type PubertalStatus = 'prepubertal' | 'early_puberty' | 'mid_puberty' | 'post_puberty' | 'unknown';
 type InsuranceType = 'medicaid' | 'commercial' | 'self_pay' | 'other';
 
+// Labs available checkboxes
+type LabType = 'a1c' | 'glucose' | 'tsh_t4' | 'lipids' | 'cmp_liver' | 'vitamin_d' | 'bone_labs' | 'morning_cortisol' | 'none';
+
+// Urgency screen checkboxes
+type UrgencyType = 'high_blood_sugar' | 'diabetes_symptoms' | 'severe_fatigue' | 'hypotension' | 'rapid_pubertal_change' | 'none';
+
 interface FormData {
   // Patient Information
   patientFullName: string;
@@ -63,14 +69,60 @@ interface FormData {
   conditionCategory: ConditionCategory | '';
   clinicalQuestion: string;
   additionalNotes: string;
+  
+  // Labs Available
+  labsAvailable: LabType[];
+  
+  // Urgency Screen
+  urgencyFlags: UrgencyType[];
+  
+  // Prior Specialty Care
+  hasPriorEndoVisit: 'yes' | 'no' | '';
+  lastEndoVisitDate: string;
+  
+  // Provider Details
+  referringClinicianName: string;
+  referringClinicianPhone: string;
+  referringClinicianEmail: string;
+  preferredResponseMethod: 'email' | 'fax' | '';
+  
+  // Admin Attestation
+  attestChartInfo: boolean;
+  attestClinicalSupport: boolean;
+  attestUrgentCases: boolean;
+  adminName: string;
+  adminSignature: string;
+  attestationDate: string;
 }
 
 const steps = [
   { id: 1, title: "Patient Info", icon: User },
   { id: 2, title: "Measurements", icon: Ruler },
   { id: 3, title: "Condition", icon: Stethoscope },
-  { id: 4, title: "Clinical Details", icon: FileText },
-  { id: 5, title: "Review", icon: ClipboardCheck },
+  { id: 4, title: "Labs & Urgency", icon: FileText },
+  { id: 5, title: "Provider & Attestation", icon: ClipboardCheck },
+  { id: 6, title: "Review", icon: CheckCircle2 },
+];
+
+const LAB_OPTIONS: { value: LabType; label: string }[] = [
+  { value: 'a1c', label: 'A1c' },
+  { value: 'glucose', label: 'Glucose' },
+  { value: 'tsh_t4', label: 'TSH / Free T4' },
+  { value: 'lipids', label: 'Lipids' },
+  { value: 'cmp_liver', label: 'CMP / Liver enzymes' },
+  { value: 'vitamin_d', label: 'Vitamin D' },
+  { value: 'bone_labs', label: 'Bone labs' },
+  { value: 'morning_cortisol', label: 'Morning cortisol' },
+  { value: 'none', label: 'No recent labs available' },
+];
+
+const URGENCY_OPTIONS: { value: UrgencyType; label: string }[] = [
+  { value: 'high_blood_sugar', label: 'Very high blood sugar' },
+  { value: 'diabetes_symptoms', label: 'Symptoms of diabetes (polyuria, polydipsia, weight loss)' },
+  { value: 'severe_fatigue', label: 'Severe fatigue / vomiting' },
+  { value: 'hypotension', label: 'Hypotension' },
+  { value: 'rapid_pubertal_change', label: 'New rapid pubertal change' },
+  { value: 'none', label: 'None of the above' },
 ];
 
 const PUBERTAL_STATUS_OPTIONS = [
@@ -115,6 +167,20 @@ const SubmitEConsult = () => {
     conditionCategory: "",
     clinicalQuestion: "",
     additionalNotes: "",
+    labsAvailable: [],
+    urgencyFlags: [],
+    hasPriorEndoVisit: "",
+    lastEndoVisitDate: "",
+    referringClinicianName: "",
+    referringClinicianPhone: "",
+    referringClinicianEmail: "",
+    preferredResponseMethod: "",
+    attestChartInfo: false,
+    attestClinicalSupport: false,
+    attestUrgentCases: false,
+    adminName: "",
+    adminSignature: "",
+    attestationDate: new Date().toISOString().split('T')[0],
   });
 
   // Calculate patient age from DOB
@@ -166,8 +232,38 @@ const SubmitEConsult = () => {
 
   const hasAnyFlag = Object.values(pedraFlags).some(Boolean);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof FormData, value: string | boolean | LabType[] | UrgencyType[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleLabToggle = (lab: LabType) => {
+    setFormData((prev) => {
+      // If selecting "none", clear all others
+      if (lab === 'none') {
+        return { ...prev, labsAvailable: prev.labsAvailable.includes('none') ? [] : ['none'] };
+      }
+      // If selecting a lab, remove "none" if present
+      const withoutNone = prev.labsAvailable.filter(l => l !== 'none');
+      if (withoutNone.includes(lab)) {
+        return { ...prev, labsAvailable: withoutNone.filter(l => l !== lab) };
+      }
+      return { ...prev, labsAvailable: [...withoutNone, lab] };
+    });
+  };
+
+  const handleUrgencyToggle = (urgency: UrgencyType) => {
+    setFormData((prev) => {
+      // If selecting "none", clear all others
+      if (urgency === 'none') {
+        return { ...prev, urgencyFlags: prev.urgencyFlags.includes('none') ? [] : ['none'] };
+      }
+      // If selecting an urgency, remove "none" if present
+      const withoutNone = prev.urgencyFlags.filter(u => u !== 'none');
+      if (withoutNone.includes(urgency)) {
+        return { ...prev, urgencyFlags: withoutNone.filter(u => u !== urgency) };
+      }
+      return { ...prev, urgencyFlags: [...withoutNone, urgency] };
+    });
   };
 
   const validateStep = (step: number): boolean => {
@@ -180,6 +276,17 @@ const SubmitEConsult = () => {
         return !!formData.conditionCategory;
       case 4:
         return !!formData.clinicalQuestion;
+      case 5:
+        return !!(
+          formData.referringClinicianName &&
+          formData.referringClinicianEmail &&
+          formData.preferredResponseMethod &&
+          formData.attestChartInfo &&
+          formData.attestClinicalSupport &&
+          formData.attestUrgentCases &&
+          formData.adminName &&
+          formData.adminSignature
+        );
       default:
         return true;
     }
@@ -187,7 +294,7 @@ const SubmitEConsult = () => {
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep((prev) => Math.min(prev + 1, 5));
+      setCurrentStep((prev) => Math.min(prev + 1, 6));
     } else {
       toast({
         title: "Required fields missing",
@@ -674,47 +781,291 @@ const SubmitEConsult = () => {
                 </div>
               )}
 
-              {/* Step 4: Clinical Question */}
+              {/* Step 4: Labs & Urgency */}
               {currentStep === 4 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
+                  {/* Clinical Question */}
                   <div className="space-y-2">
                     <Label htmlFor="question" className="text-lg">Clinical Question *</Label>
                     <Textarea
                       id="question"
                       placeholder="Describe your clinical question or the guidance you're seeking..."
-                      rows={5}
+                      rows={4}
                       value={formData.clinicalQuestion}
                       onChange={(e) => handleInputChange("clinicalQuestion", e.target.value)}
                       className="resize-none"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="notes">Additional Notes (optional)</Label>
                     <Textarea
                       id="notes"
                       placeholder="Any additional context, history, or information..."
-                      rows={3}
+                      rows={2}
                       value={formData.additionalNotes}
                       onChange={(e) => handleInputChange("additionalNotes", e.target.value)}
                       className="resize-none"
                     />
                   </div>
-                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                    <div className="flex items-start gap-3">
-                      <Upload className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-700">Lab & Document Upload</p>
-                        <p className="text-xs text-gray-500">
-                          File upload feature coming soon. For now, include relevant lab values in your notes.
-                        </p>
+
+                  {/* Recent Labs Available */}
+                  <div className="space-y-3">
+                    <Label className="text-lg">Recent Labs Available? (Check all that apply)</Label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {LAB_OPTIONS.map((option) => (
+                        <label
+                          key={option.value}
+                          className={cn(
+                            "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                            formData.labsAvailable.includes(option.value)
+                              ? "border-primary bg-primary/5"
+                              : "border-gray-200 hover:bg-gray-50"
+                          )}
+                        >
+                          <Checkbox
+                            checked={formData.labsAvailable.includes(option.value)}
+                            onCheckedChange={() => handleLabToggle(option.value)}
+                          />
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Urgency Screen */}
+                  <div className="space-y-3">
+                    <Label className="text-lg">Urgency Screen (Check any that apply)</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {URGENCY_OPTIONS.map((option) => (
+                        <label
+                          key={option.value}
+                          className={cn(
+                            "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                            formData.urgencyFlags.includes(option.value)
+                              ? "border-amber-500 bg-amber-50"
+                              : "border-gray-200 hover:bg-gray-50"
+                          )}
+                        >
+                          <Checkbox
+                            checked={formData.urgencyFlags.includes(option.value)}
+                            onCheckedChange={() => handleUrgencyToggle(option.value)}
+                          />
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Prior Specialty Care */}
+                  <div className="space-y-3">
+                    <Label className="text-lg">Prior Specialty Care</Label>
+                    <p className="text-sm text-muted-foreground">Has patient ever seen Pediatric Endocrinology?</p>
+                    <div className="flex gap-4">
+                      <label
+                        className={cn(
+                          "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                          formData.hasPriorEndoVisit === 'no'
+                            ? "border-primary bg-primary/5"
+                            : "border-gray-200 hover:bg-gray-50"
+                        )}
+                      >
+                        <Checkbox
+                          checked={formData.hasPriorEndoVisit === 'no'}
+                          onCheckedChange={(checked) => 
+                            handleInputChange("hasPriorEndoVisit", checked ? 'no' : "")
+                          }
+                        />
+                        <span className="text-sm font-medium">No</span>
+                      </label>
+                      <label
+                        className={cn(
+                          "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                          formData.hasPriorEndoVisit === 'yes'
+                            ? "border-primary bg-primary/5"
+                            : "border-gray-200 hover:bg-gray-50"
+                        )}
+                      >
+                        <Checkbox
+                          checked={formData.hasPriorEndoVisit === 'yes'}
+                          onCheckedChange={(checked) => 
+                            handleInputChange("hasPriorEndoVisit", checked ? 'yes' : "")
+                          }
+                        />
+                        <span className="text-sm font-medium">Yes</span>
+                      </label>
+                    </div>
+                    {formData.hasPriorEndoVisit === 'yes' && (
+                      <div className="space-y-2 mt-3">
+                        <Label htmlFor="lastEndoVisit">Last visit date</Label>
+                        <Input
+                          id="lastEndoVisit"
+                          type="date"
+                          value={formData.lastEndoVisitDate}
+                          onChange={(e) => handleInputChange("lastEndoVisitDate", e.target.value)}
+                          className="h-12 max-w-xs"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 5: Provider Details & Admin Attestation */}
+              {currentStep === 5 && (
+                <div className="space-y-8">
+                  {/* Provider Details */}
+                  <div className="space-y-4">
+                    <Label className="text-lg">Provider Details</Label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="clinicianName">Referring Clinician Name *</Label>
+                        <Input
+                          id="clinicianName"
+                          placeholder="e.g., Dr. Jane Smith"
+                          value={formData.referringClinicianName}
+                          onChange={(e) => handleInputChange("referringClinicianName", e.target.value)}
+                          className="h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="clinicianPhone">Phone</Label>
+                        <Input
+                          id="clinicianPhone"
+                          type="tel"
+                          placeholder="e.g., (555) 123-4567"
+                          value={formData.referringClinicianPhone}
+                          onChange={(e) => handleInputChange("referringClinicianPhone", e.target.value)}
+                          className="h-12"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="clinicianEmail">Secure Email *</Label>
+                        <Input
+                          id="clinicianEmail"
+                          type="email"
+                          placeholder="e.g., jane.smith@clinic.com"
+                          value={formData.referringClinicianEmail}
+                          onChange={(e) => handleInputChange("referringClinicianEmail", e.target.value)}
+                          className="h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Preferred Response Method *</Label>
+                        <div className="flex gap-4">
+                          <label
+                            className={cn(
+                              "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                              formData.preferredResponseMethod === 'email'
+                                ? "border-primary bg-primary/5"
+                                : "border-gray-200 hover:bg-gray-50"
+                            )}
+                          >
+                            <Checkbox
+                              checked={formData.preferredResponseMethod === 'email'}
+                              onCheckedChange={(checked) => 
+                                handleInputChange("preferredResponseMethod", checked ? 'email' : "")
+                              }
+                            />
+                            <span className="text-sm font-medium">Secure Email</span>
+                          </label>
+                          <label
+                            className={cn(
+                              "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                              formData.preferredResponseMethod === 'fax'
+                                ? "border-primary bg-primary/5"
+                                : "border-gray-200 hover:bg-gray-50"
+                            )}
+                          >
+                            <Checkbox
+                              checked={formData.preferredResponseMethod === 'fax'}
+                              onCheckedChange={(checked) => 
+                                handleInputChange("preferredResponseMethod", checked ? 'fax' : "")
+                              }
+                            />
+                            <span className="text-sm font-medium">Fax</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Admin Attestation */}
+                  <div className="space-y-4">
+                    <Label className="text-lg">Admin Attestation (Required)</Label>
+                    <div className="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                      <label className="flex items-start gap-3 cursor-pointer">
+                        <Checkbox
+                          checked={formData.attestChartInfo}
+                          onCheckedChange={(checked) => 
+                            handleInputChange("attestChartInfo", !!checked)
+                          }
+                          className="mt-0.5"
+                        />
+                        <span className="text-sm">I confirm that this request reflects documented chart information *</span>
+                      </label>
+                      <label className="flex items-start gap-3 cursor-pointer">
+                        <Checkbox
+                          checked={formData.attestClinicalSupport}
+                          onCheckedChange={(checked) => 
+                            handleInputChange("attestClinicalSupport", !!checked)
+                          }
+                          className="mt-0.5"
+                        />
+                        <span className="text-sm">This request is for clinical decision support only, not emergency care *</span>
+                      </label>
+                      <label className="flex items-start gap-3 cursor-pointer">
+                        <Checkbox
+                          checked={formData.attestUrgentCases}
+                          onCheckedChange={(checked) => 
+                            handleInputChange("attestUrgentCases", !!checked)
+                          }
+                          className="mt-0.5"
+                        />
+                        <span className="text-sm">Urgent cases remain directed to ED or on-call specialty services *</span>
+                      </label>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="adminName">Admin Name *</Label>
+                        <Input
+                          id="adminName"
+                          placeholder="e.g., Mary Johnson"
+                          value={formData.adminName}
+                          onChange={(e) => handleInputChange("adminName", e.target.value)}
+                          className="h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="adminSignature">Signature *</Label>
+                        <Input
+                          id="adminSignature"
+                          placeholder="Type your name as signature"
+                          value={formData.adminSignature}
+                          onChange={(e) => handleInputChange("adminSignature", e.target.value)}
+                          className="h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="attestDate">Date *</Label>
+                        <Input
+                          id="attestDate"
+                          type="date"
+                          value={formData.attestationDate}
+                          onChange={(e) => handleInputChange("attestationDate", e.target.value)}
+                          className="h-12"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Step 5: Review */}
-              {currentStep === 5 && (
+              {/* Step 6: Review */}
+              {currentStep === 6 && (
                 <div className="space-y-6">
                   <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                     <h4 className="font-semibold text-gray-900 text-lg">Review Your Submission</h4>
@@ -806,6 +1157,81 @@ const SubmitEConsult = () => {
                       <span className="text-gray-500 text-sm">Clinical Question:</span>
                       <p className="text-gray-900">{formData.clinicalQuestion}</p>
                     </div>
+
+                    {/* Labs Available */}
+                    {formData.labsAvailable.length > 0 && (
+                      <div className="pt-4 border-t border-gray-200 space-y-1">
+                        <span className="text-gray-500 text-sm">Labs Available:</span>
+                        <p className="text-gray-900">
+                          {formData.labsAvailable.map(lab => 
+                            LAB_OPTIONS.find(o => o.value === lab)?.label
+                          ).join(', ')}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Urgency Flags */}
+                    {formData.urgencyFlags.length > 0 && !formData.urgencyFlags.includes('none') && (
+                      <div className="pt-4 border-t border-gray-200 space-y-1">
+                        <span className="text-amber-700 text-sm font-medium">Urgency Flags:</span>
+                        <ul className="text-sm text-amber-800 list-disc list-inside">
+                          {formData.urgencyFlags.map(flag => (
+                            <li key={flag}>{URGENCY_OPTIONS.find(o => o.value === flag)?.label}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Prior Endo Visit */}
+                    {formData.hasPriorEndoVisit && (
+                      <div className="pt-4 border-t border-gray-200 space-y-1">
+                        <span className="text-gray-500 text-sm">Prior Pediatric Endocrinology Visit:</span>
+                        <p className="text-gray-900">
+                          {formData.hasPriorEndoVisit === 'yes' 
+                            ? `Yes${formData.lastEndoVisitDate ? ` (Last visit: ${formData.lastEndoVisitDate})` : ''}` 
+                            : 'No'}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Provider Details */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <span className="text-gray-500 text-sm block mb-2">Referring Provider:</span>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="text-gray-500">Name:</span>
+                          <p className="font-medium">{formData.referringClinicianName}</p>
+                        </div>
+                        <div>
+                          <span className="text-gray-500">Email:</span>
+                          <p className="font-medium">{formData.referringClinicianEmail}</p>
+                        </div>
+                        {formData.referringClinicianPhone && (
+                          <div>
+                            <span className="text-gray-500">Phone:</span>
+                            <p className="font-medium">{formData.referringClinicianPhone}</p>
+                          </div>
+                        )}
+                        <div>
+                          <span className="text-gray-500">Preferred Response:</span>
+                          <p className="font-medium capitalize">{formData.preferredResponseMethod}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Attestation Summary */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <span className="text-gray-500 text-sm block mb-2">Attestation:</span>
+                      <div className="text-sm space-y-1">
+                        <p className="text-green-700">✓ Chart information confirmed</p>
+                        <p className="text-green-700">✓ Clinical decision support only</p>
+                        <p className="text-green-700">✓ Urgent cases directed appropriately</p>
+                        <p className="mt-2 text-gray-900">
+                          <span className="text-gray-500">Signed by:</span> {formData.adminName} on {formData.attestationDate}
+                        </p>
+                      </div>
+                    </div>
+
                     {formData.additionalNotes && (
                       <div className="pt-4 border-t border-gray-200 space-y-1">
                         <span className="text-gray-500 text-sm">Additional Notes:</span>
@@ -833,7 +1259,7 @@ const SubmitEConsult = () => {
                 {currentStep === 1 ? "Cancel" : "Back"}
               </Button>
               
-              {currentStep < 5 ? (
+              {currentStep < 6 ? (
                 <Button size="lg" onClick={handleNext}>
                   Next
                   <ChevronRight className="ml-1 h-4 w-4" />
