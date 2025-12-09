@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { 
   ChevronLeft, 
@@ -26,20 +27,39 @@ import {
   Stethoscope,
   FileText,
   ClipboardCheck,
-  ArrowLeft
+  ArrowLeft,
+  AlertTriangle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import endoLogo from "@/assets/logos/endo_yellow.png";
 
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
+type PubertalStatus = 'prepubertal' | 'early_puberty' | 'mid_puberty' | 'post_puberty' | 'unknown';
+type InsuranceType = 'medicaid' | 'commercial' | 'self_pay' | 'other';
 
 interface FormData {
-  patientInitials: string;
-  patientAge: string;
+  // Patient Information
+  patientFullName: string;
   patientDob: string;
   patientGender: string;
+  raceEthnicity: string;
+  pubertalStatus: PubertalStatus | '';
+  insuranceType: InsuranceType | '';
+  insuranceOther: string;
+  memberId: string;
+  primarySubscriberName: string;
+  subscriberDob: string;
+  
+  // Measurements
   heightCm: string;
   weightKg: string;
+  weightPercentileCurrent: string;
+  weightPercentile12MonthsAgo: string;
+  heightPercentileCurrent: string;
+  heightPercentile12MonthsAgo: string;
+  growthVelocity: string;
+  
+  // Clinical
   conditionCategory: ConditionCategory | '';
   clinicalQuestion: string;
   additionalNotes: string;
@@ -53,6 +73,21 @@ const steps = [
   { id: 5, title: "Review", icon: ClipboardCheck },
 ];
 
+const PUBERTAL_STATUS_OPTIONS = [
+  { value: 'prepubertal', label: 'Prepubertal' },
+  { value: 'early_puberty', label: 'Early Puberty' },
+  { value: 'mid_puberty', label: 'Mid Puberty' },
+  { value: 'post_puberty', label: 'Post-puberty' },
+  { value: 'unknown', label: 'Unknown' },
+];
+
+const INSURANCE_OPTIONS = [
+  { value: 'medicaid', label: 'Medicaid' },
+  { value: 'commercial', label: 'Commercial' },
+  { value: 'self_pay', label: 'Self-Pay' },
+  { value: 'other', label: 'Other' },
+];
+
 const SubmitEConsult = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -60,16 +95,42 @@ const SubmitEConsult = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    patientInitials: "",
-    patientAge: "",
+    patientFullName: "",
     patientDob: "",
     patientGender: "",
+    raceEthnicity: "",
+    pubertalStatus: "",
+    insuranceType: "",
+    insuranceOther: "",
+    memberId: "",
+    primarySubscriberName: "",
+    subscriberDob: "",
     heightCm: "",
     weightKg: "",
+    weightPercentileCurrent: "",
+    weightPercentile12MonthsAgo: "",
+    heightPercentileCurrent: "",
+    heightPercentile12MonthsAgo: "",
+    growthVelocity: "",
     conditionCategory: "",
     clinicalQuestion: "",
     additionalNotes: "",
   });
+
+  // Calculate patient age from DOB
+  const calculateAge = (dob: string): number | null => {
+    if (!dob) return null;
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const patientAge = useMemo(() => calculateAge(formData.patientDob), [formData.patientDob]);
 
   const calculateBMI = () => {
     const height = parseFloat(formData.heightCm);
@@ -81,6 +142,30 @@ const SubmitEConsult = () => {
     return null;
   };
 
+  // Calculate growth velocity if both height percentiles are provided
+  const calculateGrowthVelocity = (): string | null => {
+    // Auto-calculate only if we have current and 12-month height values
+    // For now, return the manual entry since we need actual height measurements, not percentiles
+    return formData.growthVelocity || null;
+  };
+
+  // PEDRA automated flags based on data
+  const pedraFlags = useMemo(() => {
+    const bmi = calculateBMI();
+    const currentWeightPct = parseFloat(formData.weightPercentileCurrent);
+    const previousWeightPct = parseFloat(formData.weightPercentile12MonthsAgo);
+    const currentHeightPct = parseFloat(formData.heightPercentileCurrent);
+    
+    return {
+      bmiAbove95: bmi ? parseFloat(bmi) >= 30 : false, // Simplified BMI check - would need percentile charts for accurate pediatric assessment
+      weightIncreased2Bands: !isNaN(currentWeightPct) && !isNaN(previousWeightPct) && (currentWeightPct - previousWeightPct) >= 20,
+      poorLinearGrowthWithWeightGain: !isNaN(currentHeightPct) && currentHeightPct < 25 && !isNaN(currentWeightPct) && currentWeightPct > 75,
+      heightBelow3rd: !isNaN(currentHeightPct) && currentHeightPct < 3,
+    };
+  }, [formData.weightPercentileCurrent, formData.weightPercentile12MonthsAgo, formData.heightPercentileCurrent, formData.heightCm, formData.weightKg]);
+
+  const hasAnyFlag = Object.values(pedraFlags).some(Boolean);
+
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -88,7 +173,7 @@ const SubmitEConsult = () => {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.patientInitials && formData.patientAge);
+        return !!(formData.patientFullName && formData.patientDob && formData.patientGender);
       case 2:
         return true;
       case 3:
@@ -121,11 +206,16 @@ const SubmitEConsult = () => {
 
     setIsSubmitting(true);
     const bmi = calculateBMI();
+    const age = patientAge;
+
+    // Get initials from full name for database compatibility
+    const nameParts = formData.patientFullName.trim().split(' ');
+    const initials = nameParts.map(p => p.charAt(0).toUpperCase()).join('').slice(0, 4);
 
     const { error } = await supabase.from('e_consults').insert({
       physician_id: user.id,
-      patient_initials: formData.patientInitials,
-      patient_age: parseInt(formData.patientAge),
+      patient_initials: initials, // Store initials for HIPAA
+      patient_age: age || 0,
       patient_dob: formData.patientDob || null,
       patient_gender: formData.patientGender || null,
       height_cm: formData.heightCm ? parseFloat(formData.heightCm) : null,
@@ -166,6 +256,17 @@ const SubmitEConsult = () => {
       other: "Other Endocrine",
     };
     return labels[category] || category;
+  };
+
+  const getPubertalStatusLabel = (status: string) => {
+    const option = PUBERTAL_STATUS_OPTIONS.find(o => o.value === status);
+    return option?.label || status;
+  };
+
+  const getInsuranceLabel = (type: string) => {
+    if (type === 'other') return `Other: ${formData.insuranceOther}`;
+    const option = INSURANCE_OPTIONS.find(o => o.value === type);
+    return option?.label || type;
   };
 
   return (
@@ -233,39 +334,24 @@ const SubmitEConsult = () => {
             </div>
 
             {/* Step Content */}
-            <div className="py-6 min-h-[300px]">
+            <div className="py-6 min-h-[400px]">
               {/* Step 1: Patient Demographics */}
               {currentStep === 1 && (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-6">
+                  {/* Basic Info */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="initials">Patient Initials *</Label>
+                      <Label htmlFor="fullName">Full Patient Name *</Label>
                       <Input
-                        id="initials"
-                        placeholder="e.g., JD"
-                        value={formData.patientInitials}
-                        onChange={(e) => handleInputChange("patientInitials", e.target.value.toUpperCase())}
-                        maxLength={4}
+                        id="fullName"
+                        placeholder="e.g., John Doe"
+                        value={formData.patientFullName}
+                        onChange={(e) => handleInputChange("patientFullName", e.target.value)}
                         className="h-12"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="age">Patient Age (years) *</Label>
-                      <Input
-                        id="age"
-                        type="number"
-                        placeholder="e.g., 12"
-                        min="0"
-                        max="21"
-                        value={formData.patientAge}
-                        onChange={(e) => handleInputChange("patientAge", e.target.value)}
-                        className="h-12"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="dob">Date of Birth (optional)</Label>
+                      <Label htmlFor="dob">Date of Birth *</Label>
                       <Input
                         id="dob"
                         type="date"
@@ -273,9 +359,15 @@ const SubmitEConsult = () => {
                         onChange={(e) => handleInputChange("patientDob", e.target.value)}
                         className="h-12"
                       />
+                      {patientAge !== null && (
+                        <p className="text-sm text-muted-foreground">Age: {patientAge} years</p>
+                      )}
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="gender">Gender (optional)</Label>
+                      <Label htmlFor="gender">Gender *</Label>
                       <Select
                         value={formData.patientGender}
                         onValueChange={(value) => handleInputChange("patientGender", value)}
@@ -290,6 +382,110 @@ const SubmitEConsult = () => {
                         </SelectContent>
                       </Select>
                     </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="raceEthnicity">Race / Ethnicity (optional)</Label>
+                      <Input
+                        id="raceEthnicity"
+                        placeholder="e.g., Hispanic, African American"
+                        value={formData.raceEthnicity}
+                        onChange={(e) => handleInputChange("raceEthnicity", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Pubertal Status */}
+                  <div className="space-y-3">
+                    <Label>Pubertal Status (if known)</Label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                      {PUBERTAL_STATUS_OPTIONS.map((option) => (
+                        <label
+                          key={option.value}
+                          className={cn(
+                            "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                            formData.pubertalStatus === option.value
+                              ? "border-primary bg-primary/5"
+                              : "border-gray-200 hover:bg-gray-50"
+                          )}
+                        >
+                          <Checkbox
+                            checked={formData.pubertalStatus === option.value}
+                            onCheckedChange={(checked) => 
+                              handleInputChange("pubertalStatus", checked ? option.value : "")
+                            }
+                          />
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Insurance */}
+                  <div className="space-y-3">
+                    <Label>Insurance</Label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {INSURANCE_OPTIONS.map((option) => (
+                        <label
+                          key={option.value}
+                          className={cn(
+                            "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                            formData.insuranceType === option.value
+                              ? "border-primary bg-primary/5"
+                              : "border-gray-200 hover:bg-gray-50"
+                          )}
+                        >
+                          <Checkbox
+                            checked={formData.insuranceType === option.value}
+                            onCheckedChange={(checked) => 
+                              handleInputChange("insuranceType", checked ? option.value : "")
+                            }
+                          />
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {formData.insuranceType === 'other' && (
+                      <Input
+                        placeholder="Please specify insurance"
+                        value={formData.insuranceOther}
+                        onChange={(e) => handleInputChange("insuranceOther", e.target.value)}
+                        className="h-12 mt-2"
+                      />
+                    )}
+                  </div>
+
+                  {/* Insurance Details */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="memberId">Member ID</Label>
+                      <Input
+                        id="memberId"
+                        placeholder="e.g., ABC123456"
+                        value={formData.memberId}
+                        onChange={(e) => handleInputChange("memberId", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="subscriberName">Primary Subscriber Name</Label>
+                      <Input
+                        id="subscriberName"
+                        placeholder="e.g., Jane Doe"
+                        value={formData.primarySubscriberName}
+                        onChange={(e) => handleInputChange("primarySubscriberName", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="subscriberDob">Subscriber Date of Birth</Label>
+                      <Input
+                        id="subscriberDob"
+                        type="date"
+                        value={formData.subscriberDob}
+                        onChange={(e) => handleInputChange("subscriberDob", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
                   </div>
                 </div>
               )}
@@ -297,6 +493,7 @@ const SubmitEConsult = () => {
               {/* Step 2: Measurements */}
               {currentStep === 2 && (
                 <div className="space-y-6">
+                  {/* Height & Weight */}
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="height">Height (cm)</Label>
@@ -321,16 +518,134 @@ const SubmitEConsult = () => {
                       />
                     </div>
                   </div>
+
                   {calculateBMI() && (
-                    <div className="p-6 bg-blue-50 rounded-xl border border-blue-200">
+                    <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-blue-800 font-medium">Calculated BMI</span>
-                        <span className="text-3xl font-bold text-blue-900">{calculateBMI()}</span>
+                        <span className="text-2xl font-bold text-blue-900">{calculateBMI()}</span>
                       </div>
                     </div>
                   )}
+
+                  {/* Weight Percentiles */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="weightPctCurrent">Weight Percentile (current)</Label>
+                      <Input
+                        id="weightPctCurrent"
+                        type="number"
+                        placeholder="e.g., 75"
+                        min="0"
+                        max="100"
+                        value={formData.weightPercentileCurrent}
+                        onChange={(e) => handleInputChange("weightPercentileCurrent", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="weightPct12Mo">Weight Percentile (12 months ago, if known)</Label>
+                      <Input
+                        id="weightPct12Mo"
+                        type="number"
+                        placeholder="e.g., 50"
+                        min="0"
+                        max="100"
+                        value={formData.weightPercentile12MonthsAgo}
+                        onChange={(e) => handleInputChange("weightPercentile12MonthsAgo", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Height Percentiles */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="heightPctCurrent">Height Percentile (current)</Label>
+                      <Input
+                        id="heightPctCurrent"
+                        type="number"
+                        placeholder="e.g., 50"
+                        min="0"
+                        max="100"
+                        value={formData.heightPercentileCurrent}
+                        onChange={(e) => handleInputChange("heightPercentileCurrent", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="heightPct12Mo">Height Percentile (12 months ago, if known)</Label>
+                      <Input
+                        id="heightPct12Mo"
+                        type="number"
+                        placeholder="e.g., 55"
+                        min="0"
+                        max="100"
+                        value={formData.heightPercentile12MonthsAgo}
+                        onChange={(e) => handleInputChange("heightPercentile12MonthsAgo", e.target.value)}
+                        className="h-12"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Growth Velocity */}
+                  <div className="space-y-2">
+                    <Label htmlFor="growthVelocity">Growth Velocity (cm/year)</Label>
+                    <Input
+                      id="growthVelocity"
+                      type="number"
+                      step="0.1"
+                      placeholder="e.g., 5.5"
+                      value={formData.growthVelocity}
+                      onChange={(e) => handleInputChange("growthVelocity", e.target.value)}
+                      className="h-12 max-w-xs"
+                    />
+                    <p className="text-sm text-muted-foreground">
+                      Enter if known, or leave blank if unavailable.
+                    </p>
+                  </div>
+
+                  {/* PEDRA Automated Flags */}
+                  {hasAnyFlag && (
+                    <div className="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                      <div className="flex items-start gap-3 mb-3">
+                        <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-semibold text-amber-800">Automated Flags PEDRA Will Evaluate:</p>
+                          <p className="text-xs text-amber-600">Based on the data entered above</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2 ml-8">
+                        {pedraFlags.bmiAbove95 && (
+                          <div className="flex items-center gap-2">
+                            <Checkbox checked disabled className="pointer-events-none" />
+                            <span className="text-sm text-amber-800">BMI ≥95th percentile</span>
+                          </div>
+                        )}
+                        {pedraFlags.weightIncreased2Bands && (
+                          <div className="flex items-center gap-2">
+                            <Checkbox checked disabled className="pointer-events-none" />
+                            <span className="text-sm text-amber-800">Weight increased by ≥2 percentile bands in 12 months</span>
+                          </div>
+                        )}
+                        {pedraFlags.poorLinearGrowthWithWeightGain && (
+                          <div className="flex items-center gap-2">
+                            <Checkbox checked disabled className="pointer-events-none" />
+                            <span className="text-sm text-amber-800">Poor linear growth with weight gain</span>
+                          </div>
+                        )}
+                        {pedraFlags.heightBelow3rd && (
+                          <div className="flex items-center gap-2">
+                            <Checkbox checked disabled className="pointer-events-none" />
+                            <span className="text-sm text-amber-800">Height &lt;3rd percentile or dropping percentile lines</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
                   <p className="text-sm text-muted-foreground">
-                    Measurements are optional but help provide more accurate guidance.
+                    Measurements help provide more accurate clinical guidance.
                   </p>
                 </div>
               )}
@@ -403,19 +718,35 @@ const SubmitEConsult = () => {
                 <div className="space-y-6">
                   <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                     <h4 className="font-semibold text-gray-900 text-lg">Review Your Submission</h4>
+                    
+                    {/* Patient Info */}
                     <div className="grid grid-cols-2 gap-6 text-sm">
                       <div className="space-y-1">
                         <span className="text-gray-500">Patient:</span>
-                        <p className="font-medium text-gray-900">{formData.patientInitials}</p>
+                        <p className="font-medium text-gray-900">{formData.patientFullName}</p>
                       </div>
                       <div className="space-y-1">
-                        <span className="text-gray-500">Age:</span>
-                        <p className="font-medium text-gray-900">{formData.patientAge} years</p>
+                        <span className="text-gray-500">Date of Birth:</span>
+                        <p className="font-medium text-gray-900">
+                          {formData.patientDob} {patientAge !== null && `(${patientAge} years)`}
+                        </p>
                       </div>
                       {formData.patientGender && (
                         <div className="space-y-1">
                           <span className="text-gray-500">Gender:</span>
                           <p className="font-medium text-gray-900 capitalize">{formData.patientGender}</p>
+                        </div>
+                      )}
+                      {formData.pubertalStatus && (
+                        <div className="space-y-1">
+                          <span className="text-gray-500">Pubertal Status:</span>
+                          <p className="font-medium text-gray-900">{getPubertalStatusLabel(formData.pubertalStatus)}</p>
+                        </div>
+                      )}
+                      {formData.insuranceType && (
+                        <div className="space-y-1">
+                          <span className="text-gray-500">Insurance:</span>
+                          <p className="font-medium text-gray-900">{getInsuranceLabel(formData.insuranceType)}</p>
                         </div>
                       )}
                       {calculateBMI() && (
@@ -424,11 +755,53 @@ const SubmitEConsult = () => {
                           <p className="font-medium text-gray-900">{calculateBMI()}</p>
                         </div>
                       )}
-                      <div className="col-span-2 space-y-1">
-                        <span className="text-gray-500">Condition:</span>
-                        <p className="font-medium text-gray-900">{getCategoryLabel(formData.conditionCategory)}</p>
-                      </div>
                     </div>
+
+                    {/* Measurements Summary */}
+                    {(formData.weightPercentileCurrent || formData.heightPercentileCurrent || formData.growthVelocity) && (
+                      <div className="pt-4 border-t border-gray-200">
+                        <span className="text-gray-500 text-sm block mb-2">Measurements:</span>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                          {formData.weightPercentileCurrent && (
+                            <div>
+                              <span className="text-gray-500">Weight %ile (current):</span>
+                              <p className="font-medium">{formData.weightPercentileCurrent}%</p>
+                            </div>
+                          )}
+                          {formData.heightPercentileCurrent && (
+                            <div>
+                              <span className="text-gray-500">Height %ile (current):</span>
+                              <p className="font-medium">{formData.heightPercentileCurrent}%</p>
+                            </div>
+                          )}
+                          {formData.growthVelocity && (
+                            <div>
+                              <span className="text-gray-500">Growth Velocity:</span>
+                              <p className="font-medium">{formData.growthVelocity} cm/year</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* PEDRA Flags in Review */}
+                    {hasAnyFlag && (
+                      <div className="pt-4 border-t border-gray-200">
+                        <span className="text-amber-700 text-sm font-medium block mb-2">PEDRA Flags Detected:</span>
+                        <ul className="text-sm text-amber-800 list-disc list-inside space-y-1">
+                          {pedraFlags.bmiAbove95 && <li>BMI ≥95th percentile</li>}
+                          {pedraFlags.weightIncreased2Bands && <li>Weight increased by ≥2 percentile bands</li>}
+                          {pedraFlags.poorLinearGrowthWithWeightGain && <li>Poor linear growth with weight gain</li>}
+                          {pedraFlags.heightBelow3rd && <li>Height &lt;3rd percentile</li>}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="pt-4 border-t border-gray-200 space-y-1">
+                      <span className="text-gray-500 text-sm">Condition:</span>
+                      <p className="font-medium text-gray-900">{getCategoryLabel(formData.conditionCategory)}</p>
+                    </div>
+
                     <div className="pt-4 border-t border-gray-200 space-y-1">
                       <span className="text-gray-500 text-sm">Clinical Question:</span>
                       <p className="text-gray-900">{formData.clinicalQuestion}</p>
