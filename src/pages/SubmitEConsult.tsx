@@ -36,6 +36,7 @@ import endoLogo from "@/assets/logos/endo_yellow.png";
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
 type PubertalStatus = 'prepubertal' | 'early_puberty' | 'mid_puberty' | 'post_puberty' | 'unknown';
 type InsuranceType = 'medicaid' | 'commercial' | 'self_pay' | 'other';
+type ResponseMethod = 'email' | 'fax' | 'portal' | '';
 
 // Labs available checkboxes
 type LabType = 'a1c' | 'glucose' | 'tsh_t4' | 'lipids' | 'cmp_liver' | 'vitamin_d' | 'bone_labs' | 'morning_cortisol' | 'none';
@@ -84,7 +85,13 @@ interface FormData {
   referringClinicianName: string;
   referringClinicianPhone: string;
   referringClinicianEmail: string;
-  preferredResponseMethod: 'email' | 'fax' | '';
+  preferredResponseMethod: ResponseMethod;
+  
+  // Document Upload
+  uploadedFiles: File[];
+  
+  // Height measurements for growth velocity calculation
+  heightCm12MonthsAgo: string;
   
   // Admin Attestation
   attestChartInfo: boolean;
@@ -175,6 +182,8 @@ const SubmitEConsult = () => {
     referringClinicianPhone: "",
     referringClinicianEmail: "",
     preferredResponseMethod: "",
+    uploadedFiles: [],
+    heightCm12MonthsAgo: "",
     attestChartInfo: false,
     attestClinicalSupport: false,
     attestUrgentCases: false,
@@ -208,12 +217,17 @@ const SubmitEConsult = () => {
     return null;
   };
 
-  // Calculate growth velocity if both height percentiles are provided
-  const calculateGrowthVelocity = (): string | null => {
-    // Auto-calculate only if we have current and 12-month height values
-    // For now, return the manual entry since we need actual height measurements, not percentiles
+  // Auto-calculate growth velocity based on current height and height from 12 months ago
+  const calculatedGrowthVelocity = useMemo((): string | null => {
+    const currentHeight = parseFloat(formData.heightCm);
+    const previousHeight = parseFloat(formData.heightCm12MonthsAgo);
+    
+    if (currentHeight && previousHeight && currentHeight > previousHeight) {
+      const velocity = currentHeight - previousHeight; // cm per year (since it's a 12-month difference)
+      return velocity.toFixed(1);
+    }
     return formData.growthVelocity || null;
-  };
+  }, [formData.heightCm, formData.heightCm12MonthsAgo, formData.growthVelocity]);
 
   // PEDRA automated flags based on data
   const pedraFlags = useMemo(() => {
@@ -269,7 +283,8 @@ const SubmitEConsult = () => {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.patientFullName && formData.patientDob && formData.patientGender);
+        // Insurance is now mandatory
+        return !!(formData.patientFullName && formData.patientDob && formData.patientGender && formData.insuranceType);
       case 2:
         return true;
       case 3:
@@ -277,10 +292,10 @@ const SubmitEConsult = () => {
       case 4:
         return !!formData.clinicalQuestion;
       case 5:
+        // Preferred response method is now optional
         return !!(
           formData.referringClinicianName &&
           formData.referringClinicianEmail &&
-          formData.preferredResponseMethod &&
           formData.attestChartInfo &&
           formData.attestClinicalSupport &&
           formData.attestUrgentCases &&
@@ -400,14 +415,14 @@ const SubmitEConsult = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-8">
-            {/* Progress Steps */}
-            <div className="flex items-center justify-between mb-8 px-4">
+            {/* Progress Steps - Tighter spacing for all steps to fit */}
+            <div className="flex items-center justify-between mb-8 px-2">
               {steps.map((step, index) => (
                 <div key={step.id} className="flex items-center">
                   <div className="flex flex-col items-center">
                     <div
                       className={cn(
-                        "w-12 h-12 rounded-full flex items-center justify-center transition-colors",
+                        "w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors",
                         currentStep > step.id
                           ? "bg-green-500 text-white"
                           : currentStep === step.id
@@ -416,13 +431,13 @@ const SubmitEConsult = () => {
                       )}
                     >
                       {currentStep > step.id ? (
-                        <CheckCircle2 className="h-6 w-6" />
+                        <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6" />
                       ) : (
-                        <step.icon className="h-6 w-6" />
+                        <step.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                       )}
                     </div>
                     <span className={cn(
-                      "text-xs mt-2 hidden sm:block font-medium",
+                      "text-[10px] sm:text-xs mt-1.5 hidden sm:block font-medium text-center max-w-[60px]",
                       currentStep >= step.id ? "text-gray-900" : "text-gray-400"
                     )}>
                       {step.title}
@@ -431,7 +446,7 @@ const SubmitEConsult = () => {
                   {index < steps.length - 1 && (
                     <div
                       className={cn(
-                        "w-12 sm:w-20 h-0.5 mx-2",
+                        "w-6 sm:w-12 lg:w-16 h-0.5 mx-1 sm:mx-2",
                         currentStep > step.id ? "bg-green-500" : "bg-gray-200"
                       )}
                     />
@@ -527,9 +542,9 @@ const SubmitEConsult = () => {
                     </div>
                   </div>
 
-                  {/* Insurance */}
+                  {/* Insurance - Required */}
                   <div className="space-y-3">
-                    <Label>Insurance</Label>
+                    <Label>Insurance *</Label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {INSURANCE_OPTIONS.map((option) => (
                         <label
@@ -695,21 +710,46 @@ const SubmitEConsult = () => {
                     </div>
                   </div>
 
-                  {/* Growth Velocity */}
+                  {/* Height 12 Months Ago for Growth Velocity */}
                   <div className="space-y-2">
-                    <Label htmlFor="growthVelocity">Growth Velocity (cm/year)</Label>
+                    <Label htmlFor="height12Mo">Height 12 Months Ago (cm) - for growth velocity calculation</Label>
                     <Input
-                      id="growthVelocity"
+                      id="height12Mo"
                       type="number"
-                      step="0.1"
-                      placeholder="e.g., 5.5"
-                      value={formData.growthVelocity}
-                      onChange={(e) => handleInputChange("growthVelocity", e.target.value)}
+                      placeholder="e.g., 140"
+                      value={formData.heightCm12MonthsAgo}
+                      onChange={(e) => handleInputChange("heightCm12MonthsAgo", e.target.value)}
                       className="h-12 max-w-xs"
                     />
-                    <p className="text-sm text-muted-foreground">
-                      Enter if known, or leave blank if unavailable.
-                    </p>
+                  </div>
+
+                  {/* Growth Velocity - Auto-calculated or manual */}
+                  <div className="space-y-2">
+                    <Label htmlFor="growthVelocity">Growth Velocity (cm/year)</Label>
+                    {calculatedGrowthVelocity && formData.heightCm12MonthsAgo && formData.heightCm ? (
+                      <div className="p-4 bg-green-50 rounded-xl border border-green-200">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-green-800 font-medium">Auto-Calculated Growth Velocity</span>
+                          <span className="text-2xl font-bold text-green-900">{calculatedGrowthVelocity} cm/year</span>
+                        </div>
+                        <p className="text-xs text-green-600 mt-1">Based on height change over 12 months</p>
+                      </div>
+                    ) : (
+                      <>
+                        <Input
+                          id="growthVelocity"
+                          type="number"
+                          step="0.1"
+                          placeholder="e.g., 5.5"
+                          value={formData.growthVelocity}
+                          onChange={(e) => handleInputChange("growthVelocity", e.target.value)}
+                          className="h-12 max-w-xs"
+                        />
+                        <p className="text-sm text-muted-foreground">
+                          Enter current and 12-month-ago height above for auto-calculation, or enter manually.
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   {/* PEDRA Automated Flags */}
@@ -809,9 +849,46 @@ const SubmitEConsult = () => {
                     />
                   </div>
 
+                  {/* Upload Documents */}
+                  <div className="space-y-3">
+                    <Label className="text-lg">Upload Documents (optional)</Label>
+                    <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 hover:border-primary/50 transition-colors">
+                      <div className="flex flex-col items-center gap-3">
+                        <Upload className="h-10 w-10 text-gray-400" />
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-gray-700">Drop files here or click to browse</p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Upload lab results, imaging reports, or other relevant documents (PDF, JPG, PNG)
+                          </p>
+                        </div>
+                        <Input
+                          type="file"
+                          multiple
+                          accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                          className="max-w-xs"
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files || []);
+                            handleInputChange("uploadedFiles", files as any);
+                          }}
+                        />
+                        {formData.uploadedFiles && formData.uploadedFiles.length > 0 && (
+                          <div className="mt-3 space-y-2 w-full">
+                            <p className="text-sm font-medium text-gray-700">Selected files:</p>
+                            {formData.uploadedFiles.map((file: File, index: number) => (
+                              <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                                <FileText className="h-4 w-4 text-primary" />
+                                <span className="text-sm text-gray-600">{file.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Recent Labs Available */}
                   <div className="space-y-3">
-                    <Label className="text-lg">Recent Labs Available? (Check all that apply)</Label>
+                    <Label className="text-lg">Recent Labs (check all that apply)</Label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       {LAB_OPTIONS.map((option) => (
                         <label
@@ -953,8 +1030,24 @@ const SubmitEConsult = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label>Preferred Response Method *</Label>
-                        <div className="flex gap-4">
+                        <Label>Preferred Response Method (optional)</Label>
+                        <div className="flex flex-wrap gap-3">
+                          <label
+                            className={cn(
+                              "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
+                              formData.preferredResponseMethod === 'portal'
+                                ? "border-primary bg-primary/5"
+                                : "border-gray-200 hover:bg-gray-50"
+                            )}
+                          >
+                            <Checkbox
+                              checked={formData.preferredResponseMethod === 'portal'}
+                              onCheckedChange={(checked) => 
+                                handleInputChange("preferredResponseMethod", checked ? 'portal' : "")
+                              }
+                            />
+                            <span className="text-sm font-medium">E-Consult Portal</span>
+                          </label>
                           <label
                             className={cn(
                               "flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors",
@@ -1109,7 +1202,7 @@ const SubmitEConsult = () => {
                     </div>
 
                     {/* Measurements Summary */}
-                    {(formData.weightPercentileCurrent || formData.heightPercentileCurrent || formData.growthVelocity) && (
+                    {(formData.weightPercentileCurrent || formData.heightPercentileCurrent || calculatedGrowthVelocity || formData.growthVelocity) && (
                       <div className="pt-4 border-t border-gray-200">
                         <span className="text-gray-500 text-sm block mb-2">Measurements:</span>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
@@ -1125,10 +1218,10 @@ const SubmitEConsult = () => {
                               <p className="font-medium">{formData.heightPercentileCurrent}%</p>
                             </div>
                           )}
-                          {formData.growthVelocity && (
+                          {(calculatedGrowthVelocity || formData.growthVelocity) && (
                             <div>
                               <span className="text-gray-500">Growth Velocity:</span>
-                              <p className="font-medium">{formData.growthVelocity} cm/year</p>
+                              <p className="font-medium">{calculatedGrowthVelocity || formData.growthVelocity} cm/year</p>
                             </div>
                           )}
                         </div>

@@ -29,12 +29,13 @@ import {
   Eye, 
   FileText, 
   Search,
-  Filter,
+  Download,
   PlusCircle,
   AlertTriangle
 } from "lucide-react";
 import { formatDistanceToNow, differenceInDays } from "date-fns";
 import { cn } from "@/lib/utils";
+import { generateEConsultPDF, EConsultPDFData } from "@/utils/generateEConsultPDF";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -280,15 +281,37 @@ export const EConsultsTable = ({
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right">
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => onViewConsult(consult)}
-                            className="hover:bg-primary/10"
-                          >
-                            <Eye className="h-4 w-4 mr-1" />
-                            View
-                          </Button>
+                          <div className="flex items-center justify-end gap-1">
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={() => {
+                                const pdfData: EConsultPDFData = {
+                                  id: consult.id,
+                                  patientInitials: consult.patient_initials,
+                                  patientAge: consult.patient_age,
+                                  conditionCategory: consult.condition_category,
+                                  clinicalQuestion: consult.clinical_question,
+                                  status: consult.status,
+                                  createdAt: consult.created_at,
+                                };
+                                generateEConsultPDF(pdfData);
+                              }}
+                              className="hover:bg-primary/10"
+                              title="Download PDF"
+                            >
+                              <Download className="h-4 w-4" />
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={() => onViewConsult(consult)}
+                              className="hover:bg-primary/10"
+                            >
+                              <Eye className="h-4 w-4 mr-1" />
+                              View
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                       <CollapsibleContent asChild>
