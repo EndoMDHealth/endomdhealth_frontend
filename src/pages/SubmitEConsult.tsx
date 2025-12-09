@@ -99,7 +99,7 @@ const steps = [
   { id: 1, title: "Patient Info", icon: User },
   { id: 2, title: "Measurements", icon: Ruler },
   { id: 3, title: "Condition", icon: Stethoscope },
-  { id: 4, title: "Labs & Urgency", icon: FileText },
+  { id: 4, title: "Clinical", icon: FileText },
   { id: 5, title: "Provider & Attestation", icon: ClipboardCheck },
   { id: 6, title: "Review", icon: CheckCircle2 },
 ];
@@ -441,7 +441,7 @@ const SubmitEConsult = () => {
             </div>
 
             {/* Step Content */}
-            <div className="py-6 min-h-[400px]">
+            <div className="py-6">
               {/* Step 1: Patient Demographics */}
               {currentStep === 1 && (
                 <div className="space-y-6">
