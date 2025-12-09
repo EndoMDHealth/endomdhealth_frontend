@@ -9,7 +9,9 @@ import {
   ChevronDown,
   ChevronRight,
   Archive,
-  Send
+  Send,
+  Home,
+  FileDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,7 +27,7 @@ interface SidebarItem {
 }
 
 const sidebarItems: SidebarItem[] = [
-  { id: 'support', label: 'Support', icon: HelpCircle, path: '/provider-dashboard/support' },
+  { id: 'home', label: 'Home', icon: Home, path: '/provider-dashboard' },
   { 
     id: 'submissions', 
     label: 'Submissions', 
@@ -44,8 +46,10 @@ const sidebarItems: SidebarItem[] = [
       { id: 'responses-archived', label: 'Archived', path: '/provider-dashboard/responses/archived' },
     ]
   },
+  { id: 'forms', label: 'Forms', icon: FileDown, path: '/provider-dashboard/forms' },
   { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/provider-dashboard/analytics', adminOnly: true },
   { id: 'team', label: 'Providers / Team', icon: Users, path: '/provider-dashboard/team', adminOnly: true },
+  { id: 'support', label: 'Support', icon: HelpCircle, path: '/provider-dashboard/support' },
 ];
 
 interface DashboardSidebarProps {
