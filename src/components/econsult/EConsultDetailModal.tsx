@@ -20,6 +20,7 @@ import {
   Clock
 } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
+import { generateEConsultPDF, EConsultPDFData } from "@/utils/generateEConsultPDF";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -240,12 +241,30 @@ const EConsultDetailModal = ({ consult, isOpen, onClose }: EConsultDetailModalPr
               <MessageSquare className="mr-2 h-4 w-4" />
               Message
             </Button>
-            {consult.status === 'completed' && (
-              <Button variant="outline" disabled>
-                <Download className="mr-2 h-4 w-4" />
-                Download Summary
-              </Button>
-            )}
+            <Button 
+              variant="outline"
+              onClick={() => {
+                const pdfData: EConsultPDFData = {
+                  id: consult.id,
+                  patientInitials: consult.patient_initials,
+                  patientAge: consult.patient_age,
+                  patientDob: consult.patient_dob,
+                  patientGender: consult.patient_gender,
+                  conditionCategory: consult.condition_category,
+                  clinicalQuestion: consult.clinical_question,
+                  additionalNotes: consult.additional_notes,
+                  heightCm: consult.height_cm,
+                  weightKg: consult.weight_kg,
+                  bmi: consult.bmi,
+                  status: consult.status,
+                  createdAt: consult.created_at,
+                };
+                generateEConsultPDF(pdfData);
+              }}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download PDF
+            </Button>
           </div>
         </div>
       </DialogContent>
