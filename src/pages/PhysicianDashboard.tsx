@@ -21,7 +21,7 @@ import {
 import endoLogo from "@/assets/logos/endo_yellow.png";
 import EConsultDetailModal from "@/components/econsult/EConsultDetailModal";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
-import { DashboardMetrics } from "@/components/dashboard/DashboardMetrics";
+import { DashboardHome } from "@/components/dashboard/DashboardHome";
 import { EConsultsTable } from "@/components/dashboard/EConsultsTable";
 import { AnalyticsSection } from "@/components/dashboard/AnalyticsSection";
 import { TeamSection } from "@/components/dashboard/TeamSection";
@@ -191,33 +191,13 @@ const PhysicianDashboard = () => {
         );
       default:
         return (
-          <div className="space-y-6">
-            {/* Hero CTA */}
-            <Card className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-0 shadow-lg">
-              <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl font-bold mb-1">Submit a New E-Consult</h2>
-                  <p className="text-primary-foreground/80">Receive pediatric endocrinology guidance within 24–48 hours.</p>
-                </div>
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate('/submit-econsult')}
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold shadow-md"
-                >
-                  <PlusCircle className="mr-2 h-5 w-5" />
-                  Submit E-Consult
-                </Button>
-              </CardContent>
-            </Card>
-
-            <DashboardMetrics stats={stats} />
-
-            <EConsultsTable
-              consults={activeConsults}
-              onViewConsult={setSelectedConsult}
-              onSubmitNew={() => navigate('/submit-econsult')}
-            />
-          </div>
+          <DashboardHome
+            physicianName={physicianName}
+            stats={stats}
+            recentConsults={consults}
+            onSubmitNew={() => navigate('/submit-econsult')}
+            onViewConsult={setSelectedConsult}
+          />
         );
     }
   };
