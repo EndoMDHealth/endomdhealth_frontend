@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { 
   BarChart, 
   Bar, 
@@ -16,6 +17,8 @@ import {
   Area,
   AreaChart
 } from "recharts";
+import { FileDown, TrendingUp, Clock, AlertTriangle, FileText, Users } from "lucide-react";
+import { toast } from "sonner";
 
 const monthlyData = [
   { month: 'Jan', consults: 12 },
@@ -62,7 +65,18 @@ interface AnalyticsSectionProps {
   isAdmin?: boolean;
 }
 
+const summaryStats = [
+  { label: 'Total E-Consults', value: '138', icon: FileText, trend: '+12%', trendUp: true },
+  { label: 'Avg Response Time', value: '32 hrs', icon: Clock, trend: '-8%', trendUp: true },
+  { label: 'Urgent Cases', value: '15', icon: AlertTriangle, trend: '+3', trendUp: false },
+  { label: 'Active Providers', value: '8', icon: Users, trend: '+2', trendUp: true },
+];
+
 export const AnalyticsSection = ({ isAdmin = false }: AnalyticsSectionProps) => {
+  const handleDownloadReport = () => {
+    toast.success('Report download initiated');
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -72,6 +86,36 @@ export const AnalyticsSection = ({ isAdmin = false }: AnalyticsSectionProps) => 
             {isAdmin ? "Clinic-wide performance metrics" : "Your e-consult performance metrics"}
           </p>
         </div>
+        <Button onClick={handleDownloadReport} variant="outline">
+          <FileDown className="mr-2 h-4 w-4" />
+          Download Report
+        </Button>
+      </div>
+
+      {/* Summary Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {summaryStats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <Card key={stat.label} className="bg-card border-border shadow-sm">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className={`flex items-center text-sm font-medium ${stat.trendUp ? 'text-green-600' : 'text-red-500'}`}>
+                    <TrendingUp className={`h-3 w-3 mr-1 ${!stat.trendUp ? 'rotate-180' : ''}`} />
+                    {stat.trend}
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

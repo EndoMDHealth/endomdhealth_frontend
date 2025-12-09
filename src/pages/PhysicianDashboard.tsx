@@ -25,6 +25,7 @@ import { DashboardHome } from "@/components/dashboard/DashboardHome";
 import { EConsultsTable } from "@/components/dashboard/EConsultsTable";
 import { AnalyticsSection } from "@/components/dashboard/AnalyticsSection";
 import { TeamSection } from "@/components/dashboard/TeamSection";
+import { FormsSection } from "@/components/dashboard/FormsSection";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -39,7 +40,7 @@ interface EConsult {
   clinical_question: string;
 }
 
-type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'analytics' | 'team' | 'support';
+type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'analytics' | 'team' | 'support' | 'forms';
 
 const PhysicianDashboard = () => {
   const { user, signOut } = useAuth();
@@ -130,6 +131,7 @@ const PhysicianDashboard = () => {
 
   const handleSidebarNavigate = (path: string) => {
     const viewMap: Record<string, DashboardView> = {
+      '/provider-dashboard': 'dashboard',
       '/provider-dashboard/support': 'support',
       '/provider-dashboard/submissions/active': 'submissions-active',
       '/provider-dashboard/submissions/archived': 'submissions-archived',
@@ -137,6 +139,7 @@ const PhysicianDashboard = () => {
       '/provider-dashboard/responses/archived': 'responses-archived',
       '/provider-dashboard/analytics': 'analytics',
       '/provider-dashboard/team': 'team',
+      '/provider-dashboard/forms': 'forms',
     };
     setCurrentView(viewMap[path] || 'dashboard');
   };
@@ -189,6 +192,8 @@ const PhysicianDashboard = () => {
             </CardContent>
           </Card>
         );
+      case 'forms':
+        return <FormsSection />;
       default:
         return (
           <DashboardHome
@@ -212,12 +217,15 @@ const PhysicianDashboard = () => {
               <Link to="/" className="flex-shrink-0">
                 <img src={endoLogo} alt="EndoMD Health" className="h-10 w-auto" />
               </Link>
-              <button 
-                onClick={() => setCurrentView('dashboard')}
-                className="ml-6 text-lg font-semibold text-foreground hover:text-primary transition-colors"
-              >
-                Provider Dashboard
-              </button>
+              <div className="ml-6 border-l border-border pl-6">
+                <button 
+                  onClick={() => setCurrentView('dashboard')}
+                  className="flex flex-col items-start hover:opacity-80 transition-opacity"
+                >
+                  <span className="text-sm font-semibold text-primary">EndoMD Health</span>
+                  <span className="text-lg font-bold text-foreground">Provider Dashboard</span>
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center gap-4">
