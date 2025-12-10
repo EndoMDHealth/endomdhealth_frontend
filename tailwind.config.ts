@@ -59,6 +59,13 @@ export default {
           "soft-teal": "hsl(var(--soft-teal))",
           "soft-teal-light": "hsl(var(--soft-teal-light))",
         },
+        patient: {
+          navy: "hsl(var(--patient-navy))",
+          teal: "hsl(var(--patient-teal))",
+          coral: "hsl(var(--patient-coral))",
+          gold: "hsl(var(--patient-gold))",
+          bg: "hsl(var(--patient-bg))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
