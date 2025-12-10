@@ -3,8 +3,6 @@ import PatientPortalHeader from '@/components/patient-portal/PatientPortalHeader
 import WelcomeSection from '@/components/patient-portal/WelcomeSection';
 import DashboardNavigation from '@/components/patient-portal/DashboardNavigation';
 import AccountSummary from '@/components/patient-portal/AccountSummary';
-import PrimaryActionCards from '@/components/patient-portal/PrimaryActionCards';
-import SecondaryActionCards from '@/components/patient-portal/SecondaryActionCards';
 import QuickShortcuts from '@/components/patient-portal/QuickShortcuts';
 import PatientOverview from '@/components/patient-portal/PatientOverview';
 import ResourcesSection from '@/components/patient-portal/ResourcesSection';
@@ -32,14 +30,8 @@ const PatientDashboard = () => {
           {/* Account Summary & Status */}
           <AccountSummary />
           
-          {/* Primary Action Cards */}
-          <PrimaryActionCards />
-          
           {/* Quick Shortcuts */}
           <QuickShortcuts />
-          
-          {/* Secondary Action Cards */}
-          <SecondaryActionCards />
           
           {/* Patient Overview (Collapsible Panels) */}
           <PatientOverview />

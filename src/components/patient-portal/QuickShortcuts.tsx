@@ -34,15 +34,15 @@ const QuickShortcuts = () => {
 
   return (
     <section className="py-6">
-      <h2 className="text-xl font-semibold text-foreground mb-4">Quick Tasks</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <h2 className="text-xl font-semibold text-foreground mb-4 text-center">Quick Tasks</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
         {shortcuts.map((shortcut, index) => (
           <Card
             key={index}
             onClick={() => navigate(shortcut.href)}
-            className="cursor-pointer transition-all duration-300 hover:shadow-lg border-2 border-patient-gold/30 hover:border-patient-gold group bg-patient-gold/5"
+            className="cursor-pointer transition-all duration-300 hover:shadow-lg border-2 border-patient-gold/30 hover:border-patient-gold group bg-patient-gold/5 rounded-2xl"
           >
-            <CardContent className="p-6 flex flex-col items-center text-center h-full">
+            <CardContent className="p-6 flex flex-col items-center text-center h-full min-h-[180px] justify-center">
               <div className="w-14 h-14 rounded-xl bg-patient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <shortcut.icon className="h-7 w-7 text-white" />
               </div>
