@@ -51,6 +51,7 @@ const Header = () => {
 
 	const whoWeServeItems = [
 		{ name: 'For Patients', href: '/for-patients' },
+		{ name: 'Patient Login', href: '/patient-login' },
 		{ name: 'For Parents', href: '/for-parents' },
 		{
 			name: 'For Healthcare Professionals',
