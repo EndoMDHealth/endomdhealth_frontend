@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   User, 
   Pill, 
@@ -15,19 +14,19 @@ import { cn } from '@/lib/utils';
 interface MenuItem {
   icon: React.ElementType;
   label: string;
-  href: string;
+  section: string;
   description?: string;
 }
 
 const menuItems: MenuItem[] = [
-  { icon: User, label: 'My Profile', href: '#profile', description: 'Personal information & contact' },
-  { icon: Pill, label: 'Prescriptions', href: '#prescriptions', description: 'Medications & refills' },
-  { icon: Stethoscope, label: 'See My Doctor', href: '#appointments', description: 'Appointments & visits' },
-  { icon: FileHeart, label: 'Health Record', href: '#health-record', description: 'Labs, imaging & summaries' },
-  { icon: ClipboardList, label: 'Treatment Plan', href: '#treatment', description: 'Care plan & progress' },
-  { icon: Shield, label: 'Insurance Information', href: '#insurance', description: 'Coverage & documents' },
-  { icon: HelpCircle, label: 'Support', href: '#support', description: 'FAQs & help' },
-  { icon: Settings, label: 'Settings', href: '#settings', description: 'Preferences & security' },
+  { icon: User, label: 'My Profile', section: 'profile', description: 'Personal information & contact' },
+  { icon: Pill, label: 'Prescriptions', section: 'prescriptions', description: 'Medications & refills' },
+  { icon: Stethoscope, label: 'See My Doctor', section: 'appointments', description: 'Appointments & visits' },
+  { icon: FileHeart, label: 'Health Record', section: 'health-record', description: 'Labs, imaging & summaries' },
+  { icon: ClipboardList, label: 'Treatment Plan', section: 'treatment', description: 'Care plan & progress' },
+  { icon: Shield, label: 'Insurance Information', section: 'insurance', description: 'Coverage & documents' },
+  { icon: HelpCircle, label: 'Support', section: 'support', description: 'FAQs & help' },
+  { icon: Settings, label: 'Settings', section: 'settings', description: 'Preferences & security' },
 ];
 
 interface ClinicalPortalSidebarProps {
@@ -36,10 +35,7 @@ interface ClinicalPortalSidebarProps {
 }
 
 const ClinicalPortalSidebar = ({ activeSection = 'health-record', onSectionChange }: ClinicalPortalSidebarProps) => {
-  const navigate = useNavigate();
-
-  const handleClick = (href: string) => {
-    const section = href.replace('#', '');
+  const handleClick = (section: string) => {
     if (onSectionChange) {
       onSectionChange(section);
     }
@@ -49,11 +45,11 @@ const ClinicalPortalSidebar = ({ activeSection = 'health-record', onSectionChang
     <aside className="w-64 bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-fit sticky top-24">
       <nav className="space-y-1">
         {menuItems.map((item) => {
-          const isActive = activeSection === item.href.replace('#', '');
+          const isActive = activeSection === item.section;
           return (
             <button
               key={item.label}
-              onClick={() => handleClick(item.href)}
+              onClick={() => handleClick(item.section)}
               className={cn(
                 "w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group",
                 isActive 
