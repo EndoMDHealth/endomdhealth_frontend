@@ -31,6 +31,8 @@ import ManageInvoices from "./pages/patient-portal/ManageInvoices";
 import CoachingSessions from "./pages/patient-portal/CoachingSessions";
 import NutritionSchedule from "./pages/patient-portal/NutritionSchedule";
 import BillingAccount from "./pages/patient-portal/BillingAccount";
+import MessageCenter from "./pages/patient-portal/MessageCenter";
+import EducationCenter from "./pages/patient-portal/EducationCenter";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
@@ -88,6 +90,8 @@ const App = () => (
             <Route path="/patient-portal/coaching-sessions" element={<ProtectedRoute><CoachingSessions /></ProtectedRoute>} />
             <Route path="/patient-portal/nutrition-schedule" element={<ProtectedRoute><NutritionSchedule /></ProtectedRoute>} />
             <Route path="/patient-portal/billing" element={<ProtectedRoute><BillingAccount /></ProtectedRoute>} />
+            <Route path="/patient-portal/messages" element={<ProtectedRoute><MessageCenter /></ProtectedRoute>} />
+            <Route path="/patient-portal/education" element={<ProtectedRoute><EducationCenter /></ProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
