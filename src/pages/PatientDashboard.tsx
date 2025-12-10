@@ -1,6 +1,8 @@
 import { useAuth } from '@/hooks/useAuth';
 import PatientPortalHeader from '@/components/patient-portal/PatientPortalHeader';
 import WelcomeSection from '@/components/patient-portal/WelcomeSection';
+import DashboardNavigation from '@/components/patient-portal/DashboardNavigation';
+import AccountSummary from '@/components/patient-portal/AccountSummary';
 import PrimaryActionCards from '@/components/patient-portal/PrimaryActionCards';
 import SecondaryActionCards from '@/components/patient-portal/SecondaryActionCards';
 import QuickShortcuts from '@/components/patient-portal/QuickShortcuts';
@@ -23,6 +25,12 @@ const PatientDashboard = () => {
       <main className="flex-1">
         <div className="container mx-auto px-4 pb-12">
           <WelcomeSection firstName={firstName} />
+          
+          {/* Top Navigation Buttons */}
+          <DashboardNavigation />
+          
+          {/* Account Summary & Status */}
+          <AccountSummary />
           
           {/* Primary Action Cards */}
           <PrimaryActionCards />
