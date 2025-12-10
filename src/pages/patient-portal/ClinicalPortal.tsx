@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, FlaskConical, ClipboardList, Pill, FolderOpen, Download, Eye, RefreshCw, Upload, FileText, Image } from 'lucide-react';
+import { ArrowLeft, FlaskConical, ClipboardList, Pill, FolderOpen, Download, Eye, RefreshCw, Upload, FileText, Image, FileCheck, MapPin, Edit, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import PatientPortalHeader from '@/components/patient-portal/PatientPortalHeader';
 import Footer from '@/components/Footer';
+import { toast } from 'sonner';
 import happyChild from '@/assets/child-grass-happy.jpg';
 
 const ClinicalPortal = () => {
@@ -15,12 +18,52 @@ const ClinicalPortal = () => {
   const { user } = useAuth();
   const firstName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Patient';
 
+  const [preferredPharmacy, setPreferredPharmacy] = useState({
+    name: 'CVS Pharmacy',
+    address: '123 Main Street, Springfield, VA 22150',
+    phone: '(703) 555-1234',
+  });
+  const [isEditingPharmacy, setIsEditingPharmacy] = useState(false);
+  const [editPharmacy, setEditPharmacy] = useState(preferredPharmacy);
+
   const quickAccessTiles = [
     { icon: FlaskConical, title: 'My Lab Results', href: '#labs' },
     { icon: ClipboardList, title: 'Visit Summaries', href: '#visits' },
     { icon: Pill, title: 'Medications', href: '#medications' },
     { icon: FolderOpen, title: 'Documents & Uploads', href: '#documents' },
+    { icon: FileCheck, title: 'Requisitions', href: '#requisitions' },
   ];
+
+  // Sample requisitions data
+  const labRequests = [
+    { id: 1, testName: 'Thyroid Panel (TSH, T4)', dateRequested: '2024-12-05', labName: 'Quest Diagnostics', labAddress: '456 Lab Ave, Springfield, VA', status: 'completed', hasResults: true },
+    { id: 2, testName: 'HbA1c', dateRequested: '2024-12-01', labName: 'LabCorp', labAddress: '789 Medical Center Dr, Fairfax, VA', status: 'pending', hasResults: false },
+    { id: 3, testName: 'Comprehensive Metabolic Panel', dateRequested: '2024-11-20', labName: 'Quest Diagnostics', labAddress: '456 Lab Ave, Springfield, VA', status: 'sent', hasResults: false },
+  ];
+
+  const medicationRequests = [
+    { id: 1, medicationName: 'Levothyroxine 50mcg', dateRequested: '2024-12-03', pharmacyName: 'CVS Pharmacy', pharmacyAddress: '123 Main Street, Springfield, VA', status: 'completed' },
+    { id: 2, medicationName: 'Vitamin D3 2000 IU', dateRequested: '2024-11-28', pharmacyName: 'CVS Pharmacy', pharmacyAddress: '123 Main Street, Springfield, VA', status: 'sent' },
+  ];
+
+  const handleSavePharmacy = () => {
+    setPreferredPharmacy(editPharmacy);
+    setIsEditingPharmacy(false);
+    toast.success('Preferred pharmacy updated successfully');
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return <Badge className="bg-green-100 text-green-700 hover:bg-green-100">Completed</Badge>;
+      case 'pending':
+        return <Badge className="bg-patient-gold/20 text-amber-700 hover:bg-patient-gold/20">Pending</Badge>;
+      case 'sent':
+        return <Badge className="bg-patient-teal/20 text-patient-teal hover:bg-patient-teal/20">Sent</Badge>;
+      default:
+        return null;
+    }
+  };
 
   // Sample data - would come from Supabase in production
   const labResults = [
@@ -269,6 +312,166 @@ const ClinicalPortal = () => {
                     <p className="text-muted-foreground">No documents yet</p>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Requisitions Section */}
+          <section id="requisitions" className="mb-8">
+            <Card>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl text-patient-navy flex items-center gap-2">
+                  <FileCheck className="h-5 w-5 text-patient-gold" />
+                  Requisitions
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Preferred Pharmacy */}
+                <div className="p-4 bg-patient-gold/10 rounded-xl border border-patient-gold/20">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-5 w-5 text-patient-gold" />
+                      <h4 className="font-semibold text-patient-navy">Preferred Pharmacy</h4>
+                    </div>
+                    {!isEditingPharmacy && (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="text-patient-teal hover:bg-patient-teal/10"
+                        onClick={() => {
+                          setEditPharmacy(preferredPharmacy);
+                          setIsEditingPharmacy(true);
+                        }}
+                      >
+                        <Edit className="h-4 w-4 mr-1" />
+                        Edit
+                      </Button>
+                    )}
+                  </div>
+                  {isEditingPharmacy ? (
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-patient-navy text-sm">Pharmacy Name</Label>
+                        <Input
+                          value={editPharmacy.name}
+                          onChange={(e) => setEditPharmacy({ ...editPharmacy, name: e.target.value })}
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-patient-navy text-sm">Address</Label>
+                        <Input
+                          value={editPharmacy.address}
+                          onChange={(e) => setEditPharmacy({ ...editPharmacy, address: e.target.value })}
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-patient-navy text-sm">Phone</Label>
+                        <Input
+                          value={editPharmacy.phone}
+                          onChange={(e) => setEditPharmacy({ ...editPharmacy, phone: e.target.value })}
+                          className="mt-1"
+                        />
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          className="bg-patient-teal hover:bg-patient-teal/90"
+                          onClick={handleSavePharmacy}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setIsEditingPharmacy(false)}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-1 text-sm">
+                      <p className="font-medium text-patient-navy">{preferredPharmacy.name}</p>
+                      <p className="text-muted-foreground flex items-center gap-1">
+                        <MapPin className="h-3 w-3" />
+                        {preferredPharmacy.address}
+                      </p>
+                      <p className="text-muted-foreground">{preferredPharmacy.phone}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Lab Requests */}
+                <div>
+                  <h4 className="font-semibold text-patient-navy mb-3 flex items-center gap-2">
+                    <FlaskConical className="h-4 w-4 text-patient-teal" />
+                    Lab Requests
+                  </h4>
+                  {labRequests.length > 0 ? (
+                    <div className="space-y-3">
+                      {labRequests.map((req) => (
+                        <div key={req.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-patient-bg rounded-xl gap-4">
+                          <div className="space-y-1">
+                            <p className="font-medium text-patient-navy">{req.testName}</p>
+                            <p className="text-sm text-muted-foreground">Requested: {req.dateRequested}</p>
+                            <p className="text-sm text-muted-foreground flex items-center gap-1">
+                              <MapPin className="h-3 w-3" />
+                              {req.labName} - {req.labAddress}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            {getStatusBadge(req.status)}
+                            {req.hasResults && (
+                              <Button size="sm" className="bg-patient-teal hover:bg-patient-teal/90">
+                                <Eye className="h-4 w-4 mr-1" />
+                                View Results
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-6">
+                      <img src={happyChild} alt="Happy child" className="w-20 h-20 object-cover rounded-full mx-auto mb-3 opacity-80" />
+                      <p className="text-muted-foreground text-sm">No lab requests yet</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Medication Requests */}
+                <div>
+                  <h4 className="font-semibold text-patient-navy mb-3 flex items-center gap-2">
+                    <Pill className="h-4 w-4 text-patient-teal" />
+                    Medication Requests
+                  </h4>
+                  {medicationRequests.length > 0 ? (
+                    <div className="space-y-3">
+                      {medicationRequests.map((req) => (
+                        <div key={req.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-patient-bg rounded-xl gap-4">
+                          <div className="space-y-1">
+                            <p className="font-medium text-patient-navy">{req.medicationName}</p>
+                            <p className="text-sm text-muted-foreground">Requested: {req.dateRequested}</p>
+                            <p className="text-sm text-muted-foreground flex items-center gap-1">
+                              <MapPin className="h-3 w-3" />
+                              {req.pharmacyName} - {req.pharmacyAddress}
+                            </p>
+                          </div>
+                          <div>
+                            {getStatusBadge(req.status)}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-6">
+                      <img src={happyChild} alt="Happy child" className="w-20 h-20 object-cover rounded-full mx-auto mb-3 opacity-80" />
+                      <p className="text-muted-foreground text-sm">No medication requests yet</p>
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </section>

@@ -1,27 +1,34 @@
 import { CreditCard, Video, CalendarCheck, Receipt } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 
 const SecondaryActionCards = () => {
+  const navigate = useNavigate();
+
   const secondaryActions = [
     {
       icon: CreditCard,
       title: 'Manage Invoices & Payment Methods',
       description: 'View and pay invoices, update payment info',
+      href: '/patient-portal/invoices',
     },
     {
       icon: Video,
       title: 'Access Recorded Coaching Sessions',
       description: 'Review past nutrition and lifestyle sessions',
+      href: '/patient-portal/coaching-sessions',
     },
     {
       icon: CalendarCheck,
       title: 'See Nutrition Coaching Schedule',
       description: 'View upcoming coaching appointments',
+      href: '/patient-portal/nutrition-schedule',
     },
     {
       icon: Receipt,
       title: 'Manage My Billing Account',
       description: 'Update billing details and view history',
+      href: '/patient-portal/billing',
     },
   ];
 
@@ -32,6 +39,7 @@ const SecondaryActionCards = () => {
         {secondaryActions.map((action, index) => (
           <Card
             key={index}
+            onClick={() => navigate(action.href)}
             className="cursor-pointer transition-all duration-300 hover:shadow-md hover:border-patient-teal/50 border group"
           >
             <CardContent className="p-5 flex items-start space-x-4">

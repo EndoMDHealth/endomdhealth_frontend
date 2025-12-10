@@ -27,6 +27,10 @@ import ClinicalPortal from "./pages/patient-portal/ClinicalPortal";
 import BookAppointment from "./pages/patient-portal/BookAppointment";
 import UploadLabs from "./pages/patient-portal/UploadLabs";
 import FindLabs from "./pages/patient-portal/FindLabs";
+import ManageInvoices from "./pages/patient-portal/ManageInvoices";
+import CoachingSessions from "./pages/patient-portal/CoachingSessions";
+import NutritionSchedule from "./pages/patient-portal/NutritionSchedule";
+import BillingAccount from "./pages/patient-portal/BillingAccount";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
@@ -80,6 +84,10 @@ const App = () => (
             <Route path="/patient-portal/book-appointment" element={<ProtectedRoute><BookAppointment /></ProtectedRoute>} />
             <Route path="/patient-portal/upload-labs" element={<ProtectedRoute><UploadLabs /></ProtectedRoute>} />
             <Route path="/patient-portal/find-labs" element={<ProtectedRoute><FindLabs /></ProtectedRoute>} />
+            <Route path="/patient-portal/invoices" element={<ProtectedRoute><ManageInvoices /></ProtectedRoute>} />
+            <Route path="/patient-portal/coaching-sessions" element={<ProtectedRoute><CoachingSessions /></ProtectedRoute>} />
+            <Route path="/patient-portal/nutrition-schedule" element={<ProtectedRoute><NutritionSchedule /></ProtectedRoute>} />
+            <Route path="/patient-portal/billing" element={<ProtectedRoute><BillingAccount /></ProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
