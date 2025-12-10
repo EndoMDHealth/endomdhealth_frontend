@@ -23,6 +23,10 @@ import PhysicianDashboard from "./pages/PhysicianDashboard";
 import SubmitEConsult from "./pages/SubmitEConsult";
 import PatientLogin from "./pages/PatientLogin";
 import PatientDashboard from "./pages/PatientDashboard";
+import ClinicalPortal from "./pages/patient-portal/ClinicalPortal";
+import BookAppointment from "./pages/patient-portal/BookAppointment";
+import UploadLabs from "./pages/patient-portal/UploadLabs";
+import FindLabs from "./pages/patient-portal/FindLabs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClinicalServicesPolicies from "./pages/ClinicalServicesPolicies";
 import TermsOfService from "./pages/TermsOfService";
@@ -72,6 +76,10 @@ const App = () => (
             {/* Patient Portal Routes */}
             <Route path="/patient-login" element={<PatientLogin />} />
             <Route path="/patient-dashboard" element={<ProtectedRoute><PatientDashboard /></ProtectedRoute>} />
+            <Route path="/patient-portal/clinical" element={<ProtectedRoute><ClinicalPortal /></ProtectedRoute>} />
+            <Route path="/patient-portal/book-appointment" element={<ProtectedRoute><BookAppointment /></ProtectedRoute>} />
+            <Route path="/patient-portal/upload-labs" element={<ProtectedRoute><UploadLabs /></ProtectedRoute>} />
+            <Route path="/patient-portal/find-labs" element={<ProtectedRoute><FindLabs /></ProtectedRoute>} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />

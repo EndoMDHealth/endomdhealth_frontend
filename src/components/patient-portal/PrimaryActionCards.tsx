@@ -1,7 +1,10 @@
 import { ExternalLink, Calendar, Upload, MapPin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 
 const PrimaryActionCards = () => {
+  const navigate = useNavigate();
+
   const primaryActions = [
     {
       icon: ExternalLink,
@@ -9,13 +12,15 @@ const PrimaryActionCards = () => {
       description: 'View labs, visit summaries, medications, and documents',
       color: 'bg-patient-teal',
       hoverColor: 'hover:border-patient-teal',
+      href: '/patient-portal/clinical',
     },
     {
       icon: Calendar,
       title: 'Book an Appointment',
       description: 'Schedule, reschedule, or cancel visits',
-      color: 'bg-patient-coral',
-      hoverColor: 'hover:border-patient-coral',
+      color: 'bg-patient-teal',
+      hoverColor: 'hover:border-patient-teal',
+      href: '/patient-portal/book-appointment',
     },
     {
       icon: Upload,
@@ -23,13 +28,15 @@ const PrimaryActionCards = () => {
       description: 'Upload PDFs, photos, or scanned documents',
       color: 'bg-patient-gold',
       hoverColor: 'hover:border-patient-gold',
+      href: '/patient-portal/upload-labs',
     },
     {
       icon: MapPin,
       title: 'Find Labs Near Me',
       description: 'Locate nearby lab facilities',
-      color: 'bg-primary',
-      hoverColor: 'hover:border-primary',
+      color: 'bg-patient-navy',
+      hoverColor: 'hover:border-patient-navy',
+      href: '/patient-portal/find-labs',
     },
   ];
 
@@ -39,6 +46,7 @@ const PrimaryActionCards = () => {
         {primaryActions.map((action, index) => (
           <Card
             key={index}
+            onClick={() => navigate(action.href)}
             className={`cursor-pointer transition-all duration-300 hover:shadow-lg border-2 border-transparent ${action.hoverColor} group`}
           >
             <CardContent className="p-6 flex flex-col items-center text-center h-full">
