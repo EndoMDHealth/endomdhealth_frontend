@@ -22,7 +22,7 @@ const AccountSummary = () => {
 
   return (
     <section className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         {/* Account Summary Card */}
         <Card className="border-2 border-patient-teal/20 shadow-lg rounded-2xl overflow-hidden">
           <CardHeader className="bg-patient-navy text-white pb-4">
