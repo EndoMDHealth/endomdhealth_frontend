@@ -7,7 +7,8 @@ import {
   Shield, 
   HelpCircle, 
   Settings,
-  ChevronRight
+  ChevronRight,
+  MapPin
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -23,6 +24,7 @@ const menuItems: MenuItem[] = [
   { icon: Pill, label: 'Prescriptions', section: 'prescriptions', description: 'Medications & refills' },
   { icon: Stethoscope, label: 'See My Doctor', section: 'appointments', description: 'Appointments & visits' },
   { icon: FileHeart, label: 'Health Record', section: 'health-record', description: 'Labs, imaging & summaries' },
+  { icon: MapPin, label: 'Find Labs Near Me', section: 'find-labs', description: 'Locate nearby lab facilities' },
   { icon: ClipboardList, label: 'Treatment Plan', section: 'treatment', description: 'Care plan & progress' },
   { icon: Shield, label: 'Insurance Information', section: 'insurance', description: 'Coverage & documents' },
   { icon: HelpCircle, label: 'Support', section: 'support', description: 'FAQs & help' },

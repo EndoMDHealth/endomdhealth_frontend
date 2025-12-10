@@ -13,6 +13,7 @@ import TreatmentPlanSection from '@/components/patient-portal/clinical/Treatment
 import InsuranceSection from '@/components/patient-portal/clinical/InsuranceSection';
 import SupportSection from '@/components/patient-portal/clinical/SupportSection';
 import SettingsSection from '@/components/patient-portal/clinical/SettingsSection';
+import FindLabsSection from '@/components/patient-portal/clinical/FindLabsSection';
 import Footer from '@/components/Footer';
 import heroImage from '@/assets/diverse-children-clinical.jpg';
 
@@ -32,6 +33,8 @@ const ClinicalPortal = () => {
         return <DoctorSection />;
       case 'health-record':
         return <HealthRecordSection />;
+      case 'find-labs':
+        return <FindLabsSection />;
       case 'treatment':
         return <TreatmentPlanSection />;
       case 'insurance':
@@ -51,6 +54,7 @@ const ClinicalPortal = () => {
       case 'prescriptions': return 'Prescriptions';
       case 'appointments': return 'See My Doctor';
       case 'health-record': return 'Health Record';
+      case 'find-labs': return 'Find Labs Near Me';
       case 'treatment': return 'Treatment Plan';
       case 'insurance': return 'Insurance Information';
       case 'support': return 'Support';
@@ -109,6 +113,7 @@ const ClinicalPortal = () => {
                 <option value="prescriptions">Prescriptions</option>
                 <option value="appointments">See My Doctor</option>
                 <option value="health-record">Health Record</option>
+                <option value="find-labs">Find Labs Near Me</option>
                 <option value="treatment">Treatment Plan</option>
                 <option value="insurance">Insurance Information</option>
                 <option value="support">Support</option>
