@@ -12,12 +12,12 @@ const HeroSection = () => {
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                Specialized <span className="text-accent">Weight, Growth & Hormone </span> Care for Your Children &
-                Young Adults
+                Specialized <span className="text-accent">Weight, Growth & Hormone </span> Care for Children & Young
+                Adults
               </h1>
 
               <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
-                Guiding your child through every stage of pediatric endocrinology care
+                Guiding patients through every stage of pediatric endocrinology care
               </p>
 
               <p className="text-lg text-muted-foreground max-w-2xl">

@@ -17,7 +17,7 @@ const InsuranceSection = () => {
     { name: "Sentara", logo: sentaraLogo },
     { name: "Aetna", logo: aetnaLogo },
     { name: "Humana", logo: humanaLogo },
-    { name: "CareFirst", logo: carefirstLogo }
+    { name: "CareFirst", logo: carefirstLogo },
   ];
 
   return (
@@ -26,8 +26,7 @@ const InsuranceSection = () => {
         <div className="text-center space-y-12">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              In-network with most insurance plans,{" "}
-              <span className="text-primary">Medicaid, Tricare and ChampVA</span>
+              In-network with most insurance plans, <span className="text-primary">Medicaid, TRICARE and ChampVA</span>
             </h2>
           </div>
 
@@ -37,14 +36,22 @@ const InsuranceSection = () => {
               <div className="flex animate-scroll space-x-3 md:space-x-4">
                 {/* First set of logos */}
                 {insuranceLogos.map((insurance, index) => {
-                  const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
+                  const isLargerLogo = [
+                    "Anthem Blue Cross Blue Shield",
+                    "UnitedHealthcare",
+                    "Aetna",
+                    "Humana",
+                    "CareFirst",
+                  ].includes(insurance.name);
                   return (
                     <div key={`first-${index}`} className="flex-shrink-0">
-                      <div className={`${isLargerLogo ? 'w-48 h-28 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
+                      <div
+                        className={`${isLargerLogo ? "w-48 h-28 md:w-48 md:h-28" : "w-32 h-20 md:w-40 md:h-24"} flex items-center justify-center p-4`}
+                      >
                         <img
                           src={insurance.logo}
                           alt={`${insurance.name} logo`}
-                          className={`${isLargerLogo ? 'scale-125' : ''} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
+                          className={`${isLargerLogo ? "scale-125" : ""} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
                         />
                       </div>
                     </div>
@@ -52,14 +59,22 @@ const InsuranceSection = () => {
                 })}
                 {/* Second set of logos for seamless loop */}
                 {insuranceLogos.map((insurance, index) => {
-                  const isLargerLogo = ['Anthem Blue Cross Blue Shield', 'UnitedHealthcare', 'Aetna', 'Humana', 'CareFirst'].includes(insurance.name);
+                  const isLargerLogo = [
+                    "Anthem Blue Cross Blue Shield",
+                    "UnitedHealthcare",
+                    "Aetna",
+                    "Humana",
+                    "CareFirst",
+                  ].includes(insurance.name);
                   return (
                     <div key={`second-${index}`} className="flex-shrink-0">
-                      <div className={`${isLargerLogo ? 'w-40 h-24 md:w-48 md:h-28' : 'w-32 h-20 md:w-40 md:h-24'} flex items-center justify-center p-4`}>
+                      <div
+                        className={`${isLargerLogo ? "w-40 h-24 md:w-48 md:h-28" : "w-32 h-20 md:w-40 md:h-24"} flex items-center justify-center p-4`}
+                      >
                         <img
                           src={insurance.logo}
                           alt={`${insurance.name} logo`}
-                          className={`${isLargerLogo ? 'scale-125' : ''} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
+                          className={`${isLargerLogo ? "scale-125" : ""} max-w-full max-h-full object-contain transition-all duration-300 hover:scale-110`}
                         />
                       </div>
                     </div>
@@ -68,7 +83,6 @@ const InsuranceSection = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
