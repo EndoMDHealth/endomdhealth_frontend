@@ -20,9 +20,10 @@ const HeroSection = () => {
                 Guiding patients through every stage of pediatric endocrinology care
               </p>
 
+              <p className="text-lg text-muted-foreground max-w-2xl">No more waiting long months for answers</p>
+              <p className="text-lg text-muted-foreground max-w-2xl">No more missed work or school</p>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                No more waiting long months for answers No more missed work or school Simply expert, compassionate and
-                accessible care - on your schedule
+                Simply expert & compassionate care, on your schedule
               </p>
             </div>
 
