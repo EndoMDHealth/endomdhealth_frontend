@@ -1,27 +1,20 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Heart, 
-  Droplets, 
-  TrendingUp, 
-  Users, 
-  Pill, 
-  Activity 
-} from "lucide-react";
+import { Heart, Droplets, TrendingUp, Users, Pill, Activity } from "lucide-react";
 import activeFallToddlerGirl from "@/assets/active-fall-toddler-girl.jpg";
 import activeFallPreteenBoy from "@/assets/active-fall-preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
     {
-      title: "Healthy Weight Consultation",
+      title: "Weight Management",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
       icon: Heart,
       iconBg: "bg-accent",
     },
     {
-      title: "Reverse Type 2 Diabetes", 
-      description: "Specialized care to manage and potentially reverse Type 2 diabetes in children.",
+      title: "Type 2 Diabetes",
+      description: "Specialized care to manage Type 2 diabetes in children.",
       icon: Droplets,
       iconBg: "bg-accent",
     },
@@ -57,16 +50,14 @@ const ConcernsSection = () => {
         <div className="space-y-12">
           {/* Header */}
           <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Pediatric Endocrine Concerns We Address
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Pediatric Endocrine Concerns We Address</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               A Better Life For Your Child Is A Click Away, Start The Journey Today!
             </p>
-            
+
             {/* Request Appointment Button - Centered under title */}
             <div className="pt-4">
-              <Button 
+              <Button
                 asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-12 py-6 shadow-md"
               >
@@ -109,12 +100,8 @@ const ConcernsSection = () => {
                     <concern.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-primary">
-                      {concern.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {concern.description}
-                    </p>
+                    <h3 className="text-lg font-bold text-primary">{concern.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{concern.description}</p>
                   </div>
                 </div>
               ))}
