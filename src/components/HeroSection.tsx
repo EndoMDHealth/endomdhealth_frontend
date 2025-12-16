@@ -12,7 +12,8 @@ const HeroSection = () => {
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                Specialized <span className="text-accent">Weight, Growth & Hormone </span> Care Services for Your Child
+                Specialized <span className="text-accent">Weight, Growth & Hormone </span> Care for Your Children &
+                Young Adults
               </h1>
 
               <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
@@ -20,8 +21,8 @@ const HeroSection = () => {
               </p>
 
               <p className="text-lg text-muted-foreground max-w-2xl">
-                No more waiting long months for answers No more missed work or school, convenient Saturday appointments
-                available Simply expert, compassionate and accessible care - on your schedule
+                No more waiting long months for answers No more missed work or school Simply expert, compassionate and
+                accessible care - on your schedule
               </p>
             </div>
 
