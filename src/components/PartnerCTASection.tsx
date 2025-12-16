@@ -8,21 +8,25 @@ const PartnerCTASection = () => {
       title: "For Clinicians or Hospitals",
       href: "/who-we-serve/healthcare-professionals",
       description: "Collaborate with us to improve patient outcomes",
+      icon: Stethoscope,
     },
     {
       title: "For Community Partners",
       href: "/for-community-partners",
       description: "Join our network of community support",
+      icon: Users,
     },
     {
       title: "For Schools",
       href: "/for-schools",
       description: "Educational resources and support programs",
+      icon: GraduationCap,
     },
     {
       title: "For Health Plans",
       href: "/who-we-serve/health-plans",
       description: "Improve specialty care access for members",
+      icon: Heart,
     },
   ];
 
