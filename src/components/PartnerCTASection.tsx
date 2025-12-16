@@ -5,27 +5,23 @@ import { Stethoscope, Users, GraduationCap, Heart, UserCheck, Baby } from "lucid
 const PartnerCTASection = () => {
   const partnerButtons = [
     {
-      title: "Partner as a Clinician or Hospital",
+      title: "For Clinicians or Hospitals",
       href: "/who-we-serve/healthcare-professionals",
-      icon: Stethoscope,
       description: "Collaborate with us to improve patient outcomes",
     },
     {
-      title: "Join us as a Community Partner",
+      title: "For Community Partners",
       href: "/for-community-partners",
-      icon: Users,
       description: "Join our network of community support",
     },
     {
-      title: "Resources for Schools",
+      title: "For Schools",
       href: "/for-schools",
-      icon: GraduationCap,
       description: "Educational resources and support programs",
     },
     {
-      title: "Resources for Health Plans",
+      title: "For Health Plans",
       href: "/who-we-serve/health-plans",
-      icon: Heart,
       description: "Improve specialty care access for members",
     },
   ];
@@ -34,13 +30,11 @@ const PartnerCTASection = () => {
     {
       title: "Support for Patients",
       href: "/who-we-serve/patients",
-      icon: Baby,
       description: "Resources and guidance for young patients",
     },
     {
       title: "Guidance for Parents",
       href: "/who-we-serve/parents",
-      icon: UserCheck,
       description: "Support and information for families",
     },
   ];
