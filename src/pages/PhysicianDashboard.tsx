@@ -28,6 +28,7 @@ import { FormsSection } from "@/components/dashboard/FormsSection";
 import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
 import EConsultDetailView from "@/components/dashboard/EConsultDetailView";
 import { ConsultationActionsModal } from "@/components/dashboard/ConsultationActionsModal";
+import { FeedbackData } from "@/components/dashboard/EConsultFeedbackModal";
 import { toast } from "sonner";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
@@ -177,8 +178,9 @@ const PhysicianDashboard = () => {
     setShowActionsModal(true);
   };
 
-  const handleMarkComplete = async () => {
+  const handleMarkComplete = async (feedback: FeedbackData) => {
     if (selectedConsult) {
+      // Update the e-consult status to completed
       const { error } = await supabase
         .from('e_consults')
         .update({ status: 'completed' })
@@ -186,7 +188,10 @@ const PhysicianDashboard = () => {
       
       if (error) {
         toast.error("Failed to mark consultation as complete");
+        throw error;
       } else {
+        // Log feedback data (in production, this would be saved to a feedback table)
+        console.log("Feedback submitted for consult:", selectedConsult.id, feedback);
         toast.success("Consultation marked as complete");
         fetchConsults();
         setSelectedConsult(null);

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +12,7 @@ import {
   Stethoscope
 } from "lucide-react";
 import { format } from "date-fns";
+import EConsultFeedbackModal, { FeedbackData } from "./EConsultFeedbackModal";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -39,7 +41,7 @@ interface EConsultDetailViewProps {
   consult: EConsult;
   onBack: () => void;
   onContinueConsultation?: () => void;
-  onMarkComplete?: () => void;
+  onMarkComplete?: (feedback: FeedbackData) => void;
 }
 
 const EConsultDetailView = ({ 
@@ -48,6 +50,8 @@ const EConsultDetailView = ({
   onContinueConsultation,
   onMarkComplete
 }: EConsultDetailViewProps) => {
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
   const getStatusBadge = (status: EConsultStatus) => {
     const variants: Record<EConsultStatus, { label: string; className: string }> = {
       submitted: { label: "New Submission", className: "bg-blue-100 text-blue-800 border-blue-200" },
@@ -264,7 +268,7 @@ const EConsultDetailView = ({
                 </Button>
                 <Button 
                   className="flex-1 h-14 bg-green-600 hover:bg-green-700 text-white"
-                  onClick={onMarkComplete}
+                  onClick={() => setShowFeedbackModal(true)}
                   aria-label="All Done - Mark consultation as complete"
                 >
                   <CheckCircle2 className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -275,6 +279,17 @@ const EConsultDetailView = ({
           </Card>
         </div>
       </div>
+
+      {/* Feedback Modal */}
+      <EConsultFeedbackModal
+        isOpen={showFeedbackModal}
+        onClose={() => setShowFeedbackModal(false)}
+        onSubmit={(feedback) => {
+          onMarkComplete?.(feedback);
+          setShowFeedbackModal(false);
+        }}
+        consultId={consult.id}
+      />
     </div>
   );
 };
