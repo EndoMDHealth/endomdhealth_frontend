@@ -10,58 +10,55 @@ const ForPatients = () => {
   const features = [
     {
       icon: FileText,
-      title: 'View Your Health Records',
-      description: 'Access lab results, visit summaries, and medical documents anytime',
+      title: "View Your Health Records",
+      description: "Access lab results, visit summaries, and medical documents anytime",
     },
     {
       icon: Calendar,
-      title: 'Manage Appointments',
-      description: 'Schedule, reschedule, or cancel appointments with ease',
+      title: "Manage Appointments",
+      description: "Schedule, reschedule, or cancel appointments with ease",
     },
     {
       icon: Upload,
-      title: 'Upload Documents',
-      description: 'Share labs, imaging, and other documents with your care team',
+      title: "Upload Documents",
+      description: "Share labs, imaging, and other documents with your care team",
     },
     {
       icon: MapPin,
-      title: 'Find Labs Near You',
-      description: 'Locate nearby lab facilities for your testing needs',
+      title: "Find Labs Near You",
+      description: "Locate nearby lab facilities for your testing needs",
     },
     {
       icon: CreditCard,
-      title: 'Manage Billing',
-      description: 'View invoices, update payment methods, and track payments',
+      title: "Manage Billing",
+      description: "View invoices, update payment methods, and track payments",
     },
     {
       icon: HelpCircle,
-      title: 'Get Support',
-      description: 'Message your care team and access educational resources',
+      title: "Get Support",
+      description: "Message your care team and access educational resources",
     },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-background to-muted/20 py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="order-2 md:order-1">
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Your Health, <span className="text-patient-teal">Your Portal</span>
+                Your Health, <span className="text-patient-gold">Your Portal</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Access your appointments, health records, and care tools in one secure, easy-to-use patient portal designed for families.
+                Access your appointments, health records, and care tools in one secure, easy-to-use patient portal
+                designed for families.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground"
-                >
-                  <Link to="/patient-login">Log In to Portal</Link>
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                  <Link to="/patient-login">Log in to Portal</Link>
                 </Button>
                 <Button
                   asChild
@@ -88,9 +85,7 @@ const ForPatients = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Everything You Need in One Place
-            </h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Everything You Need in One Place</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Our patient portal gives you 24/7 access to your child's health information and care tools.
             </p>
@@ -120,9 +115,7 @@ const ForPatients = () => {
                 <Shield className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">Secure & HIPAA Compliant</h3>
-              <p className="text-sm text-muted-foreground">
-                Your health data is encrypted and protected
-              </p>
+              <p className="text-sm text-muted-foreground">Your health data is encrypted and protected</p>
             </div>
 
             <div className="text-center">
@@ -130,9 +123,7 @@ const ForPatients = () => {
                 <FileText className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">24/7 Access</h3>
-              <p className="text-sm text-muted-foreground">
-                View your records anytime, anywhere
-              </p>
+              <p className="text-sm text-muted-foreground">View your records anytime, anywhere</p>
             </div>
 
             <div className="text-center">
@@ -154,17 +145,11 @@ const ForPatients = () => {
       {/* CTA Section */}
       <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-            Ready to Get Started?
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Ready to Get Started?</h2>
           <p className="text-primary-foreground/90 mb-8 max-w-lg mx-auto">
             Log in to your patient portal or create an account to access your child's health information.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground"
-          >
+          <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link to="/patient-login">Access Patient Portal</Link>
           </Button>
         </div>
