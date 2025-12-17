@@ -7,7 +7,7 @@ const FAQSection = () => {
     {
       question: "What types of conditions does ENDOMD Health treat?",
       answer:
-        "We care for a wide range of pediatric endocrine conditions, including weight management, GLP-1 medications, growth disorders, thyroid disease, diabetes (Type 1 & Type 2), puberty concerns, adrenal disorders, pituitary disorders, and metabolic issues.",
+        "We care for a wide range of pediatric endocrine conditions, including weight management using GLP-1 medications if needed, growth disorders, thyroid disease, diabetes (Type 1 & Type 2), puberty concerns, adrenal disorders, pituitary disorders, and metabolic issues.",
     },
     {
       question: "What types of appointments do you offer?",
