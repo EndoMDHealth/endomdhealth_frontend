@@ -19,7 +19,9 @@ import ForSchools from "./pages/ForSchools";
 import ForCommunityPartners from "./pages/ForCommunityPartners";
 import Login from "./pages/Login";
 import ClinicianLogin from "./pages/ClinicianLogin";
+import SpecialistLogin from "./pages/SpecialistLogin";
 import PhysicianDashboard from "./pages/PhysicianDashboard";
+import SpecialistDashboard from "./pages/SpecialistDashboard";
 import SubmitEConsult from "./pages/SubmitEConsult";
 import PatientLogin from "./pages/PatientLogin";
 import PatientDashboard from "./pages/PatientDashboard";
@@ -46,6 +48,7 @@ import SignedOut from "./pages/SignedOut";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PhysicianProtectedRoute from "./components/PhysicianProtectedRoute";
+import SpecialistProtectedRoute from "./components/SpecialistProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +80,10 @@ const App = () => (
             <Route path="/provider-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/provider-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/submit-econsult" element={<PhysicianProtectedRoute><SubmitEConsult /></PhysicianProtectedRoute>} />
+            {/* Specialist Portal Routes */}
+            <Route path="/specialist-login" element={<SpecialistLogin />} />
+            <Route path="/specialist-dashboard" element={<SpecialistProtectedRoute><SpecialistDashboard /></SpecialistProtectedRoute>} />
+            <Route path="/specialist-dashboard/*" element={<SpecialistProtectedRoute><SpecialistDashboard /></SpecialistProtectedRoute>} />
             {/* Legacy routes - redirect to new paths */}
             <Route path="/physician-dashboard" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
             <Route path="/physician-dashboard/*" element={<PhysicianProtectedRoute><PhysicianDashboard /></PhysicianProtectedRoute>} />
