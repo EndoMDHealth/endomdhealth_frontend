@@ -11,7 +11,7 @@ const StatsSection = () => {
       accent: "text-primary",
     },
     {
-      value: "98%",
+      value: "99%",
       label: "Families who say they would recommend EndoMD Health to others",
       icon: Heart,
       accent: "text-accent",
