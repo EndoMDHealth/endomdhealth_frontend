@@ -101,6 +101,16 @@ const TestimonialsSection = () => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               We select our team members carefully to ensure your child receives outstanding care.
             </p>
+            <a
+              href="https://www.google.com/search?client=safari&hs=I7e9&sca_esv=72a505b08c54f090&channel=30&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E0KTyoDXkXuvK4efboWrFPcgmBldA_rZUTTVL8JydPV3Mbo9_M87Rs9EXnLShF-fsdvOvak3vOSJzoO1Y2Yr3IKD8NS7&q=EndoMD+Health+Reviews&sa=X&ved=2ahUKEwjl9aDhq8WRAxVdHjQIHbuXMWMQ0bkNegQIORAE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6 py-3 rounded-md shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              aria-label="Read more parent reviews on Google"
+            >
+              Read More Reviews on Google
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
           </div>
 
           <div className="relative overflow-hidden">
