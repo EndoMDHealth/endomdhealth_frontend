@@ -39,7 +39,7 @@ const Login = () => {
               {/* Healthcare Provider Button */}
               <Button
                 onClick={() => navigate("/clinician-login")}
-                className="h-auto py-10 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-2xl md:text-3xl transition-all flex items-center justify-center rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
+                className="h-auto py-10 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-2xl md:text-2xl transition-all flex items-center justify-center rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
               >
                 Healthcare Provider
               </Button>
