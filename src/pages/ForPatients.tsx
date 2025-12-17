@@ -58,7 +58,7 @@ const ForPatients = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <Link to="/patient-login">Log in to Portal</Link>
+                  <Link to="/patient-login">Log in</Link>
                 </Button>
                 <Button
                   asChild
