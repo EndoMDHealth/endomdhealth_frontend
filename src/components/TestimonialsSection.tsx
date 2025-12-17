@@ -147,30 +147,30 @@ const TestimonialsSection = () => {
               </Button>
             </div>
 
-            {/* Testimonials Grid */}
+            {/* Testimonials Grid - Masonry-style vertical stacking */}
             <div 
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-300"
+              className="columns-1 sm:columns-2 lg:columns-4 gap-4 md:gap-5 space-y-4 md:space-y-5"
               role="region"
               aria-label="Testimonials"
             >
               {currentTestimonials.map((testimonial, index) => (
                 <Card
                   key={`${currentPage}-${index}`}
-                  className="p-5 bg-card shadow-md hover:shadow-lg transition-all duration-300 border border-border/50 flex flex-col h-full"
+                  className="p-3 bg-card shadow-md hover:shadow-lg transition-all duration-300 border border-border/50 break-inside-avoid"
                   role="article"
                   aria-label={`Testimonial from ${testimonial.author}`}
                 >
-                  <div className="space-y-3 flex flex-col h-full">
+                  <div className="space-y-2">
                     {/* Star Rating */}
-                    <div className="flex space-x-1">{renderStars(testimonial.rating)}</div>
+                    <div className="flex space-x-0.5">{renderStars(testimonial.rating)}</div>
 
                     {/* Testimonial Quote */}
-                    <blockquote className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                    <blockquote className="text-sm text-muted-foreground leading-relaxed">
                       "{testimonial.quote}"
                     </blockquote>
 
                     {/* Author Info */}
-                    <footer className="pt-2 mt-auto border-t border-border/30">
+                    <footer className="pt-1 border-t border-border/30">
                       <cite className="text-sm font-semibold text-primary not-italic">
                         {testimonial.author}
                       </cite>
