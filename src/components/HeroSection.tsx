@@ -17,43 +17,46 @@ const HeroSection = () => {
                 Adults
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
-                Guiding patients through every stage of pediatric endocrinology care
-              </p>
-
               <div className="space-y-2">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">No more waiting</strong> – long months for answers</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong className="font-semibold text-foreground">No more waiting</strong> – long months for answers
+                  </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">No more missed</strong> – work or school</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong className="font-semibold text-foreground">No more missed</strong> – work or school
+                  </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">Expert & compassionate care</strong> – on your schedule</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong className="font-semibold text-foreground">Expert & compassionate care</strong> – on your
+                    schedule
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-md"
-              asChild
-            >
-              <Link to="/login">Get Started</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg"
-              asChild
-            >
-              <Link to="/for-parents">Learn More</Link>
-            </Button>
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-md"
+                asChild
+              >
+                <Link to="/login">Get Started</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg"
+                asChild
+              >
+                <Link to="/for-parents">Learn More</Link>
+              </Button>
             </div>
 
             {/* Info Cards */}
