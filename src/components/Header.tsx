@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Menu, X, Search, Phone, Mail, LogOut, User } from "lucide-react";
@@ -56,8 +57,11 @@ const Header = () => {
     { name: "For Community Partners", href: "/for-community-partners" },
   ];
 
+  const navigate = useNavigate();
+
   const handleSignOut = async () => {
     await signOut();
+    navigate('/signed-out');
   };
 
   return (
