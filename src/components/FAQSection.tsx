@@ -7,12 +7,12 @@ const FAQSection = () => {
     {
       question: "What types of conditions does ENDOMD Health treat?",
       answer:
-        "We care for a wide range of pediatric endocrine conditions, including growth disorders, thyroid disease, diabetes (Type 1 & Type 2), puberty concerns, adrenal disorders, pituitary disorders, and metabolic issues.",
+        "We care for a wide range of pediatric endocrine conditions, including weight management, GLP-1 medications, growth disorders, thyroid disease, diabetes (Type 1 & Type 2), puberty concerns, adrenal disorders, pituitary disorders, and metabolic issues.",
     },
     {
-      question: "How does online pediatric endocrinology care work?",
+      question: "What types of appointments do you offer?",
       answer:
-        "Our secure telemedicine platform allows your child to meet with a board-certified pediatric endocrinologist from home. Families receive the same expert guidance and personalized care as an in-person visit—without the travel or waiting room time.",
+        "We offer in-person and virtual appointments. Our secure telemedicine platform allows your child to meet with a board-certified pediatric endocrinologist from home. Families receive the same expert guidance and personalized care as an in-person visit—without the travel or waiting room time.",
     },
     {
       question: "How soon can I meet with a pediatric endocrinologist?",
