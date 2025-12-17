@@ -1,6 +1,6 @@
 const WaitTimeSection = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 md:pt-28 lg:pt-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-3xl lg:text-5xl font-bold leading-tight text-foreground">
