@@ -59,7 +59,7 @@ const ForPatients = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-patient-teal hover:bg-patient-teal/90 text-white"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground"
                 >
                   <Link to="/patient-login">Log In to Portal</Link>
                 </Button>
@@ -67,6 +67,7 @@ const ForPatients = () => {
                   asChild
                   size="lg"
                   variant="outline"
+                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 >
                   <Link to="/patient-login">Create Account</Link>
                 </Button>
@@ -96,10 +97,10 @@ const ForPatients = () => {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {features.map((feature, index) => (
-              <Card key={index} className="border hover:border-patient-teal/50 hover:shadow-md transition-all">
+              <Card key={index} className="border hover:border-accent/50 hover:shadow-md transition-all">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-xl bg-patient-teal/10 flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-patient-teal" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                    <feature.icon className="h-6 w-6 text-accent" />
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground">{feature.description}</p>
@@ -115,7 +116,7 @@ const ForPatients = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-patient-teal/10 text-patient-teal mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 text-accent mb-3">
                 <Shield className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">Secure & HIPAA Compliant</h3>
@@ -125,7 +126,7 @@ const ForPatients = () => {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-patient-teal/10 text-patient-teal mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 text-accent mb-3">
                 <FileText className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">24/7 Access</h3>
@@ -135,12 +136,12 @@ const ForPatients = () => {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-patient-teal/10 text-patient-teal mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 text-accent mb-3">
                 <HelpCircle className="w-6 h-6" />
               </div>
               <h3 className="font-semibold text-foreground mb-2">Support Available</h3>
               <p className="text-sm text-muted-foreground">
-                <Link to="/contact-us" className="text-patient-teal hover:underline">
+                <Link to="/contact-us" className="text-accent hover:underline">
                   Contact us
                 </Link>{" "}
                 for help with your account
@@ -151,18 +152,18 @@ const ForPatients = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
+      <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <p className="text-primary-foreground/90 mb-8 max-w-lg mx-auto">
             Log in to your patient portal or create an account to access your child's health information.
           </p>
           <Button
             asChild
             size="lg"
-            className="bg-patient-teal hover:bg-patient-teal/90 text-white"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
           >
             <Link to="/patient-login">Access Patient Portal</Link>
           </Button>
