@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle2, Send, Building2, User, Users, FileText } from "lucide-react";
+import { CheckCircle2, Send, Building2, Users, FileText, ExternalLink } from "lucide-react";
 import { z } from "zod";
 
 const US_STATES = [
@@ -27,6 +27,7 @@ const referralSchema = z.object({
   providerFirstName: z.string().trim().min(1, "Provider first name is required").max(100),
   providerLastName: z.string().trim().min(1, "Provider last name is required").max(100),
   providerEmail: z.string().trim().email("Please enter a valid email address").max(255),
+  providerPhone: z.string().trim().min(10, "Please enter a valid phone number").max(20),
   organization: z.string().trim().min(1, "Organization is required").max(200),
   patientFirstName: z.string().trim().min(1, "Patient first name is required").max(100),
   patientLastName: z.string().trim().min(1, "Patient last name is required").max(100),
@@ -50,6 +51,7 @@ const ForHealthcareProfessionals = () => {
     providerFirstName: "",
     providerLastName: "",
     providerEmail: "",
+    providerPhone: "",
     organization: "",
     patientFirstName: "",
     patientLastName: "",
@@ -112,8 +114,8 @@ const ForHealthcareProfessionals = () => {
         <Header />
         <main className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="w-20 h-20 bg-[hsl(174,50%,58%)] rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="h-10 w-10 text-white" />
+            <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="h-10 w-10 text-accent-foreground" />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Referral Submitted Successfully
@@ -129,6 +131,7 @@ const ForHealthcareProfessionals = () => {
                     providerFirstName: "",
                     providerLastName: "",
                     providerEmail: "",
+                    providerPhone: "",
                     organization: "",
                     patientFirstName: "",
                     patientLastName: "",
@@ -140,7 +143,7 @@ const ForHealthcareProfessionals = () => {
                     consentToEmails: false,
                   });
                 }}
-                className="bg-[hsl(174,50%,58%)] hover:bg-[hsl(174,50%,48%)] text-white"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
               >
                 Submit Another Referral
               </Button>
@@ -156,50 +159,63 @@ const ForHealthcareProfessionals = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F7FA]">
+    <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="bg-primary py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-              Refer a Patient
-            </h1>
-            <p className="text-lg text-primary-foreground/90 leading-relaxed">
-              Clinicians can fax referrals to <span className="font-semibold">804-660-6321</span> or complete the secure online form below.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Info Section */}
-      <section className="py-8 bg-background border-b">
+      {/* Hero Section - White Background */}
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <p className="text-muted-foreground text-center leading-relaxed">
-              Our team will reach out to the patient within 24 hours to schedule a pediatric endocrinology appointment. 
-              Providers are encouraged to create a profile through the{" "}
-              <a href="/provider-login" className="text-[hsl(174,50%,58%)] hover:underline font-medium">
-                Healthcare Provider Portal
-              </a>{" "}
-              to follow up on the status of submitted referrals. Thanks for partnering with us to help families access timely pediatric endocrine care!
-            </p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary text-center mb-8">
+              Refer a Patient
+            </h1>
+            <div className="space-y-4 text-foreground leading-relaxed">
+              <p>
+                Clinicians can fax referrals to <span className="font-semibold text-primary">804-660-6321</span> or complete the secure online form below.
+              </p>
+              <p>
+                Our team will reach out to the patient within 24 hours to schedule a pediatric endocrinology appointment.
+              </p>
+              <p>
+                Providers are encouraged to create a profile through the{" "}
+                <a href="/provider-login" className="text-accent font-semibold hover:underline">
+                  Healthcare Provider Portal
+                </a>{" "}
+                to follow up on the status of submitted referrals.
+              </p>
+              <p>
+                Thanks for partnering with us to help families access timely pediatric endocrine care!
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16 bg-[#F5F7FA]">
         <div className="container mx-auto px-4">
           <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-8">
             
+            {/* Access Provider Portal CTA */}
+            <div className="flex justify-center">
+              <Button 
+                asChild
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg rounded-lg shadow-md transition-all"
+              >
+                <a href="/provider-login">
+                  <ExternalLink className="h-5 w-5 mr-2" />
+                  Access Provider Portal
+                </a>
+              </Button>
+            </div>
+
             {/* Provider Information Card */}
-            <Card className="shadow-sm border-border/50">
-              <CardHeader className="bg-primary/5 border-b">
+            <Card className="shadow-sm border-border/50 bg-background">
+              <CardHeader className="bg-accent/10 border-b">
                 <CardTitle className="flex items-center gap-3 text-xl text-foreground">
-                  <div className="w-10 h-10 rounded-full bg-[hsl(174,50%,58%)] flex items-center justify-center">
-                    <Building2 className="h-5 w-5 text-white" />
+                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                    <Building2 className="h-5 w-5 text-accent-foreground" />
                   </div>
                   Provider Information
                 </CardTitle>
@@ -270,13 +286,30 @@ const ForHealthcareProfessionals = () => {
                       <p className="text-sm text-destructive">{errors.organization}</p>
                     )}
                   </div>
+
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="providerPhone" className="text-foreground font-medium">
+                      Provider Phone Number <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="providerPhone"
+                      type="tel"
+                      value={formData.providerPhone}
+                      onChange={(e) => handleInputChange("providerPhone", e.target.value)}
+                      placeholder="(555) 123-4567"
+                      className={`max-w-md ${errors.providerPhone ? "border-destructive" : ""}`}
+                    />
+                    {errors.providerPhone && (
+                      <p className="text-sm text-destructive">{errors.providerPhone}</p>
+                    )}
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Patient Information Card */}
-            <Card className="shadow-sm border-border/50">
-              <CardHeader className="bg-primary/5 border-b">
+            <Card className="shadow-sm border-border/50 bg-background">
+              <CardHeader className="bg-accent/10 border-b">
                 <CardTitle className="flex items-center gap-3 text-xl text-foreground">
                   <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
                     <Users className="h-5 w-5 text-accent-foreground" />
@@ -396,8 +429,8 @@ const ForHealthcareProfessionals = () => {
             </Card>
 
             {/* Referral Details Card */}
-            <Card className="shadow-sm border-border/50">
-              <CardHeader className="bg-primary/5 border-b">
+            <Card className="shadow-sm border-border/50 bg-background">
+              <CardHeader className="bg-accent/10 border-b">
                 <CardTitle className="flex items-center gap-3 text-xl text-foreground">
                   <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
                     <FileText className="h-5 w-5 text-primary-foreground" />
@@ -429,7 +462,7 @@ const ForHealthcareProfessionals = () => {
             </Card>
 
             {/* Consent and Submit */}
-            <Card className="shadow-sm border-border/50">
+            <Card className="shadow-sm border-border/50 bg-background">
               <CardContent className="pt-6">
                 <div className="space-y-6">
                   <div className="flex items-start gap-3">
@@ -437,7 +470,7 @@ const ForHealthcareProfessionals = () => {
                       id="consentToEmails"
                       checked={formData.consentToEmails}
                       onCheckedChange={(checked) => handleInputChange("consentToEmails", checked as boolean)}
-                      className="mt-1"
+                      className="mt-1 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                     />
                     <div className="space-y-1">
                       <Label 
@@ -457,7 +490,7 @@ const ForHealthcareProfessionals = () => {
                       type="submit" 
                       size="lg"
                       disabled={isSubmitting}
-                      className="bg-[hsl(174,50%,58%)] hover:bg-[hsl(174,50%,48%)] text-white font-semibold px-10 py-6 text-lg transition-all"
+                      className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-10 py-6 text-lg transition-all rounded-lg shadow-md"
                     >
                       {isSubmitting ? (
                         <>
