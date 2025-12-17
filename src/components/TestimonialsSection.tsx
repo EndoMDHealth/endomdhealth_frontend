@@ -1,10 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const testimonials = [
     {
@@ -69,34 +69,35 @@ const TestimonialsSection = () => {
     },
   ];
 
+  // Items per page based on screen size - we'll use 4 for desktop calculation
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
+
+  const currentTestimonials = useMemo(() => {
+    const start = currentPage * itemsPerPage;
+    return testimonials.slice(start, start + itemsPerPage);
+  }, [currentPage, testimonials]);
+
   const goToPrevious = useCallback(() => {
-    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  }, [testimonials.length]);
+    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  }, [totalPages]);
 
   const goToNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  }, [testimonials.length]);
+    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  }, [totalPages]);
 
-  const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index);
+  const goToPage = useCallback((page: number) => {
+    setCurrentPage(page);
   }, []);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
-        className={`h-5 w-5 ${i < rating ? "text-accent fill-accent" : "text-muted"}`}
+        className={`h-4 w-4 ${i < rating ? "text-accent fill-accent" : "text-muted"}`}
       />
     ));
   };
-
-  const getVisibleIndices = () => {
-    const prev = currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1;
-    const next = currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1;
-    return { prev, current: currentIndex, next };
-  };
-
-  const { prev, current, next } = getVisibleIndices();
 
   return (
     <section className="py-16 bg-brand-healing-leaf-light-100">
@@ -120,112 +121,108 @@ const TestimonialsSection = () => {
             </a>
           </div>
 
-          {/* Testimonials Carousel */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Stacked Cards Layout */}
-            <div className="relative h-[320px] md:h-[280px] flex items-center justify-center">
-              {/* Previous Card (Background Left) */}
-              <Card
-                className="absolute left-0 md:left-8 w-[85%] md:w-[70%] p-5 bg-card/60 shadow-md transition-all duration-300 -rotate-3 scale-90 opacity-50 z-0"
-                aria-hidden="true"
-              >
-                <div className="space-y-3">
-                  <div className="flex space-x-1">{renderStars(testimonials[prev].rating)}</div>
-                  <blockquote className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    "{testimonials[prev].quote}"
-                  </blockquote>
-                  <footer>
-                    <cite className="text-sm font-semibold text-primary not-italic">
-                      {testimonials[prev].author}
-                    </cite>
-                  </footer>
-                </div>
-              </Card>
-
-              {/* Next Card (Background Right) */}
-              <Card
-                className="absolute right-0 md:right-8 w-[85%] md:w-[70%] p-5 bg-card/60 shadow-md transition-all duration-300 rotate-3 scale-90 opacity-50 z-0"
-                aria-hidden="true"
-              >
-                <div className="space-y-3">
-                  <div className="flex space-x-1">{renderStars(testimonials[next].rating)}</div>
-                  <blockquote className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    "{testimonials[next].quote}"
-                  </blockquote>
-                  <footer>
-                    <cite className="text-sm font-semibold text-primary not-italic">
-                      {testimonials[next].author}
-                    </cite>
-                  </footer>
-                </div>
-              </Card>
-
-              {/* Current Card (Primary - Front) */}
-              <Card
-                className="relative w-[90%] md:w-[75%] p-6 bg-card shadow-xl transition-all duration-300 z-10 border-2 border-accent/20"
-                role="article"
-                aria-label={`Testimonial from ${testimonials[current].author}`}
-              >
-                <div className="space-y-4">
-                  <div className="flex space-x-1">{renderStars(testimonials[current].rating)}</div>
-                  <blockquote className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                    "{testimonials[current].quote}"
-                  </blockquote>
-                  <footer className="pt-2">
-                    <cite className="text-base font-semibold text-primary not-italic">
-                      {testimonials[current].author}
-                    </cite>
-                  </footer>
-                </div>
-              </Card>
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              {/* Previous Button */}
+          {/* Testimonials Grid */}
+          <div className="relative">
+            {/* Navigation Arrows - Desktop */}
+            <div className="hidden md:flex absolute -left-4 lg:-left-8 top-1/2 -translate-y-1/2 z-10">
               <Button
                 variant="outline"
                 size="icon"
                 onClick={goToPrevious}
-                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
-                aria-label="Previous testimonial"
+                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors shadow-lg bg-background"
+                aria-label="Previous testimonials"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
-
-              {/* Pagination Dots */}
-              <div className="flex items-center gap-2" role="tablist" aria-label="Testimonial navigation">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${
-                      index === currentIndex
-                        ? "bg-accent w-6"
-                        : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                    }`}
-                    role="tab"
-                    aria-selected={index === currentIndex}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* Next Button */}
+            </div>
+            <div className="hidden md:flex absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 z-10">
               <Button
                 variant="outline"
                 size="icon"
                 onClick={goToNext}
-                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
-                aria-label="Next testimonial"
+                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors shadow-lg bg-background"
+                aria-label="Next testimonials"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
             </div>
 
-            {/* Counter */}
-            <p className="text-center text-sm text-muted-foreground mt-4">
-              {currentIndex + 1} of {testimonials.length}
+            {/* Testimonials Grid */}
+            <div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-300"
+              role="region"
+              aria-label="Testimonials"
+            >
+              {currentTestimonials.map((testimonial, index) => (
+                <Card
+                  key={`${currentPage}-${index}`}
+                  className="p-5 bg-card shadow-md hover:shadow-lg transition-all duration-300 border border-border/50 flex flex-col h-full"
+                  role="article"
+                  aria-label={`Testimonial from ${testimonial.author}`}
+                >
+                  <div className="space-y-3 flex flex-col h-full">
+                    {/* Star Rating */}
+                    <div className="flex space-x-1">{renderStars(testimonial.rating)}</div>
+
+                    {/* Testimonial Quote */}
+                    <blockquote className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                      "{testimonial.quote}"
+                    </blockquote>
+
+                    {/* Author Info */}
+                    <footer className="pt-2 mt-auto border-t border-border/30">
+                      <cite className="text-sm font-semibold text-primary not-italic">
+                        {testimonial.author}
+                      </cite>
+                    </footer>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="flex md:hidden items-center justify-center gap-4 mt-6">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={goToPrevious}
+                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+                aria-label="Previous testimonials"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={goToNext}
+                className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+                aria-label="Next testimonials"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2" role="tablist" aria-label="Testimonial page navigation">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${
+                    index === currentPage
+                      ? "bg-accent w-8"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
+                  role="tab"
+                  aria-selected={index === currentPage}
+                  aria-label={`Go to page ${index + 1} of ${totalPages}`}
+                />
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Page {currentPage + 1} of {totalPages}
             </p>
           </div>
         </div>
