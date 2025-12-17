@@ -43,27 +43,27 @@ const ConcernsSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Images */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <div className="rounded-xl overflow-hidden shadow-md">
+        <div className="grid lg:grid-cols-3 gap-6 items-start">
+          {/* Left Side - Stacked Vertical Images (1/3 width) */}
+          <div className="flex flex-col gap-3 lg:col-span-1">
+            <div className="rounded-lg overflow-hidden">
               <img
                 src={activeBoy}
-                alt="Young boy running outdoors in fall with autumn leaves"
-                className="w-full sm:w-48 h-56 object-cover"
+                alt="Boy riding a bike outdoors in autumn with fall colors"
+                className="w-full h-36 object-cover"
               />
             </div>
-            <div className="rounded-xl overflow-hidden shadow-md sm:mt-6">
+            <div className="rounded-lg overflow-hidden ml-4">
               <img
                 src={activeGirl}
-                alt="Young girl playing outside in autumn with warm fall colors"
-                className="w-full sm:w-48 h-56 object-cover"
+                alt="Girl running outside in fall leaves with warm autumn tones"
+                className="w-full h-36 object-cover"
               />
             </div>
           </div>
 
-          {/* Right Side - Conditions List */}
-          <div className="space-y-4">
+          {/* Right Side - Conditions List (2/3 width) */}
+          <div className="space-y-3 lg:col-span-2">
             {concerns.map((concern, index) => (
               <div 
                 key={index} 
