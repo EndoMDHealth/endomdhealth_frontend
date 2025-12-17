@@ -32,7 +32,7 @@ interface Provider {
   phone?: string;
   total_consults: number;
   active_consults: number;
-  role: 'physician' | 'admin' | 'specialist';
+  role: 'physician' | 'admin' | 'admin_staff' | 'specialist';
 }
 
 interface TeamSectionProps {

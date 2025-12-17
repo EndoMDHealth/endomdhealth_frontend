@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinics: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          invite_code: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invite_code?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invite_code?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       e_consult_attachments: {
         Row: {
           created_at: string
@@ -105,6 +132,7 @@ export type Database = {
           responded_by: string | null
           response_notes: string | null
           status: Database["public"]["Enums"]["econsult_status"]
+          submitted_by_user_id: string | null
           updated_at: string
           weight_kg: number | null
         }
@@ -125,6 +153,7 @@ export type Database = {
           responded_by?: string | null
           response_notes?: string | null
           status?: Database["public"]["Enums"]["econsult_status"]
+          submitted_by_user_id?: string | null
           updated_at?: string
           weight_kg?: number | null
         }
@@ -145,6 +174,7 @@ export type Database = {
           responded_by?: string | null
           response_notes?: string | null
           status?: Database["public"]["Enums"]["econsult_status"]
+          submitted_by_user_id?: string | null
           updated_at?: string
           weight_kg?: number | null
         }
@@ -152,6 +182,7 @@ export type Database = {
       }
       physician_roles: {
         Row: {
+          clinic_id: string | null
           created_at: string
           id: string
           npi_number: string | null
@@ -165,6 +196,7 @@ export type Database = {
           verified: boolean | null
         }
         Insert: {
+          clinic_id?: string | null
           created_at?: string
           id?: string
           npi_number?: string | null
@@ -178,6 +210,7 @@ export type Database = {
           verified?: boolean | null
         }
         Update: {
+          clinic_id?: string | null
           created_at?: string
           id?: string
           npi_number?: string | null
@@ -190,7 +223,15 @@ export type Database = {
           user_id?: string
           verified?: boolean | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "physician_roles_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -224,6 +265,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_user_clinic_id: { Args: { _user_id: string }; Returns: string }
       has_physician_role: {
         Args: {
           _role: Database["public"]["Enums"]["physician_role"]
@@ -232,6 +274,10 @@ export type Database = {
         Returns: boolean
       }
       is_physician: { Args: { _user_id: string }; Returns: boolean }
+      is_same_clinic: {
+        Args: { _other_user_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       condition_category:

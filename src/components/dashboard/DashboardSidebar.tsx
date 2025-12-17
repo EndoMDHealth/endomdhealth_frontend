@@ -11,26 +11,32 @@ import {
   Archive,
   Send,
   Home,
-  FileDown
+  FileDown,
+  Building2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { RoleBadge } from "./RoleBadge";
+
+type UserRole = 'physician' | 'admin' | 'admin_staff' | 'specialist';
 
 interface SidebarItem {
   id: string;
   label: string;
+  adminLabel?: string; // Alternative label for admin_staff
   icon: React.ElementType;
   path?: string;
   children?: { id: string; label: string; path: string }[];
   adminOnly?: boolean;
+  providerOnly?: boolean;
 }
 
-const sidebarItems: SidebarItem[] = [
+const getSidebarItems = (isAdminStaff: boolean): SidebarItem[] => [
   { id: 'home', label: 'Home', icon: Home, path: '/provider-dashboard' },
   { 
     id: 'submissions', 
-    label: 'e-Consults', 
+    label: isAdminStaff ? 'e-Consults' : 'My e-Consults', 
     icon: Send,
     children: [
       { id: 'submissions-active', label: 'Active Submissions', path: '/provider-dashboard/submissions/active' },
@@ -48,7 +54,7 @@ const sidebarItems: SidebarItem[] = [
   },
   { 
     id: 'referrals', 
-    label: 'Patient Referrals', 
+    label: isAdminStaff ? 'Patient Referrals' : 'My Referrals', 
     icon: FileText,
     children: [
       { id: 'referrals-active', label: 'Active', path: '/provider-dashboard/referrals/active' },
@@ -57,22 +63,32 @@ const sidebarItems: SidebarItem[] = [
   { id: 'forms', label: 'Forms', icon: FileDown, path: '/provider-dashboard/forms' },
   { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/provider-dashboard/analytics', adminOnly: true },
   { id: 'team', label: 'Providers / Team', icon: Users, path: '/provider-dashboard/team', adminOnly: true },
+  { id: 'clinic', label: 'Practice Settings', icon: Building2, path: '/provider-dashboard/clinic', adminOnly: true },
   { id: 'support', label: 'Support', icon: HelpCircle, path: '/provider-dashboard/support' },
 ];
 
 interface DashboardSidebarProps {
   onNavigate?: (path: string) => void;
+  userRole?: UserRole;
+  clinicName?: string;
 }
 
-export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
+export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: DashboardSidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [expandedItems, setExpandedItems] = useState<string[]>(['submissions', 'referrals', 'responses']);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState<UserRole>('physician');
 
   useEffect(() => {
-    const checkAdminRole = async () => {
+    const checkRole = async () => {
+      if (userRole) {
+        setRole(userRole);
+        setIsAdmin(userRole === 'admin' || userRole === 'admin_staff');
+        return;
+      }
+      
       if (!user) return;
       const { data } = await supabase
         .from('physician_roles')
@@ -80,10 +96,15 @@ export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
         .eq('user_id', user.id)
         .maybeSingle();
       
-      setIsAdmin(data?.role === 'admin');
+      if (data?.role) {
+        setRole(data.role as UserRole);
+        setIsAdmin(data.role === 'admin' || data.role === 'admin_staff');
+      }
     };
-    checkAdminRole();
-  }, [user]);
+    checkRole();
+  }, [user, userRole]);
+
+  const sidebarItems = getSidebarItems(role === 'admin_staff');
 
   const toggleExpand = (id: string) => {
     setExpandedItems(prev => 
@@ -111,6 +132,29 @@ export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
 
   return (
     <aside className="w-64 bg-card border-r border-border flex flex-col h-[calc(100vh-64px)] sticky top-16">
+      {/* View indicator */}
+      <div className="p-4 border-b border-border">
+        <div className="flex items-center justify-between">
+          <RoleBadge role={role} />
+        </div>
+        {role === 'admin_staff' && (
+          <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+            <Building2 className="h-3 w-3" />
+            Clinic-wide view
+          </p>
+        )}
+        {role === 'physician' && (
+          <p className="text-xs text-muted-foreground mt-2">
+            Showing your submissions
+          </p>
+        )}
+        {clinicName && (
+          <p className="text-xs font-medium text-foreground mt-1 truncate">
+            {clinicName}
+          </p>
+        )}
+      </div>
+      
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {sidebarItems.map((item) => {
           const isDisabled = item.adminOnly && !isAdmin;

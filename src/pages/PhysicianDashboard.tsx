@@ -28,11 +28,14 @@ import { FormsSection } from "@/components/dashboard/FormsSection";
 import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
 import EConsultDetailView from "@/components/dashboard/EConsultDetailView";
 import { ConsultationActionsModal } from "@/components/dashboard/ConsultationActionsModal";
+import { RoleClinicSetupModal } from "@/components/dashboard/RoleClinicSetupModal";
+import { RoleBadge } from "@/components/dashboard/RoleBadge";
 import { FeedbackData } from "@/components/dashboard/EConsultFeedbackModal";
 import { toast } from "sonner";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
+type UserRole = 'physician' | 'admin' | 'admin_staff' | 'specialist';
 
 interface EConsult {
   id: string;
@@ -51,9 +54,11 @@ interface EConsult {
   response_notes?: string;
   responded_at?: string;
   physician_name?: string;
+  submitted_by_user_id?: string;
+  submitted_by_name?: string;
 }
 
-type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms' | 'consult-detail';
+type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms' | 'consult-detail' | 'clinic';
 
 const PhysicianDashboard = () => {
   const { user, signOut } = useAuth();
@@ -72,25 +77,57 @@ const PhysicianDashboard = () => {
   const [physicianName, setPhysicianName] = useState("");
   const [currentView, setCurrentView] = useState<DashboardView>('dashboard');
   const [previousView, setPreviousView] = useState<DashboardView>('submissions-active');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [userRole, setUserRole] = useState<UserRole>('physician');
+  const [clinicName, setClinicName] = useState<string | undefined>();
+  const [clinicId, setClinicId] = useState<string | null>(null);
   const [showActionsModal, setShowActionsModal] = useState(false);
+  const [showRoleSetupModal, setShowRoleSetupModal] = useState(false);
+  const [needsRoleSetup, setNeedsRoleSetup] = useState(false);
 
   useEffect(() => {
     if (user) {
-      fetchConsults();
+      fetchUserRole();
       fetchPhysicianInfo();
-      checkAdminRole();
     }
   }, [user]);
 
-  const checkAdminRole = async () => {
+  useEffect(() => {
+    if (user && !needsRoleSetup) {
+      fetchConsults();
+    }
+  }, [user, userRole, clinicId, needsRoleSetup]);
+
+  const fetchUserRole = async () => {
     if (!user) return;
     const { data } = await supabase
       .from('physician_roles')
-      .select('role')
+      .select('role, clinic_id')
       .eq('user_id', user.id)
       .maybeSingle();
-    setIsAdmin(data?.role === 'admin');
+    
+    if (data) {
+      setUserRole(data.role as UserRole);
+      setClinicId(data.clinic_id);
+      
+      // Check if user needs to set up their role (still default physician without clinic)
+      if (data.role === 'physician' && !data.clinic_id) {
+        setNeedsRoleSetup(true);
+        setShowRoleSetupModal(true);
+      }
+      
+      // Fetch clinic name if clinic_id exists
+      if (data.clinic_id) {
+        const { data: clinic } = await supabase
+          .from('clinics')
+          .select('name')
+          .eq('id', data.clinic_id)
+          .maybeSingle();
+        
+        if (clinic) {
+          setClinicName(clinic.name);
+        }
+      }
+    }
   };
 
   const fetchPhysicianInfo = async () => {
@@ -112,11 +149,20 @@ const PhysicianDashboard = () => {
     if (!user) return;
     setLoading(true);
     
-    const { data, error } = await supabase
+    let query = supabase
       .from('e_consults')
       .select('*')
-      .eq('physician_id', user.id)
       .order('created_at', { ascending: false });
+
+    // Admin staff can see all clinic consults, providers see only their own
+    if (userRole === 'admin_staff' && clinicId) {
+      // For admin staff, we'd need to fetch all clinic providers' consults
+      // This is handled by RLS policies
+    } else {
+      query = query.eq('physician_id', user.id);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       console.error('Error fetching consults:', error);
@@ -137,6 +183,12 @@ const PhysicianDashboard = () => {
       });
     }
     setLoading(false);
+  };
+
+  const handleRoleSetupComplete = () => {
+    setShowRoleSetupModal(false);
+    setNeedsRoleSetup(false);
+    fetchUserRole();
   };
 
   const handleSignOut = async () => {
@@ -223,7 +275,7 @@ const PhysicianDashboard = () => {
         }
         return null;
       case 'analytics':
-        return <AnalyticsSection isAdmin={isAdmin} />;
+        return <AnalyticsSection isAdmin={userRole === 'admin' || userRole === 'admin_staff'} />;
       case 'team':
         return <TeamSection />;
       case 'submissions-active':
@@ -231,8 +283,8 @@ const PhysicianDashboard = () => {
         return (
           <EConsultsTable
             consults={activeConsults}
-            title="Active Submissions"
-            description="E-consults awaiting response"
+            title={userRole === 'admin_staff' ? 'Active e-Consults (All Providers)' : 'My Active e-Consults'}
+            description={userRole === 'admin_staff' ? 'All clinic e-consults awaiting response' : 'Your e-consults awaiting response'}
             onViewConsult={handleViewConsult}
             onViewResponse={handleViewConsult}
             onSubmitNew={() => navigate('/submit-econsult')}
@@ -243,8 +295,8 @@ const PhysicianDashboard = () => {
         return (
           <EConsultsTable
             consults={archivedConsults}
-            title="Archived Submissions"
-            description="Completed e-consults"
+            title={userRole === 'admin_staff' ? 'Archived e-Consults (All Providers)' : 'My Archived e-Consults'}
+            description={userRole === 'admin_staff' ? 'All completed clinic e-consults' : 'Your completed e-consults'}
             onViewConsult={handleViewConsult}
             onViewResponse={handleViewConsult}
           />
@@ -252,8 +304,8 @@ const PhysicianDashboard = () => {
       case 'referrals-active':
         return (
           <PatientReferralsTable
-            title="Active Patient Referrals"
-            description="Patient referrals awaiting processing"
+            title={userRole === 'admin_staff' ? 'Active Patient Referrals (All Providers)' : 'My Patient Referrals'}
+            description={userRole === 'admin_staff' ? 'All clinic referrals awaiting processing' : 'Your referrals awaiting processing'}
           />
         );
       case 'support':
@@ -297,7 +349,9 @@ const PhysicianDashboard = () => {
                   className="flex flex-col items-start hover:opacity-80 transition-opacity"
                 >
                   <span className="text-sm font-semibold text-primary">EndoMD Health</span>
-                  <span className="text-lg font-bold text-foreground">Provider Dashboard</span>
+                  <span className="text-lg font-bold text-foreground">
+                    {userRole === 'admin_staff' ? 'Clinic Submissions Overview' : 'My Clinical Submissions'}
+                  </span>
                 </button>
               </div>
             </div>
@@ -324,8 +378,14 @@ const PhysicianDashboard = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <div className="px-3 py-2">
-                    <p className="text-sm font-medium">{physicianName}</p>
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-sm font-medium">{physicianName}</p>
+                      <RoleBadge role={userRole} className="scale-90" />
+                    </div>
                     <p className="text-xs text-muted-foreground">{user?.email}</p>
+                    {clinicName && (
+                      <p className="text-xs text-muted-foreground mt-1">{clinicName}</p>
+                    )}
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem><Settings className="mr-2 h-4 w-4" />Settings</DropdownMenuItem>
@@ -341,11 +401,17 @@ const PhysicianDashboard = () => {
       </nav>
 
       <div className="flex">
-        <DashboardSidebar onNavigate={handleSidebarNavigate} />
+        <DashboardSidebar onNavigate={handleSidebarNavigate} userRole={userRole} clinicName={clinicName} />
         <main className="flex-1 p-6 overflow-auto">
           {renderContent()}
         </main>
       </div>
+
+      {/* Role Setup Modal */}
+      <RoleClinicSetupModal 
+        isOpen={showRoleSetupModal} 
+        onComplete={handleRoleSetupComplete} 
+      />
 
       {/* Consultation Actions Modal */}
       {selectedConsult && (
