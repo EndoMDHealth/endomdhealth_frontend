@@ -374,20 +374,20 @@ const SpecialistDashboard = () => {
   return (
     <div className="min-h-screen bg-secondary">
       {/* Top Navigation */}
-      <nav className="bg-[#0d1b2a] border-b border-border sticky top-0 z-50">
+      <nav className="bg-background border-b border-border sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0">
                 <img src={endoLogo} alt="EndoMD Health" className="h-10 w-auto" />
               </Link>
-              <div className="ml-6 border-l border-white/20 pl-6">
+              <div className="ml-6 border-l border-border pl-6">
                 <button 
                   onClick={() => setCurrentView('dashboard')}
                   className="flex flex-col items-start hover:opacity-80 transition-opacity"
                 >
                   <span className="text-sm font-semibold text-accent">EndoMD Health</span>
-                  <span className="text-lg font-bold text-white">Specialist Dashboard</span>
+                  <span className="text-lg font-bold text-foreground">Specialist Dashboard</span>
                 </button>
               </div>
             </div>
@@ -403,9 +403,9 @@ const SpecialistDashboard = () => {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 text-white hover:text-white hover:bg-white/10">
-                    <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center">
-                      <User className="h-4 w-4 text-accent" />
+                  <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-foreground hover:bg-muted">
+                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User className="h-4 w-4 text-primary" />
                     </div>
                     <span className="hidden sm:block text-sm font-medium">
                       Dr. {specialistName.split(' ').pop()}

@@ -50,9 +50,9 @@ const Login = () => {
               {/* Specialist Button */}
               <Button
                 onClick={() => navigate("/specialist-login")}
-                className="h-auto py-8 px-6 bg-[#0d1b2a] hover:bg-[#1b2838] text-white font-bold text-xl md:text-2xl transition-all flex flex-col items-center justify-center gap-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] border border-accent/30"
+                className="h-auto py-8 px-6 bg-background hover:bg-muted text-primary font-bold text-xl md:text-2xl transition-all flex flex-col items-center justify-center gap-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] border-2 border-primary/20"
               >
-                <Activity className="h-8 w-8 text-accent" />
+                <Activity className="h-8 w-8 text-primary" />
                 Specialist
               </Button>
             </div>
