@@ -81,7 +81,7 @@ const getStatusBadge = (status: EConsultStatus) => {
       label: 'Completed', 
       variant: 'secondary' as const, 
       icon: CheckCircle2,
-      className: 'bg-green-500 hover:bg-green-600 text-white' 
+      className: 'bg-[hsl(187,60%,50%)] hover:bg-[hsl(187,60%,45%)] text-white' 
     },
   };
   

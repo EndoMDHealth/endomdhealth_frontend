@@ -54,6 +54,10 @@ All colors MUST be HSL. Warm, professional medical brand.
     --soft-teal: 174 44% 56%;
     --soft-teal-light: 174 44% 85%;
     
+    /* Specialist Portal Accent - Light Blue/Teal */
+    --specialist-teal: 187 60% 50%;
+    --specialist-teal-foreground: 0 0% 100%;
+    
     /* Patient Portal Color Palette - Navy, White, Gold only */
     --patient-navy: 210 70% 15%;
     --patient-teal: 44 100% 45%; /* Updated to Gold #F4C542 */

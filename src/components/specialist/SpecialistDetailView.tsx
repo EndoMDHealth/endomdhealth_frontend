@@ -71,7 +71,7 @@ const getStatusBadge = (status: EConsultStatus) => {
     completed: { 
       label: 'Completed', 
       icon: CheckCircle2,
-      className: 'bg-green-500 text-white' 
+      className: 'bg-[hsl(187,60%,50%)] text-white' 
     },
   };
   
@@ -352,12 +352,12 @@ export const SpecialistDetailView = ({
 
               {/* Completed State */}
               {consult.status === 'completed' && consult.responded_at && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-green-700 mb-2">
+                <div className="bg-[hsl(187,60%,95%)] border border-[hsl(187,60%,70%)] rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-[hsl(187,60%,35%)] mb-2">
                     <CheckCircle2 className="h-5 w-5" />
                     <span className="font-semibold">Response Submitted</span>
                   </div>
-                  <p className="text-sm text-green-600">
+                  <p className="text-sm text-[hsl(187,60%,40%)]">
                     Submitted on {format(new Date(consult.responded_at), 'MMMM d, yyyy \'at\' h:mm a')}
                   </p>
                 </div>

@@ -324,12 +324,12 @@ const SpecialistDashboard = () => {
               <Card className="bg-card border-border">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500" />
+                    <CheckCircle2 className="h-4 w-4 text-[hsl(187,60%,50%)]" />
                     Completed
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-green-600">{stats.completed}</p>
+                  <p className="text-3xl font-bold text-[hsl(187,60%,45%)]">{stats.completed}</p>
                 </CardContent>
               </Card>
             </div>
@@ -373,21 +373,21 @@ const SpecialistDashboard = () => {
 
   return (
     <div className="min-h-screen bg-secondary">
-      {/* Top Navigation */}
-      <nav className="bg-background border-b border-border sticky top-0 z-50">
+      {/* Top Navigation - Navy blue to match main site */}
+      <nav className="bg-primary border-b border-primary sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0">
-                <img src={endoLogo} alt="EndoMD Health" className="h-10 w-auto" />
+                <img src={endoLogo} alt="EndoMD Health" className="h-12 w-auto" />
               </Link>
-              <div className="ml-6 border-l border-border pl-6">
+              <div className="ml-6 border-l border-primary-foreground/30 pl-6">
                 <button 
                   onClick={() => setCurrentView('dashboard')}
                   className="flex flex-col items-start hover:opacity-80 transition-opacity"
                 >
                   <span className="text-sm font-semibold text-accent">EndoMD Health</span>
-                  <span className="text-lg font-bold text-foreground">Specialist Dashboard</span>
+                  <span className="text-lg font-bold text-primary-foreground">Specialist Dashboard</span>
                 </button>
               </div>
             </div>
@@ -395,7 +395,7 @@ const SpecialistDashboard = () => {
             <div className="flex items-center gap-4">
               {/* Notification indicator */}
               {newConsults.length > 0 && (
-                <div className="hidden md:flex items-center gap-2 bg-accent/20 text-accent px-3 py-1.5 rounded-full text-sm">
+                <div className="hidden md:flex items-center gap-2 bg-accent/30 text-accent px-3 py-1.5 rounded-full text-sm font-medium">
                   <Activity className="h-4 w-4" />
                   <span>{newConsults.length} new</span>
                 </div>
@@ -403,11 +403,11 @@ const SpecialistDashboard = () => {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-foreground hover:bg-muted">
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-4 w-4 text-primary" />
+                  <Button variant="ghost" className="flex items-center gap-2 text-primary-foreground hover:text-primary-foreground hover:bg-primary-foreground/10">
+                    <div className="h-8 w-8 rounded-full bg-primary-foreground/20 flex items-center justify-center">
+                      <User className="h-4 w-4 text-primary-foreground" />
                     </div>
-                    <span className="hidden sm:block text-sm font-medium">
+                    <span className="hidden sm:block text-sm font-medium text-primary-foreground">
                       Dr. {specialistName.split(' ').pop()}
                     </span>
                   </Button>
