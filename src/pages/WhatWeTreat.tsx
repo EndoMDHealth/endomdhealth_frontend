@@ -100,7 +100,7 @@ const WhatWeTreat = () => {
                 today.{" "}
               </p>
               <Button size="lg" className="text-lg px-8 py-6 hover-scale" asChild>
-                <a href="/for-parents">Get Started</a>
+                <a href="/login">Get Started</a>
               </Button>
             </div>
             <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg">
@@ -159,7 +159,7 @@ const WhatWeTreat = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-6" asChild>
-              <a href="/for-parents">Get Started</a>
+              <a href="/login">Get Started</a>
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
               <a href="/resources">Learn More</a>

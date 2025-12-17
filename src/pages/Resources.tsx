@@ -240,7 +240,7 @@ const Resources = () => {
               <a href="/blog">Visit Our Blog</a>
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
-              <a href="/for-parents">Get Started</a>
+              <a href="/login">Get Started</a>
             </Button>
           </div>
         </div>

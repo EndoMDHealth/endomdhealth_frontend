@@ -44,7 +44,7 @@ const HeroSection = () => {
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-md"
               asChild
             >
-              <Link to="/for-patients">Get Started</Link>
+              <Link to="/login">Get Started</Link>
             </Button>
             <Button
               size="lg"
