@@ -63,9 +63,9 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-md">
       {/* Top Bar - Contact Info */}
-      <div className="bg-primary-foreground/10 border-b border-primary-foreground/20">
+      <div className="bg-primary">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center lg:justify-end gap-6 py-2 text-sm text-primary-foreground/90">
+          <div className="flex items-center justify-center lg:justify-end gap-6 py-2 text-sm text-primary-foreground">
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4" />
               <span>(571) 480-6053</span>
@@ -191,7 +191,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Login & Request Appointment Buttons */}
+          {/* Login, Provider Referral & Request Appointment Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
             {user ? (
               <DropdownMenu>
@@ -217,6 +217,12 @@ const Header = () => {
                 <a href="/auth">Login</a>
               </Button>
             )}
+            <Button
+              asChild
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
+            >
+              <a href="/for-healthcare-professionals">Provider Referral</a>
+            </Button>
             <Button
               asChild
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
@@ -324,6 +330,12 @@ const Header = () => {
                   <a href="/auth">Login</a>
                 </Button>
               )}
+              <Button
+                asChild
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
+              >
+                <a href="/for-healthcare-professionals">Provider Referral</a>
+              </Button>
               <Button
                 asChild
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
