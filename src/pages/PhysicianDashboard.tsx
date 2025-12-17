@@ -19,7 +19,6 @@ import {
   Loader2,
 } from "lucide-react";
 import endoLogo from "@/assets/logos/endo_yellow.png";
-import EConsultDetailModal from "@/components/econsult/EConsultDetailModal";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHome } from "@/components/dashboard/DashboardHome";
 import { EConsultsTable } from "@/components/dashboard/EConsultsTable";
@@ -27,6 +26,8 @@ import { AnalyticsSection } from "@/components/dashboard/AnalyticsSection";
 import { TeamSection } from "@/components/dashboard/TeamSection";
 import { FormsSection } from "@/components/dashboard/FormsSection";
 import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
+import EConsultDetailView from "@/components/dashboard/EConsultDetailView";
+import { toast } from "sonner";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -35,13 +36,22 @@ interface EConsult {
   id: string;
   patient_initials: string;
   patient_age: number;
+  patient_dob?: string;
+  patient_gender?: string;
+  height_cm?: number;
+  weight_kg?: number;
+  bmi?: number;
   condition_category: ConditionCategory;
   status: EConsultStatus;
   created_at: string;
   clinical_question: string;
+  additional_notes?: string;
+  response_notes?: string;
+  responded_at?: string;
+  physician_name?: string;
 }
 
-type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms';
+type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms' | 'consult-detail';
 
 const PhysicianDashboard = () => {
   const { user, signOut } = useAuth();
@@ -59,6 +69,7 @@ const PhysicianDashboard = () => {
   const [selectedConsult, setSelectedConsult] = useState<EConsult | null>(null);
   const [physicianName, setPhysicianName] = useState("");
   const [currentView, setCurrentView] = useState<DashboardView>('dashboard');
+  const [previousView, setPreviousView] = useState<DashboardView>('submissions-active');
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -149,6 +160,27 @@ const PhysicianDashboard = () => {
   const activeConsults = consults.filter(c => c.status !== 'completed');
   const archivedConsults = consults.filter(c => c.status === 'completed');
 
+  const handleViewConsult = (consult: EConsult) => {
+    setSelectedConsult(consult);
+    setPreviousView(currentView as DashboardView);
+    setCurrentView('consult-detail');
+  };
+
+  const handleBackFromDetail = () => {
+    setSelectedConsult(null);
+    setCurrentView(previousView);
+  };
+
+  const handleContinueConsultation = () => {
+    toast.info("Continue consultation feature coming soon");
+  };
+
+  const handleMarkComplete = () => {
+    toast.success("Consultation marked as complete");
+    setSelectedConsult(null);
+    setCurrentView(previousView);
+  };
+
   const renderContent = () => {
     if (loading) {
       return (
@@ -159,6 +191,18 @@ const PhysicianDashboard = () => {
     }
 
     switch (currentView) {
+      case 'consult-detail':
+        if (selectedConsult) {
+          return (
+            <EConsultDetailView
+              consult={selectedConsult}
+              onBack={handleBackFromDetail}
+              onContinueConsultation={handleContinueConsultation}
+              onMarkComplete={handleMarkComplete}
+            />
+          );
+        }
+        return null;
       case 'analytics':
         return <AnalyticsSection isAdmin={isAdmin} />;
       case 'team':
@@ -170,7 +214,7 @@ const PhysicianDashboard = () => {
             consults={activeConsults}
             title="Active Submissions"
             description="E-consults awaiting response"
-            onViewConsult={setSelectedConsult}
+            onViewConsult={handleViewConsult}
             onSubmitNew={() => navigate('/submit-econsult')}
           />
         );
@@ -181,7 +225,7 @@ const PhysicianDashboard = () => {
             consults={archivedConsults}
             title="Archived Submissions"
             description="Completed e-consults"
-            onViewConsult={setSelectedConsult}
+            onViewConsult={handleViewConsult}
           />
         );
       case 'referrals-active':
@@ -210,7 +254,7 @@ const PhysicianDashboard = () => {
             stats={stats}
             recentConsults={consults}
             onSubmitNew={() => navigate('/submit-econsult')}
-            onViewConsult={setSelectedConsult}
+            onViewConsult={handleViewConsult}
           />
         );
     }
@@ -281,14 +325,6 @@ const PhysicianDashboard = () => {
           {renderContent()}
         </main>
       </div>
-
-      {selectedConsult && (
-        <EConsultDetailModal
-          consult={selectedConsult}
-          isOpen={!!selectedConsult}
-          onClose={() => setSelectedConsult(null)}
-        />
-      )}
     </div>
   );
 };
