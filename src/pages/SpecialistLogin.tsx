@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Shield, FileText, HelpCircle, Stethoscope, Loader2, ArrowRight, Activity } from "lucide-react";
-import doctorImage from "@/assets/dr-davallow.png";
+import { Shield, FileText, HelpCircle, Activity, Loader2, ArrowRight } from "lucide-react";
+import specialistDeskImage from "@/assets/specialist-desk-setup.jpg";
 
 const SpecialistLogin = () => {
   const [searchParams] = useSearchParams();
@@ -182,17 +182,17 @@ const SpecialistLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d1b2a]">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-[#0d1b2a] to-[#1b2838] py-12">
+      <section className="bg-gradient-to-b from-background to-muted/20 py-12">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/20 text-accent mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
             <Activity className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Specialist Portal</h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Specialist Portal</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Pediatric Endocrinologists – Receive and respond to e-Consults from referring PCPs.
           </p>
           <p className="text-sm text-accent mt-2">
@@ -244,7 +244,7 @@ const SpecialistLogin = () => {
 
                       <Button
                         type="submit"
-                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg h-12"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-12"
                         size="lg"
                         disabled={isLoading}
                       >
@@ -262,7 +262,7 @@ const SpecialistLogin = () => {
                       </Button>
 
                       <div className="text-center">
-                        <Link to="/reset-password" className="text-base text-accent hover:underline">
+                        <Link to="/reset-password" className="text-base text-primary hover:underline">
                           Forgot your password?
                         </Link>
                       </div>
@@ -375,7 +375,7 @@ const SpecialistLogin = () => {
 
                       <Button
                         type="submit"
-                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground h-12 mt-6"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 mt-6"
                         size="lg"
                         disabled={isLoading}
                       >
@@ -400,9 +400,9 @@ const SpecialistLogin = () => {
             {/* Supporting Visual */}
             <div className="order-1 md:order-2 flex items-start justify-center md:justify-end">
               <img
-                src={doctorImage}
-                alt="Dr. Ladan Davallow - Pediatric Endocrinologist"
-                className="rounded-lg shadow-lg w-full max-w-[373px] h-auto object-cover"
+                src={specialistDeskImage}
+                alt="Modern pediatric endocrinology specialist desk with medical equipment"
+                className="rounded-lg shadow-lg w-full max-w-[420px] h-auto object-cover"
               />
             </div>
           </div>
@@ -410,32 +410,32 @@ const SpecialistLogin = () => {
       </section>
 
       {/* Info Section */}
-      <section className="py-12 bg-[#1b2838]">
+      <section className="py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20 text-accent mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <Shield className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-white mb-2">HIPAA Compliant</h3>
-              <p className="text-sm text-gray-400">Secure, encrypted platform for patient consultations</p>
+              <h3 className="font-semibold text-foreground mb-2">HIPAA Compliant</h3>
+              <p className="text-sm text-muted-foreground">Secure, encrypted platform for patient consultations</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20 text-accent mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <FileText className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-white mb-2">e-Consult Review</h3>
-              <p className="text-sm text-gray-400">Receive and respond to consultations from PCPs</p>
+              <h3 className="font-semibold text-foreground mb-2">e-Consult Review</h3>
+              <p className="text-sm text-muted-foreground">Receive and respond to consultations from PCPs</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20 text-accent mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <HelpCircle className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-white mb-2">Specialist Support</h3>
-              <p className="text-sm text-gray-400">
-                <Link to="/contact-us" className="text-accent hover:underline">
+              <h3 className="font-semibold text-foreground mb-2">Specialist Support</h3>
+              <p className="text-sm text-muted-foreground">
+                <Link to="/contact-us" className="text-primary hover:underline">
                   Contact us
                 </Link>{" "}
                 for assistance
