@@ -32,7 +32,7 @@ interface Provider {
   phone?: string;
   total_consults: number;
   active_consults: number;
-  role: 'physician' | 'admin';
+  role: 'physician' | 'admin' | 'specialist';
 }
 
 interface TeamSectionProps {
@@ -254,8 +254,8 @@ export const TeamSection = ({ onViewProviderConsults }: TeamSectionProps) => {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={provider.role === 'admin' ? 'default' : 'outline'}>
-                        {provider.role === 'admin' ? 'Admin' : 'Physician'}
+                      <Badge variant={provider.role === 'admin' ? 'default' : provider.role === 'specialist' ? 'secondary' : 'outline'}>
+                        {provider.role === 'admin' ? 'Admin' : provider.role === 'specialist' ? 'Specialist' : 'Physician'}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">
