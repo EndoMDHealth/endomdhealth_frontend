@@ -127,7 +127,7 @@ const Register = () => {
               <Button
                 variant="ghost"
                 className="text-muted-foreground"
-                onClick={() => navigate("/auth")}
+                onClick={() => navigate("/login")}
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Login

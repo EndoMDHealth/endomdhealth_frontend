@@ -105,7 +105,7 @@ const ResetPassword = () => {
               </CardHeader>
               <CardContent>
                 <Button asChild className="w-full">
-                  <a href="/auth">Back to Login</a>
+                  <a href="/login">Back to Login</a>
                 </Button>
               </CardContent>
             </Card>

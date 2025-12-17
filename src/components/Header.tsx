@@ -214,7 +214,7 @@ const Header = () => {
                 asChild
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-4 xl:px-6 py-2 transition-all whitespace-nowrap"
               >
-                <a href="/auth">Login</a>
+                <a href="/login">Login</a>
               </Button>
             )}
             <Button
@@ -327,7 +327,7 @@ const Header = () => {
                   asChild
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 transition-all"
                 >
-                  <a href="/auth">Login</a>
+                  <a href="/login">Login</a>
                 </Button>
               )}
               <Button
