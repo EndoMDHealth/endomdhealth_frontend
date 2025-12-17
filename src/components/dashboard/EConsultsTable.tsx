@@ -19,21 +19,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { 
-  ChevronDown, 
-  ChevronRight, 
   Eye, 
   FileText, 
   Search,
   Download,
   PlusCircle,
-  AlertTriangle
+  AlertTriangle,
+  ChevronRight
 } from "lucide-react";
-import { formatDistanceToNow, differenceInDays } from "date-fns";
+import { format, formatDistanceToNow, differenceInDays } from "date-fns";
 import { cn } from "@/lib/utils";
 import { generateEConsultPDF, EConsultPDFData } from "@/utils/generateEConsultPDF";
 
@@ -44,6 +44,7 @@ interface EConsult {
   id: string;
   patient_initials: string;
   patient_age: number;
+  patient_dob?: string;
   condition_category: ConditionCategory;
   status: EConsultStatus;
   created_at: string;
@@ -57,6 +58,7 @@ interface EConsultsTableProps {
   title?: string;
   description?: string;
   onViewConsult: (consult: EConsult) => void;
+  onViewResponse?: (consult: EConsult) => void;
   onSubmitNew?: () => void;
   showFilters?: boolean;
   showPhysicianColumn?: boolean;
@@ -67,36 +69,40 @@ export const EConsultsTable = ({
   title = "Active E-Consults",
   description = "Your pending consultation requests",
   onViewConsult,
+  onViewResponse,
   onSubmitNew,
   showFilters = true,
   showPhysicianColumn = false
 }: EConsultsTableProps) => {
-  const [expandedRows, setExpandedRows] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [urgencyFilter, setUrgencyFilter] = useState<string>("all");
   const [conditionFilter, setConditionFilter] = useState<string>("all");
 
-  const toggleRow = (id: string) => {
-    setExpandedRows(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
-  };
-
   const getStatusBadge = (status: EConsultStatus) => {
     const variants: Record<EConsultStatus, { label: string; className: string }> = {
       submitted: { label: "Submitted", className: "bg-blue-100 text-blue-800 border-blue-200" },
-      under_review: { label: "In Review", className: "bg-amber-100 text-amber-800 border-amber-200" },
+      under_review: { label: "In Progress", className: "bg-amber-100 text-amber-800 border-amber-200" },
       awaiting_info: { label: "Awaiting Info", className: "bg-orange-100 text-orange-800 border-orange-200" },
-      completed: { label: "Completed", className: "bg-green-100 text-green-800 border-green-200" },
+      completed: { label: "New Response", className: "bg-green-100 text-green-800 border-green-200" },
     };
     const { label, className } = variants[status];
-    return <Badge variant="outline" className={cn("font-medium", className)}>{label}</Badge>;
+    return (
+      <Badge 
+        variant="outline" 
+        className={cn(
+          "font-medium cursor-pointer hover:opacity-80 transition-opacity", 
+          className
+        )}
+      >
+        {label}
+      </Badge>
+    );
   };
 
   const getCategoryLabel = (category: ConditionCategory) => {
     const labels: Record<ConditionCategory, string> = {
-      obesity: "Obesity",
+      obesity: "Obesity / Weight",
       growth: "Growth",
       diabetes: "Diabetes",
       puberty: "Puberty",
@@ -108,8 +114,7 @@ export const EConsultsTable = ({
   };
 
   const getDaysSinceSubmission = (createdAt: string) => {
-    const days = differenceInDays(new Date(), new Date(createdAt));
-    return days;
+    return differenceInDays(new Date(), new Date(createdAt));
   };
 
   const filteredConsults = consults.filter(consult => {
@@ -123,6 +128,14 @@ export const EConsultsTable = ({
     
     return matchesSearch && matchesStatus && matchesUrgency && matchesCondition;
   });
+
+  const handleStatusClick = (consult: EConsult) => {
+    if (onViewResponse) {
+      onViewResponse(consult);
+    } else {
+      onViewConsult(consult);
+    }
+  };
 
   return (
     <Card className="bg-card border-border shadow-sm">
@@ -149,23 +162,24 @@ export const EConsultsTable = ({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
+                aria-label="Search e-consults"
               />
             </div>
             <div className="flex gap-2">
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[140px]">
+                <SelectTrigger className="w-[140px]" aria-label="Filter by status">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="submitted">Submitted</SelectItem>
-                  <SelectItem value="under_review">In Review</SelectItem>
+                  <SelectItem value="under_review">In Progress</SelectItem>
                   <SelectItem value="awaiting_info">Awaiting Info</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="completed">New Response</SelectItem>
                 </SelectContent>
               </Select>
               <Select value={urgencyFilter} onValueChange={setUrgencyFilter}>
-                <SelectTrigger className="w-[130px]">
+                <SelectTrigger className="w-[130px]" aria-label="Filter by urgency">
                   <SelectValue placeholder="Urgency" />
                 </SelectTrigger>
                 <SelectContent>
@@ -175,7 +189,7 @@ export const EConsultsTable = ({
                 </SelectContent>
               </Select>
               <Select value={conditionFilter} onValueChange={setConditionFilter}>
-                <SelectTrigger className="w-[140px]">
+                <SelectTrigger className="w-[140px]" aria-label="Filter by condition">
                   <SelectValue placeholder="Condition" />
                 </SelectTrigger>
                 <SelectContent>
@@ -212,134 +226,154 @@ export const EConsultsTable = ({
             )}
           </div>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
-                <TableHead className="w-8"></TableHead>
-                <TableHead className="font-semibold">Submission ID</TableHead>
-                <TableHead className="font-semibold">Patient</TableHead>
-                {showPhysicianColumn && <TableHead className="font-semibold">Physician</TableHead>}
-                <TableHead className="font-semibold">Status</TableHead>
-                <TableHead className="font-semibold">Date</TableHead>
-                <TableHead className="font-semibold">Days</TableHead>
-                <TableHead className="font-semibold text-right">Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredConsults.map((consult) => {
-                const days = getDaysSinceSubmission(consult.created_at);
-                const isExpanded = expandedRows.includes(consult.id);
-                const isUrgent = consult.has_urgent_flags || days > 5;
-                
-                return (
-                  <Collapsible key={consult.id} asChild open={isExpanded}>
-                    <>
-                      <TableRow 
-                        className={cn(
-                          "hover:bg-muted/30 transition-colors cursor-pointer",
-                          isUrgent && "bg-orange-50/50 hover:bg-orange-50"
-                        )}
-                      >
-                        <TableCell>
-                          <CollapsibleTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="h-6 w-6 p-0"
-                              onClick={() => toggleRow(consult.id)}
-                            >
-                              {isExpanded 
-                                ? <ChevronDown className="h-4 w-4" /> 
-                                : <ChevronRight className="h-4 w-4" />
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
+                  <TableHead className="font-semibold" aria-label="Patient Name">Patient Name</TableHead>
+                  <TableHead className="font-semibold" aria-label="Age">Age</TableHead>
+                  <TableHead className="font-semibold" aria-label="Concern">Concern</TableHead>
+                  <TableHead className="font-semibold" aria-label="Status">Status</TableHead>
+                  <TableHead className="font-semibold" aria-label="Submission Date">Submission Date</TableHead>
+                  {showPhysicianColumn && <TableHead className="font-semibold" aria-label="Physician">Physician</TableHead>}
+                  <TableHead className="font-semibold text-right" aria-label="Action">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredConsults.map((consult) => {
+                  const days = getDaysSinceSubmission(consult.created_at);
+                  const isUrgent = consult.has_urgent_flags || days > 5;
+                  
+                  return (
+                    <TableRow 
+                      key={consult.id}
+                      className={cn(
+                        "hover:bg-muted/30 transition-colors",
+                        isUrgent && "bg-orange-50/50 hover:bg-orange-50"
+                      )}
+                    >
+                      {/* Patient Name */}
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          {isUrgent && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  <AlertTriangle className="h-4 w-4 text-orange-500" aria-label="Urgent" />
+                                </TooltipTrigger>
+                                <TooltipContent>Urgent attention required</TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                          <span className="font-medium">{consult.patient_initials}</span>
+                        </div>
+                      </TableCell>
+
+                      {/* Age */}
+                      <TableCell>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="cursor-help">
+                                {consult.patient_age} yrs
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              {consult.patient_dob 
+                                ? `DOB: ${format(new Date(consult.patient_dob), 'MM/dd/yyyy')}`
+                                : `${consult.patient_age} years old`
                               }
-                            </Button>
-                          </CollapsibleTrigger>
-                        </TableCell>
-                        <TableCell className="font-mono text-sm">
-                          <div className="flex items-center gap-2">
-                            {isUrgent && <AlertTriangle className="h-4 w-4 text-orange-500" />}
-                            #{consult.id.slice(0, 8).toUpperCase()}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div>
-                            <span className="font-medium">{consult.patient_initials}</span>
-                            <span className="text-muted-foreground ml-2">({consult.patient_age} yrs)</span>
-                          </div>
-                          <span className="text-xs text-muted-foreground">{getCategoryLabel(consult.condition_category)}</span>
-                        </TableCell>
-                        {showPhysicianColumn && (
-                          <TableCell className="text-sm">{consult.physician_name || 'N/A'}</TableCell>
-                        )}
-                        <TableCell>{getStatusBadge(consult.status)}</TableCell>
-                        <TableCell className="text-sm text-muted-foreground">
-                          {formatDistanceToNow(new Date(consult.created_at), { addSuffix: true })}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={days > 5 ? "destructive" : days > 2 ? "secondary" : "outline"}>
-                            {days}d
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex items-center justify-end gap-1">
-                            <Button 
-                              variant="ghost" 
-                              size="sm"
-                              onClick={() => {
-                                const pdfData: EConsultPDFData = {
-                                  id: consult.id,
-                                  patientInitials: consult.patient_initials,
-                                  patientAge: consult.patient_age,
-                                  conditionCategory: consult.condition_category,
-                                  clinicalQuestion: consult.clinical_question,
-                                  status: consult.status,
-                                  createdAt: consult.created_at,
-                                };
-                                generateEConsultPDF(pdfData);
-                              }}
-                              className="hover:bg-primary/10"
-                              title="Download PDF"
-                            >
-                              <Download className="h-4 w-4" />
-                            </Button>
-                            <Button 
-                              variant="ghost" 
-                              size="sm"
-                              onClick={() => onViewConsult(consult)}
-                              className="hover:bg-primary/10"
-                            >
-                              <Eye className="h-4 w-4 mr-1" />
-                              View
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                      <CollapsibleContent asChild>
-                        <TableRow className="bg-muted/20 hover:bg-muted/20">
-                          <TableCell colSpan={showPhysicianColumn ? 8 : 7} className="p-4">
-                            <div className="grid md:grid-cols-2 gap-4">
-                              <div>
-                                <h4 className="text-sm font-medium mb-2">Clinical Question</h4>
-                                <p className="text-sm text-muted-foreground bg-background p-3 rounded-lg">
-                                  {consult.clinical_question}
-                                </p>
-                              </div>
-                              <div>
-                                <h4 className="text-sm font-medium mb-2">Recent Labs & Documents</h4>
-                                <div className="text-sm text-muted-foreground bg-background p-3 rounded-lg">
-                                  <p className="italic">No attachments uploaded</p>
-                                </div>
-                              </div>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      </CollapsibleContent>
-                    </>
-                  </Collapsible>
-                );
-              })}
-            </TableBody>
-          </Table>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </TableCell>
+
+                      {/* Concern */}
+                      <TableCell>
+                        <span className="text-sm">{getCategoryLabel(consult.condition_category)}</span>
+                      </TableCell>
+
+                      {/* Status - Clickable */}
+                      <TableCell>
+                        <button 
+                          onClick={() => handleStatusClick(consult)}
+                          className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+                          aria-label={`View response for ${consult.patient_initials}`}
+                        >
+                          {getStatusBadge(consult.status)}
+                        </button>
+                      </TableCell>
+
+                      {/* Submission Date */}
+                      <TableCell>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-sm text-muted-foreground cursor-help">
+                                {format(new Date(consult.created_at), 'MMM d, yyyy')}
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              {formatDistanceToNow(new Date(consult.created_at), { addSuffix: true })}
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </TableCell>
+
+                      {/* Physician (optional) */}
+                      {showPhysicianColumn && (
+                        <TableCell className="text-sm">{consult.physician_name || 'N/A'}</TableCell>
+                      )}
+
+                      {/* Action */}
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  onClick={() => {
+                                    const pdfData: EConsultPDFData = {
+                                      id: consult.id,
+                                      patientInitials: consult.patient_initials,
+                                      patientAge: consult.patient_age,
+                                      conditionCategory: consult.condition_category,
+                                      clinicalQuestion: consult.clinical_question,
+                                      status: consult.status,
+                                      createdAt: consult.created_at,
+                                    };
+                                    generateEConsultPDF(pdfData);
+                                  }}
+                                  className="hover:bg-primary/10"
+                                  aria-label="Download PDF summary"
+                                >
+                                  <Download className="h-4 w-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>Download PDF</TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => onViewConsult(consult)}
+                            className="hover:bg-primary/10"
+                            aria-label={`View details for ${consult.patient_initials}`}
+                          >
+                            <Eye className="h-4 w-4 mr-1" />
+                            View
+                            <ChevronRight className="h-4 w-4 ml-1" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
         )}
       </CardContent>
     </Card>

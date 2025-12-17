@@ -27,6 +27,7 @@ import { TeamSection } from "@/components/dashboard/TeamSection";
 import { FormsSection } from "@/components/dashboard/FormsSection";
 import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
 import EConsultDetailView from "@/components/dashboard/EConsultDetailView";
+import { ConsultationActionsModal } from "@/components/dashboard/ConsultationActionsModal";
 import { toast } from "sonner";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
@@ -71,6 +72,7 @@ const PhysicianDashboard = () => {
   const [currentView, setCurrentView] = useState<DashboardView>('dashboard');
   const [previousView, setPreviousView] = useState<DashboardView>('submissions-active');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showActionsModal, setShowActionsModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -172,13 +174,25 @@ const PhysicianDashboard = () => {
   };
 
   const handleContinueConsultation = () => {
-    toast.info("Continue consultation feature coming soon");
+    setShowActionsModal(true);
   };
 
-  const handleMarkComplete = () => {
-    toast.success("Consultation marked as complete");
-    setSelectedConsult(null);
-    setCurrentView(previousView);
+  const handleMarkComplete = async () => {
+    if (selectedConsult) {
+      const { error } = await supabase
+        .from('e_consults')
+        .update({ status: 'completed' })
+        .eq('id', selectedConsult.id);
+      
+      if (error) {
+        toast.error("Failed to mark consultation as complete");
+      } else {
+        toast.success("Consultation marked as complete");
+        fetchConsults();
+        setSelectedConsult(null);
+        setCurrentView(previousView);
+      }
+    }
   };
 
   const renderContent = () => {
@@ -215,6 +229,7 @@ const PhysicianDashboard = () => {
             title="Active Submissions"
             description="E-consults awaiting response"
             onViewConsult={handleViewConsult}
+            onViewResponse={handleViewConsult}
             onSubmitNew={() => navigate('/submit-econsult')}
           />
         );
@@ -226,6 +241,7 @@ const PhysicianDashboard = () => {
             title="Archived Submissions"
             description="Completed e-consults"
             onViewConsult={handleViewConsult}
+            onViewResponse={handleViewConsult}
           />
         );
       case 'referrals-active':
@@ -325,6 +341,16 @@ const PhysicianDashboard = () => {
           {renderContent()}
         </main>
       </div>
+
+      {/* Consultation Actions Modal */}
+      {selectedConsult && (
+        <ConsultationActionsModal
+          isOpen={showActionsModal}
+          onClose={() => setShowActionsModal(false)}
+          consultId={selectedConsult.id}
+          patientName={selectedConsult.patient_initials}
+        />
+      )}
     </div>
   );
 };
