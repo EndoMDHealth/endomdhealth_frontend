@@ -126,7 +126,7 @@ const PhysicianDashboard = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/provider-login');
+    navigate('/signed-out');
   };
 
   const handleSidebarNavigate = (path: string) => {

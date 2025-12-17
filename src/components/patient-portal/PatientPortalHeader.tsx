@@ -24,7 +24,7 @@ const PatientPortalHeader = ({ firstName }: PatientPortalHeaderProps) => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/for-patients');
+    navigate('/signed-out');
   };
 
   return (

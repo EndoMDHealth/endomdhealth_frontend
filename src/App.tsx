@@ -42,6 +42,7 @@ import Auth from "./pages/Auth";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import SignedOut from "./pages/SignedOut";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PhysicianProtectedRoute from "./components/PhysicianProtectedRoute";
@@ -96,6 +97,7 @@ const App = () => (
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/signed-out" element={<SignedOut />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/clinical-services-policies" element={<ClinicalServicesPolicies />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
