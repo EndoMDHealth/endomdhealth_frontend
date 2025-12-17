@@ -1,6 +1,6 @@
 import { CheckCircle } from "lucide-react";
-import happyChild1 from "@/assets/happy-child-1.jpg";
-import happyChild2 from "@/assets/happy-child-2.jpg";
+import fallBoy from "@/assets/fall-preteen-boy.jpg";
+import fallGirl from "@/assets/fall-toddler-girl.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -48,15 +48,15 @@ const ConcernsSection = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
             <div className="rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={happyChild1}
-                alt="Happy smiling child representing pediatric care"
+                src={fallBoy}
+                alt="Boy enjoying autumn outdoors representing pediatric care"
                 className="w-full sm:w-64 h-72 object-cover"
               />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg sm:mt-8">
               <img
-                src={happyChild2}
-                alt="Joyful child representing healthy growth"
+                src={fallGirl}
+                alt="Girl enjoying fall colors outdoors representing healthy growth"
                 className="w-full sm:w-64 h-72 object-cover"
               />
             </div>
