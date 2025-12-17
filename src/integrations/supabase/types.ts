@@ -247,7 +247,7 @@ export type Database = {
         | "under_review"
         | "awaiting_info"
         | "completed"
-      physician_role: "physician" | "admin" | "specialist"
+      physician_role: "physician" | "admin" | "specialist" | "admin_staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -390,7 +390,7 @@ export const Constants = {
         "awaiting_info",
         "completed",
       ],
-      physician_role: ["physician", "admin", "specialist"],
+      physician_role: ["physician", "admin", "specialist", "admin_staff"],
     },
   },
 } as const
