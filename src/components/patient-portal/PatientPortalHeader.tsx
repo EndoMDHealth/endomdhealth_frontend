@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import endo_yellow from '@/assets/logos/endo_yellow.png';
+import EndoLogo from '@/components/EndoLogo';
 
 interface PatientPortalHeaderProps {
   firstName: string;
@@ -33,7 +33,7 @@ const PatientPortalHeader = ({ firstName }: PatientPortalHeaderProps) => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo & Brand */}
           <div className="flex items-center space-x-3">
-            <img src={endo_yellow} alt="EndoMD Health Logo" className="w-8 h-8" />
+            <EndoLogo size="lg" />
             <div className="flex flex-col">
               <span className="text-xl font-bold">
                 <span className="text-patient-gold">ENDO</span>

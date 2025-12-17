@@ -31,7 +31,7 @@ import {
   AlertTriangle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import endoLogo from "@/assets/logos/endo_yellow.png";
+import EndoLogo from "@/components/EndoLogo";
 
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
 type PubertalStatus = 'prepubertal' | 'early_puberty' | 'mid_puberty' | 'post_puberty' | 'unknown';
@@ -399,7 +399,7 @@ const SubmitEConsult = () => {
           <div className="flex justify-between items-center h-16">
             <Link to="/provider-dashboard" className="flex items-center gap-3 text-gray-600 hover:text-gray-900">
               <ArrowLeft className="h-5 w-5" />
-              <img src={endoLogo} alt="EndoMD Health" className="h-8 w-auto" />
+              <EndoLogo size="lg" />
             </Link>
             <span className="text-sm font-medium text-gray-500">E-Consult Submission</span>
           </div>
