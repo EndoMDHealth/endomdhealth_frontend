@@ -140,8 +140,8 @@ const MedicalConsult = () => {
                 <div key={index} className="flex gap-6 items-start">
                   {/* Step Number in Accent Yellow */}
                   <div className="flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center">
-                      <span className="text-2xl font-bold text-[hsl(var(--accent-foreground))]">{index + 1}</span>
+                    <div className="w-12 h-12 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center">
+                      <span className="text-lg font-bold text-[hsl(var(--accent-foreground))]">{index + 1}</span>
                     </div>
                   </div>
 
