@@ -105,8 +105,8 @@ const MedicalConsult = () => {
                   ))}
                 </div>
 
-                <Button size="lg" className="text-lg px-8">
-                  Get Started
+                <Button size="lg" className="text-lg px-8" asChild>
+                  <a href="/login">Get Started</a>
                 </Button>
               </div>
 
@@ -164,8 +164,8 @@ const MedicalConsult = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" className="text-lg px-8">
-              Get Started
+            <Button size="lg" className="text-lg px-8" asChild>
+              <a href="/login">Get Started</a>
             </Button>
           </div>
         </div>
@@ -198,8 +198,8 @@ const MedicalConsult = () => {
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Take the first step towards better health for your child. Schedule your comprehensive medical consult today.
           </p>
-          <Button size="lg" className="text-lg px-8">
-            Book Your Consult
+          <Button size="lg" className="text-lg px-8" asChild>
+            <a href="/login">Book Your Consult</a>
           </Button>
         </div>
       </section>

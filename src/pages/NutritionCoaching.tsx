@@ -140,9 +140,11 @@ const NutritionCoaching = () => {
                 Personalized support to build healthier habits, improve confidence, and create a sustainable
                 relationship with food.
               </p>
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8" asChild>
+                <a href="/login">
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
               </Button>
             </div>
 

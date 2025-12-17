@@ -6,7 +6,7 @@ const PartnerCTASection = () => {
   const partnerButtons = [
     {
       title: "For Clinicians or Hospitals",
-      href: "/who-we-serve/healthcare-professionals",
+      href: "/e-consult",
       description: "Collaborate with us to improve patient outcomes",
       icon: Stethoscope,
     },
