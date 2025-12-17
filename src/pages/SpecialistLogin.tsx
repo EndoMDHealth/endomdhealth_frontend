@@ -397,12 +397,12 @@ const SpecialistLogin = () => {
               </div>
             </div>
 
-            {/* Supporting Visual */}
+            {/* Supporting Visual - sized to 85% of form height */}
             <div className="order-1 md:order-2 flex items-start justify-center md:justify-end">
               <img
                 src={specialistDeskImage}
                 alt="Modern pediatric endocrinology specialist desk with medical equipment"
-                className="rounded-lg shadow-lg w-full max-w-[420px] h-auto object-cover"
+                className="rounded-lg shadow-lg w-full max-w-[480px] md:h-[85%] md:min-h-[450px] object-cover"
               />
             </div>
           </div>
