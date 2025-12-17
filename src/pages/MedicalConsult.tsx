@@ -97,7 +97,7 @@ const MedicalConsult = () => {
                 <div className="grid gap-4 mb-8">
                   {services.map((service, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-foreground">
                         <strong className="font-semibold">{service.title}</strong> – {service.description}
                       </span>
