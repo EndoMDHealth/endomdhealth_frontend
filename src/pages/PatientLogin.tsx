@@ -83,7 +83,7 @@ const PatientLogin = () => {
       <section className="bg-gradient-to-b from-background to-muted/20 py-12">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Patient Portal
+            Patient <span className="text-accent">Portal</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Access your appointments, health records, and care tools in one place.

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { User, Stethoscope } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,19 +31,17 @@ const Login = () => {
               {/* Patient Button */}
               <Button
                 onClick={() => navigate("/for-patients")}
-                className="h-auto py-8 px-6 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg transition-all flex flex-col items-center gap-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
+                className="h-auto py-10 px-8 bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-2xl md:text-3xl transition-all flex items-center justify-center rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
               >
-                <User className="h-12 w-12" />
-                <span>Patient</span>
+                Patient
               </Button>
 
               {/* Healthcare Provider Button */}
               <Button
                 onClick={() => navigate("/clinician-login")}
-                className="h-auto py-8 px-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg transition-all flex flex-col items-center gap-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
+                className="h-auto py-10 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-2xl md:text-3xl transition-all flex items-center justify-center rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]"
               >
-                <Stethoscope className="h-12 w-12" />
-                <span>Healthcare Provider</span>
+                Healthcare Provider
               </Button>
             </div>
           </div>
