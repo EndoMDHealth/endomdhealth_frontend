@@ -24,7 +24,7 @@ const StatsSection = () => {
     },
     {
       value: "2,500+",
-      label: "Families across Virginia and Maryland served by our expert pediatric endocrine care team",
+      label: "Families served by our expert pediatric endocrine care team",
       icon: MapPin,
       accent: "text-accent",
     },
