@@ -25,19 +25,19 @@ const ConcernsSection = () => {
       iconBg: "bg-primary",
     },
     {
-      title: "Address Puberty Concerns",
+      title: "Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
       icon: Users,
       iconBg: "bg-accent",
     },
     {
-      title: "Manage Thyroid Issues",
+      title: "Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
       icon: Pill,
       iconBg: "bg-accent",
     },
     {
-      title: "Balance Hormones",
+      title: "Hormone Imbalance",
       description: "Advanced hormone management to improve concentration and overall health.",
       icon: Activity,
       iconBg: "bg-primary",
