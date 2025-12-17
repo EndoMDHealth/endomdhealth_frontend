@@ -1,8 +1,4 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Heart, Droplets, TrendingUp, Users, Pill, Activity } from "lucide-react";
-import activeFallToddlerGirl from "@/assets/active-fall-toddler-girl.jpg";
-import activeFallPreteenBoy from "@/assets/active-fall-preteen-boy.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -10,104 +6,86 @@ const ConcernsSection = () => {
       title: "Weight Management",
       description: "Expert guidance to help your child safely achieve a healthy weight.",
       icon: Heart,
-      iconBg: "bg-accent",
     },
     {
       title: "Type 2 Diabetes",
       description: "Specialized care to manage Type 2 diabetes in children.",
       icon: Droplets,
-      iconBg: "bg-accent",
     },
     {
       title: "Growth Concerns",
       description: "Comprehensive support to promote healthy growth with professional evaluation.",
       icon: TrendingUp,
-      iconBg: "bg-primary",
     },
     {
       title: "Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
       icon: Users,
-      iconBg: "bg-accent",
     },
     {
       title: "Thyroid Issues",
       description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
       icon: Pill,
-      iconBg: "bg-accent",
     },
     {
       title: "Hormone Imbalance",
       description: "Advanced hormone management to improve concentration and overall health.",
       icon: Activity,
-      iconBg: "bg-primary",
     },
   ];
 
   return (
-    <section className="py-16 bg-secondary">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="space-y-12">
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Our Pediatric Endocrine Clinicians Address
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+              Conditions We Treat
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               A Better Life For Your Child Is A Click Away, Start The Journey Today!
             </p>
-
-            {/* Request Appointment Button - Centered under title */}
-            <div className="pt-4">
-              <Button
-                asChild
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-12 py-6 shadow-md"
-              >
-                <a href="/appointment-request">Request an Appointment</a>
-              </Button>
-            </div>
           </div>
 
-          {/* Main Content - Adjusted Layout: Images 1/3, Content 2/3 */}
-          <div className="grid lg:grid-cols-5 gap-8 items-center">
-            {/* Left Side - Images Diagonally Placed (2/5 columns) */}
-            <div className="lg:col-span-2">
-              <div className="relative max-w-md mx-auto">
-                <div className="relative h-[500px]">
-                  {/* Top image - positioned diagonally, much larger */}
-                  <div className="absolute top-0 left-4 w-80 h-56 rounded-2xl overflow-hidden transform rotate-2 z-10 shadow-lg">
-                    <img
-                      src={activeFallToddlerGirl}
-                      alt="Happy toddler girl actively playing in fall leaves"
-                      className="w-full h-full object-cover"
-                    />
+          {/* Flowing Grid Layout - matches "What Teens Can Expect" */}
+          <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
+            {concerns.map((concern, index) => {
+              const Icon = concern.icon;
+              const isLeft = index % 2 === 0;
+              return (
+                <div 
+                  key={index} 
+                  className={`flex items-start gap-5 group ${isLeft ? 'md:pr-8' : 'md:pl-8'}`}
+                >
+                  {/* Icon */}
+                  <div className="relative flex-shrink-0">
+                    <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                      <Icon className="h-7 w-7 text-accent" />
+                    </div>
+                    {/* Decorative dot */}
+                    <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-accent/40" />
                   </div>
-                  {/* Bottom image - positioned diagonally below, much larger */}
-                  <div className="absolute bottom-0 right-4 w-80 h-56 rounded-2xl overflow-hidden transform -rotate-2 shadow-lg">
-                    <img
-                      src={activeFallPreteenBoy}
-                      alt="Pre-teen boy actively biking in autumn setting"
-                      className="w-full h-full object-cover"
-                    />
+                  
+                  {/* Content */}
+                  <div className="pt-1">
+                    <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors duration-300">
+                      {concern.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {concern.description}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
+          </div>
 
-            {/* Right Side - Conditions List (3/5 columns) */}
-            <div className="lg:col-span-3 space-y-6">
-              {concerns.map((concern, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  <div className={`${concern.iconBg} p-3 rounded-full flex-shrink-0`}>
-                    <concern.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-primary">{concern.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{concern.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          {/* Subtle decorative divider */}
+          <div className="flex items-center justify-center mt-16 gap-3">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-accent/30" />
+            <div className="w-2 h-2 rounded-full bg-accent/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent/30" />
           </div>
         </div>
       </div>
