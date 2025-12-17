@@ -87,9 +87,9 @@ const MedicalConsult = () => {
               {/* Left: Text Content */}
               <div className="text-left">
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Comprehensive Medical Consult</h1>
-                <p className="text-xl text-muted-foreground mb-6">Get the Care Your Child Deserves</p>
-                <p className="text-lg text-muted-foreground mb-8">
-                  We understand that your child is unique and deserves individualized care and we provide that.
+                <p className="text-lg text-muted-foreground mb-6">
+                  We understand that your child is unique and deserves individualized care and we provide that. Get the
+                  Care Your Child Deserves.{" "}
                 </p>
 
                 <div className="grid gap-3 mb-8">
