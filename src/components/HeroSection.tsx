@@ -42,7 +42,6 @@ const HeroSection = () => {
                   <strong className="font-semibold text-foreground">
                     Direct access to expert & compassionate pediatric endocrinology care
                   </strong>{" "}
-                  on your schedule
                 </span>
               </div>
             </div>
