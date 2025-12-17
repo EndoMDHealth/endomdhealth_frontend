@@ -22,7 +22,7 @@ const conditions = [
     icon: Activity,
     iconColor: "text-accent",
     bgColor: "bg-accent/10",
-    title: "Reverse Type 2 Diabetes",
+    title: "Manage Type 2 Diabetes",
     description: [
       "Monitor and stabilize blood sugar levels",
       "Develop personalized wellness plans",
