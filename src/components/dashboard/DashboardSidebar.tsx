@@ -30,11 +30,19 @@ const sidebarItems: SidebarItem[] = [
   { id: 'home', label: 'Home', icon: Home, path: '/provider-dashboard' },
   { 
     id: 'submissions', 
-    label: 'Submissions', 
+    label: 'e-Consult Submissions', 
     icon: Send,
     children: [
       { id: 'submissions-active', label: 'Active', path: '/provider-dashboard/submissions/active' },
       { id: 'submissions-archived', label: 'Archived', path: '/provider-dashboard/submissions/archived' },
+    ]
+  },
+  { 
+    id: 'referrals', 
+    label: 'Patient Referrals', 
+    icon: FileText,
+    children: [
+      { id: 'referrals-active', label: 'Active', path: '/provider-dashboard/referrals/active' },
     ]
   },
   { 
@@ -60,7 +68,7 @@ export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [expandedItems, setExpandedItems] = useState<string[]>(['submissions', 'responses']);
+  const [expandedItems, setExpandedItems] = useState<string[]>(['submissions', 'referrals', 'responses']);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

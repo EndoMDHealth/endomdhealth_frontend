@@ -26,6 +26,7 @@ import { EConsultsTable } from "@/components/dashboard/EConsultsTable";
 import { AnalyticsSection } from "@/components/dashboard/AnalyticsSection";
 import { TeamSection } from "@/components/dashboard/TeamSection";
 import { FormsSection } from "@/components/dashboard/FormsSection";
+import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -40,7 +41,7 @@ interface EConsult {
   clinical_question: string;
 }
 
-type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'analytics' | 'team' | 'support' | 'forms';
+type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms';
 
 const PhysicianDashboard = () => {
   const { user, signOut } = useAuth();
@@ -137,6 +138,7 @@ const PhysicianDashboard = () => {
       '/provider-dashboard/submissions/archived': 'submissions-archived',
       '/provider-dashboard/responses/active': 'responses-active',
       '/provider-dashboard/responses/archived': 'responses-archived',
+      '/provider-dashboard/referrals/active': 'referrals-active',
       '/provider-dashboard/analytics': 'analytics',
       '/provider-dashboard/team': 'team',
       '/provider-dashboard/forms': 'forms',
@@ -180,6 +182,13 @@ const PhysicianDashboard = () => {
             title="Archived Submissions"
             description="Completed e-consults"
             onViewConsult={setSelectedConsult}
+          />
+        );
+      case 'referrals-active':
+        return (
+          <PatientReferralsTable
+            title="Active Patient Referrals"
+            description="Patient referrals awaiting processing"
           />
         );
       case 'support':
