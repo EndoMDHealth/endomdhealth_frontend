@@ -7,7 +7,7 @@ import childDoctorImage from "@/assets/child-doctor-consultation.jpg";
 
 const MedicalConsult = () => {
   const services = [
-    "Comprehensive medical evaluation",
+    "Comprehensive medical evaluation – Detailed assessment of your child’s health and growth patterns."
     "Lab interpretation",
     "Medication adjustments",
     "Second opinions",
