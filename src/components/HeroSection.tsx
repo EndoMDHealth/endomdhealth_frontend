@@ -21,13 +21,13 @@ const HeroSection = () => {
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                   <span className="text-lg text-muted-foreground">
-                    <strong className="font-semibold text-foreground">No more waiting</strong> – long months for answers
+                    <strong className="font-semibold text-foreground">No more waiting</strong> long months for answers
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                   <span className="text-lg text-muted-foreground">
-                    <strong className="font-semibold text-foreground">No more missed</strong> – work or school
+                    <strong className="font-semibold text-foreground">No more missed</strong> work or school
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
