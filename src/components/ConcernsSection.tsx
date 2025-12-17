@@ -5,28 +5,31 @@ import activeGirl from "@/assets/active-fall-toddler-girl.jpg";
 const ConcernsSection = () => {
   const concerns = [
     {
-      title: "Weight Management",
-      description: "Expert guidance to help your child safely achieve a healthy weight.",
+      title: "Medical Weight Management",
+      description:
+        "Medical management (using GLP1s like Wegovy and Zepbound), coaching, and nutrition guidance to maintain a healthy weight. ",
     },
     {
-      title: "Type 2 Diabetes",
-      description: "Specialized care to manage Type 2 diabetes in children.",
+      title: "Prediabetes and Diabetes",
+      description:
+        "Medical management (using GLPs like Ozempic/Mounjaro if qualified), insulin adjustment, nutrition guidance. ",
     },
     {
       title: "Growth Concerns",
-      description: "Comprehensive support to promote healthy growth with professional evaluation.",
+      description: "Full lab & growth assessments, second opinions, treatment with growth hormone if necessary.",
     },
     {
       title: "Puberty Concerns",
       description: "Personalized care to manage early or late puberty effectively.",
     },
     {
-      title: "Thyroid Issues",
-      description: "Targeted treatment for thyroid symptoms like tiredness and sleepiness.",
+      title: "Thyroid Problems",
+      description: "Address hypothyroidism,  Hashimoto’s, hyperthyroidism, abnormal thyroid labs, thyroid nodules.",
     },
     {
-      title: "Hormone Imbalance",
-      description: "Advanced hormone management to improve concentration and overall health.",
+      title: "other Hormone Conditions",
+      description:
+        "Get to the root cause of your child’s symptoms such as fatigue, poor concentration, and brain fog to improve overall health.",
     },
   ];
 
@@ -35,9 +38,7 @@ const ConcernsSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Conditions We Treat
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Conditions We Treat</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A Better Life For Your Child Is A Click Away, Start The Journey Today!
           </p>
@@ -65,18 +66,14 @@ const ConcernsSection = () => {
           {/* Right Side - Conditions List (2/3 width) */}
           <div className="space-y-3 lg:col-span-2">
             {concerns.map((concern, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex items-start space-x-3 bg-card border border-border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 <CheckCircle className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {concern.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
-                    {concern.description}
-                  </p>
+                  <h3 className="text-lg font-semibold text-foreground">{concern.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{concern.description}</p>
                 </div>
               </div>
             ))}
