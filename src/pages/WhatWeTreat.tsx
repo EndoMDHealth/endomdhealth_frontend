@@ -94,9 +94,10 @@ const WhatWeTreat = () => {
                 Conditions We Treat
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-6">
-                A better life for your child is a click away, start the journey today. At EndoMD Health, we care for the
-                whole child and adolescent—not just a diagnosis. Our pediatric endocrine team provides personalized,
-                compassionate care to support healthy growth, metabolism, and overall well-being at every stage.{" "}
+                At EndoMD Health, we care for the whole child and adolescent—not just a diagnosis. Our pediatric
+                endocrine team provides personalized,compassionate care to support healthy growth, metabolism, and
+                overall well-being at every stage.A better life for your child is a click away, start the journey
+                today.{" "}
               </p>
               <Button size="lg" className="text-lg px-8 py-6 hover-scale" asChild>
                 <a href="/for-parents">Get Started</a>
