@@ -119,7 +119,7 @@ export const generateEConsultPDF = (data: EConsultPDFData): void => {
           color: #1a1a4e;
         }
         .logo span {
-          color: #e5a800;
+          color: hsl(44, 100%, 45%);
         }
         .doc-info {
           text-align: right;
