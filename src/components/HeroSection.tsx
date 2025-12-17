@@ -57,6 +57,13 @@ const HeroSection = () => {
               </Button>
               <Button
                 size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg shadow-md"
+                asChild
+              >
+                <Link to="/for-healthcare-professionals">Provider Referral</Link>
+              </Button>
+              <Button
+                size="lg"
                 variant="outline"
                 className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg"
                 asChild
