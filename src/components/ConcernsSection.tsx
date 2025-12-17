@@ -1,6 +1,6 @@
 import { CheckCircle } from "lucide-react";
-import fallBoy from "@/assets/fall-preteen-boy.jpg";
-import fallGirl from "@/assets/fall-toddler-girl.jpg";
+import activeBoy from "@/assets/active-fall-preteen-boy.jpg";
+import activeGirl from "@/assets/active-fall-toddler-girl.jpg";
 
 const ConcernsSection = () => {
   const concerns = [
@@ -45,19 +45,19 @@ const ConcernsSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Images */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="rounded-xl overflow-hidden shadow-md">
               <img
-                src={fallBoy}
-                alt="Boy enjoying autumn outdoors representing pediatric care"
-                className="w-full sm:w-64 h-72 object-cover"
+                src={activeBoy}
+                alt="Young boy running outdoors in fall with autumn leaves"
+                className="w-full sm:w-48 h-56 object-cover"
               />
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg sm:mt-8">
+            <div className="rounded-xl overflow-hidden shadow-md sm:mt-6">
               <img
-                src={fallGirl}
-                alt="Girl enjoying fall colors outdoors representing healthy growth"
-                className="w-full sm:w-64 h-72 object-cover"
+                src={activeGirl}
+                alt="Young girl playing outside in autumn with warm fall colors"
+                className="w-full sm:w-48 h-56 object-cover"
               />
             </div>
           </div>
