@@ -5,7 +5,7 @@ import activeGirl from "@/assets/active-fall-toddler-girl.jpg";
 const ConcernsSection = () => {
   const concerns = [
     {
-      title: "Medical Weight Management",
+      title: "Weight Management",
       description:
         "Medical management (using GLP1s like Wegovy and Zepbound), coaching, and nutrition guidance to maintain a healthy weight. ",
     },
