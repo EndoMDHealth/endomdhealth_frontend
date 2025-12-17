@@ -7,10 +7,7 @@ import childDoctorImage from "@/assets/child-doctor-consultation.jpg";
 
 const MedicalConsult = () => {
   const services = [
-    {
-      title: "Comprehensive Medical Evaluation",
-      description: "Detailed assessment of your child's health and growth patterns.",
-    },
+    { title: "Comprehensive Medical Evaluation", description: "Detailed assessment of your child's health and growth patterns." },
     { title: "Lab Interpretation", description: "Expert review and explanation of lab results." },
     { title: "Medication Adjustments", description: "Optimized treatment plans based on your child's needs." },
     { title: "Second Opinions", description: "Specialized insight for complex cases." },
@@ -100,7 +97,7 @@ const MedicalConsult = () => {
                 <div className="grid gap-4 mb-8">
                   {services.map((service, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-foreground">
                         <strong className="font-semibold">{service.title}</strong> – {service.description}
                       </span>
@@ -143,7 +140,7 @@ const MedicalConsult = () => {
                 <div key={index} className="flex gap-6 items-start">
                   {/* Step Number in Accent Yellow */}
                   <div className="flex-shrink-0">
-                    <div className="w-19 h-19 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center">
                       <span className="text-2xl font-bold text-[hsl(var(--accent-foreground))]">{index + 1}</span>
                     </div>
                   </div>
