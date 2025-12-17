@@ -50,7 +50,9 @@ const ConcernsSection = () => {
         <div className="space-y-12">
           {/* Header */}
           <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Pediatric Endocrine Concerns We Address</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Our Pediatric Endocrine Clinicians Address
+            </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               A Better Life For Your Child Is A Click Away, Start The Journey Today!
             </p>
