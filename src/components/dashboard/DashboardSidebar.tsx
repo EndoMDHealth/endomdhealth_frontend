@@ -38,20 +38,20 @@ const sidebarItems: SidebarItem[] = [
     ]
   },
   { 
-    id: 'referrals', 
-    label: 'Patient Referrals', 
-    icon: FileText,
-    children: [
-      { id: 'referrals-active', label: 'Active', path: '/provider-dashboard/referrals/active' },
-    ]
-  },
-  { 
     id: 'responses', 
     label: 'Responses', 
     icon: MessageSquare,
     children: [
       { id: 'responses-active', label: 'Active', path: '/provider-dashboard/responses/active' },
       { id: 'responses-archived', label: 'Archived', path: '/provider-dashboard/responses/archived' },
+    ]
+  },
+  { 
+    id: 'referrals', 
+    label: 'Patient Referrals', 
+    icon: FileText,
+    children: [
+      { id: 'referrals-active', label: 'Active', path: '/provider-dashboard/referrals/active' },
     ]
   },
   { id: 'forms', label: 'Forms', icon: FileDown, path: '/provider-dashboard/forms' },
