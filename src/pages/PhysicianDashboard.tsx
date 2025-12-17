@@ -18,7 +18,7 @@ import {
   Settings,
   Loader2,
 } from "lucide-react";
-import EndoLogo from "@/components/EndoLogo";
+import endoLogo from "@/assets/logos/endo_yellow.png";
 import EConsultDetailModal from "@/components/econsult/EConsultDetailModal";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHome } from "@/components/dashboard/DashboardHome";
@@ -215,7 +215,7 @@ const PhysicianDashboard = () => {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0">
-                <EndoLogo size="lg" />
+                <img src={endoLogo} alt="EndoMD Health" className="h-10 w-auto" />
               </Link>
               <div className="ml-6 border-l border-border pl-6">
                 <button 

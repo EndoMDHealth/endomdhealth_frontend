@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
-import EndoLogo from "./EndoLogo";
+import endo_yellow from "../assets/logos/endo_yellow.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,7 +83,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <EndoLogo size="sm" className="mr-2" />
+            {" "}
+            <img src={endo_yellow} alt="EndoMD Health Logo" className="w-5 h-5 mr-2"></img>
             <a href="/" className="text-xl lg:text-2xl font-bold">
               <span className="text-accent">ENDO</span>
               <span className="text-primary-foreground">MD</span>
