@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Users } from "lucide-react";
+import { MapPin, Users, CheckCircle2 } from "lucide-react";
 import warmFamilyPortrait from "@/assets/warm-family-portrait.jpg";
 
 const HeroSection = () => {
@@ -20,11 +20,20 @@ const HeroSection = () => {
                 Guiding patients through every stage of pediatric endocrinology care
               </p>
 
-              <p className="text-lg text-muted-foreground max-w-2xl">No more waiting long months for answers</p>
-              <p className="text-lg text-muted-foreground max-w-2xl">No more missed work or school</p>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                Simply expert & compassionate care, on your schedule
-              </p>
+              <div className="space-y-2">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">No more waiting</strong> – long months for answers</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">No more missed</strong> – work or school</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-lg text-muted-foreground"><strong className="font-semibold text-foreground">Expert & compassionate care</strong> – on your schedule</span>
+                </div>
+              </div>
             </div>
 
             {/* Action Buttons */}
