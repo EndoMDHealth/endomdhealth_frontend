@@ -88,8 +88,9 @@ const MedicalConsult = () => {
               <div className="text-left">
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Comprehensive Medical Consult</h1>
                 <p className="text-lg text-muted-foreground mb-6">
-                  We understand that your child is unique and deserves individualized care and we provide that. Get the
-                  Care Your Child Deserves.{" "}
+                  We understand that every child is unique. That’s why we provide individualized, comprehensive care to
+                  support your child or teen’s growth, development, and overall health. Get the expert attention your
+                  child deserves—every step of the way.{" "}
                 </p>
 
                 <div className="grid gap-3 mb-8">
