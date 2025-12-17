@@ -8,25 +8,21 @@ const PartnerCTASection = () => {
       title: "For Clinicians or Hospitals",
       href: "/who-we-serve/healthcare-professionals",
       description: "Collaborate with us to improve patient outcomes",
-      icon: Stethoscope,
     },
     {
       title: "For Community Partners",
       href: "/for-community-partners",
       description: "Join our network of community support",
-      icon: Users,
     },
     {
       title: "For Schools",
       href: "/for-schools",
       description: "Educational resources and support programs",
-      icon: GraduationCap,
     },
     {
       title: "For Health Plans",
       href: "/who-we-serve/health-plans",
       description: "Improve specialty care access for members",
-      icon: Heart,
     },
   ];
 
@@ -50,7 +46,7 @@ const PartnerCTASection = () => {
           {/* Header */}
           <div className="space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Join us in improving specialty outcomes for more children with endocrine disorders.
+              Partner with us to improve specialty outcomes for more children with endocrine disorders.
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Together, we can ensure every child receives the specialized care they need to thrive and grow.
