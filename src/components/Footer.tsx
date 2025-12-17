@@ -1,40 +1,43 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, FileText } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 const Footer = () => {
   const footerSections = [
     {
-      title: "About Us",
+      title: "Who We Are",
       links: [
-        { title: "Who We Are", href: "/about" },
-        { title: "What We Offer", href: "/what-we-offer" },
-        { title: "Who We Serve", href: "/who-we-serve" },
+        { title: "What We Treat", href: "/what-we-treat" },
+        { title: "Resources", href: "/resources" },
+        { title: "About Us", href: "/about-us" },
+        { title: "Blog", href: "/blog" },
       ],
     },
     {
-      title: "Contact Info",
+      title: "What We Offer",
+      links: [
+        { title: "Medical Consult", href: "/medical-consult" },
+        { title: "Nutrition & Lifestyle Coaching", href: "/nutrition-coaching" },
+        { title: "E-Consult", href: "/e-consult" },
+      ],
+    },
+    {
+      title: "Who We Serve",
+      links: [
+        { title: "For Patients", href: "/for-patients" },
+        { title: "For Parents", href: "/for-parents" },
+        { title: "For Providers", href: "/for-healthcare-professionals" },
+        { title: "For Schools", href: "/for-schools" },
+        { title: "For Community Partners", href: "/for-community-partners" },
+      ],
+    },
+    {
+      title: "Contact & Legal",
       links: [
         { title: "Contact Us", href: "/contact-us" },
+        { title: "Privacy Policy", href: "/privacy-policy" },
+        { title: "Terms of Service", href: "/terms-of-service" },
         { title: "571-480-6053", href: "tel:571-480-6053", icon: Phone },
         { title: "info@endomdhealth.com", href: "mailto:info@endomdhealth.com", icon: Mail },
-        { title: "804-660-6321", href: "tel:804-660-6321", icon: FileText },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { title: "Blog", href: "/blog" },
-        { title: "Resources for Families", href: "/resources" },
-        { title: "Frequently Asked Questions", href: "/faq" },
-        { title: "Careers", href: "/careers" },
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        { title: "Privacy Policy", href: "/privacy-policy" },
-        { title: "Clinical Services and Practice Policies", href: "/clinical-services-policies" },
-        { title: "Terms of Service", href: "/terms-of-service" },
       ],
     },
   ];
