@@ -7,10 +7,11 @@ import childDoctorImage from "@/assets/child-doctor-consultation.jpg";
 
 const MedicalConsult = () => {
   const services = [
-    "Comprehensive medical evaluation – Detailed assessment of your child’s health and growth patterns",
-    "Lab interpretation",
-    "Medication adjustments",
-    "Second opinions",
+    { title: "Comprehensive Medical Evaluation", description: "Detailed assessment of your child's health and growth patterns." },
+    { title: "Lab Interpretation", description: "Expert review and explanation of lab results." },
+    { title: "Medication Adjustments", description: "Optimized treatment plans based on your child's needs." },
+    { title: "Second Opinions", description: "Specialized insight for complex cases." },
+    { title: "Friendly, Child-Centered Consultations", description: "Supportive, empathetic care in every visit." },
   ];
 
   const steps = [
@@ -93,11 +94,13 @@ const MedicalConsult = () => {
                   child deserves—every step of the way.{" "}
                 </p>
 
-                <div className="grid gap-3 mb-8">
+                <div className="grid gap-4 mb-8">
                   {services.map((service, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="text-foreground">{service}</span>
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground">
+                        <strong className="font-semibold">{service.title}</strong> – {service.description}
+                      </span>
                     </div>
                   ))}
                 </div>
