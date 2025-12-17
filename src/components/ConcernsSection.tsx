@@ -43,22 +43,26 @@ const ConcernsSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 items-start">
+        <div className="grid lg:grid-cols-3 gap-4 items-start">
           {/* Left Side - Stacked Vertical Images (1/3 width) */}
-          <div className="flex flex-col gap-3 lg:col-span-1">
-            <div className="rounded-lg overflow-hidden">
-              <img
-                src={activeBoy}
-                alt="Boy riding a bike outdoors in autumn with fall colors"
-                className="w-full h-36 object-cover"
-              />
+          <div className="flex flex-col gap-6 lg:col-span-1 lg:pr-4">
+            <div className="w-3/4 mx-auto lg:mx-0">
+              <div className="rounded-lg overflow-hidden">
+                <img
+                  src={activeBoy}
+                  alt="Boy running outdoors in fall colors with autumn leaves"
+                  className="w-full h-40 object-cover"
+                />
+              </div>
             </div>
-            <div className="rounded-lg overflow-hidden ml-4">
-              <img
-                src={activeGirl}
-                alt="Girl running outside in fall leaves with warm autumn tones"
-                className="w-full h-36 object-cover"
-              />
+            <div className="w-3/4 mx-auto lg:mx-0">
+              <div className="rounded-lg overflow-hidden">
+                <img
+                  src={activeGirl}
+                  alt="Girl playing outside in autumn leaves with warm fall tones"
+                  className="w-full h-40 object-cover"
+                />
+              </div>
             </div>
           </div>
 
