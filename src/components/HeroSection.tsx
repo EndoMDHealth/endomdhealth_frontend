@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, CheckCircle2 } from "lucide-react";
 import warmFamilyPortrait from "@/assets/warm-family-portrait.jpg";
@@ -38,19 +39,21 @@ const HeroSection = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-md"
-              >
-                Get Started
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg"
-              >
-                Learn More
-              </Button>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg shadow-md"
+              asChild
+            >
+              <Link to="/for-patients">Get Started</Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg"
+              asChild
+            >
+              <Link to="/for-parents">Learn More</Link>
+            </Button>
             </div>
 
             {/* Info Cards */}

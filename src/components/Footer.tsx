@@ -55,9 +55,9 @@ const Footer = () => {
                 Specialized pediatric endocrine care serving Maryland and Virginia, helping children ages Birth–25 years
                 achieve optimal health and growth.
               </p>
-              <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                <a href="/appointment-request">Request Appointment</a>
-              </Button>
+            <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              <a href="/for-patients">Request Appointment</a>
+            </Button>
             </div>
 
             {/* Footer Links */}
