@@ -22,7 +22,7 @@ const conditions = [
     icon: Activity,
     iconColor: "text-accent",
     bgColor: "bg-accent/10",
-    title: "Manage Type 2 Diabetes",
+    title: "Manage Prediabetes & Diabetes",
     description: [
       "Monitor and stabilize blood sugar levels",
       "Develop personalized wellness plans",
@@ -58,7 +58,7 @@ const conditions = [
     icon: Sparkles,
     iconColor: "text-accent",
     bgColor: "bg-accent/10",
-    title: "Manage Thyroid Issues",
+    title: "Manage Thyroid Problems",
     description: [
       "Optimize thyroid function through advanced therapies",
       "Enhance daily energy and sleep quality",
@@ -70,7 +70,7 @@ const conditions = [
     icon: Heart,
     iconColor: "text-accent",
     bgColor: "bg-accent/10",
-    title: "Balance Hormones",
+    title: "Manage Other Hormone Conditions",
     description: [
       "Diagnose & treat hormonal imbalances such as PCOS",
       "Utilize hormone therapy for weight, growth, and development",
