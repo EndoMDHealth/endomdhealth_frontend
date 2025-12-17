@@ -30,11 +30,11 @@ const sidebarItems: SidebarItem[] = [
   { id: 'home', label: 'Home', icon: Home, path: '/provider-dashboard' },
   { 
     id: 'submissions', 
-    label: 'e-Consult Submissions', 
+    label: 'e-Consults', 
     icon: Send,
     children: [
-      { id: 'submissions-active', label: 'Active', path: '/provider-dashboard/submissions/active' },
-      { id: 'submissions-archived', label: 'Archived', path: '/provider-dashboard/submissions/archived' },
+      { id: 'submissions-active', label: 'Active Submissions', path: '/provider-dashboard/submissions/active' },
+      { id: 'submissions-archived', label: 'Archived Submissions', path: '/provider-dashboard/submissions/archived' },
     ]
   },
   { 
