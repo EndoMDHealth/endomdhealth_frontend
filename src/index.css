@@ -54,11 +54,11 @@ All colors MUST be HSL. Warm, professional medical brand.
     --soft-teal: 174 44% 56%;
     --soft-teal-light: 174 44% 85%;
     
-    /* Patient Portal Color Palette */
+    /* Patient Portal Color Palette - Navy, White, Gold only */
     --patient-navy: 210 70% 15%;
-    --patient-teal: 174 51% 56%;
+    --patient-teal: 44 100% 45%; /* Updated to Gold #F4C542 */
     --patient-coral: 12 80% 62%;
-    --patient-gold: 44 90% 60%;
+    --patient-gold: 44 100% 45%;
     --patient-bg: 210 20% 97%;
     
     /* Warm, welcoming color palette */
