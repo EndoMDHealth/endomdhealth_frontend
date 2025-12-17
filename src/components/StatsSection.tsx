@@ -24,7 +24,7 @@ const StatsSection = () => {
     },
     {
       value: "2,500+",
-      label: "Families across Virginia and Maryland receiving expert pediatric endocrine care",
+      label: "Families across Virginia and Maryland served by our expert pediatric endocrine care team",
       icon: MapPin,
       accent: "text-accent",
     },
@@ -40,31 +40,21 @@ const StatsSection = () => {
                 <div className={`${stat.accent} mx-auto w-fit`}>
                   <stat.icon className="h-10 w-10 md:h-12 md:w-12" strokeWidth={1.5} />
                 </div>
-                
+
                 <div className="space-y-1">
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className={`text-4xl md:text-5xl font-bold ${stat.accent}`}>
-                      {stat.value}
-                    </span>
+                    <span className={`text-4xl md:text-5xl font-bold ${stat.accent}`}>{stat.value}</span>
                     {stat.unit && (
-                      <span className={`text-xl md:text-2xl font-semibold ${stat.accent}`}>
-                        {stat.unit}
-                      </span>
+                      <span className={`text-xl md:text-2xl font-semibold ${stat.accent}`}>{stat.unit}</span>
                     )}
                   </div>
-                  
-                  <p className="text-sm md:text-base text-foreground leading-relaxed px-2">
-                    {stat.label}
-                  </p>
-                  
-                  {stat.sublabel && (
-                    <p className="text-xs md:text-sm text-muted-foreground italic">
-                      {stat.sublabel}
-                    </p>
-                  )}
+
+                  <p className="text-sm md:text-base text-foreground leading-relaxed px-2">{stat.label}</p>
+
+                  {stat.sublabel && <p className="text-xs md:text-sm text-muted-foreground italic">{stat.sublabel}</p>}
                 </div>
               </div>
-              
+
               {index < stats.length - 1 && (
                 <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-32 w-px bg-border" />
               )}
