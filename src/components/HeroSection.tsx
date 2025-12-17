@@ -23,19 +23,19 @@ const HeroSection = () => {
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-lg text-muted-foreground">
-                  <strong className="font-semibold text-foreground">No more waiting</strong> long months for answers
+                  <strong className="font-semibold text-foreground">See a pediatric endocrinologist in weeks not months
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-lg text-muted-foreground">
-                  <strong className="font-semibold text-foreground">No more missed</strong> work or school
+                  <strong className="font-semibold text-foreground">No more missed work or school</strong> In-person and virtual appointments available
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-lg text-muted-foreground">
-                  <strong className="font-semibold text-foreground">Expert & compassionate care</strong> on your
+                  <strong className="font-semibold text-foreground">Direct access to expert & compassionate pediatric endocrinology care</strong> on your
                   schedule
                 </span>
               </div>
