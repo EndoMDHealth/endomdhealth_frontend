@@ -321,7 +321,8 @@ export const DashboardHome = ({
                     <Users className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold">{recentConsults[0].patient_initials}</p>
+                    <p className="text-xs text-muted-foreground">Patient Name</p>
+                    <p className="font-semibold text-foreground">{recentConsults[0].patient_initials}</p>
                     <p className="text-sm text-muted-foreground capitalize">
                       {recentConsults[0].condition_category} Consult
                     </p>
@@ -373,7 +374,8 @@ export const DashboardHome = ({
                   onClick={() => onViewConsult(consult)}
                 >
                   <div>
-                    <p className="font-medium text-sm">{consult.patient_initials}</p>
+                    <p className="text-xs text-muted-foreground">Patient Name</p>
+                    <p className="font-medium text-sm text-foreground">{consult.patient_initials}</p>
                     <p className="text-xs text-muted-foreground capitalize">{consult.condition_category}</p>
                   </div>
                   <div className="flex items-center gap-2">
