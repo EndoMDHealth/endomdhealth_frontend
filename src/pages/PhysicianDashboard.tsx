@@ -28,6 +28,8 @@ import { TeamSection } from "@/components/dashboard/TeamSection";
 import { FormsSection } from "@/components/dashboard/FormsSection";
 import { PatientReferralsTable } from "@/components/dashboard/PatientReferralsTable";
 import EConsultDetailView from "@/components/dashboard/EConsultDetailView";
+import SubmissionSummaryView from "@/components/dashboard/SubmissionSummaryView";
+import { AccountSection } from "@/components/dashboard/AccountSection";
 import { ConsultationActionsModal } from "@/components/dashboard/ConsultationActionsModal";
 import { RoleClinicSetupModal } from "@/components/dashboard/RoleClinicSetupModal";
 import { RoleBadge } from "@/components/dashboard/RoleBadge";
@@ -59,7 +61,7 @@ interface EConsult {
   submitted_by_name?: string;
 }
 
-type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms' | 'consult-detail' | 'clinic';
+type DashboardView = 'dashboard' | 'submissions-active' | 'submissions-archived' | 'responses-active' | 'responses-archived' | 'referrals-active' | 'analytics' | 'team' | 'support' | 'forms' | 'consult-detail' | 'submission-summary' | 'clinic' | 'account';
 
 const PhysicianDashboard = () => {
   const { user, signOut } = useAuth();
@@ -209,14 +211,25 @@ const PhysicianDashboard = () => {
       '/provider-dashboard/analytics': 'analytics',
       '/provider-dashboard/team': 'team',
       '/provider-dashboard/forms': 'forms',
+      '/provider-dashboard/account': 'account',
+      '/provider-dashboard/clinic': 'clinic',
     };
     setCurrentView(viewMap[path] || 'dashboard');
   };
 
   const activeConsults = consults.filter(c => c.status !== 'completed');
   const archivedConsults = consults.filter(c => c.status === 'completed');
+  const consultsWithResponses = consults.filter(c => c.status === 'completed' || c.response_notes);
 
-  const handleViewConsult = (consult: EConsult) => {
+  // View submission summary (from Active Submissions)
+  const handleViewSubmission = (consult: EConsult) => {
+    setSelectedConsult(consult);
+    setPreviousView(currentView as DashboardView);
+    setCurrentView('submission-summary');
+  };
+
+  // View response details (from Responses tab)
+  const handleViewResponse = (consult: EConsult) => {
     setSelectedConsult(consult);
     setPreviousView(currentView as DashboardView);
     setCurrentView('consult-detail');
@@ -263,6 +276,16 @@ const PhysicianDashboard = () => {
     }
 
     switch (currentView) {
+      case 'submission-summary':
+        if (selectedConsult) {
+          return (
+            <SubmissionSummaryView
+              consult={selectedConsult}
+              onBack={handleBackFromDetail}
+            />
+          );
+        }
+        return null;
       case 'consult-detail':
         if (selectedConsult) {
           return (
@@ -275,31 +298,49 @@ const PhysicianDashboard = () => {
           );
         }
         return null;
+      case 'account':
+        return <AccountSection />;
       case 'analytics':
         return <AnalyticsSection isAdmin={userRole === 'admin' || userRole === 'admin_staff'} />;
       case 'team':
         return <TeamSection />;
       case 'submissions-active':
-      case 'responses-active':
         return (
           <EConsultsTable
             consults={activeConsults}
             title={userRole === 'admin_staff' ? 'Active e-Consults (All Providers)' : 'My Active e-Consults'}
             description={userRole === 'admin_staff' ? 'All clinic e-consults awaiting response' : 'Your e-consults awaiting response'}
-            onViewConsult={handleViewConsult}
-            onViewResponse={handleViewConsult}
+            onViewConsult={handleViewSubmission}
             onSubmitNew={() => navigate('/submit-econsult')}
           />
         );
       case 'submissions-archived':
-      case 'responses-archived':
         return (
           <EConsultsTable
             consults={archivedConsults}
             title={userRole === 'admin_staff' ? 'Archived e-Consults (All Providers)' : 'My Archived e-Consults'}
             description={userRole === 'admin_staff' ? 'All completed clinic e-consults' : 'Your completed e-consults'}
-            onViewConsult={handleViewConsult}
-            onViewResponse={handleViewConsult}
+            onViewConsult={handleViewSubmission}
+          />
+        );
+      case 'responses-active':
+        return (
+          <EConsultsTable
+            consults={consultsWithResponses.filter(c => c.status !== 'completed')}
+            title="Active Responses"
+            description="Specialist responses awaiting your review"
+            onViewConsult={handleViewResponse}
+            onViewResponse={handleViewResponse}
+          />
+        );
+      case 'responses-archived':
+        return (
+          <EConsultsTable
+            consults={archivedConsults}
+            title="Archived Responses"
+            description="Completed consultations with specialist responses"
+            onViewConsult={handleViewResponse}
+            onViewResponse={handleViewResponse}
           />
         );
       case 'referrals-active':
@@ -328,7 +369,7 @@ const PhysicianDashboard = () => {
             stats={stats}
             recentConsults={consults}
             onSubmitNew={() => navigate('/submit-econsult')}
-            onViewConsult={handleViewConsult}
+            onViewConsult={handleViewSubmission}
           />
         );
     }
@@ -361,7 +402,7 @@ const PhysicianDashboard = () => {
               <Button 
                 onClick={() => navigate('/for-healthcare-professionals')}
                 variant="outline"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hidden md:flex"
+                className="bg-white/90 border-white text-primary hover:bg-white hover:text-primary hidden md:flex font-medium"
               >
                 <Users className="mr-2 h-4 w-4" />
                 Refer a Patient
