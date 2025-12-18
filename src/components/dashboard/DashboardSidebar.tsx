@@ -8,11 +8,11 @@ import {
   Users,
   ChevronDown,
   ChevronRight,
-  Archive,
   Send,
   Home,
   FileDown,
-  Building2
+  Building2,
+  UserCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -60,6 +60,7 @@ const getSidebarItems = (isAdminStaff: boolean): SidebarItem[] => [
       { id: 'referrals-active', label: 'Active', path: '/provider-dashboard/referrals/active' },
     ]
   },
+  { id: 'account', label: 'Account', icon: UserCircle, path: '/provider-dashboard/account' },
   { id: 'forms', label: 'Forms', icon: FileDown, path: '/provider-dashboard/forms' },
   { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/provider-dashboard/analytics', adminOnly: true },
   { id: 'team', label: 'Providers / Team', icon: Users, path: '/provider-dashboard/team', adminOnly: true },
