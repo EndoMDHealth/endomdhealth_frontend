@@ -265,7 +265,7 @@ export const EConsultsTable = ({
                               </Tooltip>
                             </TooltipProvider>
                           )}
-                          <span className="font-medium">{consult.patient_initials}</span>
+                          <span className="font-medium text-foreground">{consult.patient_initials}</span>
                         </div>
                       </TableCell>
 

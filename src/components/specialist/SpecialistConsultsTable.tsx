@@ -209,7 +209,7 @@ export const SpecialistConsultsTable = ({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead aria-label="Patient Name">Patient</TableHead>
+                  <TableHead aria-label="Patient Full Name">Patient Name</TableHead>
                   <TableHead aria-label="Age">Age</TableHead>
                   <TableHead aria-label="Concern">Concern</TableHead>
                   <TableHead aria-label="Status">Status</TableHead>
@@ -224,7 +224,7 @@ export const SpecialistConsultsTable = ({
                     key={consult.id}
                     className="cursor-pointer hover:bg-muted/50"
                   >
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium text-foreground">
                       {consult.patient_initials}
                     </TableCell>
                     <TableCell>
