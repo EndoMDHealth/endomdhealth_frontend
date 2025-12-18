@@ -234,7 +234,7 @@ export const EConsultsTable = ({
                   <TableHead className="font-semibold" aria-label="Age">Age</TableHead>
                   <TableHead className="font-semibold" aria-label="Concern">Concern</TableHead>
                   <TableHead className="font-semibold" aria-label="Status">Status</TableHead>
-                  <TableHead className="font-semibold" aria-label="Submission Date">Submission Date</TableHead>
+                  <TableHead className="font-semibold" aria-label="Submission Date">Submitted</TableHead>
                   {showPhysicianColumn && <TableHead className="font-semibold" aria-label="Physician">Physician</TableHead>}
                   <TableHead className="font-semibold text-right" aria-label="Action">Action</TableHead>
                 </TableRow>
@@ -252,7 +252,7 @@ export const EConsultsTable = ({
                         isUrgent && "bg-orange-50/50 hover:bg-orange-50"
                       )}
                     >
-                      {/* Patient Name */}
+                      {/* Patient Full Name */}
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {isUrgent && (

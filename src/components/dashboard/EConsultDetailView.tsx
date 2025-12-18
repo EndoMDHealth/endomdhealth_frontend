@@ -124,8 +124,8 @@ const EConsultDetailView = ({
                 <div className="flex items-center gap-3">
                   <User className="h-5 w-5 text-accent" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Patient Name</p>
-                    <p className="font-semibold text-foreground">{consult.patient_initials}</p>
+                    <p className="text-sm text-muted-foreground">Patient Full Name</p>
+                    <p className="font-semibold text-foreground text-lg">{consult.patient_initials}</p>
                   </div>
                 </div>
                 

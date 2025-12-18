@@ -14,6 +14,7 @@ import {
 import { 
   PlusCircle, 
   User,
+  Users,
   LogOut,
   Settings,
   Loader2,
@@ -336,27 +337,35 @@ const PhysicianDashboard = () => {
   return (
     <div className="min-h-screen bg-secondary">
       {/* Top Navigation */}
-      <nav className="bg-card border-b border-border sticky top-0 z-50">
+      <nav className="bg-primary sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0">
-                <img src={endoLogo} alt="EndoMD Health" className="h-10 w-auto" />
+                <img src={endoLogo} alt="EndoMD Health" className="h-12 w-auto" />
               </Link>
-              <div className="ml-6 border-l border-border pl-6">
+              <div className="ml-6 border-l border-primary-foreground/30 pl-6">
                 <button 
                   onClick={() => setCurrentView('dashboard')}
                   className="flex flex-col items-start hover:opacity-80 transition-opacity"
                 >
-                  <span className="text-sm font-semibold text-primary">EndoMD Health</span>
-                  <span className="text-lg font-bold text-foreground">
+                  <span className="text-sm font-semibold text-accent">EndoMD Health</span>
+                  <span className="text-lg font-bold text-primary-foreground">
                     {userRole === 'admin_staff' ? 'Clinic Submissions Overview' : 'My Clinical Submissions'}
                   </span>
                 </button>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <Button 
+                onClick={() => navigate('/for-healthcare-professionals')}
+                variant="outline"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hidden md:flex"
+              >
+                <Users className="mr-2 h-4 w-4" />
+                Refer a Patient
+              </Button>
               <Button 
                 onClick={() => navigate('/submit-econsult')}
                 className="bg-accent hover:bg-accent/90 text-accent-foreground hidden md:flex"
@@ -367,11 +376,11 @@ const PhysicianDashboard = () => {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-4 w-4 text-primary" />
+                  <Button variant="ghost" className="flex items-center gap-2 text-primary-foreground hover:bg-primary-foreground/10">
+                    <div className="h-8 w-8 rounded-full bg-primary-foreground/20 flex items-center justify-center">
+                      <User className="h-4 w-4 text-primary-foreground" />
                     </div>
-                    <span className="hidden sm:block text-sm font-medium">
+                    <span className="hidden sm:block text-sm font-medium text-primary-foreground">
                       Dr. {physicianName.split(' ').pop()}
                     </span>
                   </Button>
