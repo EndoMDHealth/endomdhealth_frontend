@@ -157,9 +157,9 @@ export const SpecialistDetailView = ({
           Back
         </Button>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">e-Consult Review</h1>
+          <h1 className="text-2xl font-bold text-foreground">e-Consult Review</h1>
           <p className="text-muted-foreground">
-            Patient: {consult.patient_initials} | {getCategoryLabel(consult.condition_category)}
+            Patient: <span className="font-medium text-foreground">{consult.patient_initials}</span> | {getCategoryLabel(consult.condition_category)}
           </p>
         </div>
         {getStatusBadge(consult.status)}
@@ -179,8 +179,8 @@ export const SpecialistDetailView = ({
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-xs text-muted-foreground">Patient Name</Label>
-                  <p className="font-medium">{consult.patient_initials}</p>
+                  <Label className="text-xs text-muted-foreground">Patient Full Name</Label>
+                  <p className="font-medium text-foreground">{consult.patient_initials}</p>
                 </div>
                 <div>
                   <Label className="text-xs text-muted-foreground">Age</Label>

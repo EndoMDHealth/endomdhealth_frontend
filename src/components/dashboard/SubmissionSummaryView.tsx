@@ -97,10 +97,10 @@ const SubmissionSummaryView = ({ consult, onBack }: SubmissionSummaryViewProps) 
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Patient Full Name */}
+            {/* Patient Full Name - Critical: Always display full name, never initials */}
             <div>
-              <label className="text-sm text-muted-foreground" id="patient-name-label">Patient Full Name</label>
-              <p className="font-semibold text-lg text-foreground" aria-labelledby="patient-name-label">
+              <label className="text-sm font-medium text-muted-foreground" id="patient-name-label">Patient Full Name</label>
+              <p className="font-bold text-xl text-foreground" aria-labelledby="patient-name-label">
                 {consult.patient_initials}
               </p>
             </div>
