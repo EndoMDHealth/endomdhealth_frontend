@@ -158,7 +158,9 @@ export const DashboardHome = ({
   onViewConsult 
 }: DashboardHomeProps) => {
   const [chartPeriod, setChartPeriod] = useState<'weekly' | 'monthly' | 'yearly'>('monthly');
-  const firstName = physicianName.split(' ')[0] || 'Doctor';
+  // Extract last name for welcome message
+  const nameParts = physicianName.split(' ');
+  const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : physicianName;
 
   const pendingApprovals = recentConsults.filter(c => c.status === 'submitted' || c.status === 'under_review').slice(0, 4);
   const todayConsults = recentConsults.slice(0, 4);
@@ -168,7 +170,7 @@ export const DashboardHome = ({
       {/* Welcome Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-foreground">
-          Welcome Back, Dr. {firstName}!
+          Welcome, Dr. {lastName}
         </h1>
         <div className="flex gap-1 bg-muted rounded-lg p-1">
           {(['weekly', 'monthly', 'yearly'] as const).map((period) => (
