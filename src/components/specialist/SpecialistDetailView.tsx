@@ -26,12 +26,20 @@ import {
   Loader2,
   Sparkles,
   Search,
+  Video,
+  Building2,
+  Eye,
+  FlaskConical,
+  UserPlus,
 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
+import { supabase } from "@/integrations/supabase/client";
+
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
+type NextStepOption = 'schedule_virtual_visit' | 'schedule_in_person_visit' | 'continue_monitoring' | 'obtain_further_labs' | 'refer_different_specialty';
 
 interface EConsult {
   id: string;
@@ -50,7 +58,16 @@ interface EConsult {
   response_notes?: string;
   responded_at?: string;
   physician_name?: string;
+  next_step?: NextStepOption | null;
 }
+
+const NEXT_STEP_OPTIONS: { value: NextStepOption; label: string; icon: typeof Video }[] = [
+  { value: 'schedule_virtual_visit', label: 'Schedule a virtual visit', icon: Video },
+  { value: 'schedule_in_person_visit', label: 'Schedule an in-person visit', icon: Building2 },
+  { value: 'continue_monitoring', label: 'Continue monitoring', icon: Eye },
+  { value: 'obtain_further_labs', label: 'Obtain further labs', icon: FlaskConical },
+  { value: 'refer_different_specialty', label: 'Refer to a different specialty', icon: UserPlus },
+];
 
 interface SpecialistDetailViewProps {
   consult: EConsult;
@@ -117,6 +134,28 @@ export const SpecialistDetailView = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSavingDraft, setIsSavingDraft] = useState(false);
   const [attachments, setAttachments] = useState<File[]>([]);
+  const [selectedNextStep, setSelectedNextStep] = useState<NextStepOption | null>(consult.next_step || null);
+  const [isSavingNextStep, setIsSavingNextStep] = useState(false);
+
+  const handleNextStepSelect = async (value: NextStepOption) => {
+    const newValue = selectedNextStep === value ? null : value;
+    setSelectedNextStep(newValue);
+    setIsSavingNextStep(true);
+    
+    try {
+      const { error } = await supabase
+        .from('e_consults')
+        .update({ next_step: newValue })
+        .eq('id', consult.id);
+      
+      if (error) throw error;
+      toast.success(newValue ? "Next step saved" : "Next step cleared");
+    } catch (error) {
+      toast.error("Failed to save next step");
+      setSelectedNextStep(consult.next_step || null);
+    }
+    setIsSavingNextStep(false);
+  };
 
   const handleSubmitResponse = async () => {
     if (!response.trim()) {
@@ -315,7 +354,50 @@ export const SpecialistDetailView = ({
                 </TooltipProvider>
               </div>
 
-              {/* Attachments */}
+              {/* Next Steps Section */}
+              <div>
+                <Label className="text-sm font-semibold text-foreground mb-2 block">
+                  Next Steps
+                </Label>
+                <div className="bg-muted/50 border border-border rounded-lg p-4">
+                  <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Select next step">
+                    {NEXT_STEP_OPTIONS.map((option) => {
+                      const Icon = option.icon;
+                      const isSelected = selectedNextStep === option.value;
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          role="radio"
+                          aria-checked={isSelected}
+                          disabled={consult.status === 'completed' || isSavingNextStep}
+                          onClick={() => handleNextStepSelect(option.value)}
+                          className={`
+                            inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium
+                            transition-all duration-200 border
+                            focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+                            disabled:opacity-50 disabled:cursor-not-allowed
+                            ${isSelected 
+                              ? 'bg-primary text-primary-foreground border-primary shadow-sm' 
+                              : 'bg-background text-foreground border-border hover:bg-muted hover:border-primary/50'
+                            }
+                          `}
+                        >
+                          <Icon className="h-4 w-4" />
+                          {option.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {isSavingNextStep && (
+                    <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      Saving...
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {consult.status !== 'completed' && (
                 <div>
                   <Label className="text-sm font-semibold text-foreground mb-2 block">
