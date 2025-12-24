@@ -123,6 +123,7 @@ export type Database = {
           created_at: string
           height_cm: number | null
           id: string
+          next_step: string | null
           patient_age: number
           patient_dob: string | null
           patient_gender: string | null
@@ -144,6 +145,7 @@ export type Database = {
           created_at?: string
           height_cm?: number | null
           id?: string
+          next_step?: string | null
           patient_age: number
           patient_dob?: string | null
           patient_gender?: string | null
@@ -165,6 +167,7 @@ export type Database = {
           created_at?: string
           height_cm?: number | null
           id?: string
+          next_step?: string | null
           patient_age?: number
           patient_dob?: string | null
           patient_gender?: string | null
