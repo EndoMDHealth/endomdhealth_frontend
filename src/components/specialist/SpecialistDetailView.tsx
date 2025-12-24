@@ -6,6 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { 
   ArrowLeft, 
   User, 
@@ -18,6 +24,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  Sparkles,
+  Search,
 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -273,7 +281,7 @@ export const SpecialistDetailView = ({
               <Separator />
 
               {/* Response Section */}
-              <div>
+              <div className="relative">
                 <Label className="text-sm font-semibold text-foreground mb-2 block">
                   Recommended Course of Action / Response
                 </Label>
@@ -285,6 +293,26 @@ export const SpecialistDetailView = ({
                   disabled={consult.status === 'completed'}
                   aria-label="Specialist response"
                 />
+                
+                {/* AI Agent Icon */}
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div 
+                        className="absolute bottom-3 right-3 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary cursor-default"
+                        aria-label="AI-assisted recommendation indicator"
+                      >
+                        <div className="relative">
+                          <Search className="h-3.5 w-3.5" />
+                          <Sparkles className="h-2.5 w-2.5 absolute -top-1 -right-1 text-primary" />
+                        </div>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="left" className="bg-primary text-primary-foreground">
+                      <p>AI-assisted recommendation</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
 
               {/* Attachments */}
