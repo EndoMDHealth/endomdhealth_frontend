@@ -9,13 +9,27 @@ import {
   CheckCircle2,
   User,
   Calendar,
-  Stethoscope
+  Stethoscope,
+  Video,
+  Building2,
+  Eye,
+  FlaskConical,
+  UserPlus,
 } from "lucide-react";
 import { format } from "date-fns";
 import EConsultFeedbackModal, { FeedbackData } from "./EConsultFeedbackModal";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
+type NextStepOption = 'schedule_virtual_visit' | 'schedule_in_person_visit' | 'continue_monitoring' | 'obtain_further_labs' | 'refer_different_specialty';
+
+const NEXT_STEP_DISPLAY: Record<NextStepOption, { label: string; icon: typeof Video }> = {
+  schedule_virtual_visit: { label: 'Schedule a virtual visit', icon: Video },
+  schedule_in_person_visit: { label: 'Schedule an in-person visit', icon: Building2 },
+  continue_monitoring: { label: 'Continue monitoring', icon: Eye },
+  obtain_further_labs: { label: 'Obtain further labs', icon: FlaskConical },
+  refer_different_specialty: { label: 'Refer to a different specialty', icon: UserPlus },
+};
 
 interface EConsult {
   id: string;
@@ -35,6 +49,7 @@ interface EConsult {
   responded_by?: string;
   created_at: string;
   physician_name?: string;
+  next_step?: NextStepOption | null;
 }
 
 interface EConsultDetailViewProps {
@@ -252,6 +267,27 @@ const EConsultDetailView = ({
                   )}
                 </div>
               </div>
+
+              {/* Next Steps - Read-only display for Providers */}
+              {consult.next_step && (
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Recommended Next Step</h4>
+                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                    {(() => {
+                      const stepInfo = NEXT_STEP_DISPLAY[consult.next_step];
+                      const Icon = stepInfo.icon;
+                      return (
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+                            <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                          </div>
+                          <p className="font-medium text-foreground">{stepInfo.label}</p>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
+              )}
 
               <Separator className="my-4" />
 
