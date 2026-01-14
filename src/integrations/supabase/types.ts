@@ -238,27 +238,60 @@ export type Database = {
       }
       profiles: {
         Row: {
+          address: string | null
           avatar_url: string | null
+          child_name: string | null
           created_at: string
+          date_of_birth: string | null
           email: string | null
+          email_notifications: boolean | null
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          emergency_contact_relation: string | null
           full_name: string | null
           id: string
+          is_parent: boolean | null
+          phone: string | null
+          preferred_language: string | null
+          sms_notifications: boolean | null
           updated_at: string
         }
         Insert: {
+          address?: string | null
           avatar_url?: string | null
+          child_name?: string | null
           created_at?: string
+          date_of_birth?: string | null
           email?: string | null
+          email_notifications?: boolean | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          emergency_contact_relation?: string | null
           full_name?: string | null
           id: string
+          is_parent?: boolean | null
+          phone?: string | null
+          preferred_language?: string | null
+          sms_notifications?: boolean | null
           updated_at?: string
         }
         Update: {
+          address?: string | null
           avatar_url?: string | null
+          child_name?: string | null
           created_at?: string
+          date_of_birth?: string | null
           email?: string | null
+          email_notifications?: boolean | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          emergency_contact_relation?: string | null
           full_name?: string | null
           id?: string
+          is_parent?: boolean | null
+          phone?: string | null
+          preferred_language?: string | null
+          sms_notifications?: boolean | null
           updated_at?: string
         }
         Relationships: []

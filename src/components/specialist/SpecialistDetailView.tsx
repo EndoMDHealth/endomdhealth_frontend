@@ -36,10 +36,14 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
 type NextStepOption = 'schedule_virtual_visit' | 'schedule_in_person_visit' | 'continue_monitoring' | 'obtain_further_labs' | 'refer_different_specialty';
+
+// Backend API URL - update this with your actual backend URL
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
 
 interface EConsult {
   id: string;
@@ -130,12 +134,14 @@ export const SpecialistDetailView = ({
   onSubmitResponse,
   onSaveDraft,
 }: SpecialistDetailViewProps) => {
-  const [response, setResponse] = useState(consult.response_notes || "");
+  const { session } = useAuth();
+  const [response, setResponse] = useState(String(consult.response_notes || ""));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSavingDraft, setIsSavingDraft] = useState(false);
   const [attachments, setAttachments] = useState<File[]>([]);
   const [selectedNextStep, setSelectedNextStep] = useState<NextStepOption | null>(consult.next_step || null);
   const [isSavingNextStep, setIsSavingNextStep] = useState(false);
+  const [isProcessingAI, setIsProcessingAI] = useState(false);
 
   const handleNextStepSelect = async (value: NextStepOption) => {
     const newValue = selectedNextStep === value ? null : value;
@@ -158,14 +164,15 @@ export const SpecialistDetailView = ({
   };
 
   const handleSubmitResponse = async () => {
-    if (!response.trim()) {
+    const responseText = String(response);
+    if (!responseText.trim()) {
       toast.error("Please enter a response before submitting");
       return;
     }
     
     setIsSubmitting(true);
     try {
-      await onSubmitResponse(consult.id, response);
+      await onSubmitResponse(consult.id, responseText);
       toast.success("Response submitted successfully");
     } catch (error) {
       toast.error("Failed to submit response");
@@ -176,7 +183,7 @@ export const SpecialistDetailView = ({
   const handleSaveDraft = async () => {
     setIsSavingDraft(true);
     try {
-      await onSaveDraft(consult.id, response);
+      await onSaveDraft(consult.id, String(response));
       toast.success("Draft saved");
     } catch (error) {
       toast.error("Failed to save draft");
@@ -187,6 +194,44 @@ export const SpecialistDetailView = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setAttachments(prev => [...prev, ...Array.from(e.target.files!)]);
+    }
+  };
+
+  const handleProcessEConsult = async () => {
+    if (!session) {
+      toast.error('❌ Please login first');
+      return;
+    }
+
+    setIsProcessingAI(true);
+    toast.info('Processing e-consult with AI...');
+
+    try {
+      const apiResponse = await fetch(`${BACKEND_URL}/process`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          e_consult_id: consult.id
+        }),
+      });
+
+      const data = await apiResponse.json();
+
+      if (apiResponse.ok) {
+        toast.success(`✅ ${data.message}`);
+        if (data?.result) {
+          setResponse(String(data.result.draft_response));
+        }
+      } else {
+        toast.error(`❌ ${data.detail || JSON.stringify(data)}`);
+      }
+    } catch (error) {
+      toast.error(`❌ ${error instanceof Error ? error.message : 'Failed to process e-consult'}`);
+    } finally {
+      setIsProcessingAI(false);
     }
   };
 
@@ -328,7 +373,7 @@ export const SpecialistDetailView = ({
                   value={response}
                   onChange={(e) => setResponse(e.target.value)}
                   placeholder="Enter your clinical recommendations, guidance, and any suggested next steps for the referring provider..."
-                  className="min-h-[200px] resize-none"
+                  className="min-h-[200px] resize-y"
                   disabled={consult.status === 'completed'}
                   aria-label="Specialist response"
                 />
@@ -337,18 +382,27 @@ export const SpecialistDetailView = ({
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div 
-                        className="absolute bottom-3 right-3 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary cursor-default"
-                        aria-label="AI-assisted recommendation indicator"
+                      <button 
+                        type="button"
+                        onClick={handleProcessEConsult}
+                        disabled={isProcessingAI || consult.status === 'completed'}
+                        className="absolute bottom-3 right-3 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary cursor-pointer hover:bg-primary/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label="Generate AI-assisted recommendation"
                       >
                         <div className="relative">
-                          <Search className="h-3.5 w-3.5" />
-                          <Sparkles className="h-2.5 w-2.5 absolute -top-1 -right-1 text-primary" />
+                          {isProcessingAI ? (
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                          ) : (
+                            <>
+                              <Search className="h-3.5 w-3.5" />
+                              <Sparkles className="h-2.5 w-2.5 absolute -top-2 -right-1.5 text-primary" />
+                            </>
+                          )}
                         </div>
-                      </div>
+                      </button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="bg-primary text-primary-foreground">
-                      <p>AI-assisted recommendation</p>
+                      <p>{isProcessingAI ? 'Processing...' : 'Generate AI-assisted recommendation'}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -446,7 +500,7 @@ export const SpecialistDetailView = ({
                   </Button>
                   <Button
                     onClick={handleSubmitResponse}
-                    disabled={isSubmitting || !response.trim()}
+                    disabled={isSubmitting || !String(response).trim()}
                     className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
                     aria-label="Submit response"
                   >
