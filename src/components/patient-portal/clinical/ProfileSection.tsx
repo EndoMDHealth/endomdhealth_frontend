@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { User, Phone, Mail, MapPin, Calendar, Camera, Globe, Bell, AlertCircle } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { User, Phone, Mail, MapPin, Calendar, Camera, Globe, Bell, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,29 +8,236 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 import happyChild from '@/assets/child-grass-happy.jpg';
 
 const ProfileSection = () => {
+  const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState({
-    firstName: 'Sarah',
-    lastName: 'Johnson',
-    dateOfBirth: '2015-03-15',
-    email: 'parent@email.com',
-    phone: '(703) 555-1234',
-    address: '123 Oak Street, Springfield, VA 22150',
-    emergencyName: 'Michael Johnson',
-    emergencyPhone: '(703) 555-5678',
-    emergencyRelation: 'Father',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: '',
+    phone: '',
+    address: '',
+    emergencyName: '',
+    emergencyPhone: '',
+    emergencyRelation: '',
     language: 'english',
     emailNotifications: true,
     smsNotifications: false,
+    avatarUrl: '',
   });
 
-  const handleSave = () => {
-    setIsEditing(false);
-    toast.success('Profile updated successfully');
+  const fetchProfile = useCallback(async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      // First, use data from auth (faster, no DB call needed for basic info)
+      const fullNameFromAuth = user.user_metadata?.full_name || '';
+      const nameParts = fullNameFromAuth.split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      // Set initial profile from auth data
+      setProfile({
+        firstName,
+        lastName,
+        dateOfBirth: '',
+        email: user.email || '',
+        phone: '',
+        address: '',
+        emergencyName: '',
+        emergencyPhone: '',
+        emergencyRelation: '',
+        language: 'english',
+        emailNotifications: true,
+        smsNotifications: false,
+        avatarUrl: '',
+      });
+
+      // Then fetch extended profile data from database (for avatar, additional fields, etc.)
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (!error && data) {
+        // Update profile with database data (overrides auth data if different)
+        const dbNameParts = (data.full_name || '').split(' ');
+        const dbFirstName = dbNameParts[0] || firstName;
+        const dbLastName = dbNameParts.slice(1).join(' ') || lastName;
+
+        setProfile(prev => ({
+          ...prev,
+          firstName: dbFirstName,
+          lastName: dbLastName,
+          dateOfBirth: data.date_of_birth || '',
+          email: data.email || prev.email,
+          phone: data.phone || '',
+          address: data.address || '',
+          emergencyName: data.emergency_contact_name || '',
+          emergencyPhone: data.emergency_contact_phone || '',
+          emergencyRelation: data.emergency_contact_relation || '',
+          language: data.preferred_language || 'english',
+          emailNotifications: data.email_notifications ?? true,
+          smsNotifications: data.sms_notifications ?? false,
+          avatarUrl: data.avatar_url || '',
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+      // Don't show error toast - we already have auth data loaded
+      // toast.error('Failed to load extended profile');
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchProfile();
+    }
+  }, [user, fetchProfile]);
+
+  const handleSave = async () => {
+    if (!user) return;
+
+    try {
+      const fullName = `${profile.firstName} ${profile.lastName}`.trim();
+      
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          full_name: fullName,
+          email: profile.email,
+          date_of_birth: profile.dateOfBirth || null,
+          phone: profile.phone,
+          address: profile.address,
+          emergency_contact_name: profile.emergencyName,
+          emergency_contact_phone: profile.emergencyPhone,
+          emergency_contact_relation: profile.emergencyRelation,
+          preferred_language: profile.language,
+          email_notifications: profile.emailNotifications,
+          sms_notifications: profile.smsNotifications,
+          avatar_url: profile.avatarUrl,
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
+
+      setIsEditing(false);
+      toast.success('Profile updated successfully');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast.error('Failed to update profile');
+    }
   };
+
+  const handleNotificationToggle = async (field: 'emailNotifications' | 'smsNotifications', value: boolean) => {
+    if (!user) return;
+
+    // Update local state immediately for responsive UI
+    setProfile(prev => ({ ...prev, [field]: value }));
+
+    // Save to database
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          [field === 'emailNotifications' ? 'email_notifications' : 'sms_notifications']: value,
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
+      toast.success('Notification preference updated');
+    } catch (error) {
+      console.error('Error updating notification preference:', error);
+      // Revert local state on error
+      setProfile(prev => ({ ...prev, [field]: !value }));
+      toast.error('Failed to update notification preference');
+    }
+  };
+
+  const handlePhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user || !event.target.files || event.target.files.length === 0) return;
+
+    const file = event.target.files[0];
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please upload an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size must be less than 5MB');
+      return;
+    }
+
+    setLoading(true);
+    toast.info('Uploading photo...');
+
+    try {
+      // Create unique file name (use underscore to separate user ID from timestamp)
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}_${Date.now()}.${fileExt}`;
+      const filePath = `avatars/${fileName}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from('profiles')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: true,
+        });
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL (RLS will still enforce access control)
+      const { data: { publicUrl } } = supabase.storage
+        .from('profiles')
+        .getPublicUrl(filePath);
+
+      // Update profile with avatar URL
+      const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: publicUrl })
+        .eq('id', user.id);
+
+      if (updateError) throw updateError;
+
+      // Update local state
+      setProfile(prev => ({ ...prev, avatarUrl: publicUrl }));
+      toast.success('Profile photo updated successfully');
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      toast.error('Failed to upload photo');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get initials for avatar fallback
+  const getInitials = () => {
+    const first = profile.firstName.charAt(0).toUpperCase();
+    const last = profile.lastName.charAt(0).toUpperCase();
+    return first + last || 'U';
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-patient-teal" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -57,15 +264,32 @@ const ProfileSection = () => {
             {/* Avatar Section */}
             <div className="flex flex-col items-center space-y-3">
               <Avatar className="h-24 w-24 border-4 border-patient-teal/20">
-                <AvatarImage src={happyChild} alt="Profile" />
-                <AvatarFallback className="bg-patient-teal text-white text-2xl">SJ</AvatarFallback>
+                <AvatarImage src={profile.avatarUrl || happyChild} alt="Profile" />
+                <AvatarFallback className="bg-patient-teal text-white text-2xl">{getInitials()}</AvatarFallback>
               </Avatar>
-              {isEditing && (
-                <Button size="sm" variant="outline" className="text-xs">
-                  <Camera className="h-3 w-3 mr-1" />
+              <div className="relative">
+                <input
+                  type="file"
+                  id="avatar-upload"
+                  accept="image/*"
+                  onChange={handlePhotoUpload}
+                  className="hidden"
+                />
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="text-xs"
+                  onClick={() => document.getElementById('avatar-upload')?.click()}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                  ) : (
+                    <Camera className="h-3 w-3 mr-1" />
+                  )}
                   Change Photo
                 </Button>
-              )}
+              </div>
             </div>
 
             {/* Profile Fields */}
@@ -107,7 +331,7 @@ const ProfileSection = () => {
                     className="mt-1"
                   />
                 ) : (
-                  <p className="mt-1 text-muted-foreground">{new Date(profile.dateOfBirth).toLocaleDateString()}</p>
+                  <p className="mt-1 text-muted-foreground">{profile.dateOfBirth ? new Date(profile.dateOfBirth).toLocaleDateString() : 'Not set'}</p>
                 )}
               </div>
               <div>
@@ -251,7 +475,7 @@ const ProfileSection = () => {
             </div>
             <Switch
               checked={profile.emailNotifications}
-              onCheckedChange={(checked) => setProfile({ ...profile, emailNotifications: checked })}
+              onCheckedChange={(checked) => handleNotificationToggle('emailNotifications', checked)}
             />
           </div>
           <div className="flex items-center justify-between p-4 bg-patient-bg rounded-xl">
@@ -264,7 +488,7 @@ const ProfileSection = () => {
             </div>
             <Switch
               checked={profile.smsNotifications}
-              onCheckedChange={(checked) => setProfile({ ...profile, smsNotifications: checked })}
+              onCheckedChange={(checked) => handleNotificationToggle('smsNotifications', checked)}
             />
           </div>
         </CardContent>
