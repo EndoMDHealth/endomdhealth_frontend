@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -55,6 +55,7 @@ type DashboardView = 'dashboard' | 'consults-new' | 'consults-in-progress' | 'co
 const SpecialistDashboard = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [consults, setConsults] = useState<EConsult[]>([]);
   const [loading, setLoading] = useState(true);
   const [specialistName, setSpecialistName] = useState("");
@@ -67,7 +68,24 @@ const SpecialistDashboard = () => {
       fetchConsults();
       fetchSpecialistInfo();
     }
-  }, [user]);
+  }, [user?.id]); // Only re-fetch if user ID changes, not on every user object update
+
+  // Handle URL params for consult detail view
+  useEffect(() => {
+    const consultId = searchParams.get('consultId');
+    const view = searchParams.get('view');
+    
+    if (consultId && consults.length > 0) {
+      const consult = consults.find(c => c.id === consultId);
+      if (consult) {
+        setSelectedConsult(consult);
+        setCurrentView('consult-detail');
+        if (view) {
+          setPreviousView(view as DashboardView);
+        }
+      }
+    }
+  }, [searchParams, consults]);
 
   const fetchSpecialistInfo = async () => {
     if (!user) return;
@@ -120,23 +138,31 @@ const SpecialistDashboard = () => {
     };
     setCurrentView(viewMap[path] || 'dashboard');
     setSelectedConsult(null);
+    // Clear URL params when navigating away from detail
+    setSearchParams({});
   };
 
   const handleViewConsult = (consult: EConsult) => {
     setSelectedConsult(consult);
     setPreviousView(currentView as DashboardView);
     setCurrentView('consult-detail');
+    // Set URL params to persist state
+    setSearchParams({ consultId: consult.id, view: currentView });
   };
 
   const handleRespondConsult = (consult: EConsult) => {
     setSelectedConsult(consult);
     setPreviousView(currentView as DashboardView);
     setCurrentView('consult-detail');
+    // Set URL params to persist state
+    setSearchParams({ consultId: consult.id, view: currentView });
   };
 
   const handleBackFromDetail = () => {
     setSelectedConsult(null);
     setCurrentView(previousView);
+    // Clear URL params when going back
+    setSearchParams({});
   };
 
   const handleSubmitResponse = async (consultId: string, response: string) => {
@@ -154,7 +180,7 @@ const SpecialistDashboard = () => {
       throw error;
     }
     
-    fetchConsults();
+    await fetchConsults();
     handleBackFromDetail();
   };
 
@@ -171,7 +197,12 @@ const SpecialistDashboard = () => {
       throw error;
     }
     
-    fetchConsults();
+    await fetchConsults();
+    // Update selectedConsult with the new data
+    if (selectedConsult) {
+      const updatedConsult = { ...selectedConsult, response_notes: draft, status: 'under_review' as EConsultStatus };
+      setSelectedConsult(updatedConsult);
+    }
   };
 
   // Filter consults by status
@@ -348,7 +379,11 @@ const SpecialistDashboard = () => {
                       </p>
                     </div>
                     <Button 
-                      onClick={() => setCurrentView('consults-new')}
+                      onClick={() => {
+                        setCurrentView('consults-new');
+                        setSelectedConsult(null);
+                        setSearchParams({});
+                      }}
                       className="bg-accent hover:bg-accent/90 text-accent-foreground"
                     >
                       View New Requests
@@ -383,7 +418,11 @@ const SpecialistDashboard = () => {
               </Link>
               <div className="ml-6 border-l border-primary-foreground/30 pl-6">
                 <button 
-                  onClick={() => setCurrentView('dashboard')}
+                  onClick={() => {
+                    setCurrentView('dashboard');
+                    setSelectedConsult(null);
+                    setSearchParams({});
+                  }}
                   className="flex flex-col items-start hover:opacity-80 transition-opacity"
                 >
                   <span className="text-sm font-semibold text-accent">EndoMD Health</span>
@@ -419,7 +458,11 @@ const SpecialistDashboard = () => {
                     <p className="text-xs text-accent mt-1">Pediatric Endocrinologist</p>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setCurrentView('settings')}>
+                  <DropdownMenuItem onClick={() => {
+                    setCurrentView('settings');
+                    setSelectedConsult(null);
+                    setSearchParams({});
+                  }}>
                     <Settings className="mr-2 h-4 w-4" />Settings
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
