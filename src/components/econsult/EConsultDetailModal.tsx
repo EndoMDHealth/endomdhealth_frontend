@@ -25,6 +25,12 @@ import { generateEConsultPDF, EConsultPDFData } from "@/utils/generateEConsultPD
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
 
+const formatHeightInFeetAndInches = (totalInches: number): string => {
+  const feet = Math.floor(totalInches / 12);
+  const inches = Math.round(totalInches % 12);
+  return `${feet}' ${inches}"`;
+};
+
 interface EConsult {
   id: string;
   patient_initials: string;
@@ -113,7 +119,7 @@ const EConsultDetailModal = ({ consult, isOpen, onClose }: EConsultDetailModalPr
                   <Ruler className="h-4 w-4 text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-500">Height</p>
-                    <p className="font-semibold">{consult.height_cm} cm</p>
+                    <p className="font-semibold">{formatHeightInFeetAndInches(consult.height_cm)}</p>
                   </div>
                 </div>
               )}

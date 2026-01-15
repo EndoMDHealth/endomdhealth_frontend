@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -128,6 +128,12 @@ const getCategoryLabel = (category: ConditionCategory) => {
   return labels[category];
 };
 
+const formatHeightInFeetAndInches = (totalInches: number): string => {
+  const feet = Math.floor(totalInches / 12);
+  const inches = Math.round(totalInches % 12);
+  return `${feet}' ${inches}"`;
+};
+
 export const SpecialistDetailView = ({ 
   consult, 
   onBack,
@@ -142,6 +148,7 @@ export const SpecialistDetailView = ({
   const [selectedNextStep, setSelectedNextStep] = useState<NextStepOption | null>(consult.next_step || null);
   const [isSavingNextStep, setIsSavingNextStep] = useState(false);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
+  const usedAIRef = useRef(false);
 
   const handleNextStepSelect = async (value: NextStepOption) => {
     const newValue = selectedNextStep === value ? null : value;
@@ -174,6 +181,11 @@ export const SpecialistDetailView = ({
     try {
       await onSubmitResponse(consult.id, responseText);
       toast.success("Response submitted successfully");
+
+      // Only send feedback if AI was actually used
+      if (usedAIRef.current) {
+        handleProcessFeedBack();
+      }
     } catch (error) {
       toast.error("Failed to submit response");
     }
@@ -224,6 +236,7 @@ export const SpecialistDetailView = ({
         toast.success(`✅ ${data.message}`);
         if (data?.result) {
           setResponse(String(data.result.draft_response));
+          usedAIRef.current = true; // Mark that AI was used (instant, no re-render)
         }
       } else {
         toast.error(`❌ ${data.detail || JSON.stringify(data)}`);
@@ -233,6 +246,25 @@ export const SpecialistDetailView = ({
     } finally {
       setIsProcessingAI(false);
     }
+  };
+
+  const handleProcessFeedBack = () => {
+    if (!session) return;
+
+    // Fire and forget - no await, no loading state, no feedback
+    fetch(`${BACKEND_URL}/feedback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({
+        e_consult_id: consult.id
+      }),
+    }).catch(error => {
+      // Silently log errors without user feedback
+      console.error('Feedback request failed:', error);
+    });
   };
 
   return (
@@ -312,13 +344,13 @@ export const SpecialistDetailView = ({
                   {consult.height_cm && (
                     <div className="bg-muted/50 rounded p-2 text-center">
                       <p className="text-xs text-muted-foreground">Height</p>
-                      <p className="font-medium">{consult.height_cm} cm</p>
+                      <p className="font-medium">{formatHeightInFeetAndInches(consult.height_cm)}</p>
                     </div>
                   )}
                   {consult.weight_kg && (
                     <div className="bg-muted/50 rounded p-2 text-center">
                       <p className="text-xs text-muted-foreground">Weight</p>
-                      <p className="font-medium">{consult.weight_kg} kg</p>
+                      <p className="font-medium">{consult.weight_kg} Pounds</p>
                     </div>
                   )}
                   {consult.bmi && (

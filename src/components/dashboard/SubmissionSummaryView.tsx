@@ -16,6 +16,12 @@ import { format } from "date-fns";
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
 
+const formatHeightInFeetAndInches = (totalInches: number): string => {
+  const feet = Math.floor(totalInches / 12);
+  const inches = Math.round(totalInches % 12);
+  return `${feet}' ${inches}"`;
+};
+
 interface EConsult {
   id: string;
   patient_initials: string;
@@ -137,7 +143,7 @@ const SubmissionSummaryView = ({ consult, onBack }: SubmissionSummaryViewProps) 
                     <div>
                       <label className="text-sm text-muted-foreground" id="height-label">Height</label>
                       <p className="font-medium text-foreground" aria-labelledby="height-label">
-                        {consult.height_cm} cm
+                        {formatHeightInFeetAndInches(consult.height_cm)}
                       </p>
                     </div>
                   )}
