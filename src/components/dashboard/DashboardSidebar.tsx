@@ -12,7 +12,9 @@ import {
   Home,
   FileDown,
   Building2,
-  UserCircle
+  UserCircle,
+  Menu,
+  X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -81,6 +83,18 @@ export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: Dashboard
   const [expandedItems, setExpandedItems] = useState<string[]>(['submissions', 'referrals', 'responses']);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState<UserRole>('physician');
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  
+  // Check screen size on mount and set default collapse state
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsCollapsed(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   useEffect(() => {
     const checkRole = async () => {
@@ -132,31 +146,48 @@ export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: Dashboard
   };
 
   return (
-    <aside className="w-64 bg-card border-r border-border flex flex-col h-[calc(100vh-64px)] sticky top-16">
-      {/* View indicator */}
-      <div className="p-4 border-b border-border">
-        <div className="flex items-center justify-between">
-          <RoleBadge role={role} />
-        </div>
-        {role === 'admin_staff' && (
-          <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
-            <Building2 className="h-3 w-3" />
-            Clinic-wide view
-          </p>
-        )}
-        {role === 'physician' && (
-          <p className="text-xs text-muted-foreground mt-2">
-            Showing your submissions
-          </p>
-        )}
-        {clinicName && (
-          <p className="text-xs font-medium text-foreground mt-1 truncate">
-            {clinicName}
-          </p>
-        )}
+    <aside className={cn(
+      "bg-card border-r border-border flex flex-col h-[calc(100vh-64px)] sticky top-16 transition-all duration-300",
+      isCollapsed ? "w-16" : "w-64"
+    )}>
+      {/* Toggle button */}
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        {!isCollapsed && <RoleBadge role={role} />}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className={cn(
+            "p-2 hover:bg-muted rounded-lg transition-colors",
+            isCollapsed && "mx-auto"
+          )}
+          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {isCollapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
+        </button>
       </div>
       
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+      {/* View indicator - only show when expanded */}
+      {!isCollapsed && (
+        <div className="px-4 py-3 border-b border-border">
+          {role === 'admin_staff' && (
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <Building2 className="h-3 w-3" />
+              Clinic-wide view
+            </p>
+          )}
+          {role === 'physician' && (
+            <p className="text-xs text-muted-foreground">
+              Showing your submissions
+            </p>
+          )}
+          {clinicName && (
+            <p className="text-xs font-medium text-foreground mt-1 truncate">
+              {clinicName}
+            </p>
+          )}
+        </div>
+      )}
+      
+      <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
         {sidebarItems.map((item) => {
           const isDisabled = item.adminOnly && !isAdmin;
           const Icon = item.icon;
@@ -169,15 +200,24 @@ export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: Dashboard
               <button
                 onClick={() => {
                   if (isDisabled) return;
-                  if (hasChildren) {
-                    toggleExpand(item.id);
+                  if (isCollapsed && !hasChildren && item.path) {
+                    handleNavigate(item.path);
+                  } else if (hasChildren) {
+                    if (isCollapsed) {
+                      setIsCollapsed(false);
+                      setTimeout(() => toggleExpand(item.id), 100);
+                    } else {
+                      toggleExpand(item.id);
+                    }
                   } else if (item.path) {
                     handleNavigate(item.path);
                   }
                 }}
                 disabled={isDisabled}
+                title={isCollapsed ? item.label : undefined}
                 className={cn(
-                  "w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  "w-full flex items-center rounded-lg text-sm font-medium transition-all duration-200",
+                  isCollapsed ? "justify-center p-3" : "justify-between px-3 py-2.5",
                   active && !hasChildren
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : isDisabled
@@ -185,21 +225,24 @@ export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: Dashboard
                     : "text-foreground hover:bg-muted"
                 )}
               >
-                <div className="flex items-center gap-3">
+                <div className={cn(
+                  "flex items-center",
+                  isCollapsed ? "justify-center" : "gap-3"
+                )}>
                   <Icon className={cn(
-                    "h-5 w-5",
+                    "h-5 w-5 flex-shrink-0",
                     active && !hasChildren ? "text-primary-foreground" : isDisabled ? "text-muted-foreground/50" : "text-muted-foreground"
                   )} />
-                  <span>{item.label}</span>
+                  {!isCollapsed && <span>{item.label}</span>}
                 </div>
-                {hasChildren && (
+                {!isCollapsed && hasChildren && (
                   isExpanded 
                     ? <ChevronDown className="h-4 w-4 text-muted-foreground" />
                     : <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 )}
               </button>
               
-              {hasChildren && isExpanded && (
+              {!isCollapsed && hasChildren && isExpanded && (
                 <div className="ml-8 mt-1 space-y-1">
                   {item.children?.map((child) => (
                     <button
@@ -225,9 +268,12 @@ export const DashboardSidebar = ({ onNavigate, userRole, clinicName }: Dashboard
       {/* Admin indicator */}
       {isAdmin && (
         <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-            <span>Admin Access</span>
+          <div className={cn(
+            "flex items-center gap-2 text-xs text-muted-foreground",
+            isCollapsed && "justify-center"
+          )}>
+            <div className="h-2 w-2 rounded-full bg-accent animate-pulse" title={isCollapsed ? "Admin Access" : undefined} />
+            {!isCollapsed && <span>Admin Access</span>}
           </div>
         </div>
       )}

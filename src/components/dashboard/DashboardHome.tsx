@@ -71,33 +71,37 @@ const MetricCard = ({
 }) => (
   <Card className="bg-card border-border shadow-sm hover:shadow-md transition-all duration-300">
     <CardContent className="p-5">
-      <div className="flex items-start gap-4">
+      <div className="flex flex-col justify-end items-start gap-4">
+        <div className="flex flex-row items-start justify-center gap-4">
         <div className="p-3 rounded-xl bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
         </div>
+        {trend && trendValue && (
+          <div className={cn(
+            "flex items-center gap-1 text-xs font-medium m-auto",
+            trend === 'up' ? "text-green-600" : "text-red-600"
+          )}>
+            {trend === 'up' ? (
+              <TrendingUp className="h-6 w-6 xl:h-10 xl:w-10" />
+            ) : (
+              <TrendingDown className="h-6 w-6 xl:h-10 xl:w-10" />
+            )}
+            <span className="text-sm xl:text-base">{trendValue}</span>
+          </div>
+        )}
+        </div>
         <div className="flex-1">
           <p className="text-sm text-muted-foreground mb-1">{title}</p>
+          <div className="flex items-center gap-2">
           <p className="text-3xl font-bold text-foreground">{value}</p>
-          <div className="flex items-center justify-between mt-3">
-            {trend && trendValue && (
-              <div className={cn(
-                "flex items-center gap-1 text-xs font-medium",
-                trend === 'up' ? "text-green-600" : "text-red-600"
-              )}>
-                {trend === 'up' ? (
-                  <TrendingUp className="h-3 w-3" />
-                ) : (
-                  <TrendingDown className="h-3 w-3" />
-                )}
-                <span>{trendValue}</span>
-              </div>
-            )}
+          </div>
+        </div>
+        <div className="flex items-center justify-between mt-3">
             {onViewReport && (
               <Button variant="outline" size="sm" className="text-xs h-7 px-3" onClick={onViewReport}>
                 View report
               </Button>
             )}
-          </div>
         </div>
       </div>
     </CardContent>
@@ -168,7 +172,7 @@ export const DashboardHome = ({
   return (
     <div className="space-y-6">
       {/* Welcome Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         <h1 className="text-2xl font-bold text-foreground">
           Welcome, Dr. {lastName}
         </h1>
@@ -191,9 +195,9 @@ export const DashboardHome = ({
       </div>
 
       {/* Top Row - Metrics & Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Left Column - Metric Cards */}
-        <div className="lg:col-span-1 grid grid-cols-2 gap-4">
+        <div className="lg:col-span-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <MetricCard
             title="Total E-Consults"
             value={stats.total}
@@ -231,7 +235,7 @@ export const DashboardHome = ({
         {/* Right Column - Bar Chart */}
         <Card className="lg:col-span-2 bg-card border-border shadow-sm">
           <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-center justify-between">
               <CardTitle className="text-lg font-semibold">E-Consults Overview</CardTitle>
               <div className="flex gap-4 text-sm">
                 <div className="flex items-center gap-2">
@@ -246,7 +250,7 @@ export const DashboardHome = ({
             </div>
           </CardHeader>
           <CardContent>
-            <div className="h-48">
+            <div className="h-48 justify-center items-center">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={monthlyData} barGap={4}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
@@ -269,7 +273,7 @@ export const DashboardHome = ({
       </div>
 
       {/* Middle Row - Pie Chart, Next Patient, Pending Approvals */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Conditions Distribution */}
         <Card className="bg-card border-border shadow-sm">
           <CardHeader className="pb-2">
@@ -396,7 +400,7 @@ export const DashboardHome = ({
       </div>
 
       {/* Bottom Row - Today's Consults, Success Stats, Totals, Quick Action */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Today's Activity */}
         <Card className="bg-card border-border shadow-sm">
           <CardHeader className="pb-2">
