@@ -2,11 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import Editor from 'react-simple-wysiwyg';
+import { WysiwygEditor } from "@/components/WysiwygEditor";
 import {
   Tooltip,
   TooltipContent,
@@ -328,36 +327,7 @@ export const SpecialistDetailView = ({
   };
 
   return (
-    <>
-      <style>{`
-        .wysiwyg-content h1 { 
-          font-size: 2em; 
-          font-weight: 700; 
-          margin: 1em 0 0.5em; 
-        }
-        .wysiwyg-content h2 { 
-          font-size: 1.5em; 
-          font-weight: 700; 
-          margin: 0.8em 0 0.4em; 
-        }
-        .wysiwyg-content h3 { 
-          font-size: 1.2em; 
-          font-weight: 700; 
-          margin: 0.8em 0 0.4em; 
-        }
-        .wysiwyg-content p { 
-          margin: 0.6em 0; 
-        }
-        .wysiwyg-content ul { 
-          margin: 0.6em 0; 
-          padding-left: 1.5em; 
-          list-style: disc; 
-        }
-        .wysiwyg-content li { 
-          margin: 0.25em 0; 
-        }
-      `}</style>
-      <div className="space-y-6">
+    <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
         <Button 
@@ -513,16 +483,14 @@ export const SpecialistDetailView = ({
                 <Label className="text-sm font-semibold text-foreground mb-2 block">
                   Recommended Course of Action / Response
                 </Label>
-                <div className="wysiwyg-content">
-                  <Editor
-                    value={response}
-                    onChange={(e) => setResponse(e.target.value)}
-                    placeholder="Enter your clinical recommendations, guidance, and any suggested next steps for the referring provider..."
-                    className="min-h-[500px] resize-y"
-                    disabled={consult.status === 'completed'}
-                    aria-label="Specialist response"
-                  />
-                </div>
+                <WysiwygEditor
+                  value={response}
+                  onChange={(e) => setResponse(e.target.value)}
+                  placeholder="Enter your clinical recommendations, guidance, and any suggested next steps for the referring provider..."
+                  className="min-h-[500px] resize-y"
+                  disabled={consult.status === 'completed'}
+                  ariaLabel="Specialist response"
+                />
                 
                 {/* AI Agent Icon */}
                 <TooltipProvider>
@@ -677,6 +645,5 @@ export const SpecialistDetailView = ({
         </div>
       </div>
     </div>
-    </>
   );
 };

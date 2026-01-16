@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import EConsultFeedbackModal, { FeedbackData } from "./EConsultFeedbackModal";
+import { WysiwygDisplay } from "@/components/WysiwygEditor";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -257,9 +258,7 @@ const EConsultDetailView = ({
                 <h4 className="font-semibold text-foreground mb-2">Specialist Response</h4>
                 <div className="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
                   {consult.response_notes ? (
-                    <p className="text-foreground whitespace-pre-wrap">
-                      {consult.response_notes}
-                    </p>
+                    <WysiwygDisplay content={consult.response_notes} className="text-foreground" />
                   ) : (
                     <p className="text-muted-foreground italic">
                       Response pending. The specialist will review your submission and provide recommendations.

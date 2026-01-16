@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { generateEConsultPDF, EConsultPDFData } from "@/utils/generateEConsultPDF";
+import { WysiwygDisplay } from "@/components/WysiwygEditor";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -194,7 +195,7 @@ const EConsultDetailModal = ({ consult, isOpen, onClose }: EConsultDetailModalPr
                   Specialist Response
                 </h3>
                 <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                  <p className="text-gray-900 whitespace-pre-wrap">{consult.response_notes}</p>
+                  <WysiwygDisplay content={consult.response_notes} className="text-gray-900" />
                   {consult.responded_at && (
                     <p className="text-xs text-green-600 mt-3">
                       Responded on {format(new Date(consult.responded_at), 'PPP')}
