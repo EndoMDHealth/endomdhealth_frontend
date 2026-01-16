@@ -28,7 +28,8 @@ import {
   FileText,
   ClipboardCheck,
   ArrowLeft,
-  AlertTriangle
+  AlertTriangle,
+  X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import endoLogo from "@/assets/logos/endo_yellow.png";
@@ -247,7 +248,7 @@ const SubmitEConsult = () => {
 
   const hasAnyFlag = Object.values(pedraFlags).some(Boolean);
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean | LabType[] | UrgencyType[]) => {
+  const handleInputChange = (field: keyof FormData, value: string | boolean | LabType[] | UrgencyType[] | File[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -331,40 +332,95 @@ const SubmitEConsult = () => {
     const bmi = calculateBMI();
     const age = patientAge;
 
-    // Get initials from full name for database compatibility
-    const nameParts = formData.patientFullName.trim().split(' ');
-    const initials = nameParts.map(p => p.charAt(0).toUpperCase()).join('').slice(0, 4);
+    try {
+      // Get initials from full name for database compatibility
+      const nameParts = formData.patientFullName.trim().split(' ');
+      const initials = nameParts.map(p => p.charAt(0).toUpperCase()).join('').slice(0, 4);
 
-    const { error } = await supabase.from('e_consults').insert({
-      physician_id: user.id,
-      patient_initials: initials, // Store initials for HIPAA
-      patient_age: age || 0,
-      patient_dob: formData.patientDob || null,
-      patient_gender: formData.patientGender || null,
-      height_cm: formData.heightCm ? parseFloat(formData.heightCm) : null, // Actually stores inches (misleading column name)
-      weight_kg: formData.weightKg ? parseFloat(formData.weightKg) : null, // Actually stores pounds (misleading column name)
-      bmi: bmi ? parseFloat(bmi) : null,
-      condition_category: formData.conditionCategory as ConditionCategory,
-      clinical_question: formData.clinicalQuestion,
-      additional_notes: formData.additionalNotes || null,
-      status: 'submitted',
-    });
+      // 1. Create the e-consult record
+      const { data: econsult, error: econsultError } = await supabase
+        .from('e_consults')
+        .insert({
+          physician_id: user.id,
+          patient_initials: initials,
+          patient_age: age || 0,
+          patient_dob: formData.patientDob || null,
+          patient_gender: formData.patientGender || null,
+          height_cm: formData.heightCm ? parseFloat(formData.heightCm) : null, // Actually stores inches
+          weight_kg: formData.weightKg ? parseFloat(formData.weightKg) : null, // Actually stores pounds
+          bmi: bmi ? parseFloat(bmi) : null,
+          condition_category: formData.conditionCategory as ConditionCategory,
+          clinical_question: formData.clinicalQuestion,
+          additional_notes: formData.additionalNotes || null,
+          status: 'submitted',
+        })
+        .select()
+        .single();
 
-    setIsSubmitting(false);
+      if (econsultError) {
+        throw new Error(`Failed to create e-consult: ${econsultError.message}`);
+      }
 
-    if (error) {
-      console.error('Error submitting e-consult:', error);
-      toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your e-consult. Please try again.",
-        variant: "destructive",
-      });
-    } else {
+      const econsultId = econsult.id;
+
+      // 2. Upload files and create attachment records
+      if (formData.uploadedFiles && formData.uploadedFiles.length > 0) {
+        for (const file of formData.uploadedFiles) {
+          try {
+            // Upload file to Supabase Storage
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${econsultId}_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+            const filePath = `${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+              .from('econsult-attachments')
+              .upload(filePath, file, {
+                cacheControl: '3600',
+                upsert: false,
+              });
+
+            if (uploadError) {
+              console.error(`Failed to upload file ${file.name}:`, uploadError);
+              continue; // Skip this file but continue with others
+            }
+
+            // Insert attachment record into database with file path
+            const { error: attachmentError } = await supabase
+              .from('e_consult_attachments')
+              .insert({
+                e_consult_id: econsultId,
+                file_name: file.name,
+                file_type: file.type,
+                file_size: file.size,
+                file_path: filePath,
+              });
+
+            if (attachmentError) {
+              console.error(`Failed to create attachment record for ${file.name}:`, attachmentError);
+            }
+          } catch (fileError) {
+            console.error(`Error processing file ${file.name}:`, fileError);
+            // Continue with other files
+          }
+        }
+      }
+
+      setIsSubmitting(false);
+
       toast({
         title: "E-Consult Submitted",
         description: "Your consultation request has been submitted successfully.",
       });
       navigate('/provider-dashboard');
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error('Error submitting e-consult:', error);
+      const errorMessage = error instanceof Error ? error.message : "There was an error submitting your e-consult. Please try again.";
+      toast({
+        title: "Submission Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
     }
   };
 
@@ -868,17 +924,37 @@ const SubmitEConsult = () => {
                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                           className="max-w-xs"
                           onChange={(e) => {
-                            const files = Array.from(e.target.files || []);
-                            handleInputChange("uploadedFiles", files as any);
+                            const newFiles = Array.from(e.target.files || []) as File[];
+                            // Add new files to existing files instead of replacing
+                            const existingFiles = formData.uploadedFiles || [];
+                            handleInputChange("uploadedFiles", [...existingFiles, ...newFiles]);
+                            // Reset input so same file can be selected again if removed
+                            e.target.value = '';
                           }}
                         />
                         {formData.uploadedFiles && formData.uploadedFiles.length > 0 && (
                           <div className="mt-3 space-y-2 w-full">
-                            <p className="text-sm font-medium text-gray-700">Selected files:</p>
+                            <p className="text-sm font-medium text-gray-700">Selected files ({formData.uploadedFiles.length}):</p>
                             {formData.uploadedFiles.map((file: File, index: number) => (
-                              <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
-                                <FileText className="h-4 w-4 text-primary" />
-                                <span className="text-sm text-gray-600">{file.name}</span>
+                              <div key={index} className="flex items-center justify-between gap-2 p-2 bg-gray-50 rounded-lg">
+                                <div className="flex items-center gap-2 min-w-0 flex-1">
+                                  <FileText className="h-4 w-4 text-primary flex-shrink-0" />
+                                  <span className="text-sm text-gray-600 truncate">{file.name}</span>
+                                  <span className="text-xs text-gray-400 flex-shrink-0">
+                                    ({(file.size / 1024).toFixed(1)} KB)
+                                  </span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const newFiles = formData.uploadedFiles.filter((_, i) => i !== index);
+                                    handleInputChange("uploadedFiles", newFiles);
+                                  }}
+                                  className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded p-1 transition-colors flex-shrink-0"
+                                  aria-label="Remove file"
+                                >
+                                  <X className="h-4 w-4" />
+                                </button>
                               </div>
                             ))}
                           </div>
