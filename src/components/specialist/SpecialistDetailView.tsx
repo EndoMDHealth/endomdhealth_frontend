@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import Editor from 'react-simple-wysiwyg';
 import {
   Tooltip,
   TooltipContent,
@@ -31,12 +32,14 @@ import {
   Eye,
   FlaskConical,
   UserPlus,
+  Paperclip,
 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { AttachmentViewer, type Attachment } from "@/components/AttachmentViewer";
 
 type EConsultStatus = 'submitted' | 'under_review' | 'awaiting_info' | 'completed';
 type ConditionCategory = 'obesity' | 'growth' | 'diabetes' | 'puberty' | 'thyroid' | 'pcos' | 'other';
@@ -149,6 +152,63 @@ export const SpecialistDetailView = ({
   const [isSavingNextStep, setIsSavingNextStep] = useState(false);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
   const usedAIRef = useRef(false);
+  const [consultAttachments, setConsultAttachments] = useState<Attachment[]>([]);
+  const [loadingAttachments, setLoadingAttachments] = useState(true);
+
+  // Fetch e-consult attachments on mount
+  useEffect(() => {
+    const fetchAttachments = async () => {
+      try {
+        setLoadingAttachments(true);
+        
+        // Fetch attachments from database
+        const { data: attachmentsData, error } = await supabase
+          .from('e_consult_attachments')
+          .select('*')
+          .eq('e_consult_id', consult.id)
+          .order('created_at', { ascending: true });
+
+        if (error) {
+          console.error('Error fetching attachments:', error);
+          toast.error('Failed to load attachments');
+          return;
+        }
+
+        if (attachmentsData && attachmentsData.length > 0) {
+          // Get signed URLs for each attachment (bucket is private)
+          const attachmentsWithUrls = await Promise.all(
+            attachmentsData.map(async (attachment) => {
+              const { data: urlData, error: urlError } = await supabase.storage
+                .from('econsult-attachments')
+                .createSignedUrl(attachment.file_path, 3600); // 1 hour expiry
+              
+              if (urlError) {
+                console.error('Error creating signed URL:', urlError);
+                return {
+                  ...attachment,
+                  url: undefined,
+                };
+              }
+              
+              return {
+                ...attachment,
+                url: urlData?.signedUrl,
+              };
+            })
+          );
+
+          setConsultAttachments(attachmentsWithUrls.filter(att => att.url));
+        }
+      } catch (error) {
+        console.error('Error fetching attachments:', error);
+        toast.error('Failed to load attachments');
+      } finally {
+        setLoadingAttachments(false);
+      }
+    };
+
+    fetchAttachments();
+  }, [consult.id]);
 
   const handleNextStepSelect = async (value: NextStepOption) => {
     const newValue = selectedNextStep === value ? null : value;
@@ -268,7 +328,36 @@ export const SpecialistDetailView = ({
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <style>{`
+        .wysiwyg-content h1 { 
+          font-size: 2em; 
+          font-weight: 700; 
+          margin: 1em 0 0.5em; 
+        }
+        .wysiwyg-content h2 { 
+          font-size: 1.5em; 
+          font-weight: 700; 
+          margin: 0.8em 0 0.4em; 
+        }
+        .wysiwyg-content h3 { 
+          font-size: 1.2em; 
+          font-weight: 700; 
+          margin: 0.8em 0 0.4em; 
+        }
+        .wysiwyg-content p { 
+          margin: 0.6em 0; 
+        }
+        .wysiwyg-content ul { 
+          margin: 0.6em 0; 
+          padding-left: 1.5em; 
+          list-style: disc; 
+        }
+        .wysiwyg-content li { 
+          margin: 0.25em 0; 
+        }
+      `}</style>
+      <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
         <Button 
@@ -370,6 +459,29 @@ export const SpecialistDetailView = ({
                   {consult.additional_notes || 'No additional background provided.'}
                 </p>
               </div>
+
+              {/* Attachments Section */}
+              {loadingAttachments ? (
+                <div className="flex items-center justify-center py-4">
+                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                  <span className="ml-2 text-sm text-muted-foreground">Loading attachments...</span>
+                </div>
+              ) : consultAttachments.length > 0 && (
+                <>
+                  <Separator />
+                  <div>
+                    <Label className="text-xs text-muted-foreground flex items-center gap-2 mb-3">
+                      <Paperclip className="h-4 w-4" />
+                      Attachments ({consultAttachments.length})
+                    </Label>
+                    <div className="space-y-3">
+                      {consultAttachments.map((attachment) => (
+                        <AttachmentViewer key={attachment.id} attachment={attachment} />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -401,14 +513,16 @@ export const SpecialistDetailView = ({
                 <Label className="text-sm font-semibold text-foreground mb-2 block">
                   Recommended Course of Action / Response
                 </Label>
-                <Textarea
-                  value={response}
-                  onChange={(e) => setResponse(e.target.value)}
-                  placeholder="Enter your clinical recommendations, guidance, and any suggested next steps for the referring provider..."
-                  className="min-h-[200px] resize-y"
-                  disabled={consult.status === 'completed'}
-                  aria-label="Specialist response"
-                />
+                <div className="wysiwyg-content">
+                  <Editor
+                    value={response}
+                    onChange={(e) => setResponse(e.target.value)}
+                    placeholder="Enter your clinical recommendations, guidance, and any suggested next steps for the referring provider..."
+                    className="min-h-[500px] resize-y"
+                    disabled={consult.status === 'completed'}
+                    aria-label="Specialist response"
+                  />
+                </div>
                 
                 {/* AI Agent Icon */}
                 <TooltipProvider>
@@ -563,5 +677,6 @@ export const SpecialistDetailView = ({
         </div>
       </div>
     </div>
+    </>
   );
 };

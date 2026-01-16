@@ -131,8 +131,8 @@ const ProfileSection = () => {
 
       if (error) throw error;
 
-      setIsEditing(false);
-      toast.success('Profile updated successfully');
+    setIsEditing(false);
+    toast.success('Profile updated successfully');
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('Failed to update profile');
@@ -285,7 +285,7 @@ const ProfileSection = () => {
                   {loading ? (
                     <Loader2 className="h-3 w-3 mr-1 animate-spin" />
                   ) : (
-                    <Camera className="h-3 w-3 mr-1" />
+                  <Camera className="h-3 w-3 mr-1" />
                   )}
                   Change Photo
                 </Button>
