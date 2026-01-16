@@ -618,7 +618,7 @@ const SubmitEConsult = () => {
                   {/* Height & Weight */}
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="height">Height (cm)</Label>
+                      <Label htmlFor="height">Height (inches)</Label>
                       <Input
                         id="height"
                         type="number"
@@ -629,7 +629,7 @@ const SubmitEConsult = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="weight">Weight (kg)</Label>
+                      <Label htmlFor="weight">Weight (pounds)</Label>
                       <Input
                         id="weight"
                         type="number"
