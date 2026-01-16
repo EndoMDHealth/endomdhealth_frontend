@@ -208,11 +208,12 @@ const SubmitEConsult = () => {
   const patientAge = useMemo(() => calculateAge(formData.patientDob), [formData.patientDob]);
 
   const calculateBMI = () => {
-    const height = parseFloat(formData.heightCm);
-    const weight = parseFloat(formData.weightKg);
-    if (height && weight && height > 0) {
-      const heightM = height / 100;
-      return (weight / (heightM * heightM)).toFixed(1);
+    const heightInches = parseFloat(formData.heightCm); // Actually in inches despite variable name
+    const weightPounds = parseFloat(formData.weightKg); // Actually in pounds despite variable name
+    
+    if (heightInches && weightPounds && heightInches > 0) {
+      // Calculate BMI directly from imperial units: (weight_lbs / height_in²) × 703
+      return ((weightPounds / (heightInches * heightInches)) * 703).toFixed(1);
     }
     return null;
   };
@@ -340,8 +341,8 @@ const SubmitEConsult = () => {
       patient_age: age || 0,
       patient_dob: formData.patientDob || null,
       patient_gender: formData.patientGender || null,
-      height_cm: formData.heightCm ? parseFloat(formData.heightCm) : null,
-      weight_kg: formData.weightKg ? parseFloat(formData.weightKg) : null,
+      height_cm: formData.heightCm ? parseFloat(formData.heightCm) : null, // Actually stores inches (misleading column name)
+      weight_kg: formData.weightKg ? parseFloat(formData.weightKg) : null, // Actually stores pounds (misleading column name)
       bmi: bmi ? parseFloat(bmi) : null,
       condition_category: formData.conditionCategory as ConditionCategory,
       clinical_question: formData.clinicalQuestion,
@@ -712,7 +713,7 @@ const SubmitEConsult = () => {
 
                   {/* Height 12 Months Ago for Growth Velocity */}
                   <div className="space-y-2">
-                    <Label htmlFor="height12Mo">Height 12 Months Ago (cm) - for growth velocity calculation</Label>
+                    <Label htmlFor="height12Mo">Height 12 Months Ago (inches) - for growth velocity calculation</Label>
                     <Input
                       id="height12Mo"
                       type="number"
@@ -725,7 +726,7 @@ const SubmitEConsult = () => {
 
                   {/* Growth Velocity - Auto-calculated or manual */}
                   <div className="space-y-2">
-                    <Label htmlFor="growthVelocity">Growth Velocity (cm/year)</Label>
+                    <Label htmlFor="growthVelocity">Growth Velocity (inches/year)</Label>
                     {calculatedGrowthVelocity && formData.heightCm12MonthsAgo && formData.heightCm ? (
                       <div className="p-4 bg-green-50 rounded-xl border border-green-200">
                         <div className="flex items-center justify-between">
